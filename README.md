@@ -37,3 +37,5 @@
   * 안드로이드 버전 화면 캡쳐  
 * 제공받은 안드로이드 템플릿 숙지
 * mvp 패턴 적용하여 프로젝트 세팅
+* Splash 화면 생성
+* Main Activity 내 Bottom Navigation Bar 생성

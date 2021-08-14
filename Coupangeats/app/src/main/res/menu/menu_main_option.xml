@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_main_option_search"
-        android:icon="@drawable/ic_search_view_unselected"
-        android:iconTint="@color/black"
+        android:icon="@drawable/ic_search_view_selected"
         app:showAsAction="always"
         android:enabled="true"
         android:checkable="true"

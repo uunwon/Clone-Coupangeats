@@ -17,6 +17,8 @@
         android:id="@+id/main_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:background="@color/white"
         app:itemBackground="@color/white"
         app:itemIconTint="@drawable/main_btm_nav_item_color"
