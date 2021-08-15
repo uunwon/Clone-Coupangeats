@@ -8,19 +8,16 @@ import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityMainBinding
 import com.yunwoon.coupangeatsproject.src.main.favorite.FavoriteActivity
 import com.yunwoon.coupangeatsproject.src.main.home.HomeFragment
+import com.yunwoon.coupangeatsproject.src.main.login.BottomLoginDialog
 import com.yunwoon.coupangeatsproject.src.main.order.OrderFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        clickBottomNavigation()
-
         supportFragmentManager.beginTransaction().replace(R.id.main_frame_layout, HomeFragment())
             .commitAllowingStateLoss()
-    }
 
-    private fun clickBottomNavigation() {
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
@@ -42,11 +39,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                         return@OnNavigationItemSelectedListener true
                     }
                     R.id.menu_main_btm_nav_my_page -> {
-
+                        // 로그인 상태 체크
+                        setLoginDialog()
                     }
                 }
                 false
             }
         )
+    }
+
+    // 로그인 창 띄우기
+    private fun setLoginDialog() {
+        val dialogBottomLogin = BottomLoginDialog()
+        dialogBottomLogin.show(supportFragmentManager, "BottomLoginDialog")
     }
 }
