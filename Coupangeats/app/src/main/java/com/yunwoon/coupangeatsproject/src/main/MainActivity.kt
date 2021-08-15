@@ -1,10 +1,12 @@
 package com.yunwoon.coupangeatsproject.src.main
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityMainBinding
+import com.yunwoon.coupangeatsproject.src.main.favorite.FavoriteActivity
 import com.yunwoon.coupangeatsproject.src.main.home.HomeFragment
 import com.yunwoon.coupangeatsproject.src.main.order.OrderFragment
 
@@ -12,8 +14,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportFragmentManager.beginTransaction().replace(R.id.main_frame_layout, HomeFragment()).commitAllowingStateLoss()
+        clickBottomNavigation()
 
+        supportFragmentManager.beginTransaction().replace(R.id.main_frame_layout, HomeFragment())
+            .commitAllowingStateLoss()
+    }
+
+    private fun clickBottomNavigation() {
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
@@ -26,6 +33,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                     R.id.menu_main_btm_nav_search -> {
                     }
                     R.id.menu_main_btm_nav_favorite -> {
+                        this.startActivity(Intent(this, FavoriteActivity::class.java))
                     }
                     R.id.menu_main_btm_nav_order -> {
                         supportFragmentManager.beginTransaction()

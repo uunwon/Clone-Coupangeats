@@ -3,6 +3,7 @@
 
     <!-- Naming Rules -->
     <!-- 도메인명_컴포넌트함축어_용도(=목적) -->
+    <string name="back_button_default">뒤로 가기</string>
 
     <!-- Main -->
     <string name="main_btm_nav_home_title">홈</string>
@@ -12,5 +13,11 @@
     <string name="main_btm_nav_my_page_title">My 이츠</string>
 
     <!-- Order Fragment-->
-    <string name="main_none_order">주문 내역이 없습니다.</string>
+    <string name="order_text_default">주문 내역이 없습니다.</string>
+    <string name="order_text_view_ordered">과거 주문 내역 보기</string>
+
+    <!-- Favorite Activity -->
+    <string name="favorite_text_default">즐겨찾는 맛집이 없습니다.\n좋아하는 맛집에 ♥ 를 눌러주세요.</string>
+    <string name="favorite_button_view_main">쿠팡이츠 맛집 구경가기</string>
+
 </resources>

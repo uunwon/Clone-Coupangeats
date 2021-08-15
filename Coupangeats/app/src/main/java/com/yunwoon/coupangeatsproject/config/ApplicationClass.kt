@@ -9,6 +9,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class ApplicationClass : Application() {
+
+    init {
+        instance = this
+    }
     // 테스트 서버 주소
     val API_URL = "https://david-softsquared.shop/"
 
@@ -16,6 +20,8 @@ class ApplicationClass : Application() {
     // val API_URL = ""
 
     companion object {
+        lateinit var instance : ApplicationClass
+
         // 만들어져있는 SharedPreferences 를 사용해야합니다. 재생성하지 않도록 유념해주세요
         lateinit var sSharedPreferences: SharedPreferences
 

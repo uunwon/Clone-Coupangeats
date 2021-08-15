@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
 import com.yunwoon.coupangeatsproject.util.LoadingDialog
 
@@ -39,5 +40,12 @@ abstract class BaseActivity<B: ViewBinding>(private val inflate: (LayoutInflater
     // 토스트를 쉽게 띄울 수 있게 해줌.
     fun showCustomToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    // 툴바 세팅하기
+    fun setToolBar(toolbar : Toolbar) {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 }

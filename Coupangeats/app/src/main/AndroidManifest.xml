@@ -14,6 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+        <activity android:name=".src.main.favorite.FavoriteActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".src.splash.SplashActivity"
             android:screenOrientation="portrait">

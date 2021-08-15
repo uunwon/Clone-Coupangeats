@@ -5,7 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.ImageView
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseFragment
 import com.yunwoon.coupangeatsproject.databinding.FragmentHomeBinding
@@ -13,16 +13,27 @@ import com.yunwoon.coupangeatsproject.databinding.FragmentHomeBinding
 class HomeFragment :
     BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home){
 
+    private val imageHomeAd : Array<Int> = arrayOf(R.drawable.image_home_ad_1, R.drawable.image_home_ad_2)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setDisplayShowCustomEnabled(true)
-        actionBar?.setDisplayShowTitleEnabled(false)
+        moveViewFlipper()
 
-        binding.textViewBasic.text = "여기는 홈!!"
+        setToolBar(binding.homeToolbar)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+
+        moveViewFlipper()
+    }
+
+    private fun moveViewFlipper() {
+        for(image in imageHomeAd) {
+            setViewFlipper(image)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -36,6 +47,15 @@ class HomeFragment :
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setViewFlipper(image : Int) {
+        val imageView = ImageView(context)
+        imageView.setBackgroundResource(image)
+
+        binding.homeViewFlipper.addView(imageView)
+        binding.homeViewFlipper.flipInterval = 3000
+        binding.homeViewFlipper.isAutoStart = true
     }
 
 }
