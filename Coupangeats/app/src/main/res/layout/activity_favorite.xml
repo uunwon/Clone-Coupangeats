@@ -31,12 +31,12 @@
             android:id="@+id/title_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:paddingStart="25dp"
             android:singleLine="true"
             android:ellipsize="end"
             android:text="@string/main_btm_nav_favorite_title"
             android:textColor="@color/black"
-            android:textSize="23sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
     </androidx.appcompat.widget.Toolbar>
@@ -73,6 +73,7 @@
         android:layout_marginTop="15dp"
         android:text="@string/favorite_button_view_main"
         android:textSize="14sp"
+        android:stateListAnimator="@null"
         android:textColor="@color/black"
         android:background="@drawable/button_default"
         app:backgroundTint="@null"

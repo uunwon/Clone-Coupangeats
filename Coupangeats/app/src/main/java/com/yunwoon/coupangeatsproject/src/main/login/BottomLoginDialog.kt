@@ -25,14 +25,22 @@ class BottomLoginDialog : BottomSheetDialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        // 쿠팡 앱으로 이동 -> 구현 X
         binding.loginButtonCoupangApp.setOnClickListener {
             Log.d("BottomLoginDialog", "coupang app 연동 아님")
             dismiss()
         }
 
+        // 로그인 창 이동
         binding.loginButtonCoupangId.setOnClickListener {
             dismiss()
             this.startActivity(Intent(context, LoginActivity::class.java))
+        }
+
+        // 회원가입 창 이동
+        binding.loginTextJoin.setOnClickListener {
+            dismiss()
+            this.startActivity(Intent(context, JoinActivity::class.java))
         }
     }
 }

@@ -39,4 +39,31 @@
     <string name="login_text_terms">로그인하여 <u>쿠팡이츠 서비스 이용약관</u>, <u>위치기반서비스 이용약관</u>,\n<u>쿠팡페이 서비스 이용약관</u>,
         <u>쿠팡페이 전자금융거래약관</u>, <u>쿠팡페이\n개인정보수집이용</u>, <u>쿠팡페이 개인정보제공</u>에 동의합니다.</string>
 
+    <!-- Join Activity -->
+    <string name="join_text_need">회원정보를 입력해주세요</string>
+    <string name="join_edit_text_email_hint">아이디(이메일)</string>
+    <string name="join_text_wrong_email">이메일을 올바르게 입력해주세요.</string>
+    <string name="join_edit_text_password_hint">비밀번호</string>
+    <string name="join_text_correct_password">사용 가능한 비밀번호입니다.</string>
+    <string name="join_text_wrong_password_1">X&#160;&#160;영문/숫자/특수문자 2가지 이상 조합 (8~20자)</string>
+    <string name="join_text_wrong_password_1_1">O&#160;&#160;영문/숫자/특수문자 2가지 이상 조합 (8~20자)</string>
+    <string name="join_text_wrong_password_2">X&#160;&#160;3개 이상 연속되거나 동일한 문자/숫자 제외</string>
+    <string name="join_text_wrong_password_2_1">O&#160;&#160;3개 이상 연속되거나 동일한 문자/숫자 제외</string>
+    <string name="join_text_wrong_password_3">X&#160;&#160;아이디(이메일) 제외</string>
+    <string name="join_text_wrong_password_3_1">O&#160;&#160;아이디(이메일) 제외</string>
+    <string name="join_edit_text_name_hint">이름</string>
+    <string name="join_text_wrong_name">이름을 정확하게 입력하세요.</string>
+    <string name="join_edit_text_phone_hint">휴대폰 번호</string>
+    <string name="join_text_wrong_phone">휴대폰 번호를 정확하게 입력하세요.</string>
+    <string name="join_button_phone">휴대폰 인증</string>
+    <string name="join_text_term">쿠팡 서비스약관에 동의해주세요</string>
+    <string name="join_check_box_term_all">모두 동의합니다.</string>
+    <string name="join_check_box_term_1">[필수] 만 14세 이상입니다.</string>
+    <string name="join_check_box_term_2">[필수] 쿠팡 이용약관 동의</string>
+    <string name="join_check_box_term_3">[필수] 전자금융거래 이용약관 동의</string>
+    <string name="join_check_box_term_4">[필수] 개인정보 수집 및 이용 동의</string>
+    <string name="join_check_box_term_5">[필수] 개인정보 제공 동의</string>
+    <string name="join_button">동의하고 가입하기</string>
+
+    <string name="copy_right">ⓒCoupang Corp. All rights reserved.</string>
 </resources>
