@@ -30,7 +30,7 @@
 
 ## 테스트 진행현황
 ### 1주차 진행현황 🌈
-![Progress](https://progress-bar.dev/15/?scale=100&width=500&suffix=%)  
+![Progress](https://progress-bar.dev/30/?scale=100&width=500&suffix=%)  
 ### 2021-08-14
 * 기획서 제출 - 100%  
   * 개발 범위 / 개발 우선 순위  
@@ -38,5 +38,17 @@
   * 안드로이드 버전 화면 캡쳐  
 * 제공받은 안드로이드 템플릿 숙지
 * mvp 패턴 적용하여 프로젝트 세팅
-* Splash 화면 생성
-* Main Activity 내 Bottom Navigation Bar 생성
+* SplashActivity 생성
+* MainActivity 내 Bottom Navigation Bar 생성
+
+### 2021-08-15
+* 앱 로고 이미지 변경
+* FavoriteActivity , OrderFragment 생성
+* OrderFragment 내 TabLayout 구현
+* FavoriteActivity 생성
+* HomeFragment 내 광고 이미지 ViewFlipper 구현
+* 로그인/회원가입 창 BottomSheetDialogFragment 구현
+* LoginActivity 구현
+* JoinActivity 구현
+  * (추가할 부분) 비밀번호 화면 표시 이모지 처리
+  * 각 컬럼 예외처리 코드 구현
