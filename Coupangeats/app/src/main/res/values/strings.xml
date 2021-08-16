@@ -12,6 +12,10 @@
     <string name="main_btm_nav_order_title">주문내역</string>
     <string name="main_btm_nav_my_page_title">My 이츠</string>
 
+    <!-- Home Fragment -->
+    <string name="home_text_category_new">신규 맛집</string>
+    <string name="home_text_hot_store">인기 프랜차이즈</string>
+
     <!-- Order Fragment-->
     <string name="order_text_default">주문 내역이 없습니다.</string>
     <string name="order_text_view_ordered">과거 주문 내역 보기</string>

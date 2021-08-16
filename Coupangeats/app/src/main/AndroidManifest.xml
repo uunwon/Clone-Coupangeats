@@ -15,6 +15,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".src.category.CategoryDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".src.main.login.JoinActivity"
             android:screenOrientation="portrait" />
         <activity
