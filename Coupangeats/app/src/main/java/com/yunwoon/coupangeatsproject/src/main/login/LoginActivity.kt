@@ -106,7 +106,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         else {
             val email = binding.loginEditTextEmail.text.toString()
             val password = binding.loginEditTextPassword.text.toString()
-            val postRequest = PostLogInRequest(email = "ckrt4815@gmail.com", password = "woals4815")
+            val postRequest = PostLogInRequest(email = email, password = password)
             showLoadingDialog(this)
             LoginService(this).tryPostLogIn(postRequest)
         }
@@ -114,9 +114,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     override fun onPostLogInSuccess(response: LogInResponse) {
         dismissLoadingDialog()
-        ApplicationClass.sEditor.putString("jwt", response.result.jwt).apply()
-        response.result.jwt.let { showCustomToast(it) } // 요청 성공 메시지 띄우기
-        finish()
+        if(response.isSuccess) {
+            ApplicationClass.sEditor.putString("jwt", response.result.jwt).apply()
+            response.result.jwt.let { showCustomToast(it) } // 요청 성공 메시지 띄우기
+            finish()
+        } else {
+            val dialogLoginError = LoginErrorDialog()
+            dialogLoginError.show(supportFragmentManager, "LoginErrorDialog")
+        }
     }
 
     override fun onPostLogInFailure(message: String) {
