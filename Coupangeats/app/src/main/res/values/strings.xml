@@ -38,6 +38,7 @@
     <string name="login_text_join">회원가입</string>
     <string name="login_text_terms">로그인하여 <u>쿠팡이츠 서비스 이용약관</u>, <u>위치기반서비스 이용약관</u>,\n<u>쿠팡페이 서비스 이용약관</u>,
         <u>쿠팡페이 전자금융거래약관</u>, <u>쿠팡페이\n개인정보수집이용</u>, <u>쿠팡페이 개인정보제공</u>에 동의합니다.</string>
+    <string name="login_text_error">아이디는 이메일주소 형식으로 입력해주세요</string>
 
     <!-- Join Activity -->
     <string name="join_text_need">회원정보를 입력해주세요</string>

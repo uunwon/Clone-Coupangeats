@@ -7,10 +7,21 @@ import android.view.View
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityLoginBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate)  {
 
     private var isChecked = false
+    private lateinit var matcher : Matcher
+
+    private val EMAIL_ADDRESS = Pattern.compile(
+        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" + "\\@" + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,18 +38,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             this.startActivity(Intent(this, JoinActivity::class.java))
         }
 
-        // 이메일 텍스트 포커스
-        binding.loginEditTextEmail.setOnFocusChangeListener(object : View.OnFocusChangeListener {
-            override fun onFocusChange(p0: View?, p1: Boolean) {
-                if(p1) {
-                    binding.loginLinearLayoutEmail.setBackgroundDrawable(drawableBlue)
-                    binding.loginImageViewEmail.visibility = View.VISIBLE
-                } else {
-                    binding.loginLinearLayoutEmail.setBackgroundDrawable(drawableWhite)
-                    binding.loginImageViewEmail.visibility = View.INVISIBLE
-                }
+        // 이메일 텍스트 포커스 (람다 표현식)
+        binding.loginEditTextEmail.setOnFocusChangeListener { _, p1 ->
+            if (p1) {
+                binding.loginLinearLayoutEmail.setBackgroundDrawable(drawableBlue)
+                binding.loginImageViewEmail.visibility = View.VISIBLE
+            } else {
+                binding.loginLinearLayoutEmail.setBackgroundDrawable(drawableWhite)
+                binding.loginImageViewEmail.visibility = View.INVISIBLE
             }
-        })
+        }
 
         // 이메일 텍스트 클리어
         binding.loginImageViewEmail.setOnClickListener {
@@ -67,6 +76,33 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             }
 
             isChecked = !isChecked
+        }
+
+        // 로그인 버튼 클릭
+        binding.loginButton.setOnClickListener {
+            login()
+        }
+    }
+
+    private fun login() {
+        matcher = EMAIL_ADDRESS.matcher(binding.loginEditTextEmail.text.toString())
+
+        if(binding.loginEditTextEmail.text.toString() == "" || binding.loginEditTextPassword.text.toString() == "") {
+            showCustomToast("이메일 혹은 비밀번호를 입력해주세요")
+        }
+        // 이메일 형식 체크 -> 실패
+        else if(!matcher.matches()) {
+            val dialogBottomLoginError = BottomLoginErrorDialog()
+
+            GlobalScope.launch {
+                delay(2000L)
+                dialogBottomLoginError.dismiss()
+            }
+
+            dialogBottomLoginError.show(supportFragmentManager, "BottomLoginErrorDialog")
+        }
+        else {
+            showCustomToast("로그인이 완료되었습니다.")
         }
     }
 }

@@ -65,7 +65,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:singleLine="true"
             android:textSize="14sp"
             android:textColor="@color/black"
@@ -179,7 +179,6 @@
             android:text="@string/login_text_join"
             android:textSize="14sp"
             android:textColor="@color/blue_300"/>
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
