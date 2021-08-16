@@ -25,12 +25,21 @@
   * 어떻게 해결을 시도하였는지,
   * 해결이 되었는지
 
+## 테스트 역할분담
+| 서버 | 클라이언트 |
+| :---: | :-----------: |
+| Coogie / 정재민 | &#160;&#160;&#160;Sally / 채윤원&#160;&#160;&#160; |
+
 ## 테스트 기획서
-#### 구글 DOCS [보러가기 👆](https://docs.google.com/document/d/1f3Ua5d-3wBIh7YIModxf8_8H15YEf-Swgd18dXQDDhE/edit?usp=sharing)
+#### 구글 DOCS [`보러가기` 👆](https://docs.google.com/document/d/1f3Ua5d-3wBIh7YIModxf8_8H15YEf-Swgd18dXQDDhE/edit?usp=sharing)
+
+## 테스트 개발이슈
+#### Notion 쿠팡이츠 개발이슈와 구현일정 [`보러가기` 🤘](https://www.notion.so/uunwon/bc814b591c6a4bd594941c0e26cb53ff)
+<img src="https://user-images.githubusercontent.com/48541984/129486402-3a21b120-b4b0-4006-baed-a012ccd31247.png" width="60%"/>
 
 ## 테스트 진행현황
 ### 1주차 진행현황 🌈
-![Progress](https://progress-bar.dev/30/?scale=100&width=500&suffix=%)  
+![Progress](https://progress-bar.dev/45/?scale=100&width=500&suffix=%)  
 ### 2021-08-14
 * 기획서 제출 - 100%  
   * 개발 범위 / 개발 우선 순위  
@@ -50,5 +59,18 @@
 * 로그인/회원가입 창 BottomSheetDialogFragment 구현
 * LoginActivity 구현
 * JoinActivity 구현
-  * (추가할 부분) 비밀번호 화면 표시 이모지 처리
-  * 각 컬럼 예외처리 코드 구현
+  * (.!!추가할 부분) 비밀번호 화면 표시 이모지 처리
+
+### 2021-08-16
+* LoginActivity 내 BottomLoginErrorDialog 활용해 예외 처리 
+* JoinActivity 내 각 컬럼 예외처리, 정규식 추가
+* 서버 Retrofit 통신
+  * 로그인 API : 실패 시 LoginErrorDialog 출력
+  * 회원가입 API : 성공 시 생성한 유저 index 값 출력
+* HomeFragment 내 가로형 RecyclerView 생성
+  * 카테고리 클릭 시 해당 position 값 다음 액티비티에 전달
+
+## 테스트 개발환경
+* AWS EC2 / RDS
+* Node.js
+* Android Studio

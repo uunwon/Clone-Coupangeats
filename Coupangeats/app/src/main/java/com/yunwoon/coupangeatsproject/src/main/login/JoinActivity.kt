@@ -191,9 +191,13 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
 
     override fun onPostJoinSuccess(response: JoinResponse) {
         dismissLoadingDialog()
-        showCustomToast(response.result.toString())
-        finish()
-        showCustomToast("회원가입에 성공했습니다")
+        if(response.isSuccess) {
+            showCustomToast(response.result.toString())
+            finish()
+            showCustomToast("회원가입에 성공했습니다")
+        } else {
+            showCustomToast("회원가입에 실패했습니다")
+        }
     }
 
     override fun onPostJoinFailure(message: String) {
