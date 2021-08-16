@@ -1,5 +1,6 @@
 package com.yunwoon.coupangeatsproject.config
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.SharedPreferences
 import okhttp3.OkHttpClient
@@ -9,12 +10,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class ApplicationClass : Application() {
+    init { instance = this }
 
-    init {
-        instance = this
-    }
     // 테스트 서버 주소
-    val API_URL = "https://david-softsquared.shop/"
+    val API_URL = "https://vicion.shop/"
 
     // 실 서버 주소
     // val API_URL = ""
@@ -24,6 +23,7 @@ class ApplicationClass : Application() {
 
         // 만들어져있는 SharedPreferences 를 사용해야합니다. 재생성하지 않도록 유념해주세요
         lateinit var sSharedPreferences: SharedPreferences
+        lateinit var sEditor: SharedPreferences.Editor
 
         // JWT Token Header 키 값
         val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
@@ -33,10 +33,12 @@ class ApplicationClass : Application() {
     }
 
     // 앱이 처음 생성되는 순간, SP를 새로 만들어주고, 레트로핏 인스턴스를 생성합니다.
+    @SuppressLint("CommitPrefEdits")
     override fun onCreate() {
         super.onCreate()
         sSharedPreferences =
             applicationContext.getSharedPreferences("COUPANG_EATS_APP", MODE_PRIVATE)
+        sEditor = sSharedPreferences.edit()
 
         // 레트로핏 인스턴스 생성
         initRetrofitInstance()

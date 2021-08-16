@@ -1,15 +1,17 @@
 package com.yunwoon.coupangeatsproject.src.main.login
 
 import android.os.Bundle
-import android.telephony.PhoneNumberFormattingTextWatcher
+import android.util.Log
 import android.view.View
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityJoinBinding
+import com.yunwoon.coupangeatsproject.src.main.login.models.JoinResponse
+import com.yunwoon.coupangeatsproject.src.main.login.models.PostJoinRequest
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::inflate)  {
+class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::inflate), JoinActivityView  {
 
     private lateinit var matcher : Matcher
     private val emailPattern = Pattern.compile(
@@ -34,32 +36,35 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
 
         // 이메일 포커스
         binding.joinEditTextEmail.setOnFocusChangeListener { _, p1 ->
-            if (p1) {
-                matcher = emailPattern.matcher(binding.joinEditTextEmail.text.toString())
-            }
-            else {
-                if(!matcher.matches()) {
+            if(!p1) {
+                if(binding.joinEditTextEmail.text.toString() == "") {
                     emailCheck = false
                     binding.joinImageViewEmailCheck.visibility = View.GONE // 체크
                     binding.joinTextWrongEmail.visibility = View.VISIBLE // 경고문
                     binding.joinViewWrongEmail.visibility = View.VISIBLE // 뷰
-                } else {
-                    emailCheck = true
-                    binding.joinImageViewEmailCheck.visibility = View.VISIBLE // 체크
-                    binding.joinTextWrongEmail.visibility = View.GONE // 경고문
-                    binding.joinViewWrongEmail.visibility = View.GONE // 뷰
+                }
+                else {
+                    matcher = emailPattern.matcher(binding.joinEditTextEmail.text.toString())
+                    if(!matcher.matches()) {
+                        emailCheck = false
+                        binding.joinImageViewEmailCheck.visibility = View.GONE // 체크
+                        binding.joinTextWrongEmail.visibility = View.VISIBLE // 경고문
+                        binding.joinViewWrongEmail.visibility = View.VISIBLE // 뷰
+                    } else {
+                        emailCheck = true
+                        binding.joinImageViewEmailCheck.visibility = View.VISIBLE // 체크
+                        binding.joinTextWrongEmail.visibility = View.GONE // 경고문
+                        binding.joinViewWrongEmail.visibility = View.GONE // 뷰
+                    }
                 }
             }
         }
 
         // 비밀번호 포커스
         binding.joinEditTextPassword.setOnFocusChangeListener { _, p1 ->
-            val password = binding.joinEditTextPassword.text.toString()
-            if(p1) {
-                matcher = passwordPattern.matcher(password)
-            }
-            else {
-                if(password == "") {
+            if(!p1) {
+                matcher = passwordPattern.matcher(binding.joinEditTextPassword.text.toString())
+                if(binding.joinEditTextPassword.text.toString() == "") {
                     passwordCheck1 = false
                     passwordCheck2 = false
                     binding.joinViewWrongPassword.visibility = View.VISIBLE // 뷰
@@ -84,7 +89,7 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
                         binding.joinTextWrongPassword11.visibility = View.VISIBLE // 성공문1
                     }
 
-                    if(password == binding.joinEditTextEmail.text.toString()) { // 이메일과 동일하면
+                    if(binding.joinEditTextPassword.text.toString() == binding.joinEditTextEmail.text.toString()) { // 이메일과 동일하면
                         passwordCheck2 = false
                         binding.joinViewWrongPassword.visibility = View.VISIBLE // 뷰
                         binding.joinTextWrongPassword3.visibility = View.VISIBLE //경고문3
@@ -126,31 +131,20 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
 
         // 휴대폰 번호 포커스
         binding.joinEditTextPhone.setOnFocusChangeListener { _, p1 ->
-            val phone = binding.joinEditTextPhone.text.toString()
-
-            if(p1) {
-                binding.joinEditTextPhone.addTextChangedListener(PhoneNumberFormattingTextWatcher())
-            } else {
+            if(!p1) {
                 // 휴대폰 번호 작성 여부 / 자릿수 체크
-                if(phone == "") {
+                if(binding.joinEditTextPhone.text.toString() == "") {
                     phoneCheck = false
                     binding.joinImageViewPhoneCheck.visibility = View.GONE // 체크
-                    binding.joinImageViewPhoneCheck.visibility = View.VISIBLE // 뷰
+                    binding.joinViewWrongPhone.visibility = View.VISIBLE // 뷰
                     binding.joinTextWrongPhone.visibility = View.VISIBLE // 경고문
                 }
                 else {
-                    if(phone.length < 13) {
-                        phoneCheck = false
-                        binding.joinImageViewPhoneCheck.visibility = View.GONE // 체크
-                        binding.joinImageViewPhoneCheck.visibility = View.VISIBLE // 뷰
-                        binding.joinTextWrongPhone.visibility = View.VISIBLE // 경고문
-                    } else {
-                        phoneCheck = true
-                        // 휴대폰 인증 버튼과 인증 메소드 구현!!!!!!!
-                        binding.joinImageViewPhoneCheck.visibility = View.VISIBLE // 체크
-                        binding.joinImageViewPhoneCheck.visibility = View.GONE // 뷰
-                        binding.joinTextWrongPhone.visibility = View.GONE // 경고문
-                    }
+                    phoneCheck = true
+                    // 휴대폰 인증 버튼과 인증 메소드 구현!!!!!!!
+                    binding.joinImageViewPhoneCheck.visibility = View.VISIBLE // 체크
+                    binding.joinViewWrongPhone.visibility = View.GONE // 뷰
+                    binding.joinTextWrongPhone.visibility = View.GONE // 경고문
                 }
             }
         }
@@ -177,11 +171,34 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
         // 가입 버튼 클릭
         binding.joinButton.setOnClickListener {
             if(emailCheck && passwordCheck1 && passwordCheck2 && nameCheck && phoneCheck && termCheck) {
-                showCustomToast("가입이 완료되었습니다!")
-                finish()
+                join()
             }
             else
                 showCustomToast("각 항목을 다시 검토해주세요")
         }
+    }
+
+    private fun join() {
+        val email = binding.joinEditTextEmail.text.toString()
+        val password = binding.joinEditTextPassword.text.toString()
+        val name = binding.joinEditTextName.text.toString()
+        val phone = binding.joinEditTextPhone.text.toString()
+
+        val postRequest = PostJoinRequest(email = email, password = password, name = name, phoneNumber = phone)
+        showLoadingDialog(this)
+        JoinService(this).tryPostJoin(postRequest)
+    }
+
+    override fun onPostJoinSuccess(response: JoinResponse) {
+        dismissLoadingDialog()
+        showCustomToast(response.result.toString())
+        finish()
+        showCustomToast("회원가입에 성공했습니다")
+    }
+
+    override fun onPostJoinFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
+        Log.d("오류", "$message")
     }
 }

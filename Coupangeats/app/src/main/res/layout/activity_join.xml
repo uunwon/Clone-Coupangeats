@@ -298,7 +298,7 @@
                 android:layout_marginTop="13dp"
                 android:singleLine="true"
                 android:textSize="15sp"
-                android:maxLength="13"
+                android:maxLength="11"
                 android:inputType="phone"
                 android:hint="@string/join_edit_text_phone_hint"
                 android:drawableStart="@drawable/edit_join_phone"

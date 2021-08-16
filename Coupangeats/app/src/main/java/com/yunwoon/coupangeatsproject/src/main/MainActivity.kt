@@ -2,8 +2,10 @@ package com.yunwoon.coupangeatsproject.src.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yunwoon.coupangeatsproject.R
+import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityMainBinding
 import com.yunwoon.coupangeatsproject.src.main.favorite.FavoriteActivity
@@ -46,6 +48,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 false
             }
         )
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        val token = ApplicationClass.sSharedPreferences.getString("jwt", null)
+
+        Log.d("MainActivity", "$token")
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frame_layout, HomeFragment())
+            .commitAllowingStateLoss()
     }
 
     // 로그인 창 띄우기
