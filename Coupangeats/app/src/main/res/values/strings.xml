@@ -29,6 +29,11 @@
     <string name="order_text_default">주문 내역이 없습니다.</string>
     <string name="order_text_view_ordered">과거 주문 내역 보기</string>
 
+    <!-- My Page Fragment-->
+    <string name="my_page_text_name">샐리</string>
+    <string name="my_page_text_phone">010-****-4321</string>
+    <string name="my_page_test_list_name">배달 주소 관리</string>
+
     <!-- Favorite Activity -->
     <string name="favorite_text_default">즐겨찾는 맛집이 없습니다.\n좋아하는 맛집에 ♥ 를 눌러주세요.</string>
     <string name="favorite_button_view_main">쿠팡이츠 맛집 구경가기</string>

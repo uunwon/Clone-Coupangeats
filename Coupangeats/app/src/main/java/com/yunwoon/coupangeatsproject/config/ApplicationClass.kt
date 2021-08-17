@@ -44,6 +44,8 @@ class ApplicationClass : Application() {
             applicationContext.getSharedPreferences("COUPANG_EATS_APP", MODE_PRIVATE)
         sEditor = sSharedPreferences.edit()
 
+        sEditor.putString("loginJwtToken", null).apply()
+
         // 레트로핏 인스턴스 생성
         initRetrofitInstance()
     }

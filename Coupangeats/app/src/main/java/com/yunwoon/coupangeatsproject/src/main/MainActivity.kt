@@ -11,11 +11,16 @@ import com.yunwoon.coupangeatsproject.databinding.ActivityMainBinding
 import com.yunwoon.coupangeatsproject.src.main.favorite.FavoriteActivity
 import com.yunwoon.coupangeatsproject.src.main.home.HomeFragment
 import com.yunwoon.coupangeatsproject.src.main.login.BottomLoginDialog
+import com.yunwoon.coupangeatsproject.src.main.mypage.MyPageFragment
 import com.yunwoon.coupangeatsproject.src.main.order.OrderFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
+
+    private var loginJwtToken = ApplicationClass.sSharedPreferences.getString("loginJwtToken", null)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("MainActivity", "$loginJwtToken")
 
         supportFragmentManager.beginTransaction().replace(R.id.main_frame_layout, HomeFragment())
             .commitAllowingStateLoss()
@@ -32,17 +37,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                     R.id.menu_main_btm_nav_search -> {
                     }
                     R.id.menu_main_btm_nav_favorite -> {
-                        this.startActivity(Intent(this, FavoriteActivity::class.java))
+                        if(loginJwtToken != null)
+                            this.startActivity(Intent(this, FavoriteActivity::class.java))
+                        else
+                            setLoginDialog()
                     }
                     R.id.menu_main_btm_nav_order -> {
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_frame_layout, OrderFragment())
-                            .commitAllowingStateLoss()
-                        return@OnNavigationItemSelectedListener true
+                        if(loginJwtToken != null) {
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.main_frame_layout, OrderFragment())
+                                .commitAllowingStateLoss()
+                            return@OnNavigationItemSelectedListener true
+                        }
+                        else
+                            setLoginDialog()
                     }
                     R.id.menu_main_btm_nav_my_page -> {
-                        // 로그인 상태 체크
-                        setLoginDialog()
+                        if(loginJwtToken != null) {
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.main_frame_layout, MyPageFragment())
+                                .commitAllowingStateLoss()
+                            return@OnNavigationItemSelectedListener true
+                        }
+                        else
+                            setLoginDialog()
                     }
                 }
                 false
@@ -50,14 +68,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         )
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        val token = ApplicationClass.sSharedPreferences.getString("jwt", null)
+    override fun onResume() {
+        super.onResume()
+        loginJwtToken = ApplicationClass.sSharedPreferences.getString("loginJwtToken", null)
 
-        Log.d("MainActivity", "$token")
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frame_layout, HomeFragment())
-            .commitAllowingStateLoss()
+        Log.d("MainActivity", "$loginJwtToken")
+        binding.mainBottomNavigation.selectedItemId = R.id.menu_main_btm_nav_home
     }
 
     // 로그인 창 띄우기
