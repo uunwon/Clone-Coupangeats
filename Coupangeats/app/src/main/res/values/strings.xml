@@ -42,7 +42,9 @@
     <string name="login_text_join">회원가입</string>
     <string name="login_text_terms">로그인하여 <u>쿠팡이츠 서비스 이용약관</u>, <u>위치기반서비스 이용약관</u>,\n<u>쿠팡페이 서비스 이용약관</u>,
         <u>쿠팡페이 전자금융거래약관</u>, <u>쿠팡페이\n개인정보수집이용</u>, <u>쿠팡페이 개인정보제공</u>에 동의합니다.</string>
-    <string name="login_text_error">아이디는 이메일주소 형식으로 입력해주세요</string>
+    <string name="login_text_error">아이디를 입력해주세요</string>
+    <string name="login_text_error1">비밀번호를 입력해주세요</string>
+    <string name="login_text_error2">아이디는 이메일주소 형식으로 입력해주세요</string>
     <string name="login_error">입력하신 아이디 또는 비밀번호가\n일치하지 않습니다.</string>
     <string name="login_error_confirm">확인</string>
 
@@ -71,6 +73,20 @@
     <string name="join_check_box_term_4">[필수] 개인정보 수집 및 이용 동의</string>
     <string name="join_check_box_term_5">[필수] 개인정보 제공 동의</string>
     <string name="join_button">동의하고 가입하기</string>
+    
+    <!-- Address Activity -->
+    <string name="address_text_title">배달지 주소 설정</string>
+    <string name="address_edit_text_search_hint">도로명, 건물명 또는 지번으로 검색</string>
+    <string name="address_button_current_position">현재 위치로 주소 찾기</string>
+    <string name="address_text_home">집 추가</string>
+    <string name="address_text_company">회사 추가</string>
+    <string name="address_text_search_tip">검색 Tip</string>
+    <string name="address_text_search_guide1">* 도로명 + 건물번호</string>
+    <string name="address_text_search_guide1_1">(예: 송파대로 570)</string>
+    <string name="address_text_search_guide2">* 동/읍/면/리 + 번지</string>
+    <string name="address_text_search_guide2_1">(예: 신천동 7_30)</string>
+    <string name="address_text_search_guide3">* 건물명, 아파트명</string>
+    <string name="address_text_search_guide3_1">(예: 반포자이아파트)</string>
 
     <string name="copy_right">ⓒCoupang Corp. All rights reserved.</string>
 </resources>

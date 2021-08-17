@@ -90,18 +90,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     private fun login() {
         matcher = EMAIL_ADDRESS.matcher(binding.loginEditTextEmail.text.toString())
 
-        if(binding.loginEditTextEmail.text.toString() == "" || binding.loginEditTextPassword.text.toString() == "") {
-            showCustomToast("이메일 혹은 비밀번호를 입력해주세요")
+        if(binding.loginEditTextEmail.text.toString() == "") { // 이메일 null 체크
+            showBottomLoginErrorDialog(0)
+        }
+        else if(binding.loginEditTextPassword.text.toString() == "") { // 비밀번호 null 체크
+            showBottomLoginErrorDialog(1)
         }
         // 이메일 형식 체크 -> 실패
         else if(!matcher.matches()) {
-            val dialogBottomLoginError = BottomLoginErrorDialog()
-
-            GlobalScope.launch {
-                delay(2000L)
-                dialogBottomLoginError.dismiss()
-            }
-            dialogBottomLoginError.show(supportFragmentManager, "BottomLoginErrorDialog")
+            showBottomLoginErrorDialog(2)
         }
         else {
             val email = binding.loginEditTextEmail.text.toString()
@@ -110,6 +107,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             showLoadingDialog(this)
             LoginService(this).tryPostLogIn(postRequest)
         }
+    }
+
+    // 하단 로그인 에러 다이얼로그 뜨기
+    private fun showBottomLoginErrorDialog(errorCode: Int) {
+        val dialogBottomLoginError = BottomLoginErrorDialog(errorCode)
+
+        GlobalScope.launch {
+            delay(1500L)
+            dialogBottomLoginError.dismiss()
+        }
+        dialogBottomLoginError.show(supportFragmentManager, "BottomLoginErrorDialog")
     }
 
     override fun onPostLogInSuccess(response: LogInResponse) {

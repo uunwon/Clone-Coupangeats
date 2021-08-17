@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseFragment
 import com.yunwoon.coupangeatsproject.databinding.FragmentHomeBinding
+import com.yunwoon.coupangeatsproject.src.address.AddressActivity
 import com.yunwoon.coupangeatsproject.src.category.CategoryDetailActivity
 import com.yunwoon.coupangeatsproject.util.categoryRecycler.CategoryAdapter
 import com.yunwoon.coupangeatsproject.util.categoryRecycler.CategoryData
@@ -25,7 +26,6 @@ class HomeFragment :
 
     private val imageHomeAd : Array<Int> = arrayOf(R.drawable.image_home_ad_1, R.drawable.image_home_ad_2)
     private lateinit var scope : Job
-
 
     private lateinit var mlayoutManager : LinearLayoutManager
     private lateinit var categoryAdapter: CategoryAdapter
@@ -43,6 +43,11 @@ class HomeFragment :
         setToolBar(binding.homeToolbar)
         initViewFlipper()
         initCategoryRecyclerView()
+
+        // 배달지 주소 설정 화면 이동
+        binding.textToolbarTitle.setOnClickListener {
+            this.startActivity(Intent(requireContext(), AddressActivity::class.java))
+        }
     }
 
     // 카테고리 리사이클러뷰 세팅
@@ -65,6 +70,7 @@ class HomeFragment :
         }
     }
 
+    // 카테고리 아이템 클릭 시 화면 이동
     fun moveToCategoryDetailActivity(position: Int) {
         val intent = Intent(requireContext(), CategoryDetailActivity::class.java)
         intent.putExtra("position", position)
