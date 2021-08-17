@@ -67,8 +67,16 @@
 * 서버 Retrofit 통신
   * 로그인 API : 실패 시 LoginErrorDialog 출력
   * 회원가입 API : 성공 시 생성한 유저 index 값 출력
-* HomeFragment 내 가로형 RecyclerView 생성
+* HomeFragment 내 가로형 카테고리 RecyclerView 생성
   * 카테고리 클릭 시 해당 position 값 다음 액티비티에 전달
+
+### 2021-08-17
+* AddressActivity 배달지 주소 설정 , 검색창 화면
+* AddressActivity 내 도로명 주소 검색 API 적용
+* HomeFragment 내 가로형 가게 RecyclerView 생성
+* JoinActivity 내 TextWatcher 이벤트 추가
+* 로그인 여부에 따른 MainActivity 화면 상이하게 처리
+* MyPageFragment 생성
 
 ## 테스트 개발환경
 * AWS EC2 / RDS

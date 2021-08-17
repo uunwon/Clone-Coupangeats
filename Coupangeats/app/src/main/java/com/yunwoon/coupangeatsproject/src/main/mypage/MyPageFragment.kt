@@ -14,7 +14,7 @@ import com.yunwoon.coupangeatsproject.config.BaseFragment
 import com.yunwoon.coupangeatsproject.databinding.FragmentMyPageBinding
 import com.yunwoon.coupangeatsproject.databinding.ItemMyPageBinding
 
-data class MyPageData(val myPageImageView: Bitmap, val myPageText: String)
+data class MyPageData(val myPageImageView: Int, val myPageText: String)
 class MyPageFragment :
     BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page) {
 
@@ -32,13 +32,6 @@ class MyPageFragment :
         myPageAdapter = MyPageAdapter(myPageDataArrayList, requireContext())
         binding.myPageListView.adapter = myPageAdapter
 
-        // myPageDataArrayList.clear()
-        addMyPageData()
-
-        myPageAdapter.notifyDataSetChanged()
-    }
-
-    private fun addMyPageData() {
         val resources : Resources = this.resources
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_my_page_test)
 
@@ -53,6 +46,14 @@ class MyPageFragment :
         myPageDataArrayList.add(MyPageData(bitmap, "설정"))
         myPageDataArrayList.add(MyPageData(bitmap, "공지사항"))
         myPageDataArrayList.add(MyPageData(bitmap, "약관ㆍ개인정보 처리방침"))
+
+        // myPageDataArrayList.clear()
+        // addMyPageData()
+
+        myPageAdapter.notifyDataSetChanged()
+    }
+
+    private fun addMyPageData() {
     }
 
     class MyPageAdapter(private val myPageDataArrayList:ArrayList<MyPageData>, context: Context) : BaseAdapter() {
