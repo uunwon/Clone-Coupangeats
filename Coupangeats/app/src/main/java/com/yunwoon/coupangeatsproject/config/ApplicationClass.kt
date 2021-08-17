@@ -18,6 +18,9 @@ class ApplicationClass : Application() {
     // 실 서버 주소
     // val API_URL = ""
 
+    // 도로명 검색 서버 주소
+    val ROAD_API_URL = "https://www.juso.go.kr/"
+
     companion object {
         lateinit var instance : ApplicationClass
 
@@ -30,6 +33,7 @@ class ApplicationClass : Application() {
 
         // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.
         lateinit var sRetrofit: Retrofit
+        lateinit var roadRetrofit: Retrofit
     }
 
     // 앱이 처음 생성되는 순간, SP를 새로 만들어주고, 레트로핏 인스턴스를 생성합니다.
@@ -59,6 +63,12 @@ class ApplicationClass : Application() {
         // 이 전역변수로 http 요청을 서버로 보내면 됩니다.
         sRetrofit = Retrofit.Builder()
             .baseUrl(API_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        roadRetrofit = Retrofit.Builder()
+            .baseUrl(ROAD_API_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
