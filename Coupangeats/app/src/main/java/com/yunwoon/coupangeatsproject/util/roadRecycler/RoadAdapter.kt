@@ -1,6 +1,7 @@
 package com.yunwoon.coupangeatsproject.util.roadRecycler
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +23,7 @@ class RoadAdapter(private val context: Context) : RecyclerView.Adapter<RoadAdapt
         holder.bind(roadDataArrayList[position])
 
         holder.itemView.setOnClickListener {
-
+            Log.d("AddressActivity", "RoadData $position 선택됨")
         }
     }
 

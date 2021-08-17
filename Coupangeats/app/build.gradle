@@ -3,6 +3,9 @@ plugins {
     id 'kotlin-android'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdkVersion 30
 
@@ -18,6 +21,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "ROAD_API_KEY", properties['ROAD_API_KEY'])
     }
 
     buildTypes {

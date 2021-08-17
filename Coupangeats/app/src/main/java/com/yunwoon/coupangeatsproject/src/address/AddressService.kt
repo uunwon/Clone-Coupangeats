@@ -1,5 +1,6 @@
 package com.yunwoon.coupangeatsproject.src.address
 
+import com.yunwoon.coupangeatsproject.BuildConfig
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.src.address.models.AddressResponse
 import retrofit2.Call
@@ -8,7 +9,7 @@ import retrofit2.Response
 
 class AddressService(val view: AddressActivityView) {
 
-    private val key = "devU01TX0FVVEgyMDIxMDgxNjAxMDEzMTExMTUyNTU="
+    private val key = BuildConfig.ROAD_API_KEY
 
     fun tryGetAddress(address: String) {
         val addressRetrofitInterface = ApplicationClass.roadRetrofit.create(AddressRetrofitInterface::class.java)
@@ -20,8 +21,6 @@ class AddressService(val view: AddressActivityView) {
             override fun onFailure(call: Call<AddressResponse>, t: Throwable) {
                 view.onPostAddressFailure(t.message ?: "통신 오류")
             }
-
         })
     }
-
 }

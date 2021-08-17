@@ -110,6 +110,13 @@
                 app:layout_constraintBottom_toBottomOf="@id/join_edit_text_email"/>
             <View
                 android:visibility="gone"
+                android:id="@+id/join_view_focus_email"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/blue"
+                app:layout_constraintTop_toBottomOf="@id/join_edit_text_email" />
+            <View
+                android:visibility="gone"
                 android:id="@+id/join_view_wrong_email"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -153,6 +160,13 @@
                 app:layout_constraintBottom_toBottomOf="@id/join_edit_text_password"/>
             <View
                 android:visibility="gone"
+                android:id="@+id/join_view_focus_password"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/blue"
+                app:layout_constraintTop_toBottomOf="@id/join_edit_text_password" />
+            <View
+                android:visibility="gone"
                 android:id="@+id/join_view_wrong_password"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -176,6 +190,18 @@
                 app:layout_constraintTop_toBottomOf="@id/join_view_wrong_password" />
             <TextView
                 android:visibility="gone"
+                android:id="@+id/join_text_wrong_password_1_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/join_text_wrong_password_1"
+                android:textSize="12sp"
+                android:textColor="@color/gray_600"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/join_text_correct_password" />
+            <TextView
+                android:visibility="gone"
                 android:id="@+id/join_text_wrong_password_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,7 +211,7 @@
                 android:textSize="12sp"
                 android:textColor="@color/red_900"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/join_text_correct_password" />
+                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_1_0" />
             <TextView
                 android:visibility="gone"
                 android:id="@+id/join_text_wrong_password_1_1"
@@ -197,7 +223,19 @@
                 android:textSize="12sp"
                 android:textColor="@color/green"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/join_text_correct_password" />
+                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_1" />
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/join_text_wrong_password_2_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/join_text_wrong_password_2"
+                android:textSize="12sp"
+                android:textColor="@color/gray_600"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_1_1" />
             <TextView
                 android:visibility="gone"
                 android:id="@+id/join_text_wrong_password_2"
@@ -209,7 +247,7 @@
                 android:textSize="12sp"
                 android:textColor="@color/red_900"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_1" />
+                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_2_0" />
             <TextView
                 android:visibility="gone"
                 android:id="@+id/join_text_wrong_password_2_1"
@@ -221,7 +259,19 @@
                 android:textSize="12sp"
                 android:textColor="@color/green"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_1" />
+                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_2" />
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/join_text_wrong_password_3_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/join_text_wrong_password_3"
+                android:textSize="12sp"
+                android:textColor="@color/gray_600"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_2_1" />
             <TextView
                 android:visibility="gone"
                 android:id="@+id/join_text_wrong_password_3"
@@ -233,7 +283,7 @@
                 android:textSize="12sp"
                 android:textColor="@color/red_900"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_2" />
+                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_3_0" />
             <TextView
                 android:visibility="gone"
                 android:id="@+id/join_text_wrong_password_3_1"
@@ -245,7 +295,7 @@
                 android:textSize="12sp"
                 android:textColor="@color/green"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_2" />
+                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_3" />
 
             <EditText
                 android:id="@+id/join_edit_text_name"
@@ -260,7 +310,7 @@
                 android:drawableStart="@drawable/edit_join_person"
                 android:drawablePadding="10dp"
                 android:background="@drawable/button_join_white"
-                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_3" />
+                app:layout_constraintTop_toBottomOf="@id/join_text_wrong_password_3_1" />
             <ImageView
                 android:visibility="gone"
                 android:id="@+id/join_image_view_name_check"
@@ -271,6 +321,13 @@
                 app:layout_constraintTop_toTopOf="@id/join_edit_text_name"
                 app:layout_constraintEnd_toEndOf="@id/join_edit_text_name"
                 app:layout_constraintBottom_toBottomOf="@id/join_edit_text_name"/>
+            <View
+                android:visibility="gone"
+                android:id="@+id/join_view_focus_name"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/blue"
+                app:layout_constraintTop_toBottomOf="@id/join_edit_text_name" />
             <View
                 android:visibility="gone"
                 android:id="@+id/join_view_wrong_name"
@@ -315,6 +372,13 @@
                 app:layout_constraintTop_toTopOf="@id/join_edit_text_phone"
                 app:layout_constraintEnd_toEndOf="@id/join_edit_text_phone"
                 app:layout_constraintBottom_toBottomOf="@id/join_edit_text_phone"/>
+            <View
+                android:visibility="gone"
+                android:id="@+id/join_view_focus_phone"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/blue"
+                app:layout_constraintTop_toBottomOf="@id/join_edit_text_phone" />
             <View
                 android:visibility="gone"
                 android:id="@+id/join_view_wrong_phone"
