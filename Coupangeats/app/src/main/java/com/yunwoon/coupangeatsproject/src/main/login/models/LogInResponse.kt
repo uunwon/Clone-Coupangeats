@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 import com.yunwoon.coupangeatsproject.config.BaseResponse
 
 data class LogInResponse (
-    @SerializedName("result") val result: ResultLogIn
+    @SerializedName("result") val result : ResultLogIn
 ) : BaseResponse()

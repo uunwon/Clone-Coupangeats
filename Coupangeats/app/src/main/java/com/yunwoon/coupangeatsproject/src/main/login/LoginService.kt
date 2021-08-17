@@ -13,7 +13,11 @@ class LoginService(val view: LoginActivityView) {
         val loginRetrofitInterface = ApplicationClass.sRetrofit.create(LoginRetrofitInterface::class.java)
         loginRetrofitInterface.postLogIn(postLogInRequest).enqueue(object: Callback<LogInResponse>{
             override fun onResponse(call: Call<LogInResponse>, response: Response<LogInResponse>) {
-                view.onPostLogInSuccess(response.body() as LogInResponse)
+                if(response.body() != null)
+                    view.onPostLogInSuccess(response.body() as LogInResponse)
+                else {
+                    view.onPostLogInFailure("입력 오류")
+                }
             }
 
             override fun onFailure(call: Call<LogInResponse>, t: Throwable) {

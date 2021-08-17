@@ -1,9 +1,6 @@
 package com.yunwoon.coupangeatsproject.src.main.mypage
 
 import android.content.Context
-import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,31 +26,28 @@ class MyPageFragment :
     }
 
     private fun initMyPageListView() {
-        myPageAdapter = MyPageAdapter(myPageDataArrayList, requireContext())
-        binding.myPageListView.adapter = myPageAdapter
-
-        val resources : Resources = this.resources
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_my_page_test)
-
-        myPageDataArrayList.add(MyPageData(bitmap, "배달 주소 관리"))
-        myPageDataArrayList.add(MyPageData(bitmap, "즐겨찾기"))
-        myPageDataArrayList.add(MyPageData(bitmap, "할인쿠폰"))
-        myPageDataArrayList.add(MyPageData(bitmap, "진행중인 이벤트"))
-        myPageDataArrayList.add(MyPageData(bitmap, "결제관리"))
-        myPageDataArrayList.add(MyPageData(bitmap, "배달파트너 모집"))
-        myPageDataArrayList.add(MyPageData(bitmap, "자주 묻는 질문"))
-        myPageDataArrayList.add(MyPageData(bitmap, "고객 지원"))
-        myPageDataArrayList.add(MyPageData(bitmap, "설정"))
-        myPageDataArrayList.add(MyPageData(bitmap, "공지사항"))
-        myPageDataArrayList.add(MyPageData(bitmap, "약관ㆍ개인정보 처리방침"))
+        addMyPageData()
 
         // myPageDataArrayList.clear()
-        // addMyPageData()
+        myPageAdapter = MyPageAdapter(myPageDataArrayList, requireContext())
+        binding.myPageListView.adapter = myPageAdapter
 
         myPageAdapter.notifyDataSetChanged()
     }
 
     private fun addMyPageData() {
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "배달 주소 관리"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "즐겨찾기"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "할인쿠폰"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "진행중인 이벤트"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "결제관리"))
+
+        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "배달파트너 모집"))
+        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "자주 묻는 질문"))
+        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "고객 지원"))
+        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "설정"))
+        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "공지사항"))
+        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "약관ㆍ개인정보 처리방침"))
     }
 
     class MyPageAdapter(private val myPageDataArrayList:ArrayList<MyPageData>, context: Context) : BaseAdapter() {
@@ -69,7 +63,7 @@ class MyPageFragment :
         override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
             binding = ItemMyPageBinding.inflate(inflater, p2, false)
 
-            binding.myPageImageView.setImageBitmap(myPageDataArrayList[p0].myPageImageView)
+            binding.myPageImageView.setImageResource(myPageDataArrayList[p0].myPageImageView)
             binding.myPageText.text = myPageDataArrayList[p0].myPageText
 
             return binding.root

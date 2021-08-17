@@ -62,6 +62,11 @@
     <string name="login_error">입력하신 아이디 또는 비밀번호가\n일치하지 않습니다.</string>
     <string name="login_error_confirm">확인</string>
 
+    <!-- Logout Dialog -->
+    <string name="logout_text">정말로 로그아웃 하시겠습니까?</string>
+    <string name="logout_text_cancel">취소</string>
+    <string name="logout_text_confirm">로그아웃</string>
+
     <!-- Join Activity -->
     <string name="join_text_need">회원정보를 입력해주세요</string>
     <string name="join_edit_text_email_hint">아이디(이메일)</string>

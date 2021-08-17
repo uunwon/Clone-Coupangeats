@@ -126,14 +126,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             ApplicationClass.sEditor.putString("loginJwtToken", response.result.jwt).apply()
             response.result.jwt.let { showCustomToast(it) } // 요청 성공 메시지 띄우기
             finish()
-        } else {
-            val dialogLoginError = LoginErrorDialog()
-            dialogLoginError.show(supportFragmentManager, "LoginErrorDialog")
         }
     }
 
     override fun onPostLogInFailure(message: String) {
         dismissLoadingDialog()
-        showCustomToast("오류 : $message")
+        if(message == "입력 오류") {
+            val dialogLoginError = LoginErrorDialog()
+            dialogLoginError.show(supportFragmentManager, "LoginErrorDialog")
+        } else {
+            showCustomToast("오류 : $message")
+        }
     }
 }
