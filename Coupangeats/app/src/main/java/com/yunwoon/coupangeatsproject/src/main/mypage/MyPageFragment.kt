@@ -1,19 +1,24 @@
 package com.yunwoon.coupangeatsproject.src.main.mypage
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.yunwoon.coupangeatsproject.R
+import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseFragment
 import com.yunwoon.coupangeatsproject.databinding.FragmentMyPageBinding
 import com.yunwoon.coupangeatsproject.databinding.ItemMyPageBinding
+import com.yunwoon.coupangeatsproject.src.main.MainActivity
 
 data class MyPageData(val myPageImageView: Int, val myPageText: String)
 class MyPageFragment :
     BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page) {
+    private val LOGOUT_CODE = 101
 
     private val myPageDataArrayList = ArrayList<MyPageData>()
     private lateinit var myPageAdapter : MyPageAdapter
@@ -23,6 +28,17 @@ class MyPageFragment :
 
         binding.myPageListView.isNestedScrollingEnabled = true
         initMyPageListView()
+
+        binding.myPageImageViewLogout.setOnClickListener {
+            val dialogLogout = LogoutDialog()
+            dialogLogout.setTargetFragment(this@MyPageFragment, LOGOUT_CODE)
+            fragmentManager?.let { it1 -> dialogLogout.show(it1, "LogoutDialog") }
+        }
+    }
+
+    private fun backToMain() {
+        ApplicationClass.sEditor.putString("loginJwtToken", null).apply()
+        (activity as MainActivity).setMainFragment()
     }
 
     private fun initMyPageListView() {
@@ -67,6 +83,17 @@ class MyPageFragment :
             binding.myPageText.text = myPageDataArrayList[p0].myPageText
 
             return binding.root
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == LOGOUT_CODE) {
+            if(resultCode == Activity.RESULT_OK) {
+                val bundle = data?.extras
+                if(bundle?.getInt("code") == 1) {
+                    backToMain()
+                }
+            }
         }
     }
 }

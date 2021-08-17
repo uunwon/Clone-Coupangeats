@@ -1,5 +1,7 @@
 package com.yunwoon.coupangeatsproject.src.main.mypage
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -30,7 +32,11 @@ class LogoutDialog  : DialogFragment() {
 
         binding.logoutTextConfirm.setOnClickListener {
             ApplicationClass.sEditor.putString("loginJwtToken", null).apply()
+            val intent = Intent().putExtra("code", 1)
+            targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
+
             dismiss()
+            // savedInstanceState?.putInt("code", 1)
         }
 
         return view
