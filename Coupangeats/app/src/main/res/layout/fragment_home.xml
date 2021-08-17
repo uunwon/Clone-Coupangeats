@@ -1,51 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/home_coordinator_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/home_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:minHeight="?attr/actionBarSize"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <TextView
-            android:id="@+id/text_toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:maxLength="10"
-            android:text="집"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:drawableStart="@drawable/ic_location"
-            android:drawableEnd="@drawable/ic_arrow_down"
-            android:drawablePadding="12dp"/>
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <androidx.core.widget.NestedScrollView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/home_app_bar_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/home_toolbar">
+        android:stateListAnimator="@null">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/white"
+            android:background="@color/white"
+            app:collapsedTitleGravity="center"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/home_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:minHeight="?attr/actionBarSize"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                app:backgroundTint="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="7dp"
+                    android:layout_marginEnd="2dp"
+                    android:src="@drawable/ic_gps" />
+
+                <TextView
+                    android:id="@+id/home_text_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:maxLength="12"
+                    android:text="집"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="7dp"
+                    android:src="@drawable/ic_arrow_down" />
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/home_nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/home_toolbar"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:descendantFocusability="blocksDescendants"
-            android:background="@color/gray_100">
+            android:background="@color/gray_50"
+            android:animateLayoutChanges="true">
 
             <ViewFlipper
                 android:id="@+id/home_view_flipper"
@@ -59,13 +95,14 @@
                 android:id="@+id/home_recycler_view_category"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
-                android:paddingStart="10dp"
+                android:paddingStart="20dp"
                 android:paddingEnd="5dp"
                 tools:listitem="@layout/item_category"
                 android:background="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/home_view_flipper"/>
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/home_text_recommend_store"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,6 +120,7 @@
                 app:drawableEndCompat="@drawable/ic_list_more" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
                 android:id="@+id/home_recycler_view_recommend"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
@@ -106,26 +144,71 @@
                 app:layout_constraintTop_toBottomOf="@id/home_recycler_view_recommend"
                 app:drawableEndCompat="@drawable/ic_list_more" />
 
-            <!-- androidx.recyclerview.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_recycler_view_hot"
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:layout_height="190dp"
+                android:paddingStart="20dp"
                 tools:listitem="@layout/item_small_store"
                 android:background="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/home_text_hot_store"/ -->
+                app:layout_constraintTop_toBottomOf="@id/home_text_hot_store"/>
 
-            <!--ImageView
+            <ImageView
                 android:id="@+id/home_image_view_event"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:scaleType="centerCrop"
+                android:layout_height="125dp"
+                android:layout_marginTop="4dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/home_event_banner"
+                app:layout_constraintTop_toBottomOf="@id/home_recycler_view_hot"/>
+
+            <TextView
+                android:id="@+id/home_text_new_store"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:padding="20dp"
+                android:text="@string/home_text_new_store"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:background="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/home_image_view_event"
+                app:drawableEndCompat="@drawable/ic_list_more" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_recycler_view_new"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:paddingStart="20dp"
+                tools:listitem="@layout/item_small_store"
+                android:background="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/home_text_new_store"/>
+
+            <TextView
+                android:id="@+id/home_text_choose_store"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/home_test_event"
-                app:layout_constraintTop_toBottomOf="@id/home_recycler_view_hot"/-->
+                android:padding="20dp"
+                android:text="@string/home_text_choose_store"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:background="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/home_recycler_view_new" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_recycler_view_choose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                tools:listitem="@layout/item_store"
+                android:background="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/home_text_choose_store"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

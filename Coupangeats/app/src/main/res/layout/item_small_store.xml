@@ -11,13 +11,14 @@
         android:id="@+id/small_store_image"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/test_small_store" />
+        android:src="@drawable/test_recommend_store" />
 
     <TextView
         android:id="@+id/small_store_text_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
         android:layout_marginTop="7dp"
+        android:maxLength="9"
         android:minHeight="0dp"
         android:ellipsize="end"
         android:text="@string/store_test_title"
@@ -27,7 +28,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
         android:layout_marginTop="2dp">
         <ImageView
             android:layout_width="wrap_content"
@@ -83,7 +84,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
         android:layout_marginTop="2dp">
 
         <TextView
