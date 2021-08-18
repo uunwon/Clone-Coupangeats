@@ -9,7 +9,12 @@ import com.yunwoon.coupangeatsproject.databinding.FragmentOrderedBinding
 class OrderedFragment :
     BaseFragment<FragmentOrderedBinding>(FragmentOrderedBinding::bind, R.layout.fragment_ordered) {
 
-    val orderedFragment = newInstance(this)
+    fun newInstance() : OrderedFragment {
+        val args = Bundle()
+        val frag = OrderedFragment()
+        frag.arguments = args
+        return frag
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -14,10 +14,12 @@ import com.yunwoon.coupangeatsproject.config.BaseFragment
 import com.yunwoon.coupangeatsproject.databinding.FragmentMyPageBinding
 import com.yunwoon.coupangeatsproject.databinding.ItemMyPageBinding
 import com.yunwoon.coupangeatsproject.src.main.MainActivity
+import com.yunwoon.coupangeatsproject.src.main.mypage.models.MyPageResponse
 
 data class MyPageData(val myPageImageView: Int, val myPageText: String)
 class MyPageFragment :
-    BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page) {
+    BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page), MyPageFragmentView {
+    private val loginJwtToken = ApplicationClass.sSharedPreferences.getString("loginJwtToken", null)
     private val LOGOUT_CODE = 101
 
     private val myPageDataArrayList = ArrayList<MyPageData>()
@@ -28,6 +30,7 @@ class MyPageFragment :
 
         binding.myPageListView.isNestedScrollingEnabled = true
         initMyPageListView()
+        initUserProfile()
 
         binding.myPageImageViewLogout.setOnClickListener {
             val dialogLogout = LogoutDialog()
@@ -36,11 +39,7 @@ class MyPageFragment :
         }
     }
 
-    private fun backToMain() {
-        ApplicationClass.sEditor.putString("loginJwtToken", null).apply()
-        (activity as MainActivity).setMainFragment()
-    }
-
+    // 마이페이지 목록 세팅
     private fun initMyPageListView() {
         addMyPageData()
 
@@ -95,5 +94,34 @@ class MyPageFragment :
                 }
             }
         }
+    }
+
+    private fun backToMain() {
+        ApplicationClass.sEditor.putString("loginJwtToken", null).apply()
+        (activity as MainActivity).setMainFragment()
+    }
+
+    // 사용자 프로필 조회
+    private fun initUserProfile() {
+        if(loginJwtToken != null) {
+            showLoadingDialog(requireContext())
+            MyPageService(this).tryGetMyPage(loginJwtToken)
+        }
+    }
+
+    override fun onGetMyPageSuccess(response: MyPageResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            showCustomToast("사용자 정보를 받아왔습니다")
+            binding.myPageTextName.text = response.result[0].name
+            binding.myPageTextPhone.text = response.result[0].phoneNumber
+        } else {
+            showCustomToast("사용자 정보를 받아오는데 실패했습니다")
+        }
+    }
+
+    override fun onGetMyPageFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 }

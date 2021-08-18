@@ -8,7 +8,7 @@
     tools:context=".src.main.order.OrderedFragment">
 
     <Button
-        android:id="@+id/oder_button_view_ordered"
+        android:id="@+id/order_button_view_ordered"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/order_text_view_ordered"
