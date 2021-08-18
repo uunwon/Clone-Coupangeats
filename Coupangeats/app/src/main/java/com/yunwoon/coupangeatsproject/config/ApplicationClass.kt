@@ -13,13 +13,13 @@ class ApplicationClass : Application() {
     init { instance = this }
 
     // 테스트 서버 주소
-    val API_URL = "https://vicion.shop/"
+    private val API_URL = "https://dev.vicion.shop/"
 
     // 실 서버 주소
     // val API_URL = ""
 
     // 도로명 검색 서버 주소
-    val ROAD_API_URL = "https://www.juso.go.kr/"
+    private val ROAD_API_URL = "https://www.juso.go.kr/"
 
     companion object {
         lateinit var instance : ApplicationClass
@@ -29,7 +29,7 @@ class ApplicationClass : Application() {
         lateinit var sEditor: SharedPreferences.Editor
 
         // JWT Token Header 키 값
-        val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
+        const val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
 
         // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.
         lateinit var sRetrofit: Retrofit

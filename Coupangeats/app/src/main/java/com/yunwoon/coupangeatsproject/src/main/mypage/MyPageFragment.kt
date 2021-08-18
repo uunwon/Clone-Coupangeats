@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.telephony.PhoneNumberUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,8 @@ import com.yunwoon.coupangeatsproject.databinding.FragmentMyPageBinding
 import com.yunwoon.coupangeatsproject.databinding.ItemMyPageBinding
 import com.yunwoon.coupangeatsproject.src.main.MainActivity
 import com.yunwoon.coupangeatsproject.src.main.mypage.models.MyPageResponse
+import java.util.*
+import kotlin.collections.ArrayList
 
 data class MyPageData(val myPageImageView: Int, val myPageText: String)
 class MyPageFragment :
@@ -29,6 +32,7 @@ class MyPageFragment :
         super.onViewCreated(view, savedInstanceState)
 
         binding.myPageListView.isNestedScrollingEnabled = true
+
         initMyPageListView()
         initUserProfile()
 
@@ -57,11 +61,11 @@ class MyPageFragment :
         myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "진행중인 이벤트"))
         myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "결제관리"))
 
-        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "배달파트너 모집"))
-        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "자주 묻는 질문"))
-        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "고객 지원"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "배달파트너 모집"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "자주 묻는 질문"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "고객 지원"))
         // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "설정"))
-        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "공지사항"))
+        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "공지사항"))
         // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "약관ㆍ개인정보 처리방침"))
     }
 
@@ -113,8 +117,19 @@ class MyPageFragment :
         dismissLoadingDialog()
         if(response.isSuccess) {
             showCustomToast("사용자 정보를 받아왔습니다")
+            val phoneFormat = PhoneNumberUtils.formatNumber(response.result[0].phoneNumber)
+            // val phoneFormat = PhoneNumberUtils.formatNumber(response.result[0].phoneNumber, Locale.getDefault().country)
+            /* val phoneSplit = phoneFormat.split("-").toMutableList()
+
+            if(phoneSplit.size == 3) {
+                phoneSplit[1] = "****"
+                binding.myPageTextPhone.text = phoneSplit[0].plus(phoneSplit[1]).plus(phoneSplit[2])
+            } else {
+                binding.myPageTextPhone.text = phoneFormat
+            } */
+
+            binding.myPageTextPhone.text = phoneFormat
             binding.myPageTextName.text = response.result[0].name
-            binding.myPageTextPhone.text = response.result[0].phoneNumber
         } else {
             showCustomToast("사용자 정보를 받아오는데 실패했습니다")
         }

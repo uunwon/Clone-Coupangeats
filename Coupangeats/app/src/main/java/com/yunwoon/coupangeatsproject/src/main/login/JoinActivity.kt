@@ -216,7 +216,7 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
 
                 // 휴대폰 번호 작성 여부 / 자릿수 체크
                 if(binding.joinEditTextPhone.text.toString() == "" ||
-                        binding.joinEditTextPhone.text.length < 10) {
+                        binding.joinEditTextPhone.text.length < 11) {
                     phoneCheck = false
                     binding.joinViewFocusPhone.visibility = View.GONE // 파란 뷰
                     binding.joinImageViewPhoneCheck.visibility = View.GONE // 체크

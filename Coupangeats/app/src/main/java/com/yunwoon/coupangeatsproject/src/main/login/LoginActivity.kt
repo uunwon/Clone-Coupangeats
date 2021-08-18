@@ -124,7 +124,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         dismissLoadingDialog()
         if(response.isSuccess) {
             ApplicationClass.sEditor.putString("loginJwtToken", response.result.jwt).apply()
-            response.result.jwt.let { showCustomToast(it) } // 요청 성공 메시지 띄우기
+            showCustomToast("로그인에 성공했습니다")
             finish()
         }
     }
