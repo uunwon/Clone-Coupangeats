@@ -75,8 +75,16 @@
 * AddressActivity 내 도로명 주소 검색 API 적용
 * HomeFragment 내 가로형 가게 RecyclerView 생성
 * JoinActivity 내 TextWatcher 이벤트 추가
-* 로그인 여부에 따른 MainActivity 화면 상이하게 처리
+* **1차 피드백 적용** --> 로그인 여부에 따른 MainActivity 화면 상이하게 처리
 * MyPageFragment 생성
+
+### 2021-08-18
+* **1차 피드백 적용** --> HomeFragment 내 가로형 RecyclerView 로그인 유무에 따라 상이하게 처리
+* HomeFragment RecyclerView 전부 구현 / 이중 스크롤 이슈 해결
+* OrderFragment 내 Tablayout 과 ViewPager 연결
+* HomeFragment 유저 프로필 정보 API 연결, 연락처 데이터 가공
+* StoreActivity 내 가게 이름 부분 CollapsingToolbarLayout 구현
+* StoreActivity 내 작은 리뷰 RecyclerView 추가
 
 ## 테스트 개발환경
 * AWS EC2 / RDS
