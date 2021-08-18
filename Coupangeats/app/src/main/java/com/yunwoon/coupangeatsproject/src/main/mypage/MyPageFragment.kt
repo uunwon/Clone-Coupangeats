@@ -64,9 +64,9 @@ class MyPageFragment :
         myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "배달파트너 모집"))
         myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "자주 묻는 질문"))
         myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "고객 지원"))
-        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "설정"))
-        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "공지사항"))
-        // myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "약관ㆍ개인정보 처리방침"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "설정"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "공지사항"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "약관ㆍ개인정보 처리방침"))
     }
 
     class MyPageAdapter(private val myPageDataArrayList:ArrayList<MyPageData>, context: Context) : BaseAdapter() {
@@ -119,7 +119,7 @@ class MyPageFragment :
             showCustomToast("사용자 정보를 받아왔습니다")
             // val phoneFormat = PhoneNumberUtils.formatNumber(response.result[0].phoneNumber)
             val phoneFormat = PhoneNumberUtils.formatNumber(response.result[0].phoneNumber, Locale.getDefault().country)
-            
+
             /* val phoneSplit = phoneFormat.split("-").toMutableList()
 
             if(phoneSplit.size == 3) {

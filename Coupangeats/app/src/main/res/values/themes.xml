@@ -40,7 +40,7 @@
     </style>
 
     <style name="TabItemText" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <!-- Store activity theme. -->

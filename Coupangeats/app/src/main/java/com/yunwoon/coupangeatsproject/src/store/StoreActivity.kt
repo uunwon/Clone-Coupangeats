@@ -1,5 +1,7 @@
 package com.yunwoon.coupangeatsproject.src.store
 
+import android.content.res.Resources
+import android.graphics.BitmapFactory
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
@@ -8,10 +10,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.view.WindowManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityStoreBinding
+import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewAdapter
+import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewData
 import kotlin.math.abs
 
 class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::inflate), AppBarLayout.OnOffsetChangedListener {
@@ -22,10 +27,16 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     private lateinit var blackFilter: PorterDuffColorFilter
     private lateinit var redFilter: PorterDuffColorFilter
 
+    private lateinit var rlayoutManager: LinearLayoutManager // 수평 레이아웃 매니저
+
+    private lateinit var smallReviewAdapter: SmallReviewAdapter
+    private val smallReviewData = mutableListOf<SmallReviewData>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initStoreView()
+        setSmallReviewRecyclerView()
     }
 
     // store 화면 세팅
@@ -81,5 +92,28 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
                 }
             }
         }
+    }
+
+    // 작은 리뷰 RecyclerView 세팅
+    private fun setSmallReviewRecyclerView() {
+        rlayoutManager = LinearLayoutManager(this)
+        rlayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+
+        binding.storeRecyclerViewReview.layoutManager = rlayoutManager
+        binding.storeRecyclerViewReview.isNestedScrollingEnabled = true
+
+        smallReviewAdapter = SmallReviewAdapter(this)
+        binding.storeRecyclerViewReview.adapter = smallReviewAdapter
+
+        val resources: Resources = this.resources
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.test_small_review)
+
+        smallReviewData.apply {
+            add(SmallReviewData(bitmap, "이번엔 도우가 좀 질겼어요. 그래도 피자는 여기로 정착!", "★★★★★"))
+            add(SmallReviewData(bitmap, "너무 맛나요~ 피자는 이 집이 최고에요!!", "★★★"))
+            add(SmallReviewData(bitmap, "맛있어서 순삭. 배달 빨라서 피자 뜨끈뜨끈해서 좋아요", "★★★★"))
+        }
+
+        smallReviewAdapter.smallReviewDataArrayList = smallReviewData
     }
 }

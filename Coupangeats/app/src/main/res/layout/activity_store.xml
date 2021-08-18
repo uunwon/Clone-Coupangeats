@@ -27,7 +27,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
+                android:layout_height="250dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/test_recommend_store"
                 app:layout_collapseMode="parallax"
@@ -36,16 +36,18 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
-                android:layout_marginTop="150dp"
+                android:layout_height="385dp"
+                android:layout_marginTop="205dp"
                 app:layout_collapseMode="parallax">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/store_constraint_layout_basic"
                     android:layout_width="370dp"
-                    android:layout_height="120dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="25dp"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_join_white"
+                    android:background="@drawable/button_store_shadow"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">
@@ -56,6 +58,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_gravity="center"
+                        android:maxLength="10"
+                        android:ellipsize="end"
                         android:text="@string/store_test_title"
                         android:textColor="@color/black"
                         android:textSize="27sp"
@@ -69,9 +73,10 @@
                         android:id="@+id/store_image_view_star_rating"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginStart="115dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="140dp"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginEnd="2dp"
                         android:src="@drawable/ic_star_rating"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/store_text_star_rating"
@@ -82,6 +87,7 @@
                         android:id="@+id/store_text_star_rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="20dp"
                         android:text="@string/store_test_star_rating"
                         android:textSize="17sp"
@@ -96,12 +102,12 @@
                         android:id="@+id/store_text_review"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
                         android:layout_marginBottom="20dp"
                         android:layout_marginStart="8dp"
                         android:text="@string/store_test_review"
                         android:textSize="15sp"
                         android:textColor="@color/blue_300"
-                        android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@id/store_text_star_rating"
                         app:layout_constraintEnd_toStartOf="@id/store_text_review_count"
                         app:layout_constraintTop_toBottomOf="@id/store_text_title"
@@ -111,8 +117,9 @@
                         android:id="@+id/store_text_review_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginStart="5dp"
+                        android:layout_marginStart="4dp"
                         android:text="@string/store_test_review_count2"
                         android:textSize="15sp"
                         android:textColor="@color/blue_300"
@@ -126,13 +133,13 @@
                         android:id="@+id/store_text_review_go"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="115dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="140dp"
                         android:text="@string/store_test_review_go"
                         android:textSize="15sp"
                         android:textColor="@color/blue_300"
-                        android:textStyle="bold"
                         android:drawableEnd="@drawable/ic_store_more"
                         android:drawableTint="@color/blue_300"
                         android:drawablePadding="3dp"
@@ -148,12 +155,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_marginTop="140dp"
+                    android:layout_marginTop="160dp"
                     android:layout_marginStart="20dp"
                     android:text="@string/store_item_delivery_time"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:drawableStart="@drawable/ic_store_delivery_time"
                     android:drawablePadding="5dp"
                     app:layout_constraintTop_toTopOf="parent"
@@ -164,12 +171,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_marginTop="140dp"
+                    android:layout_marginTop="160dp"
                     android:layout_marginEnd="20dp"
                     android:text="@string/store_text_detail"
                     android:textColor="@color/blue_300"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:drawableEnd="@drawable/ic_store_more"
                     android:drawableTint="@color/blue_300"
                     android:drawablePadding="5dp"
@@ -181,12 +188,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginStart="20dp"
                     android:text="@string/store_test_delivery"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@id/store_text_delivery_time"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -195,12 +202,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginStart="35dp"
                     android:text="@string/store_test_delivery_tip"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@id/store_text_delivery_time"
                     app:layout_constraintStart_toEndOf="@id/store_text_delivery"/>
 
@@ -209,11 +216,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="31dp"
                     android:layout_marginStart="5dp"
                     android:text="@string/store_text_delivery_tip_detail"
-                    android:textColor="@color/gray_600"
-                    android:textSize="15sp"
+                    android:textColor="@color/gray_500"
+                    android:textSize="13sp"
                     app:layout_constraintTop_toBottomOf="@id/store_text_delivery_time"
                     app:layout_constraintStart_toEndOf="@id/store_text_delivery_tip"/>
 
@@ -227,7 +234,7 @@
                     android:text="@string/store_text_least_delivery"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@id/store_text_delivery"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -241,7 +248,7 @@
                     android:text="@string/store_text_lest_delivery_tip"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@id/store_text_delivery"
                     app:layout_constraintStart_toEndOf="@id/store_text_delivery"/>
 
@@ -250,7 +257,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    tools:listitem="@layout/item_my_page"
+                    tools:listitem="@layout/item_small_review"
                     app:layout_constraintTop_toBottomOf="@id/store_text_least_delivery"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -260,7 +267,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:elevation="3dp"
                 app:layout_collapseMode="pin"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -299,19 +306,19 @@
                 android:background="@color/white"
                 android:nestedScrollingEnabled="false">
                 <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/main_btm_nav_home_title"/>
                 <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/main_btm_nav_search_title" />
                 <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/main_btm_nav_favorite_title" />
                 <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/main_btm_nav_order_title" />
             </com.google.android.material.tabs.TabLayout>

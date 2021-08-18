@@ -43,6 +43,8 @@
     <string name="store_text_lest_delivery_tip">15,000원</string>
     <string name="store_menu_share">공유</string>
     <string name="store_menu_favorite">즐겨찾기</string>
+    <string name="store_small_review_text">치킨은 이제 거의 후참잘에서만 시켜요 좋아요 맛있어요 맛있어요</string>
+    <string name="store_small_review_star_rating">★★★★★</string>
 
     <!-- My Page Fragment-->
     <string name="my_page_text_name">샐리</string>
