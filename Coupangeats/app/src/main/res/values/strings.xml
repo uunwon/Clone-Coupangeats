@@ -27,11 +27,22 @@
     <string name="store_test_delivery">배달비</string>
     <string name="store_test_delivery_tip">3,000원</string>
     <string name="store_item_title">진심을 담아내다. 고기장인</string>
-    <string name="store_item_delivery_time">10분-20분</string>
+    <string name="store_item_delivery_time">10-20분</string>
+    <string name="store_test_review">리뷰</string>
+    <string name="store_test_review_count2">22</string>
+    <string name="store_test_review_go">개</string>
 
     <!-- Order Fragment-->
     <string name="order_text_default">주문 내역이 없습니다.</string>
     <string name="order_text_view_ordered">과거 주문 내역 보기</string>
+
+    <!-- Store Activity -->
+    <string name="store_text_detail">매장 / 원산지 정보</string>
+    <string name="store_text_delivery_tip_detail">자세히</string>
+    <string name="store_text_least_delivery">최소주문</string>
+    <string name="store_text_lest_delivery_tip">15,000원</string>
+    <string name="store_menu_share">공유</string>
+    <string name="store_menu_favorite">즐겨찾기</string>
 
     <!-- My Page Fragment-->
     <string name="my_page_text_name">샐리</string>

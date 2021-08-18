@@ -28,6 +28,29 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <!-- scroll 되기 전 text color -->
+    <style name="CollapsingToolbar.TitleText" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:textColor">@color/transparency</item>
+    </style>
+
+    <!-- scroll 된 후 text color -->
+    <style name="Toolbar.TitleText" parent="Widget.AppCompat.Toolbar">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TabItemText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <!-- Store activity theme. -->
+    <style name="StoreAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorAccent">@color/transparency</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

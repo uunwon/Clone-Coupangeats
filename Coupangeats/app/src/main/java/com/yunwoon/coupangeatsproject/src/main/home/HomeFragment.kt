@@ -16,6 +16,7 @@ import com.yunwoon.coupangeatsproject.config.BaseFragment
 import com.yunwoon.coupangeatsproject.databinding.FragmentHomeBinding
 import com.yunwoon.coupangeatsproject.src.address.AddressActivity
 import com.yunwoon.coupangeatsproject.src.category.CategoryDetailActivity
+import com.yunwoon.coupangeatsproject.src.store.StoreActivity
 import com.yunwoon.coupangeatsproject.util.categoryRecycler.CategoryAdapter
 import com.yunwoon.coupangeatsproject.util.categoryRecycler.CategoryData
 import com.yunwoon.coupangeatsproject.util.smallStoreRecycler.SmallStoreAdapter
@@ -244,7 +245,7 @@ class HomeFragment :
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_main_option_search -> {
-                showCustomToast("검색 누름")
+                this.startActivity(Intent(requireContext(), StoreActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)

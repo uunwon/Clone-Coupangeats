@@ -10,6 +10,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         android:clipToPadding="false"
         android:fillViewport="true"
         android:focusable="true"
@@ -19,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:animateLayoutChanges="true">
+            android:animateLayoutChanges="true"
+            android:descendantFocusability="blocksDescendants">
             <TextView
                 android:id="@+id/my_page_text_name"
                 android:layout_width="wrap_content"
@@ -69,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="550dp"
                 android:layout_marginStart="20dp"
+                android:scrollbars="none"
                 android:divider="@color/white"
                 tools:listitem="@layout/item_my_page"
                 app:layout_constraintTop_toBottomOf="@id/my_page_image_view"/>

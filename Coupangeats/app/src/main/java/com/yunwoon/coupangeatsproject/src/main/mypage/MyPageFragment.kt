@@ -117,8 +117,9 @@ class MyPageFragment :
         dismissLoadingDialog()
         if(response.isSuccess) {
             showCustomToast("사용자 정보를 받아왔습니다")
-            val phoneFormat = PhoneNumberUtils.formatNumber(response.result[0].phoneNumber)
-            // val phoneFormat = PhoneNumberUtils.formatNumber(response.result[0].phoneNumber, Locale.getDefault().country)
+            // val phoneFormat = PhoneNumberUtils.formatNumber(response.result[0].phoneNumber)
+            val phoneFormat = PhoneNumberUtils.formatNumber(response.result[0].phoneNumber, Locale.getDefault().country)
+            
             /* val phoneSplit = phoneFormat.split("-").toMutableList()
 
             if(phoneSplit.size == 3) {

@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/coordinatorLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".src.store.StoreActivity"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/white"
+            android:background="@color/white"
+            app:collapsedTitleGravity="center"
+            app:expandedTitleTextAppearance="@style/CollapsingToolbar.TitleText"
+            app:collapsedTitleTextAppearance="@style/Toolbar.TitleText"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <!-- 접히고자 하는 layout 추가 -->
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/test_recommend_store"
+                app:layout_collapseMode="parallax"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:layout_marginTop="150dp"
+                app:layout_collapseMode="parallax">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/store_constraint_layout_basic"
+                    android:layout_width="370dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/button_join_white"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/store_text_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center"
+                        android:text="@string/store_test_title"
+                        android:textColor="@color/black"
+                        android:textSize="27sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/store_text_star_rating"/>
+
+                    <ImageView
+                        android:id="@+id/store_image_view_star_rating"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="115dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_star_rating"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/store_text_star_rating"
+                        app:layout_constraintTop_toBottomOf="@id/store_text_title"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/store_text_star_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="@string/store_test_star_rating"
+                        android:textSize="17sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/store_image_view_star_rating"
+                        app:layout_constraintEnd_toStartOf="@id/store_text_review"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/store_text_title" />
+
+                    <TextView
+                        android:id="@+id/store_text_review"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/store_test_review"
+                        android:textSize="15sp"
+                        android:textColor="@color/blue_300"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/store_text_star_rating"
+                        app:layout_constraintEnd_toStartOf="@id/store_text_review_count"
+                        app:layout_constraintTop_toBottomOf="@id/store_text_title"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/store_text_review_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/store_test_review_count2"
+                        android:textSize="15sp"
+                        android:textColor="@color/blue_300"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/store_text_review"
+                        app:layout_constraintEnd_toStartOf="@id/store_text_review_go"
+                        app:layout_constraintTop_toBottomOf="@id/store_text_title"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/store_text_review_go"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="115dp"
+                        android:text="@string/store_test_review_go"
+                        android:textSize="15sp"
+                        android:textColor="@color/blue_300"
+                        android:textStyle="bold"
+                        android:drawableEnd="@drawable/ic_store_more"
+                        android:drawableTint="@color/blue_300"
+                        android:drawablePadding="3dp"
+                        app:layout_constraintStart_toEndOf="@id/store_text_review_count"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/store_text_title"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/store_text_delivery_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="140dp"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/store_item_delivery_time"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:drawableStart="@drawable/ic_store_delivery_time"
+                    android:drawablePadding="5dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:id="@+id/store_text_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="140dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/store_text_detail"
+                    android:textColor="@color/blue_300"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:drawableEnd="@drawable/ic_store_more"
+                    android:drawableTint="@color/blue_300"
+                    android:drawablePadding="5dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/store_text_delivery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/store_test_delivery"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@id/store_text_delivery_time"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:id="@+id/store_text_delivery_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="35dp"
+                    android:text="@string/store_test_delivery_tip"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@id/store_text_delivery_time"
+                    app:layout_constraintStart_toEndOf="@id/store_text_delivery"/>
+
+                <TextView
+                    android:id="@+id/store_text_delivery_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/store_text_delivery_tip_detail"
+                    android:textColor="@color/gray_600"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@id/store_text_delivery_time"
+                    app:layout_constraintStart_toEndOf="@id/store_text_delivery_tip"/>
+
+                <TextView
+                    android:id="@+id/store_text_least_delivery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/store_text_least_delivery"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@id/store_text_delivery"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:id="@+id/store_text_lest_delivery_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="35dp"
+                    android:text="@string/store_text_lest_delivery_tip"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@id/store_text_delivery"
+                    app:layout_constraintStart_toEndOf="@id/store_text_delivery"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/store_recycler_view_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    tools:listitem="@layout/item_my_page"
+                    app:layout_constraintTop_toBottomOf="@id/store_text_least_delivery"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="20dp"
+                android:elevation="3dp"
+                app:layout_collapseMode="pin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:navigationIcon="@drawable/ic_toolbar_back_white"
+                app:title="@string/store_test_title" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:animateLayoutChanges="true">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:tabMaxWidth="0dp"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+                app:tabIndicatorColor="@color/black"
+                app:tabTextAppearance="@style/TabItemText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/white"
+                android:nestedScrollingEnabled="false">
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_btm_nav_home_title"/>
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_btm_nav_search_title" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_btm_nav_favorite_title" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_btm_nav_order_title" />
+            </com.google.android.material.tabs.TabLayout>
+
+            <!-- ScrollView 안에 ListView Height 직접 지정해줘야 함-->
+
+            <View
+                android:id="@+id/firstView"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                android:nestedScrollingEnabled="true"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@color/red"
+                app:layout_constraintTop_toBottomOf="@id/firstView"
+                android:nestedScrollingEnabled="true"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
