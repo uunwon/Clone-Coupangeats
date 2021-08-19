@@ -15,6 +15,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".src.store.MenuActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MenuAppTheme"/>
+        <activity
             android:name=".src.store.StoreActivity"
             android:screenOrientation="portrait"
             android:theme="@style/StoreAppTheme"/>

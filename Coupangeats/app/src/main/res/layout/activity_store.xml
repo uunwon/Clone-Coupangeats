@@ -267,12 +267,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_marginTop="30dp"
+                android:paddingEnd="5dp"
                 android:elevation="3dp"
                 app:layout_collapseMode="pin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:navigationIcon="@drawable/ic_toolbar_back_white"
-                app:title="@string/store_test_title" />
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <ImageButton
+                    android:id="@+id/store_image_button_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_toolbar_back_white"
+                    android:contentDescription="@string/back_button_default"/>
+
+                <TextView
+                    android:id="@+id/store_text_toolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="15dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="@string/store_test_title"
+                    android:textColor="@color/transparency"
+                    android:textSize="19sp"
+                    android:textStyle="bold"/>
+
+            </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <com.google.android.material.tabs.TabLayout

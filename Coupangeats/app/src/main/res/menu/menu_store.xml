@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_share"
+        android:id="@+id/menu_store_share"
         android:title="@string/store_menu_favorite"
         android:icon="@drawable/ic_store_share_white"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menu_favorite"
+        android:id="@+id/menu_store_favorite"
         android:title="@string/store_menu_share"
         android:icon="@drawable/ic_my_page_test_white"
         app:showAsAction="ifRoom" />

@@ -1,5 +1,6 @@
 package com.yunwoon.coupangeatsproject.src.store
 
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.graphics.PorterDuff
@@ -8,6 +9,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -60,9 +62,10 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
 
         whiteFilter = PorterDuffColorFilter(resources.getColor(R.color.white), PorterDuff.Mode.SRC_ATOP)
         blackFilter = PorterDuffColorFilter(resources.getColor(R.color.black), PorterDuff.Mode.SRC_ATOP)
-        redFilter = PorterDuffColorFilter(resources.getColor(R.color.red), PorterDuff.Mode.SRC_ATOP)
+        redFilter = PorterDuffColorFilter(resources.getColor(R.color.red_900), PorterDuff.Mode.SRC_ATOP)
     }
 
+    // 옵션 메뉴 세팅
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_store, menu)
         if(menu != null) {
@@ -76,19 +79,33 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_store_share -> {
+                showCustomToast("공유되었습니다")
+            }
+            R.id.menu_store_favorite -> {
+                showCustomToast("찜되었습니다")
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
         if (appBarLayout != null) {
             when {
                 //  State Expanded
                 verticalOffset == 0 -> {
-                    supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_back_white)
+                    binding.storeImageButtonBack.setBackgroundResource(R.drawable.ic_toolbar_back_white)
+                    binding.storeTextToolbar.setTextColor(resources.getColor(R.color.transparency))
                     menuIconDrawable1.colorFilter = whiteFilter
                     menuIconDrawable2.colorFilter = whiteFilter
                     window.decorView.systemUiVisibility = 0
                 }
                 //  State Collapsed
                 abs(verticalOffset) >= appBarLayout.totalScrollRange -> {
-                    supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_back)
+                    binding.storeImageButtonBack.setBackgroundResource(R.drawable.ic_toolbar_back)
+                    binding.storeTextToolbar.setTextColor(resources.getColor(R.color.black))
                     menuIconDrawable1.colorFilter = blackFilter
                     menuIconDrawable2.colorFilter = redFilter
                     window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -120,11 +137,15 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         smallReviewAdapter.smallReviewDataArrayList = smallReviewData
     }
 
+    fun moveActivity(position : Int) {
+        this.startActivity(Intent(this, MenuActivity::class.java))
+    }
+
     private fun setStoreViewPager() {
         verticalFragmentAdapter = MenuFragmentAdapter(supportFragmentManager)
         verticalFragmentAdapter.setType(verticalFragmentAdapter.TYPE_VERTICAL_VIEWPAGER)
-
         binding.storeViewPager.adapter = verticalFragmentAdapter
+
         binding.storeTabLayout.setupWithViewPager(binding.storeViewPager)
     }
 }

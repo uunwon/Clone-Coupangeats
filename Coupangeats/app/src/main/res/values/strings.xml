@@ -34,7 +34,15 @@
     <string name="store_test_menu_title">고르곤졸라 피자</string>
     <string name="store_test_menu_price">23,000</string>
     <string name="store_test_menu_price_unit">원</string>
-    <string name="store_test_menu_detail">이탈리아의 대표적인 블루치즈를 사용하여 치즈의 깊고 진한 맛을 느낄 수 있는 이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자</string>
+    <string name="store_test_menu_detail">이탈리아의 대표적인 블루치즈를 사용하여 치즈의 깊고 진한 맛을 느낄 수 있는 이태리 정통피자이태리</string>
+    <string name="store_test_menu_detail2">디저트</string>
+    <string name="store_test_menu_detail3">달콤바삭치즈볼</string>
+    <string name="store_menu_info">알레르기/영양성분 정보 보기</string>
+
+    <!-- Menu Activity -->
+    <string name="menu_text_price">가격</string>
+    <string name="menu_text_number">수량</string>
+    <string name="menu_text_cart">카트에 담기</string>
 
     <!-- Order Fragment-->
     <string name="order_text_default">주문 내역이 없습니다.</string>

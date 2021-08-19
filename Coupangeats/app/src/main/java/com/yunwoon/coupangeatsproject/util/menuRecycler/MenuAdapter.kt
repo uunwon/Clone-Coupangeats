@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
+import com.yunwoon.coupangeatsproject.src.store.StoreActivity
 
 class MenuAdapter(private val context: Context) : RecyclerView.Adapter<MenuAdapter.ViewHolder>() {
     var menuDataArrayList = mutableListOf<MenuData>()
@@ -24,7 +25,10 @@ class MenuAdapter(private val context: Context) : RecyclerView.Adapter<MenuAdapt
         holder.bind(menuDataArrayList[position])
 
         holder.itemView.setOnClickListener {
+            val activity = context as StoreActivity
+            activity.moveActivity(position)
             Log.d("StoreActivity", "MenuData $position 선택됨")
+
         }
     }
 
