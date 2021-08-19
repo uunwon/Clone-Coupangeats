@@ -20,6 +20,7 @@
     <string name="home_text_choose_store">골라먹는 맛집</string>
     
     <!-- Test Data -->
+    <string name="blank">&#160;</string>
     <string name="store_test_title">피자헛 당산점</string>
     <string name="store_test_star_rating">4.9</string>
     <string name="store_test_location">0.1km</string>
@@ -37,6 +38,8 @@
     <string name="store_test_menu_detail">이탈리아의 대표적인 블루치즈를 사용하여 치즈의 깊고 진한 맛을 느낄 수 있는 이태리 정통피자이태리</string>
     <string name="store_test_menu_detail2">디저트</string>
     <string name="store_test_menu_detail3">달콤바삭치즈볼</string>
+    <string name="store_test_menu_detail4">M인치(11인치)</string>
+    <string name="store_test_menu_detail5">기본</string>
     <string name="store_menu_info">알레르기/영양성분 정보 보기</string>
 
     <!-- Menu Activity -->

@@ -11,6 +11,10 @@ import com.google.android.material.appbar.AppBarLayout
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityMenuBinding
+import com.yunwoon.coupangeatsproject.util.menuDetailRecycler.MenuCheckData
+import com.yunwoon.coupangeatsproject.util.menuDetailRecycler.MenuDetailAdapter
+import com.yunwoon.coupangeatsproject.util.menuDetailRecycler.MenuDetailData
+import com.yunwoon.coupangeatsproject.util.menuDetailRecycler.MenuRadioData
 import kotlin.math.abs
 
 class MenuActivity : BaseActivity<ActivityMenuBinding>(ActivityMenuBinding::inflate), AppBarLayout.OnOffsetChangedListener {
@@ -22,7 +26,11 @@ class MenuActivity : BaseActivity<ActivityMenuBinding>(ActivityMenuBinding::infl
     private lateinit var whiteFilter: PorterDuffColorFilter
     private lateinit var blackFilter: PorterDuffColorFilter
 
-    private lateinit var mlayoutManager: LinearLayoutManager // 수평 레이아웃 매니저
+    private lateinit var mlayoutManager: LinearLayoutManager // 옵션 메뉴
+    private lateinit var menuDetailAdapter: MenuDetailAdapter
+    private val menuDetailData = mutableListOf<MenuDetailData>()
+    private val menuRadioData = mutableListOf<MenuRadioData>()
+    private val menuCheckData = mutableListOf<MenuCheckData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +38,7 @@ class MenuActivity : BaseActivity<ActivityMenuBinding>(ActivityMenuBinding::infl
         initMenuView()
         setMenuRecyclerView()
 
-        binding.cartAppBarLayout.setOnClickListener {
+        binding.cartToolbar.setOnClickListener {
             showCustomToast("카트에 담아보세요")
         }
     }
@@ -94,17 +102,24 @@ class MenuActivity : BaseActivity<ActivityMenuBinding>(ActivityMenuBinding::infl
         binding.menuRecyclerView.layoutManager = mlayoutManager
         binding.menuRecyclerView.isNestedScrollingEnabled = true
 
-        /* menuAdapter = MenuAdapter(this)
-        binding.storeRecyclerViewMenu.adapter = menuAdapter
+        menuDetailAdapter = MenuDetailAdapter(this)
+        binding.menuRecyclerView.adapter = menuDetailAdapter
 
-        val resources: Resources = this.resources
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.test_store_menu)
-
-        menuData.apply {
-            add(MenuData("고르곤졸라 피자", "23,000",
-                "이탈리아의 대표적인 블루치즈를 사용하여 치즈의 깊고 진한 맛을 느낄 수 있는 이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자", bitmap))
+        menuRadioData.apply {
+            add(MenuRadioData(false, "필수 - 달콤씁쓸치즈볼"))
+            add(MenuRadioData(true, "필수 - 달콤상콤치즈볼"))
         }
 
-        menuAdapter.menuDataArrayList = menuData */
+        menuCheckData.apply {
+            add(MenuCheckData(false, "선택 - 달콤씁쓸치즈볼"))
+            add(MenuCheckData(false, "선택 - 달콤상콤치즈볼"))
+        }
+
+        menuDetailData.apply {
+            add(MenuDetailData("기본", "필수항목", menuRadioData, menuCheckData, true))
+            add(MenuDetailData("선택", "", menuRadioData, menuCheckData, false))
+        }
+
+        menuDetailAdapter.menuDetailDataArrayList = menuDetailData
     }
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="20dp">
+
+    <RadioButton
+        android:id="@+id/menu_detail_radio_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/blue_300"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:checked="true"
+        android:text="@string/blank"/>
+
+    <TextView
+        android:id="@+id/menu_detail_radio_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="@string/store_test_menu_detail4"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+</LinearLayout>

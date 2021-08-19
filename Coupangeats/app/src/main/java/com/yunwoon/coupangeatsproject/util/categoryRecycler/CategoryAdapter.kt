@@ -41,6 +41,4 @@ class CategoryAdapter(private val context: Context, private var homeFragment: Ho
             reviewContent.text = item.categoryTextTitle
         }
     }
-
-
 }
