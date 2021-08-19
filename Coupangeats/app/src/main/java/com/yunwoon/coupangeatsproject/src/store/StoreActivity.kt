@@ -45,6 +45,10 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         initStoreView()
         setSmallReviewRecyclerView()
         setStoreViewPager()
+
+        binding.storeTextDetail.setOnClickListener {
+            this.startActivity(Intent(this, StoreDetailActivity::class.java))
+        }
     }
 
     // store 화면 세팅

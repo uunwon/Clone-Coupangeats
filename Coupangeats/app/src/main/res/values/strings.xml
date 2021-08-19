@@ -62,6 +62,32 @@
     <string name="store_small_review_star_rating">★★★★★</string>
     <string name="store_text_menu_title">신메뉴</string>
 
+    <!-- Store Detail Activity -->
+    <string name="store_detail_title">매장정보</string>
+    <string name="store_detail_phone">전화번호:</string>
+    <string name="store_detail_phone_detail">02-2059-1823</string>
+    <string name="store_detail_call">전화하기</string>
+    <string name="store_detail_address">주소:</string>
+    <string name="store_detail_address_detail">서울 영등포구 국회대로 574 2층</string>
+    <string name="store_detail_owner_name">대표자명:</string>
+    <string name="store_detail_owner_name_detail">채윤원</string>
+    <string name="store_detail_number">사업자등록번호:</string>
+    <string name="store_detail_number_detail">110-47-713340</string>
+    <string name="store_detail_store_name">상호명:</string>
+    <string name="store_detail_store_name_detail">한국피자헛 당산점</string>
+    <string name="store_detail_time">영업시간</string>
+    <string name="store_detail_time_detail">월요일 ~ 일요일: 11:00 ~ 22:30</string>
+    <string name="store_detail_store_info">매장소개</string>
+    <string name="store_detail_store_info_detail">안녕하세요. 피자헛입니다.</string>
+    <string name="store_detail_origin">원산지 정보</string>
+    <string name="store_detail_origin_detail">원산지 상세정보는 아래 링크를 참조해주세요.</string>
+    <string name="store_detail_nutrient">영양성분 정보</string>
+    <string name="store_detail_nutrient_detail">하단 링크를 눌러 자세한 내용을 확인하시기 바랍니다.</string>
+    <string name="store_detail_allergy">알레르기 유발성분 정보</string>
+    <string name="store_detail_allergy_detail">하단 링크를 눌러 자세한 내용을 확인하시기 바랍니다.</string>
+    <string name="store_coupang">쿠팡은 통신판매중개자로서 통신판매의 당사자가 아니며, 판매자가 등록한 상품 정보, 상품의 품질
+    및 거래에 대해서 일체의 책임을 지지 않습니다.</string>
+
     <!-- My Page Fragment-->
     <string name="my_page_text_name">샐리</string>
     <string name="my_page_text_phone">010-****-4321</string>
