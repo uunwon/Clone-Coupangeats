@@ -31,6 +31,10 @@
     <string name="store_test_review">리뷰</string>
     <string name="store_test_review_count2">22</string>
     <string name="store_test_review_go">개</string>
+    <string name="store_test_menu_title">고르곤졸라 피자</string>
+    <string name="store_test_menu_price">23,000</string>
+    <string name="store_test_menu_price_unit">원</string>
+    <string name="store_test_menu_detail">이탈리아의 대표적인 블루치즈를 사용하여 치즈의 깊고 진한 맛을 느낄 수 있는 이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자이태리 정통피자</string>
 
     <!-- Order Fragment-->
     <string name="order_text_default">주문 내역이 없습니다.</string>
@@ -45,6 +49,7 @@
     <string name="store_menu_favorite">즐겨찾기</string>
     <string name="store_small_review_text">치킨은 이제 거의 후참잘에서만 시켜요 좋아요 맛있어요 맛있어요</string>
     <string name="store_small_review_star_rating">★★★★★</string>
+    <string name="store_text_menu_title">신메뉴</string>
 
     <!-- My Page Fragment-->
     <string name="my_page_text_name">샐리</string>

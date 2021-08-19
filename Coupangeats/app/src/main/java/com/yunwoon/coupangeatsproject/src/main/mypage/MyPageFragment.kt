@@ -102,7 +102,7 @@ class MyPageFragment :
 
     private fun backToMain() {
         ApplicationClass.sEditor.putString("loginJwtToken", null).apply()
-        (activity as MainActivity).setMainFragment()
+        (activity as MainActivity).setHomeFragment()
     }
 
     // 사용자 프로필 조회

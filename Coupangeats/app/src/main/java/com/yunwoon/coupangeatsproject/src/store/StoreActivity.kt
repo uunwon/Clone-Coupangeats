@@ -15,17 +15,22 @@ import com.google.android.material.appbar.AppBarLayout
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityStoreBinding
+import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragmentAdapter
 import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewAdapter
 import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewData
 import kotlin.math.abs
 
 class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::inflate), AppBarLayout.OnOffsetChangedListener {
     private lateinit var appBarLayout: AppBarLayout
+
     private lateinit var menuIconDrawable1: Drawable
     private lateinit var menuIconDrawable2: Drawable
+
     private lateinit var whiteFilter: PorterDuffColorFilter
     private lateinit var blackFilter: PorterDuffColorFilter
     private lateinit var redFilter: PorterDuffColorFilter
+
+    private lateinit var verticalFragmentAdapter: MenuFragmentAdapter
 
     private lateinit var rlayoutManager: LinearLayoutManager // 수평 레이아웃 매니저
 
@@ -37,6 +42,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
 
         initStoreView()
         setSmallReviewRecyclerView()
+        setStoreViewPager()
     }
 
     // store 화면 세팅
@@ -49,9 +55,6 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         }
 
         setSupportActionBar(binding.toolbar)
-
-        binding.nestedScrollView.fullScroll(View.FOCUS_UP)
-        binding.nestedScrollView.scrollTo(0,0)
 
         appBarLayout = binding.appBarLayout
 
@@ -115,5 +118,13 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         }
 
         smallReviewAdapter.smallReviewDataArrayList = smallReviewData
+    }
+
+    private fun setStoreViewPager() {
+        verticalFragmentAdapter = MenuFragmentAdapter(supportFragmentManager)
+        verticalFragmentAdapter.setType(verticalFragmentAdapter.TYPE_VERTICAL_VIEWPAGER)
+
+        binding.storeViewPager.adapter = verticalFragmentAdapter
+        binding.storeTabLayout.setupWithViewPager(binding.storeViewPager)
     }
 }

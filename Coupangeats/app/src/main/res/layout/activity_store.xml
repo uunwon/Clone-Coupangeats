@@ -24,7 +24,6 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <!-- 접히고자 하는 layout 추가 -->
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
@@ -275,73 +274,27 @@
                 app:navigationIcon="@drawable/ic_toolbar_back_white"
                 app:title="@string/store_test_title" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/store_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:tabMaxWidth="0dp"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabIndicatorColor="@color/black"
+            app:tabTextAppearance="@style/TabItemText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/white"
+            android:nestedScrollingEnabled="false" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/store_view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:fillViewport="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:animateLayoutChanges="true">
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:tabMaxWidth="0dp"
-                app:tabGravity="fill"
-                app:tabMode="fixed"
-                app:tabIndicatorColor="@color/black"
-                app:tabTextAppearance="@style/TabItemText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@color/white"
-                android:nestedScrollingEnabled="false">
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_btm_nav_home_title"/>
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_btm_nav_search_title" />
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_btm_nav_favorite_title" />
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_btm_nav_order_title" />
-            </com.google.android.material.tabs.TabLayout>
-
-            <!-- ScrollView 안에 ListView Height 직접 지정해줘야 함-->
-
-            <View
-                android:id="@+id/firstView"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:background="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/tabLayout"
-                android:nestedScrollingEnabled="true"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:background="@color/red"
-                app:layout_constraintTop_toBottomOf="@id/firstView"
-                android:nestedScrollingEnabled="true"/>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -70,14 +70,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     override fun onResume() {
         super.onResume()
-        setMainFragment()
+        setHomeFragment()
     }
 
     // 홈 프래그먼트 화면 띄우기
-    fun setMainFragment() {
+    fun setHomeFragment() {
         loginJwtToken = ApplicationClass.sSharedPreferences.getString("loginJwtToken", null)
-
         Log.d("MainActivity", "$loginJwtToken")
+
         binding.mainBottomNavigation.selectedItemId = R.id.menu_main_btm_nav_home
     }
 
