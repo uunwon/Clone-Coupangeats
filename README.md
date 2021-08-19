@@ -86,6 +86,12 @@
 * StoreActivity 내 가게 이름 부분 CollapsingToolbarLayout 구현
 * StoreActivity 내 작은 리뷰 RecyclerView 추가
 
+### 2021-08-19
+* StoreActivity 내 CollapsingToolbarLayout + Tablayout
+* StoreActivity 내 메뉴 RecyclerView 추가
+* MenuActivity 생성
+* MenuActivity 내 RecyclerView 안에 RecyclerView 넣기
+
 ## 테스트 개발환경
 * AWS EC2 / RDS
 * Node.js
