@@ -8,8 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
+import com.yunwoon.coupangeatsproject.src.main.home.HomeFragment
 
-class StoreAdapter(private val context: Context) : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
+class StoreAdapter(private val context: Context, private var homeFragment: HomeFragment) : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
     var storeDataArrayList = mutableListOf<StoreData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

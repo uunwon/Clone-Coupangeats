@@ -2,6 +2,7 @@ package com.yunwoon.coupangeatsproject.src.main.home
 
 import android.content.Intent
 import android.content.res.Resources
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.Menu
@@ -16,6 +17,8 @@ import com.yunwoon.coupangeatsproject.config.BaseFragment
 import com.yunwoon.coupangeatsproject.databinding.FragmentHomeBinding
 import com.yunwoon.coupangeatsproject.src.address.AddressActivity
 import com.yunwoon.coupangeatsproject.src.category.CategoryDetailActivity
+import com.yunwoon.coupangeatsproject.src.main.home.models.CategoryResponse
+import com.yunwoon.coupangeatsproject.src.main.home.models.HomeResponse
 import com.yunwoon.coupangeatsproject.src.store.StoreActivity
 import com.yunwoon.coupangeatsproject.util.categoryRecycler.CategoryAdapter
 import com.yunwoon.coupangeatsproject.util.categoryRecycler.CategoryData
@@ -28,7 +31,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class HomeFragment :
-    BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home){
+    BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home), HomeFragmentView{
 
     private val loginJwtToken = ApplicationClass.sSharedPreferences.getString("loginJwtToken", null)
     private val imageHomeAd : Array<Int> = arrayOf(R.drawable.image_home_ad_1, R.drawable.image_home_ad_2)
@@ -56,9 +59,23 @@ class HomeFragment :
     private lateinit var chooseStoreAdapter: StoreAdapter
     private val chooseStoreData = mutableListOf<StoreData>()
 
+    private lateinit var reSources : Resources
+    private lateinit var bitmap1 : Bitmap
+    private lateinit var bitmap2 : Bitmap
+    private lateinit var bitmap3 : Bitmap
+    private lateinit var bitmap4 : Bitmap
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+
+        reSources = this.resources
+        bitmap1 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store1)
+        bitmap2 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store2)
+        bitmap3 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store3)
+        bitmap4 = BitmapFactory.decodeResource(resources, R.drawable.test_category)
+
 
         setRecyclerViewLayoutManager()
         setToolBar(binding.homeToolbar)
@@ -72,7 +89,6 @@ class HomeFragment :
             this.startActivity(Intent(requireContext(), AddressActivity::class.java))
         }
     }
-
     // 주소 받아오기
     private fun setAddress() {
         if(loginJwtToken != null) {
@@ -132,24 +148,32 @@ class HomeFragment :
         }
     }
 
-    // 카테고리 리사이클러뷰 세팅
+    // 카테고리 세팅
     private fun initCategoryRecyclerView() {
         categoryAdapter = CategoryAdapter(requireContext(),this@HomeFragment)
         binding.homeRecyclerViewCategory.adapter = categoryAdapter
 
-        val resources : Resources = this.resources
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.test_category)
+        categoryData.add(CategoryData(bitmap4, "신규 맛집"))
+        categoryData.add(CategoryData(bitmap4, "1인분"))
 
-        categoryData.apply {
-            add(CategoryData(bitmap, "신규 맛집"))
-            add(CategoryData(bitmap, "1인분"))
-            add(CategoryData(bitmap, "한식"))
-            add(CategoryData(bitmap, "치킨"))
-            add(CategoryData(bitmap, "분식"))
-            add(CategoryData(bitmap, "중식"))
+        HomeService(this).tryGetCategories()
+    }
+
+    override fun onGetCategoriesSuccess(response: CategoryResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            for (i in response.result) {
+                categoryData.add(CategoryData(bitmap4, i.categoryName))
+            }
 
             categoryAdapter.categoryData = categoryData
+            categoryAdapter.notifyDataSetChanged()
         }
+    }
+
+    override fun onGetCategoriesFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     // 로그인 시, 즐겨찾기 기반 추천 맛집 세팅
@@ -214,20 +238,28 @@ class HomeFragment :
 
     // 골라먹는 맛집 세팅
     private fun initChooseRecyclerView() {
-        chooseStoreAdapter = StoreAdapter(requireContext())
+        chooseStoreAdapter = StoreAdapter(requireContext(), this@HomeFragment)
         binding.homeRecyclerViewChoose.adapter = chooseStoreAdapter
 
-        val resources : Resources = this.resources
-        val bitmap1 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store1)
-        val bitmap2 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store2)
-        val bitmap3 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store3)
+        showLoadingDialog(requireContext())
+        HomeService(this).tryGetRestaurants()
+    }
 
-        chooseStoreData.apply {
-            add(StoreData(bitmap1, bitmap2, bitmap3,"진심을 담아내다. 고기장인", "10-20분", "4.8", "(352)", "1.1km", "2,000원"))
-            add(StoreData(bitmap1, bitmap2, bitmap3,"진심을 담아내다. 고기장인", "10-20분", "4.8", "(352)", "1.1km", "2,000원"))
-       }
+    override fun onGetRestaurantsSuccess(response: HomeResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            for (i in response.result) {
+                chooseStoreData.add(StoreData(bitmap1, bitmap2, bitmap3, i.name, "10-20분", "4.8", "(321)", "1.1km", i.deliveryFee+"원"))
+            }
 
-        chooseStoreAdapter.storeDataArrayList = chooseStoreData
+            chooseStoreAdapter.storeDataArrayList = chooseStoreData
+            chooseStoreAdapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun onGetRestaurantsFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     // 카테고리 아이템 클릭 시 화면 이동
