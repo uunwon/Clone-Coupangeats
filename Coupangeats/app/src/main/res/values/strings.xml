@@ -172,6 +172,7 @@
 
     <!-- Cart Activity -->
     <string name="cart_text_title">카트</string>
+    <string name="cart_text_any">장바구니가 비어있습니다.</string>
     <string name="cart_text_modify">수정</string>
     <string name="cart_text_delivery">서울특별시 양천구 목동서로 30길 (으)로 배달</string>
     <string name="cart_text_delivery_info">서울특별시 양천구 목동서로 30길</string>

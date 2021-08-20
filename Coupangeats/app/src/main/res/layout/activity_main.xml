@@ -13,6 +13,34 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize" />
 
+    <!--- 결제 바텀 >
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/cart_appBar_layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="65dp"
+        android:background="@color/blue_300"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/cart_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center"
+            android:elevation="3dp"
+            app:layout_collapseMode="pin">
+            <TextView
+                android:id="@+id/title_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:text="@string/cart_text_bottom"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout-->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_bottom_navigation"
         android:layout_width="match_parent"

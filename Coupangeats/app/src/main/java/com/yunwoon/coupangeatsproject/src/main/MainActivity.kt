@@ -3,6 +3,7 @@ package com.yunwoon.coupangeatsproject.src.main
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
@@ -17,10 +18,12 @@ import com.yunwoon.coupangeatsproject.src.main.order.OrderFragment
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
     private var loginJwtToken = ApplicationClass.sSharedPreferences.getString("loginJwtToken", null)
+    private lateinit var bottomAppBarLayout: AppBarLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("MainActivity", "$loginJwtToken")
+        // bottomAppBarLayout = binding.cartAppBarLayoutBottom
 
         supportFragmentManager.beginTransaction().replace(R.id.main_frame_layout, HomeFragment())
             .commitAllowingStateLoss()
