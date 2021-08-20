@@ -33,6 +33,7 @@
     <string name="store_test_review_count2">22</string>
     <string name="store_test_review_go">개</string>
     <string name="store_test_menu_title">고르곤졸라 피자</string>
+    <string name="store_test_menu_title_detail">L (+3,000원), 선택없음, 참여안함</string>
     <string name="store_test_menu_price">23,000</string>
     <string name="store_test_menu_price_unit">원</string>
     <string name="store_test_menu_detail">이탈리아의 대표적인 블루치즈를 사용하여 치즈의 깊고 진한 맛을 느낄 수 있는 이태리 정통피자이태리</string>
@@ -168,6 +169,38 @@
     <string name="address_text_road_title">지번명</string>
     <string name="address_text_road">영등포구 선유서로34길</string>
     <string name="address_text_road_detail">서울 영등포구 선유서로34길 13</string>
+
+    <!-- Cart Activity -->
+    <string name="cart_text_title">카트</string>
+    <string name="cart_text_modify">수정</string>
+    <string name="cart_text_delivery">서울특별시 양천구 목동서로 30길 (으)로 배달</string>
+    <string name="cart_text_delivery_info">서울특별시 양천구 목동서로 30길</string>
+    <string name="cart_text_delivery_detail">(으)로 배달</string>
+    <string name="cart_text_menu_add">+ 메뉴추가</string>
+    <string name="cart_text_coupon">할인쿠폰</string>
+    <string name="cart_text_coupon_available">사용가능 쿠폰</string>
+    <string name="cart_text_coupon_available_detail">0장</string>
+    <string name="cart_text_coupon_choose">쿠폰을 선택해주세요</string>
+    <string name="cart_text_coupon_choose_detail">선택</string>
+    <string name="cart_text_order_fee">주문금액</string>
+    <string name="cart_text_order_fee_detail">71,700원</string>
+    <string name="cart_text_delivery_fee">배달비</string>
+    <string name="cart_text_delivery_fee_detail">+0원</string>
+    <string name="cart_text_total_fee">총 결제금액</string>
+    <string name="cart_text_comment">요청사항</string>
+    <string name="cart_text_comment_ex">예) 견과류는 빼주세요.</string>
+    <string name="cart_text_owner">가게 사장님에게</string>
+    <string name="cart_text_man">배달 기사님에게</string>
+    <string name="cart_text_man_detail">초인종 누르고 문 앞</string>
+    <string name="cart_text_comment_plastic">일회용 수저, 포크 받기</string>
+    <string name="cart_text_comment_plastic_detail">일회용품 사용을 줄이기 위해, 선택 시에만 제공됩니다.</string>
+    <string name="cart_text_pay">결제수단</string>
+    <string name="cart_text_pay_detail">쿠페이 중 계좌이체/신용카드로만 결제가능</string>
+    <string name="cart_text_term">구매조건 확인 및 결제대행 서비스 동의</string>
+    <string name="cart_text_term_agree">보기</string>
+    <string name="cart_text_bottom">71,700원 결제하기</string>
+    <string name="cart_text_coupang">쿠팡은 통신판매중개자로서 통신판매의 당사자가 아니며, 판매자가 등록한 상품 정보, 상품의 품질
+    및 거래에 대해서 일체의 책임을 지지 않습니다. 회원은 주문 내용을 확인하였고, 결제에 동의합니다.</string>
 
     <string name="copy_right">ⓒ&#160;Coupang Corp. All rights reserved.</string>
 </resources>

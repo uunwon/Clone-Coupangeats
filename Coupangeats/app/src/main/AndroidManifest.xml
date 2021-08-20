@@ -15,6 +15,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".src.cart.CartActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".src.store.StoreDetailActivity"
             android:screenOrientation="portrait" />
         <activity

@@ -267,7 +267,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_marginTop="30dp"
-                android:paddingEnd="5dp"
+                android:paddingEnd="15dp"
                 android:elevation="3dp"
                 app:layout_collapseMode="pin"
                 app:layout_constraintEnd_toEndOf="parent"
