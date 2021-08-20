@@ -10,6 +10,7 @@ import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityJoinBinding
 import com.yunwoon.coupangeatsproject.src.main.login.models.JoinResponse
 import com.yunwoon.coupangeatsproject.src.main.login.models.PostJoinRequest
+import com.yunwoon.coupangeatsproject.src.main.login.models.UsersResponse
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -37,6 +38,8 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
     private var passwordCount = 0
     private var nameCount = 0
     private var phoneCount = 0
+
+    private var phoneNumber : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -176,6 +179,25 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
             }
             else {
                 passwordCount++
+
+                if(binding.joinEditTextPassword.text.toString() == "") {
+                    passwordCheck1 = false
+                    passwordCheck3 = false
+
+                    binding.joinViewFocusPassword.visibility = View.GONE
+                    binding.joinTextWrongPassword10.visibility = View.GONE
+                    binding.joinTextWrongPassword30.visibility = View.GONE
+
+                    binding.joinViewWrongPassword.visibility = View.VISIBLE // 뷰
+                    binding.joinTextWrongPassword1.visibility = View.VISIBLE // 경고문1
+                    binding.joinTextWrongPassword3.visibility = View.VISIBLE //경고문3
+
+                    binding.joinTextCorrectPassword.visibility = View.GONE // 성공문
+                    binding.joinTextWrongPassword11.visibility = View.GONE // 성공문1
+                    binding.joinTextWrongPassword31.visibility = View.GONE // 성공문3
+
+                    binding.joinImageViewPassword.setImageResource(R.drawable.ic_password_invisible)
+                }
             }
         }
 
@@ -220,16 +242,15 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
                     phoneCheck = false
                     binding.joinViewFocusPhone.visibility = View.GONE // 파란 뷰
                     binding.joinImageViewPhoneCheck.visibility = View.GONE // 체크
+                    binding.joinTextSamePhone.visibility = View.GONE // 같은 번호
                     binding.joinViewWrongPhone.visibility = View.VISIBLE // 뷰
                     binding.joinTextWrongPhone.visibility = View.VISIBLE // 경고문
                 }
                 else {
-                    phoneCheck = true
-                    // 휴대폰 인증 버튼과 인증 메소드 구현!!!!!!!
-                    binding.joinViewFocusPhone.visibility = View.GONE // 파란 뷰
-                    binding.joinImageViewPhoneCheck.visibility = View.VISIBLE // 체크
-                    binding.joinViewWrongPhone.visibility = View.GONE // 뷰
-                    binding.joinTextWrongPhone.visibility = View.GONE // 경고문
+                    // 휴대폰 자릿수 완벽하면
+                    // 같은 휴대폰 번호인지 확인
+                   phoneNumber = binding.joinEditTextPhone.text.toString()
+                    checkSamePhone()
                 }
             }
         }
@@ -263,6 +284,48 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
         }
     }
 
+    // 같은 이메일 체크
+    private fun checkSamePhone() {
+        showLoadingDialog(this)
+        JoinService(this).tryGetUsers()
+    }
+
+    override fun onGetUsersSuccess(response: UsersResponse) {
+        var phone = 0
+        dismissLoadingDialog()
+
+        for (p in response.result) {
+            if(phoneNumber == p.phoneNumber) {
+
+                phone++
+                phoneCheck = false
+                binding.joinViewFocusPhone.visibility = View.GONE // 파란 뷰
+                binding.joinImageViewPhoneCheck.visibility = View.GONE // 체크
+                binding.joinTextSamePhone.visibility = View.VISIBLE // 같은 번호
+                binding.joinViewWrongPhone.visibility = View.VISIBLE // 뷰
+                binding.joinTextWrongPhone.visibility = View.GONE // 경고문
+
+                binding.joinTextSamePhone.text = "${p.email} 아이디(이메일)로 가입된 휴대폰 번호입니다."
+            }
+        }
+
+        if(phone == 0) {
+            Log.d("JoinActivity", "phone number 같은 거 없습니다, 입력 허용!")
+            phoneCheck = true
+            binding.joinViewFocusPhone.visibility = View.VISIBLE // 파란 뷰
+            binding.joinImageViewPhoneCheck.visibility = View.VISIBLE // 체크
+            binding.joinTextSamePhone.visibility = View.GONE // 같은 번호
+            binding.joinViewWrongPhone.visibility = View.GONE // 뷰
+            binding.joinTextWrongPhone.visibility = View.GONE // 경고문
+        }
+    }
+
+    override fun onGetUsersFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
+    }
+
+    // 회원가입
     private fun join() {
         val email = binding.joinEditTextEmail.text.toString()
         val password = binding.joinEditTextPassword.text.toString()

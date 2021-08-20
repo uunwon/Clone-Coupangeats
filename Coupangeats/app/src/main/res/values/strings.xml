@@ -148,6 +148,7 @@
     <string name="join_text_wrong_name">이름을 정확하게 입력하세요.</string>
     <string name="join_edit_text_phone_hint">휴대폰 번호</string>
     <string name="join_text_wrong_phone">휴대폰 번호를 정확하게 입력하세요.</string>
+    <string name="join_text_same_phone">ch**@naver.com 아이디(이메일)로 가입된 휴대폰 번호입니다.</string>
     <string name="join_button_phone">휴대폰 인증</string>
     <string name="join_text_term">쿠팡 서비스약관에 동의해주세요</string>
     <string name="join_check_box_term_all">모두 동의합니다.</string>
