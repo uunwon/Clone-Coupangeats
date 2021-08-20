@@ -7,6 +7,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yunwoon.coupangeatsproject.R
+import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityAddressBinding
 import com.yunwoon.coupangeatsproject.src.address.models.AddressResponse
@@ -17,17 +18,21 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
 
     private var addressSearchStatus = false
     private lateinit var inputMethodManager : InputMethodManager
-    private var count = 0
+
+    // 1페이지는 배송지 주소설정
+    // 2페이지는 배송지 검색 페이지
+    //
+    private var addressPage : Int = ApplicationClass.sSharedPreferences.getInt("addressPage", 1)
 
     private val roadItemArrayList = ArrayList<RoadData>()
     private lateinit var roadAdapter : RoadAdapter
-    private lateinit var mlayoutManager : LinearLayoutManager
+    private lateinit var rlayoutManager : LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        mlayoutManager = LinearLayoutManager(this)
+        rlayoutManager = LinearLayoutManager(this)
 
         binding.addressRecyclerView.isNestedScrollingEnabled = true
         binding.addressRecyclerViewSearch.isNestedScrollingEnabled = true
@@ -40,7 +45,7 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
             if(b) {
                 addressSearchStatus = true
 
-                if(count++ == 0) {
+                if(addressPage++ == 0) {
                     binding.addressImageButtonBack.setImageResource(R.drawable.ic_toolbar_back)
                     binding.addressLinearLayoutSearch.visibility = View.VISIBLE
                     binding.addressNestedScrollView.visibility = View.GONE
@@ -72,9 +77,9 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
 
      // 검색창 아래 화면 세팅
     private fun setAddressView() {
-        if(addressSearchStatus && count > 0) {
+        if(addressSearchStatus && addressPage > 0) {
             addressSearchStatus = !addressSearchStatus
-            count = 0
+            addressPage = 0
 
             binding.addressImageButtonBack.setImageResource(R.drawable.ic_toolbar_close)
             binding.addressLinearLayoutSearch.visibility = View.GONE
@@ -86,7 +91,7 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
             binding.addressEditTextSearch.clearFocus()
             inputMethodManager.hideSoftInputFromWindow(binding.addressEditTextSearch.windowToken, 0)
         }
-        else if (count == 0) {
+        else if (addressPage == 0) {
             finish()
         }
     }
@@ -100,6 +105,7 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
         if(p1 == KeyEvent.KEYCODE_ENTER) {
             binding.addressLinearLayoutSearch.visibility = View.GONE
             binding.addressNestedScrollViewSearch.visibility = View.VISIBLE
+
             // 도로명 주소 받아오는 API 구현
             setAddressSearchRecyclerView()
             binding.addressEditTextSearch.clearFocus()
@@ -134,7 +140,7 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
 
     // 도로명 주소 리사이클러뷰에 정보 뿌리기
     private fun initRecyclerView(response: AddressResponse) {
-        binding.addressRecyclerViewSearch.layoutManager = mlayoutManager
+        binding.addressRecyclerViewSearch.layoutManager = rlayoutManager
         roadAdapter = RoadAdapter(this)
         roadItemArrayList.clear()
 

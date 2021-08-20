@@ -45,6 +45,7 @@ class ApplicationClass : Application() {
         sEditor = sSharedPreferences.edit()
 
         sEditor.putString("loginJwtToken", null).apply()
+        sEditor.putInt("addressPage", 1).apply()
 
         // 레트로핏 인스턴스 생성
         initRetrofitInstance()
