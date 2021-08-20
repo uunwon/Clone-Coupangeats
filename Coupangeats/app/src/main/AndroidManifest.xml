@@ -42,7 +42,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".src.main.favorite.FavoriteActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/FavoriteAppTheme"/>
         <activity
             android:name=".src.splash.SplashActivity"
             android:screenOrientation="portrait">

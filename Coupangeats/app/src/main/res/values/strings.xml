@@ -97,6 +97,11 @@
     <!-- Favorite Activity -->
     <string name="favorite_text_default">즐겨찾는 맛집이 없습니다.\n좋아하는 맛집에 ♥ 를 눌러주세요.</string>
     <string name="favorite_button_view_main">쿠팡이츠 맛집 구경가기</string>
+    <string name="favorite_all">총</string>
+    <string name="favorite_count">개</string>
+    <string name="favorite_filter">자주 주문한 순</string>
+    <string name="favorite_delivery_tip">배달비 2,000원</string>
+    <string name="favorite_store_text">굽네치킨 문래점</string>
 
     <!-- Login Activity -->
     <string name="login_text_email">이메일</string>
