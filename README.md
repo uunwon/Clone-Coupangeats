@@ -39,7 +39,7 @@
 
 ## 테스트 진행현황
 ### 1주차 진행현황 🌈
-![Progress](https://progress-bar.dev/45/?scale=100&width=500&suffix=%)  
+![Progress](https://progress-bar.dev/65/?scale=100&width=500&suffix=%)  
 ### 2021-08-14
 * 기획서 제출 - 100%  
   * 개발 범위 / 개발 우선 순위  
@@ -91,6 +91,15 @@
 * StoreActivity 내 메뉴 RecyclerView 추가
 * MenuActivity 생성
 * MenuActivity 내 RecyclerView 안에 RecyclerView 넣기
+
+### 2021-08-20
+* MenuActivity NestedScrollView 스크롤 문제 => FrameLayout으로 해결
+* CartActivity 생성
+  * 주소 없는 사용자의 경우 주소 설정 페이지로 넘어감
+* FavoriteActivity 내 RecyclerView 생성
+* 서버 Retrofit 통신
+  * 식당 전체 조회 API : HomeFragment 내 "골라먹는 맛집"
+  * 음식 카테고리 전체 조회 API : HomeFragment 내 카테고리 목록
 
 ## 테스트 개발환경
 * AWS EC2 / RDS
