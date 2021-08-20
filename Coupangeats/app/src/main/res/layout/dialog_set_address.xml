@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="@string/login_error"
+            android:text="@string/address_dialog_text"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -28,11 +28,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/dialog_text_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:text="@string/address_dialog_cancel"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/dialog_text_confirm"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
             android:id="@+id/dialog_text_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="25dp"
-            android:text="@string/login_error_confirm"
+            android:text="@string/address_dialog_confirm"
             android:textColor="@color/blue"
             android:textSize="16sp"
             android:textStyle="bold"

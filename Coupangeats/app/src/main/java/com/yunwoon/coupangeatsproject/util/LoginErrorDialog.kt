@@ -1,4 +1,4 @@
-package com.yunwoon.coupangeatsproject.src.main.login
+package com.yunwoon.coupangeatsproject.util
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,6 +12,7 @@ import com.yunwoon.coupangeatsproject.databinding.DialogLoginErrorBinding
 class LoginErrorDialog : DialogFragment() {
     private var _binding: DialogLoginErrorBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -22,7 +23,7 @@ class LoginErrorDialog : DialogFragment() {
 
         // layout background transperency
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        binding.loginTextConfirm.setOnClickListener {
+        binding.dialogTextConfirm.setOnClickListener {
             dismiss()
         }
 

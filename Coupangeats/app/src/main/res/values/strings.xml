@@ -170,6 +170,11 @@
     <string name="address_text_road">영등포구 선유서로34길</string>
     <string name="address_text_road_detail">서울 영등포구 선유서로34길 13</string>
 
+    <!-- Address Dialog -->
+    <string name="address_dialog_text">배달받을 주소를 설정해 주세요.</string>
+    <string name="address_dialog_confirm">배달 주소 설정</string>
+    <string name="address_dialog_cancel">취소</string>
+
     <!-- Cart Activity -->
     <string name="cart_text_title">카트</string>
     <string name="cart_text_any">장바구니가 비어있습니다.</string>

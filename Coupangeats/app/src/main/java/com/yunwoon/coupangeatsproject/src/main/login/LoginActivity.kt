@@ -10,6 +10,7 @@ import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityLoginBinding
 import com.yunwoon.coupangeatsproject.src.main.login.models.LogInResponse
 import com.yunwoon.coupangeatsproject.src.main.login.models.PostLogInRequest
+import com.yunwoon.coupangeatsproject.util.LoginErrorDialog
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

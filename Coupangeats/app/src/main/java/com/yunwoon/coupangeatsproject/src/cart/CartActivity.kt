@@ -1,9 +1,12 @@
 package com.yunwoon.coupangeatsproject.src.cart
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityCartBinding
+import com.yunwoon.coupangeatsproject.src.address.AddressActivity
+import com.yunwoon.coupangeatsproject.util.SetAddressDialog
 import com.yunwoon.coupangeatsproject.util.cartRecycler.CartAdapter
 import com.yunwoon.coupangeatsproject.util.cartRecycler.CartData
 
@@ -17,9 +20,33 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
         super.onCreate(savedInstanceState)
 
         setSupportActionBar(binding.storeDetailToolbar)
+        setAddress()
         setCartRecyclerView()
 
         binding.storeCartImageButtonClose.setOnClickListener { finish() }
+    }
+
+    private fun setAddress() {
+        // 주소 받아와서 없으면
+        val dialogSetAddress = SetAddressDialog()
+        dialogSetAddress.isCancelable = false
+        dialogSetAddress.show(supportFragmentManager, "SetAddressDialog")
+
+        dialogSetAddress.setAddressDialogResult(object : SetAddressDialog.SetAddressResult{
+            override fun finish(dialogResult: Int) {
+                if(dialogResult == 1) {
+                    // 주소 액티비티로 이동
+                    moveToAddressActivity()
+                }
+                else if(dialogResult == 2){
+                    finish()
+                }
+            }
+        })
+    }
+
+    private fun moveToAddressActivity() {
+        this.startActivity(Intent(this, AddressActivity::class.java))
     }
 
     // 카트 리사이클러뷰 세팅
