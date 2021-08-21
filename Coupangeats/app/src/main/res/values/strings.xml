@@ -22,6 +22,8 @@
     <!-- Test Data -->
     <string name="blank">&#160;</string>
     <string name="store_test_title">피자헛 당산점</string>
+    <string name="store_test_date">2021-08-20 오후 08:45</string>
+    <string name="store_test_status">배달 완료</string>
     <string name="store_test_star_rating">4.9</string>
     <string name="store_test_location">0.1km</string>
     <string name="store_test_review_count">(528)</string>
@@ -41,6 +43,7 @@
     <string name="store_test_menu_detail3">달콤바삭치즈볼</string>
     <string name="store_test_menu_detail4">M인치(11인치)</string>
     <string name="store_test_menu_detail5">기본</string>
+    <string name="store_test_menu_detail6">고추 바사삭 한마리</string>
     <string name="store_menu_info">알레르기/영양성분 정보 보기</string>
 
     <!-- Menu Activity -->
@@ -51,6 +54,13 @@
     <!-- Order Fragment-->
     <string name="order_text_default">주문 내역이 없습니다.</string>
     <string name="order_text_view_ordered">과거 주문 내역 보기</string>
+    <string name="order_text_search">주문한 메뉴/매장을 찾아보세요</string>
+    <string name="order_text_sum">합계: </string>
+    <string name="order_button_delivery">배달 현황 보기</string>
+    <string name="order_button_reorder">재주문하기</string>
+    <string name="order_button_new_review">리뷰쓰기</string>
+    <string name="order_button_review">작성한 리뷰 보기</string>
+    <string name="order_text_receipt">영수증 보기</string>
 
     <!-- Store Activity -->
     <string name="store_text_detail">매장 / 원산지 정보</string>

@@ -8,6 +8,8 @@
     tools:context=".src.main.order.OrderedFragment">
 
     <TextView
+        android:visibility="gone"
+        android:id="@+id/any_ordered_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/order_text_default"
@@ -15,5 +17,61 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="13dp"
+            android:animateLayoutChanges="true"
+            android:clickable="true">
+
+            <EditText
+                android:id="@+id/ordered_edit_text"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="10dp"
+                android:hint="@string/order_text_search"
+                android:textSize="17sp"
+                android:background="@drawable/button_menu_search"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/ordered_image_view_search"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_search_view_unselected"
+                app:layout_constraintTop_toTopOf="@id/ordered_edit_text"
+                app:layout_constraintBottom_toBottomOf="@id/ordered_edit_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/black" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ordered_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                tools:listitem="@layout/item_ordered"
+                app:layout_constraintTop_toBottomOf="@id/ordered_edit_text"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

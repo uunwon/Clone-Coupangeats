@@ -1,6 +1,7 @@
 package com.yunwoon.coupangeatsproject.src.main.order
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseFragment
@@ -12,11 +13,17 @@ class OrderFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("OrderFragment", "onViewCreated 호출")
+    }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         setViewPager()
     }
 
     private fun setViewPager() {
+        Log.d("OrderFragment", "setViewPager 호출")
+
         orderFragmentAdapter = OrderFragmentAdapter(requireActivity().supportFragmentManager)
         binding.orderViewPager.adapter = orderFragmentAdapter
         binding.orderTabLayout.setupWithViewPager(binding.orderViewPager)

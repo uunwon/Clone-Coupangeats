@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/button_default_gray"
+    android:orientation="vertical"
+    android:layout_marginBottom="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+        <TextView
+            android:id="@+id/ordered_text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="8"
+            android:ellipsize="end"
+            android:text="@string/favorite_store_text"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/ordered_text_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/store_test_date"
+            android:textColor="@color/gray_600"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/ordered_text_title"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+            android:id="@+id/ordered_text_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/store_test_status"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/ordered_text_date"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <RatingBar
+            android:id="@+id/ordered_text_star_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:progressTint="@color/yellow_a700"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="4"
+            android:stepSize="1"
+            style="?android:attr/ratingBarStyleSmall"
+            app:layout_constraintTop_toBottomOf="@id/ordered_text_status"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <ImageView
+            android:id="@+id/ordered_image_view"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/test_favorite_store"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ordered_recycler_view_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            tools:listitem="@layout/item_ordered_menu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ordered_text_star_rating" />
+
+        <TextView
+            android:id="@+id/ordered_text_sum_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/order_text_sum"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/ordered_recycler_view_menu"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/ordered_text_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/store_text_lest_delivery_tip"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/ordered_text_sum_detail"
+            app:layout_constraintTop_toBottomOf="@id/ordered_recycler_view_menu" />
+
+        <Button
+            android:id="@+id/ordered_button_delivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/order_button_delivery"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:background="@drawable/button_coupang_blue"
+            app:backgroundTint="@null"
+            app:layout_constraintTop_toBottomOf="@id/ordered_text_sum" />
+
+        <Button
+            android:id="@+id/ordered_button_reorder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/order_button_reorder"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:background="@drawable/button_coupang_blue"
+            app:backgroundTint="@null"
+            app:layout_constraintTop_toBottomOf="@id/ordered_button_delivery" />
+
+        <Button
+            android:id="@+id/ordered_button_new_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/order_button_new_review"
+            android:textSize="15sp"
+            android:textColor="@color/blue_300"
+            android:background="@drawable/button_coupang"
+            app:backgroundTint="@null"
+            app:layout_constraintTop_toBottomOf="@id/ordered_button_reorder" />
+
+        <Button
+            android:id="@+id/ordered_button_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/order_button_review"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:background="@drawable/button_default_gray2"
+            app:backgroundTint="@null"
+            app:layout_constraintTop_toBottomOf="@id/ordered_button_new_review" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/ordered_text_receipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:gravity="center"
+        android:elevation="0dp"
+        android:text="@string/order_text_receipt"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:background="@drawable/button_menu_receipt"
+        app:layout_constraintTop_toBottomOf="@id/ordered_button_review" />
+
+</LinearLayout>
