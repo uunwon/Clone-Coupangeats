@@ -39,7 +39,7 @@
 
 ## 테스트 진행현황
 ### 1주차 진행현황 🌈
-![Progress](https://progress-bar.dev/65/?scale=100&width=500&suffix=%)  
+![Progress](https://progress-bar.dev/80/?scale=100&width=500&suffix=%)  
 ### 2021-08-14
 * 기획서 제출 - 100%  
   * 개발 범위 / 개발 우선 순위  
@@ -100,6 +100,12 @@
 * 서버 Retrofit 통신
   * 식당 전체 조회 API : HomeFragment 내 "골라먹는 맛집"
   * 음식 카테고리 전체 조회 API : HomeFragment 내 카테고리 목록
+
+### 2021-08-21
+* API 명세서 화면 캡쳐본 업데이트
+* OrderFragment 내 ViewPager 안 RecyclerView 생성
+* 서버 Retrofit 통신
+  * 전체 유저 조회 API : JoinActivity 내 같은 이메일 오류 처리
 
 ## 테스트 개발환경
 * AWS EC2 / RDS
