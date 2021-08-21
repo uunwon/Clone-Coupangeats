@@ -14,17 +14,14 @@ class OrderFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("OrderFragment", "onViewCreated 호출")
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         setViewPager()
     }
 
     private fun setViewPager() {
         Log.d("OrderFragment", "setViewPager 호출")
 
-        orderFragmentAdapter = OrderFragmentAdapter(requireActivity().supportFragmentManager)
+        orderFragmentAdapter = OrderFragmentAdapter(childFragmentManager)
         binding.orderViewPager.adapter = orderFragmentAdapter
         binding.orderTabLayout.setupWithViewPager(binding.orderViewPager)
     }

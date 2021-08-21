@@ -21,7 +21,7 @@
             android:ellipsize="end"
             android:text="@string/favorite_store_text"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

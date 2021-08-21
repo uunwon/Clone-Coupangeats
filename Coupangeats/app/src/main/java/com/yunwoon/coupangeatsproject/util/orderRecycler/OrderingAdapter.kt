@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
 
-class OrderAdapter (private var context: Context) : RecyclerView.Adapter<OrderAdapter.ViewHolder>()  {
+class OrderingAdapter (private var context: Context) : RecyclerView.Adapter<OrderingAdapter.ViewHolder>()  {
     var orderData = mutableListOf<OrderData>()
 
     private lateinit var orderMenuAdapter: OrderMenuAdapter
@@ -67,20 +67,14 @@ class OrderAdapter (private var context: Context) : RecyclerView.Adapter<OrderAd
             orderRecyclerViewMenu.layoutManager = LinearLayoutManager(context)
             orderRecyclerViewMenu.adapter = orderMenuAdapter
 
-            orderStatus.text = "배달 완료"
-            orderStatus.setTextColor(Color.parseColor("#FF000000"))
-            orderDelivery.visibility = View.GONE
-            orderReOrder.visibility = View.VISIBLE
+            // 배달 상태는 !
+            orderStatus.text = "메뉴 준비중"
+            orderStatus.setTextColor(Color.parseColor("#18afff"))
 
-            // 작성한 리뷰 상태 체크
-            if (item.reviewStatus) {
-                // 리뷰 있다면
-                orderNewReview.visibility = View.GONE
-                orderReview.visibility = View.VISIBLE
-            } else {
-                orderNewReview.visibility = View.VISIBLE
-                orderReview.visibility = View.GONE
-            }
+            orderDelivery.visibility = View.VISIBLE
+            orderReOrder.visibility = View.GONE
+            orderNewReview.visibility = View.GONE
+            orderReview.visibility = View.GONE
 
             // 영수증 보기
             orderReceipt.setOnClickListener { Log.d("OrderAdapter", "영수증 보기 버튼 클릭") }

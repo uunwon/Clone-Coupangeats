@@ -5,13 +5,18 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 class OrderFragmentAdapter (fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+    private val fragmentManager = fragmentManager
+
+    private val orderedFragment = OrderedFragment().newInstance()
+    private val orderingFragment = OrderingFragment().newInstance()
+
     override fun getCount(): Int = 2
 
     override fun getItem(position: Int): Fragment {
         val fragment = when(position) {
-            0 -> OrderedFragment().newInstance()
-            1 -> OrderingFragment().newInstance()
-            else -> OrderedFragment().newInstance()
+            0 -> orderedFragment
+            1 -> orderingFragment
+            else -> orderedFragment
         }
         return fragment
     }

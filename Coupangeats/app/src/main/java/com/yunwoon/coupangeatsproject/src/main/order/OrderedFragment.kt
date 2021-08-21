@@ -53,9 +53,9 @@ class OrderedFragment :
         }
 
         orderData.apply {
-            add(OrderData(true, "굽네치킨 문래점", bitmap, "2021-08-20 오후 08:45", 5, orderMenuData, "14,000원", false))
-            add(OrderData(false, "네네치킨 문래점", bitmap, "2021-08-17 오후 08:45", 2, orderMenuData, "24,000원", false))
-            add(OrderData(true, "교촌치킨 문래점", bitmap, "2021-08-15 오후 08:45", 4, orderMenuData, "10,000원", true))
+            add(OrderData("굽네치킨 문래점", bitmap, "2021-08-20 오후 08:45", 5, orderMenuData, "14,000원", false))
+            add(OrderData("네네치킨 문래점", bitmap, "2021-08-17 오후 08:45", 2, orderMenuData, "24,000원", false))
+            add(OrderData("교촌치킨 문래점", bitmap, "2021-08-15 오후 08:45", 4, orderMenuData, "10,000원", true))
         }
 
         orderAdapter.orderData = orderData
