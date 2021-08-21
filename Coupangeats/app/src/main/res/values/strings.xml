@@ -18,6 +18,18 @@
     <string name="home_text_hot_store">인기 프랜차이즈</string>
     <string name="home_text_new_store">새로 들어왔어요!</string>
     <string name="home_text_choose_store">골라먹는 맛집</string>
+
+    <string name="home_chip_reset">초기화</string>
+    <string name="home_chip_arrange">매장 정렬</string>
+    <string name="home_chip_recommend">추천순</string>
+    <string name="home_chip_order">주문많은순</string>
+    <string name="home_chip_location">가까운순</string>
+    <string name="home_chip_star_rating">별점높은순</string>
+    <string name="home_chip_new">신규매장순</string>
+    <string name="home_chip_fast">치타배달</string>
+    <string name="home_chip_delivery_tip">배달비</string>
+    <string name="home_chip_least">최소주문</string>
+    <string name="home_chip_coupon">할인쿠폰</string>
     
     <!-- Test Data -->
     <string name="blank">&#160;</string>

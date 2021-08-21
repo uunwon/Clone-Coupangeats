@@ -189,7 +189,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:padding="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="10dp"
                 android:text="@string/home_text_choose_store"
                 android:textSize="18sp"
                 android:textColor="@color/black"
@@ -197,15 +200,115 @@
                 android:background="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/home_recycler_view_new" />
 
+            <HorizontalScrollView
+                android:id="@+id/home_horizontal_scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:scrollbars="none"
+                app:layout_constraintTop_toBottomOf="@id/home_text_choose_store">
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleLine="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:visibility="gone"
+                        android:id="@+id/home_chip_reset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/home_chip_reset"
+                        android:textSize="13sp"
+                        app:chipIcon="@drawable/ic_home_reset"
+                        app:chipBackgroundColor="@color/white"
+                        app:chipStrokeColor="@color/gray_300"
+                        app:chipStrokeWidth="1dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/home_text_choose_store"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/home_chip_store_filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:text="@string/home_chip_recommend"
+                        android:textSize="13sp"
+                        app:closeIcon="@drawable/ic_arrow_down"
+                        app:closeIconEnabled="true"
+                        app:closeIconTint="@color/black"
+                        app:chipBackgroundColor="@color/white"
+                        app:chipStrokeColor="@color/gray_300"
+                        app:chipStrokeWidth="1dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/home_text_choose_store"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/home_chip_fast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_chip_fast"
+                        android:textSize="13sp"
+                        app:chipIcon="@drawable/ic_chip_fast"
+                        app:chipBackgroundColor="@color/white"
+                        app:chipStrokeColor="@color/gray_300"
+                        app:chipStrokeWidth="1dp"
+                        app:iconEndPadding="2dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/home_text_choose_store"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/home_chip_delivery_fee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_chip_delivery_tip"
+                        android:textSize="13sp"
+                        app:closeIcon="@drawable/ic_arrow_down"
+                        app:closeIconEnabled="true"
+                        app:closeIconTint="@color/black"
+                        app:chipBackgroundColor="@color/white"
+                        app:chipStrokeColor="@color/gray_300"
+                        app:chipStrokeWidth="1dp"
+                        app:closeIconEndPadding="2dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/home_text_choose_store"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/home_chip_least"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_chip_least"
+                        android:textSize="13sp"
+                        app:closeIcon="@drawable/ic_arrow_down"
+                        app:closeIconEnabled="true"
+                        app:closeIconTint="@color/black"
+                        app:chipBackgroundColor="@color/white"
+                        app:chipStrokeColor="@color/gray_300"
+                        app:chipStrokeWidth="1dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/home_text_choose_store"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/home_chip_coupon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/home_chip_coupon"
+                        android:textSize="13sp"
+                        app:chipBackgroundColor="@color/white"
+                        app:chipStrokeColor="@color/gray_300"
+                        app:chipStrokeWidth="1dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/home_text_choose_store"/>
+
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_recycler_view_choose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 tools:listitem="@layout/item_store"
                 android:background="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/home_text_choose_store"/>
+                app:layout_constraintTop_toBottomOf="@id/home_horizontal_scroll_view"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
