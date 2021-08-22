@@ -14,11 +14,11 @@ import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseFragment
 import com.yunwoon.coupangeatsproject.databinding.FragmentHomeBinding
 import com.yunwoon.coupangeatsproject.src.address.AddressActivity
-import com.yunwoon.coupangeatsproject.src.category.CategoryDetailActivity
 import com.yunwoon.coupangeatsproject.src.main.home.dialogs.ChipArrangeDialog
 import com.yunwoon.coupangeatsproject.src.main.home.models.CategoryResponse
 import com.yunwoon.coupangeatsproject.src.main.home.models.HomeResponse
 import com.yunwoon.coupangeatsproject.src.store.StoreActivity
+import com.yunwoon.coupangeatsproject.src.storelist.StoreListActivity
 import com.yunwoon.coupangeatsproject.util.categoryRecycler.CategoryAdapter
 import com.yunwoon.coupangeatsproject.util.categoryRecycler.CategoryData
 import com.yunwoon.coupangeatsproject.util.smallStoreRecycler.SmallStoreAdapter
@@ -94,6 +94,7 @@ class HomeFragment :
         // 매장 정렬 필터
         binding.homeChipStoreFilter.setOnClickListener { setChipArrangeDialog() }
     }
+
     // 주소 받아오기
     private fun setAddress() {
         if(loginJwtToken != null) {
@@ -157,7 +158,7 @@ class HomeFragment :
     private fun initCategoryRecyclerView() {
         categoryAdapter = CategoryAdapter(requireContext(),this@HomeFragment)
         binding.homeRecyclerViewCategory.adapter = categoryAdapter
-        
+
         categoryData.add(CategoryData("https://user-images.githubusercontent.com/48541984/130348425-562f1565-7b95-49ff-b5c7-7700377b06a5.jpg", "신규 맛집"))
         categoryData.add(CategoryData("https://user-images.githubusercontent.com/48541984/130348314-9b8b6d34-2e29-4130-9c72-d84d3435beab.jpg", "1인분"))
 
@@ -347,9 +348,13 @@ class HomeFragment :
 
     // 카테고리 아이템 클릭 시 화면 이동
     fun moveToCategoryDetailActivity(position: Int) {
-        val intent = Intent(requireContext(), CategoryDetailActivity::class.java)
+        val intent = Intent(requireContext(), StoreListActivity::class.java)
         intent.putExtra("position", position)
         startActivity(intent)
+    }
+
+    fun moveToStoreActivity(position: Int) {
+        this.startActivity(Intent(requireContext(), StoreActivity::class.java))
     }
 
     // 옵션 메뉴 - 검색 기능 생성

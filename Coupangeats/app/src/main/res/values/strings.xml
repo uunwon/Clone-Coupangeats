@@ -30,6 +30,9 @@
     <string name="home_chip_delivery_tip">배달비</string>
     <string name="home_chip_least">최소주문</string>
     <string name="home_chip_coupon">할인쿠폰</string>
+
+    <!-- Category -->
+    <string name="category_text_toolbar">한식</string>
     
     <!-- Test Data -->
     <string name="blank">&#160;</string>

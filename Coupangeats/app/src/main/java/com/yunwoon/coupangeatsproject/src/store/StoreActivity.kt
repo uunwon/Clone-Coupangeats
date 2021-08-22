@@ -108,6 +108,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
             LoadImage.execute(response.result.imgResult[0].imgUrl)
 
             binding.storeTextTitle.text = response.result.restaurantResult[0].name
+            binding.storeTextToolbar.text = response.result.restaurantResult[0].name
             binding.storeTextDeliveryTip.text = "${response.result.restaurantResult[0].delieveryFee}원"
             binding.storeTextLestDeliveryTip.text = "${response.result.restaurantResult[0].minOrderPrice}원"
         } else {

@@ -8,9 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
-import com.yunwoon.coupangeatsproject.src.main.home.HomeFragment
+import com.yunwoon.coupangeatsproject.src.storelist.StoreListActivity
 
-class StoreAdapter(private val context: Context, private var homeFragment: HomeFragment) : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
+class StoreListAdapter(private val context: Context) : RecyclerView.Adapter<StoreListAdapter.ViewHolder>() {
     var storeDataArrayList = mutableListOf<StoreData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,7 +22,7 @@ class StoreAdapter(private val context: Context, private var homeFragment: HomeF
         holder.bind(storeDataArrayList[position])
 
         holder.itemView.setOnClickListener {
-            homeFragment.moveToStoreActivity(position)
+            (context as StoreListActivity).moveToStoreActivity(position)
         }
     }
 
