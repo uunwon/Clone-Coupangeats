@@ -17,6 +17,7 @@ import com.yunwoon.coupangeatsproject.util.roadRecycler.RoadData
 class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBinding::inflate), View.OnKeyListener, AddressActivityView {
 
     private var addressSearchStatus = false
+    private var addressDetailSetStatus = false
     private lateinit var inputMethodManager : InputMethodManager
 
     // 1페이지는 배송지 주소설정
@@ -30,6 +31,7 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("addressPage", "현재 addressPage 는 ? $addressPage")
 
         inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         rlayoutManager = LinearLayoutManager(this)
@@ -43,9 +45,11 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
         // 검색창 포커스 얻으면
         binding.addressEditTextSearch.setOnFocusChangeListener { _, b ->
             if(b) {
+                Log.d("addressPage", "현재 addressPage 는 ? $addressPage")
+
                 addressSearchStatus = true
 
-                if(addressPage++ == 0) {
+                if(addressPage++ == 1) {
                     binding.addressImageButtonBack.setImageResource(R.drawable.ic_toolbar_back)
                     binding.addressLinearLayoutSearch.visibility = View.VISIBLE
                     binding.addressNestedScrollView.visibility = View.GONE
@@ -75,13 +79,32 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
 
     }
 
+    override fun onBackPressed() {
+        setAddressView()
+    }
+
      // 검색창 아래 화면 세팅
     private fun setAddressView() {
-        if(addressSearchStatus && addressPage > 0) {
+        if(addressDetailSetStatus) {
+            addressDetailSetStatus = !addressDetailSetStatus
+            addressSearchStatus = true
+            binding.addressConstraintLayoutDetail.visibility = View.GONE
+            binding.addressLinearLayoutSearch.visibility = View.GONE
+            binding.addressNestedScrollView.visibility = View.GONE
+
+            binding.titleAddress.text = "배달지 주소 설정"
+            binding.addressNestedScrollViewSearch.visibility = View.VISIBLE
+            binding.addressImageButtonTextClear.visibility = View.VISIBLE
+
+            binding.addressEditTextSearch.clearFocus()
+            inputMethodManager.hideSoftInputFromWindow(binding.addressEditTextSearch.windowToken, 0)
+        }
+        else if(!addressDetailSetStatus && addressSearchStatus && addressPage > 1) {
             addressSearchStatus = !addressSearchStatus
-            addressPage = 0
+            addressPage = 1
 
             binding.addressImageButtonBack.setImageResource(R.drawable.ic_toolbar_close)
+            binding.addressConstraintLayoutDetail.visibility = View.GONE
             binding.addressLinearLayoutSearch.visibility = View.GONE
             binding.addressNestedScrollView.visibility = View.VISIBLE
             binding.addressNestedScrollViewSearch.visibility = View.GONE
@@ -91,13 +114,9 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
             binding.addressEditTextSearch.clearFocus()
             inputMethodManager.hideSoftInputFromWindow(binding.addressEditTextSearch.windowToken, 0)
         }
-        else if (addressPage == 0) {
+        else if (addressPage == 1) {
             finish()
         }
-    }
-
-    override fun onBackPressed() {
-        setAddressView()
     }
 
     // 검색 ENTER EVENT
@@ -144,7 +163,7 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
         roadAdapter = RoadAdapter(this)
         roadItemArrayList.clear()
 
-        for(i in 0..9) {
+        for(i in 0 until response.results.juso.size) {
             roadItemArrayList.add(RoadData(response.results.juso[i].roadAddrPart1, response.results.juso[i].jibunAddr))
         }
 
@@ -153,4 +172,14 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
         roadAdapter.notifyDataSetChanged()
     }
 
+    // 배달지 상세 정보 페이지로 이동
+    fun moveToAddressDetailPage() {
+        addressSearchStatus = false
+        addressDetailSetStatus = true
+        binding.addressConstraintLayoutDetail.visibility = View.VISIBLE
+        binding.titleAddress.text = "배달지 상세 정보"
+
+        binding.addressTextAddress.text = ApplicationClass.sSharedPreferences.getString("temporaryAddress", "temporaryAddress")
+        binding.addressTextAddressDetail.text = ApplicationClass.sSharedPreferences.getString("temporaryAddressDetail", "temporaryAddressDetail")
+    }
 }

@@ -197,6 +197,13 @@
     <string name="address_text_road_title">지번명</string>
     <string name="address_text_road">영등포구 선유서로34길</string>
     <string name="address_text_road_detail">서울 영등포구 선유서로34길 13</string>
+    <string name="address_text_hint_detail">상세주소 (아파트/동/호)</string>
+    <string name="address_text_hint_direction">길 안내 (예 : 1층에 올리브영이 있는 오피스텔)</string>
+    <string name="address_button_home">집</string>
+    <string name="address_button_company">회사</string>
+    <string name="address_button_etc">기타</string>
+    <string name="address_button_map">지도에서 위치 확인하기</string>
+    <string name="address_button_set">완료</string>
 
     <!-- Address Dialog -->
     <string name="address_dialog_text">배달받을 주소를 설정해 주세요.</string>

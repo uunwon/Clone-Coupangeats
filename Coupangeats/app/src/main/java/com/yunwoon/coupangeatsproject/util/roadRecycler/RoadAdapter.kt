@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
+import com.yunwoon.coupangeatsproject.config.ApplicationClass
+import com.yunwoon.coupangeatsproject.src.address.AddressActivity
 
 class RoadAdapter(private val context: Context) : RecyclerView.Adapter<RoadAdapter.ViewHolder>() {
     var roadDataArrayList = ArrayList<RoadData>()
@@ -24,6 +26,12 @@ class RoadAdapter(private val context: Context) : RecyclerView.Adapter<RoadAdapt
 
         holder.itemView.setOnClickListener {
             Log.d("AddressActivity", "RoadData $position 선택됨")
+            val activity = context as AddressActivity
+
+            ApplicationClass.sEditor.putString("temporaryAddress", roadDataArrayList[position].roadText).apply()
+            ApplicationClass.sEditor.putString("temporaryAddressDetail", roadDataArrayList[position].roadTextDetail).apply()
+
+            activity.moveToAddressDetailPage()
         }
     }
 
