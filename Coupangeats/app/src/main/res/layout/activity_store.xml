@@ -25,6 +25,7 @@
 
             <!-- 접히고자 하는 layout 추가 -->
             <ImageView
+                android:id="@+id/store_image_view_main"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"

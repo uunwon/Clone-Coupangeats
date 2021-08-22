@@ -2,12 +2,15 @@ package com.yunwoon.coupangeatsproject.src.store
 
 import android.content.Intent
 import android.content.res.Resources
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
+import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -18,11 +21,16 @@ import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityStoreBinding
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragmentAdapter
+import com.yunwoon.coupangeatsproject.src.store.models.StoreResponse
 import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewAdapter
 import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewData
+import java.io.IOException
+import java.net.URL
 import kotlin.math.abs
 
-class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::inflate), AppBarLayout.OnOffsetChangedListener {
+
+class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::inflate),
+    AppBarLayout.OnOffsetChangedListener, StoreActivityView {
     private lateinit var appBarLayout: AppBarLayout
 
     private lateinit var menuIconDrawable1: Drawable
@@ -43,6 +51,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         super.onCreate(savedInstanceState)
 
         initStoreView()
+        setStoreData()
         setSmallReviewRecyclerView()
         setStoreViewPager()
 
@@ -61,12 +70,55 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         }
 
         setSupportActionBar(binding.toolbar)
-
         appBarLayout = binding.appBarLayout
 
         whiteFilter = PorterDuffColorFilter(resources.getColor(R.color.white), PorterDuff.Mode.SRC_ATOP)
         blackFilter = PorterDuffColorFilter(resources.getColor(R.color.black), PorterDuff.Mode.SRC_ATOP)
         redFilter = PorterDuffColorFilter(resources.getColor(R.color.red_900), PorterDuff.Mode.SRC_ATOP)
+    }
+
+    // 해당 가게 데이터 가져오기
+    private fun setStoreData() {
+        showLoadingDialog(this)
+        StoreService(this).tryGetStore(1)
+    }
+
+    override fun onGetStoreSuccess(response: StoreResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            LoadImage.execute(response.result.imgResult[0].imgUrl)
+
+            binding.storeTextTitle.text = response.result.restaurantResult[0].name
+            binding.storeTextDeliveryTip.text = "${response.result.restaurantResult[0].delieveryFee}원"
+            binding.storeTextLestDeliveryTip.text = "${response.result.restaurantResult[0].minOrderPrice}원"
+        } else {
+            showCustomToast("가게를 받아오지 못했습니다!")
+        }
+    }
+
+    override fun onGetStoreFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
+        Log.d("오류", "$message")
+    }
+
+    // 이미지 변환
+    val LoadImage = object : AsyncTask<String, Int, Bitmap?>() {
+        var bitmap : Bitmap? = null
+
+        override fun doInBackground(vararg p0: String?): Bitmap? {
+            try {
+                val inputStream = URL(p0[0]).openStream()
+                bitmap = BitmapFactory.decodeStream(inputStream)
+            } catch (e : IOException) {
+                e.printStackTrace()
+            }
+            return bitmap
+        }
+
+        override fun onPostExecute(result: Bitmap?) {
+            binding.storeImageViewMain.setImageBitmap(bitmap)
+        }
     }
 
     // 옵션 메뉴 세팅

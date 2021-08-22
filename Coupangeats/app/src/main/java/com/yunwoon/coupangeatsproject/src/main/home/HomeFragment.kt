@@ -254,8 +254,8 @@ class HomeFragment :
     override fun onGetRestaurantsSuccess(response: HomeResponse) {
         dismissLoadingDialog()
         if(response.isSuccess) {
-            for (i in response.result) {
-                chooseStoreData.add(StoreData(bitmap1, bitmap2, bitmap3, i.name, "10-20분", "4.8", "(321)", "1.1km", i.deliveryFee+"원"))
+            for (i in response.result.restaurantResult) {
+                chooseStoreData.add(StoreData(bitmap1, bitmap2, bitmap3, i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
             }
 
             chooseStoreAdapter.storeDataArrayList = chooseStoreData
