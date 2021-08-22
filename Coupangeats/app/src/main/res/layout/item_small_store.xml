@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="120dp"
-    android:layout_height="190dp"
+    android:layout_height="200dp"
     android:layout_marginEnd="10dp"
     android:background="@color/white"
     android:orientation="vertical">
@@ -16,20 +16,20 @@
     <TextView
         android:id="@+id/small_store_text_title"
         android:layout_width="match_parent"
-        android:layout_height="16dp"
+        android:layout_height="19dp"
         android:layout_marginTop="7dp"
         android:maxLength="9"
         android:minHeight="0dp"
         android:ellipsize="end"
         android:text="@string/store_test_title"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:layout_marginTop="2dp">
+        android:layout_height="18dp"
+        android:layout_marginTop="4dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -45,8 +45,7 @@
             android:ellipsize="end"
             android:text="@string/store_test_star_rating"
             android:textSize="11sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/small_store_text_review_count"
@@ -57,8 +56,7 @@
             android:ellipsize="end"
             android:text="@string/store_test_review_count"
             android:textSize="11sp"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textColor="@color/black" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,8 +65,7 @@
             android:ellipsize="end"
             android:text="ㆍ"
             android:textSize="11sp"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textColor="@color/black" />
         <TextView
             android:id="@+id/small_store_text_location"
             android:layout_width="wrap_content"
@@ -78,14 +75,13 @@
             android:ellipsize="end"
             android:text="@string/store_test_location"
             android:textSize="11sp"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="16dp"
-        android:layout_marginTop="2dp">
+        android:layout_marginTop="3dp">
 
         <TextView
             android:id="@+id/small_store_text_delivery"
@@ -95,8 +91,7 @@
             android:ellipsize="end"
             android:text="@string/store_test_delivery"
             android:textSize="11sp"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/small_store_text_delivery_tip"
@@ -107,8 +102,7 @@
             android:ellipsize="end"
             android:text="@string/store_test_delivery_tip"
             android:textSize="11sp"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textColor="@color/black" />
     </LinearLayout>
 
 </LinearLayout>

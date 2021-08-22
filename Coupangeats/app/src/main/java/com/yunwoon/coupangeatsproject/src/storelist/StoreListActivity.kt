@@ -59,6 +59,8 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
         setCategoryRecyclerView()
         setNewRecyclerView()
         setStoreListRecyclerView()
+
+        binding.storeListImageButtonBack.setOnClickListener { finish() }
     }
 
     private fun setStoreListView() {
@@ -146,7 +148,7 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
     }
 
     override fun onGetRestaurantsSuccess(response: HomeResponse) {
-        // dismissLoadingDialog()
+        dismissLoadingDialog()
         if(response.isSuccess) {
             for (i in response.result.restaurantResult) {
                 storeListData.add(StoreData(bitmap1, bitmap2, bitmap3, i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
@@ -158,7 +160,7 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
     }
 
     override fun onGetRestaurantsFailure(message: String) {
-        // dismissLoadingDialog()
+        dismissLoadingDialog()
         showCustomToast("오류 : $message")
     }
 

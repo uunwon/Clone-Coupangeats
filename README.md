@@ -39,7 +39,7 @@
 
 ## 테스트 진행현황
 ### 1주차 진행현황 🌈
-![Progress](https://progress-bar.dev/80/?scale=100&width=500&suffix=%)  
+![Progress](https://progress-bar.dev/95/?scale=100&width=500&suffix=%)  
 ### 2021-08-14
 * 기획서 제출 - 100%  
   * 개발 범위 / 개발 우선 순위  
@@ -106,6 +106,15 @@
 * OrderFragment 내 ViewPager 안 RecyclerView 생성
 * 서버 Retrofit 통신
   * 전체 유저 조회 API : JoinActivity 내 같은 이메일 오류 처리
+
+### 2021-08-22
+* HomeFragment 내 가게 filter chip 제작
+* ViewPager Refresh 이슈 해결!
+* 배달지 주소 설정 페이지 제작
+* 네이버 maps API 적용
+* 서버 Retrofit 통신
+  * 음식 카테고리 전체 조회 API : 이미지 받아오기
+  * 특정 식당 조회 API : StoreActivity 내 정보 받아오기
 
 ## 테스트 개발환경
 * AWS EC2 / RDS

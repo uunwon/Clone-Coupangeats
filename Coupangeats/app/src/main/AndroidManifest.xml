@@ -16,9 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".src.storelist.StoreListActivity"
+        <activity
+            android:name=".src.storelist.StoreListActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".src.address.NaverMapActivity"
+        <activity
+            android:name=".src.address.NaverMapActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".src.cart.CartActivity"
@@ -36,9 +38,6 @@
             android:theme="@style/StoreAppTheme"/>
         <activity
             android:name=".src.address.AddressActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".src.category.CategoryDetailActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".src.main.login.JoinActivity"
