@@ -1,5 +1,6 @@
 package com.yunwoon.coupangeatsproject.src.address
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -20,9 +21,8 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
     private var addressDetailSetStatus = false
     private lateinit var inputMethodManager : InputMethodManager
 
-    // 1페이지는 배송지 주소설정
-    // 2페이지는 배송지 검색 페이지
-    //
+    // addressPage = 1 , 세팅 초기
+    // addressPage > 1 , 배송지 검색 페이지
     private var addressPage : Int = ApplicationClass.sSharedPreferences.getInt("addressPage", 1)
 
     private val roadItemArrayList = ArrayList<RoadData>()
@@ -72,6 +72,10 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
 
         // 검색 ENTER EVENT
         binding.addressEditTextSearch.setOnKeyListener(this)
+
+        binding.addressButtonSearch.setOnClickListener {
+            this.startActivity(Intent(this, NaverMapActivity::class.java))
+        }
     }
 
     // 사용자 주소 데이터 받아오기 // recyclerview 아이템 뿌려주기

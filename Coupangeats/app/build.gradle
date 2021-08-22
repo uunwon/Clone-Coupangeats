@@ -23,6 +23,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "ROAD_API_KEY", properties['ROAD_API_KEY'])
+        buildConfigField("String", "NAVER_CLIENT_ID", properties['NAVER_CLIENT_ID'])
     }
 
     buildTypes {
@@ -79,6 +80,10 @@ dependencies {
 
     // view pager
     implementation 'androidx.viewpager2:viewpager2:1.0.0-alpha04'
+
+    // 네이버 지도 SDK
+    implementation 'com.naver.maps:map-sdk:3.12.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0' // 현재 위치
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -203,6 +203,7 @@
     <string name="address_button_company">회사</string>
     <string name="address_button_etc">기타</string>
     <string name="address_button_map">지도에서 위치 확인하기</string>
+    <string name="address_button_naver">이 위치로 배달받기</string>
     <string name="address_button_set">완료</string>
 
     <!-- Address Dialog -->
