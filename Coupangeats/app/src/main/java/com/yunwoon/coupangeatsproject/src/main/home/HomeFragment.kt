@@ -5,18 +5,17 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.chip.ChipGroup
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseFragment
 import com.yunwoon.coupangeatsproject.databinding.FragmentHomeBinding
 import com.yunwoon.coupangeatsproject.src.address.AddressActivity
 import com.yunwoon.coupangeatsproject.src.category.CategoryDetailActivity
+import com.yunwoon.coupangeatsproject.src.main.home.dialogs.ChipArrangeDialog
 import com.yunwoon.coupangeatsproject.src.main.home.models.CategoryResponse
 import com.yunwoon.coupangeatsproject.src.main.home.models.HomeResponse
 import com.yunwoon.coupangeatsproject.src.store.StoreActivity
@@ -65,6 +64,10 @@ class HomeFragment :
     private lateinit var bitmap3 : Bitmap
     private lateinit var bitmap4 : Bitmap
 
+    private var filterCount = 0
+    private var chipArrangeDialogNumber = 1
+    private val dialogChipArrange = ChipArrangeDialog()
+    private var params = ChipGroup.LayoutParams(ChipGroup.LayoutParams.WRAP_CONTENT, ChipGroup.LayoutParams.WRAP_CONTENT)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -88,6 +91,9 @@ class HomeFragment :
         binding.homeTextAddress.setOnClickListener {
             this.startActivity(Intent(requireContext(), AddressActivity::class.java))
         }
+
+        // 매장 정렬 필터
+        binding.homeChipStoreFilter.setOnClickListener { setChipArrangeDialog() }
     }
     // 주소 받아오기
     private fun setAddress() {
@@ -262,6 +268,84 @@ class HomeFragment :
         showCustomToast("오류 : $message")
     }
 
+    // 매장 정렬 chip 필터
+    private fun setChipArrangeDialog() {
+        dialogChipArrange.setChipDialog(chipArrangeDialogNumber)
+        dialogChipArrange.show(requireFragmentManager(), "ChipArrangeDialog")
+
+        dialogChipArrange.setChipDialogResult(object : ChipArrangeDialog.SetChipResult{
+            override fun setFilter(dialogResult: Int) {
+                filterCount = 1
+
+                when(dialogResult){
+                    1 -> { // 추천순
+                        binding.homeChipStoreFilter.setChipBackgroundColorResource(R.color.white)
+                        binding.homeChipStoreFilter.setTextColor(reSources.getColor(R.color.black))
+                        binding.homeChipStoreFilter.setText(R.string.home_chip_recommend)
+
+                        filterCount = 0
+                        chipArrangeDialogNumber = 1
+                        // 아래 가게 정렬 받아오는 걸로 바뀌기
+                    }
+                    2 -> { // 주문많은순
+                        params.setMargins(0,0,0,0)
+                        binding.homeChipStoreFilter.layoutParams = params
+                        binding.homeChipStoreFilter.setChipBackgroundColorResource(R.color.blue_300)
+                        binding.homeChipStoreFilter.setTextColor(reSources.getColor(R.color.white))
+                        binding.homeChipStoreFilter.setText(R.string.home_chip_order)
+
+                        binding.homeChipReset.visibility = View.VISIBLE
+                        binding.homeChipReset.setText("초기화 " + filterCount)
+
+                        chipArrangeDialogNumber = 2
+                    }
+                    3 -> { // 가까운순
+                        params.setMargins(0,0,0,0)
+                        binding.homeChipStoreFilter.layoutParams = params
+                        binding.homeChipStoreFilter.setChipBackgroundColorResource(R.color.blue_300)
+                        binding.homeChipStoreFilter.setTextColor(reSources.getColor(R.color.white))
+                        binding.homeChipStoreFilter.setText(R.string.home_chip_location)
+
+                        binding.homeChipReset.visibility = View.VISIBLE
+                        binding.homeChipReset.setText("초기화 " + filterCount)
+
+                        chipArrangeDialogNumber = 3
+                    }
+                    4 -> { // 별점높은순
+                        params.setMargins(0,0,0,0)
+                        binding.homeChipStoreFilter.layoutParams = params
+                        binding.homeChipStoreFilter.setChipBackgroundColorResource(R.color.blue_300)
+                        binding.homeChipStoreFilter.setTextColor(reSources.getColor(R.color.white))
+                        binding.homeChipStoreFilter.setText(R.string.home_chip_star_rating)
+
+                        binding.homeChipReset.visibility = View.VISIBLE
+                        binding.homeChipReset.setText("초기화 " + filterCount)
+
+                        chipArrangeDialogNumber = 4
+                    }
+                    5 -> { // 신규매장순
+                        params.setMargins(0,0,0,0)
+                        binding.homeChipStoreFilter.layoutParams = params
+                        binding.homeChipStoreFilter.setChipBackgroundColorResource(R.color.blue_300)
+                        binding.homeChipStoreFilter.setTextColor(reSources.getColor(R.color.white))
+                        binding.homeChipStoreFilter.setText(R.string.home_chip_new)
+
+                        binding.homeChipReset.visibility = View.VISIBLE
+                        binding.homeChipReset.setText("초기화 " + filterCount)
+
+                        chipArrangeDialogNumber = 5
+                    }
+                }
+
+                if(filterCount == 0) {
+                    binding.homeChipReset.visibility = View.GONE
+                    params.setMargins(38,0,0,0)
+                    binding.homeChipStoreFilter.layoutParams = params
+                }
+            }
+        })
+    }
+
     // 카테고리 아이템 클릭 시 화면 이동
     fun moveToCategoryDetailActivity(position: Int) {
         val intent = Intent(requireContext(), CategoryDetailActivity::class.java)
@@ -269,7 +353,7 @@ class HomeFragment :
         startActivity(intent)
     }
 
-    // 검색 옵션 메뉴 생성
+    // 옵션 메뉴 - 검색 기능 생성
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main_option, menu)
     }

@@ -217,7 +217,7 @@
                         android:id="@+id/home_chip_reset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="13dp"
                         android:text="@string/home_chip_reset"
                         android:textSize="13sp"
                         app:chipIcon="@drawable/ic_home_reset"

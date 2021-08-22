@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/chip_text_arrange"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:paddingStart="40dp"
         android:paddingEnd="20dp"
         android:gravity="center"
@@ -29,7 +29,7 @@
     <LinearLayout
         android:id="@+id/chip_linear_recommend"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/chip_view_arrange">
         <ImageView
@@ -37,7 +37,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="3dp"
-            android:src="@drawable/ic_join_check" />
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
         <TextView
             android:id="@+id/chip_text_recommend"
             android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
     <LinearLayout
         android:id="@+id/chip_linear_order"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/chip_view_recommend">
         <ImageView
@@ -69,7 +70,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="3dp"
-            android:src="@drawable/ic_join_check" />
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
         <TextView
             android:id="@+id/chip_text_order"
             android:layout_width="wrap_content"
@@ -92,7 +94,7 @@
     <LinearLayout
         android:id="@+id/chip_linear_location"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/chip_view_order">
         <ImageView
@@ -101,7 +103,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="3dp"
-            android:src="@drawable/ic_join_check" />
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
         <TextView
             android:id="@+id/chip_text_location"
             android:layout_width="wrap_content"
@@ -124,7 +127,7 @@
     <LinearLayout
         android:id="@+id/chip_linear_star_rating"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/chip_view_location">
         <ImageView
@@ -133,7 +136,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="3dp"
-            android:src="@drawable/ic_join_check" />
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
         <TextView
             android:id="@+id/chip_text_star_rating"
             android:layout_width="wrap_content"
@@ -156,7 +160,7 @@
     <LinearLayout
         android:id="@+id/chip_linear_new"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/chip_view_star_rating">
         <ImageView
@@ -165,7 +169,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="3dp"
-            android:src="@drawable/ic_join_check" />
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
         <TextView
             android:id="@+id/chip_text_new"
             android:layout_width="wrap_content"
