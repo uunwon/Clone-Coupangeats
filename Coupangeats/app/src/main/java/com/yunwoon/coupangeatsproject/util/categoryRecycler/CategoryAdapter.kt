@@ -1,6 +1,9 @@
 package com.yunwoon.coupangeatsproject.util.categoryRecycler
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +12,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.src.main.home.HomeFragment
+import java.io.IOException
+import java.net.URL
 
 class CategoryAdapter(private val context: Context, private var homeFragment: HomeFragment) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
     var categoryData = mutableListOf<CategoryData>()
@@ -37,7 +42,26 @@ class CategoryAdapter(private val context: Context, private var homeFragment: Ho
         private val reviewContent: TextView = itemView.findViewById(R.id.category_text_title)
 
         fun bind(item: CategoryData) {
-            reviewImage.setImageBitmap(item.categoryCircleImage)
+            // 이미지 변환
+            val LoadImage = object : AsyncTask<String, Int, Bitmap?>() {
+                var bitmap : Bitmap? = null
+
+                override fun doInBackground(vararg p0: String?): Bitmap? {
+                    try {
+                        val inputStream = URL(p0[0]).openStream()
+                        bitmap = BitmapFactory.decodeStream(inputStream)
+                    } catch (e : IOException) {
+                        e.printStackTrace()
+                    }
+                    return bitmap
+                }
+
+                override fun onPostExecute(result: Bitmap?) {
+                    reviewImage.setImageBitmap(bitmap)
+                }
+            }
+
+            LoadImage.execute(item.categoryCircleImage)
             reviewContent.text = item.categoryTextTitle
         }
     }

@@ -47,6 +47,25 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     private lateinit var smallReviewAdapter: SmallReviewAdapter
     private val smallReviewData = mutableListOf<SmallReviewData>()
 
+    // 이미지 변환
+    val LoadImage = object : AsyncTask<String, Int, Bitmap?>() {
+        var bitmap : Bitmap? = null
+
+        override fun doInBackground(vararg p0: String?): Bitmap? {
+            try {
+                val inputStream = URL(p0[0]).openStream()
+                bitmap = BitmapFactory.decodeStream(inputStream)
+            } catch (e : IOException) {
+                e.printStackTrace()
+            }
+            return bitmap
+        }
+
+        override fun onPostExecute(result: Bitmap?) {
+            binding.storeImageViewMain.setImageBitmap(bitmap)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -100,25 +119,6 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         dismissLoadingDialog()
         showCustomToast("오류 : $message")
         Log.d("오류", "$message")
-    }
-
-    // 이미지 변환
-    val LoadImage = object : AsyncTask<String, Int, Bitmap?>() {
-        var bitmap : Bitmap? = null
-
-        override fun doInBackground(vararg p0: String?): Bitmap? {
-            try {
-                val inputStream = URL(p0[0]).openStream()
-                bitmap = BitmapFactory.decodeStream(inputStream)
-            } catch (e : IOException) {
-                e.printStackTrace()
-            }
-            return bitmap
-        }
-
-        override fun onPostExecute(result: Bitmap?) {
-            binding.storeImageViewMain.setImageBitmap(bitmap)
-        }
     }
 
     // 옵션 메뉴 세팅

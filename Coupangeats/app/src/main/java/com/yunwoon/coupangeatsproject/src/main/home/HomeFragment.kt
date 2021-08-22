@@ -79,7 +79,6 @@ class HomeFragment :
         bitmap3 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store3)
         bitmap4 = BitmapFactory.decodeResource(resources, R.drawable.test_category)
 
-
         setRecyclerViewLayoutManager()
         setToolBar(binding.homeToolbar)
         setAddress()
@@ -158,9 +157,9 @@ class HomeFragment :
     private fun initCategoryRecyclerView() {
         categoryAdapter = CategoryAdapter(requireContext(),this@HomeFragment)
         binding.homeRecyclerViewCategory.adapter = categoryAdapter
-
-        categoryData.add(CategoryData(bitmap4, "신규 맛집"))
-        categoryData.add(CategoryData(bitmap4, "1인분"))
+        
+        categoryData.add(CategoryData("https://user-images.githubusercontent.com/48541984/130348425-562f1565-7b95-49ff-b5c7-7700377b06a5.jpg", "신규 맛집"))
+        categoryData.add(CategoryData("https://user-images.githubusercontent.com/48541984/130348314-9b8b6d34-2e29-4130-9c72-d84d3435beab.jpg", "1인분"))
 
         HomeService(this).tryGetCategories()
     }
@@ -169,7 +168,7 @@ class HomeFragment :
         dismissLoadingDialog()
         if(response.isSuccess) {
             for (i in response.result) {
-                categoryData.add(CategoryData(bitmap4, i.categoryName))
+                categoryData.add(CategoryData(i.imgUrl, i.categoryName))
             }
 
             categoryAdapter.categoryData = categoryData
