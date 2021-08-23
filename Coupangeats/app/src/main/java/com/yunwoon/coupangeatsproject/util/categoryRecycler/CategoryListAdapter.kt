@@ -15,11 +15,12 @@ import com.yunwoon.coupangeatsproject.src.storelist.StoreListActivity
 import java.io.IOException
 import java.net.URL
 
-class CategoryListAdapter (private var context: Context) : RecyclerView.Adapter<CategoryListAdapter.ViewHolder>() {
+class CategoryListAdapter (private var context: Context, private var categoryPosition: Int) : RecyclerView.Adapter<CategoryListAdapter.ViewHolder>() {
     var categoryData = mutableListOf<CategoryData>()
 
-    fun CategoryAdapter(context: Context) {
+    fun CategoryAdapter(context: Context, categoryPosition: Int) {
         this.context = context
+        this.categoryPosition = categoryPosition
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

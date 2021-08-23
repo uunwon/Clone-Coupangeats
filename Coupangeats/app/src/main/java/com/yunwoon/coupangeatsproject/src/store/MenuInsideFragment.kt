@@ -35,6 +35,10 @@ class MenuInsideFragment :
 
         initMenuView()
         setMenuRecyclerView()
+
+        binding.storeImageButtonBack.setOnClickListener {
+            (context as MenuActivity).backToStore()
+        }
     }
 
     // 메뉴 디테일 화면 세팅

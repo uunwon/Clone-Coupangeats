@@ -21,6 +21,8 @@ class MenuActivity : BaseActivity<ActivityMenuBinding>(ActivityMenuBinding::infl
         }
     }
 
+    fun backToStore() { finish() }
+
     override fun onResume() {
         super.onResume()
 

@@ -1,12 +1,14 @@
 package com.yunwoon.coupangeatsproject.src.store.menu
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class MenuFragmentAdapter (fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager)  {
+class MenuFragmentAdapter (fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+    var fragments : ArrayList<Fragment> = ArrayList()
+
     val TYPE_VERTICAL_VIEWPAGER = 1001
-    val TYPE_HORIAONTALL_VIEWPAGER = 1002
+
     private var type : Int = 0
     private var count : Int = 0
 
@@ -19,23 +21,20 @@ class MenuFragmentAdapter (fragmentManager: FragmentManager) : FragmentPagerAdap
         this.count = count
     }
 
-    override fun getCount(): Int = 2
-
-    override fun getItem(position: Int): Fragment {
-        val fragment = when(position) {
-            0 -> MenuFragment().newInstance()
-            1 -> MenuFragment().newInstance()
-            else -> MenuFragment().newInstance()
-        }
-        return fragment
+    fun addFragment(fragment: Fragment) {
+        fragments.add(fragment)
+        notifyItemInserted(fragments.size - 1)
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        val title = when(position) {
-            0 -> "대표메뉴"
-            1-> "반반피자"
-            else -> "대표메뉴"
-        }
-        return title
+    fun removeFragment() {
+        fragments.removeLast()
+        notifyItemRemoved(fragments.size)
     }
+
+    override fun getItemCount(): Int  = 3
+
+    override fun createFragment(position: Int): Fragment {
+        return fragments[position]
+    }
+
 }

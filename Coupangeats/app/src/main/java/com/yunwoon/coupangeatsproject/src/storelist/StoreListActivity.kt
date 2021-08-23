@@ -30,6 +30,8 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
     private lateinit var nlayoutManager: LinearLayoutManager
     private lateinit var slayoutManager : LinearLayoutManager
 
+    private var categoryPosition = 0
+
     private lateinit var categoryAdapter: CategoryListAdapter
     private val categoryData = mutableListOf<CategoryData>()
 
@@ -47,8 +49,7 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val position = intent.getIntExtra("position", 0)
-        showCustomToast("$position")
+        categoryPosition = intent.getIntExtra("position", 0) // 카테고리 받아옴
 
         reSources = this.resources
         bitmap1 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store1)
@@ -82,7 +83,7 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
         binding.storeListRecyclerViewCategory.layoutManager = clayoutManager
         binding.storeListRecyclerViewCategory.isNestedScrollingEnabled = true
 
-        categoryAdapter = CategoryListAdapter(this)
+        categoryAdapter = CategoryListAdapter(this, categoryPosition)
         binding.storeListRecyclerViewCategory.adapter = categoryAdapter
 
         categoryData.add(CategoryData("https://user-images.githubusercontent.com/48541984/130348425-562f1565-7b95-49ff-b5c7-7700377b06a5.jpg", "신규 맛집"))

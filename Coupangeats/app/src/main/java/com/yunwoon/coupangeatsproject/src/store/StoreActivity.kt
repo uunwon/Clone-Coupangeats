@@ -16,10 +16,13 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityStoreBinding
+import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragment
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragmentAdapter
 import com.yunwoon.coupangeatsproject.src.store.models.StoreResponse
 import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewAdapter
@@ -46,6 +49,8 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
 
     private lateinit var smallReviewAdapter: SmallReviewAdapter
     private val smallReviewData = mutableListOf<SmallReviewData>()
+
+    val tabLayoutTextArray = arrayOf("추천메뉴","세트메뉴","엽기메뉴")
 
     // 이미지 변환
     val LoadImage = object : AsyncTask<String, Int, Bitmap?>() {
@@ -77,6 +82,8 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         binding.storeTextDetail.setOnClickListener {
             this.startActivity(Intent(this, StoreDetailActivity::class.java))
         }
+
+        binding.storeImageButtonBack.setOnClickListener { finish() }
     }
 
     // store 화면 세팅
@@ -199,10 +206,18 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     }
 
     private fun setStoreViewPager() {
-        verticalFragmentAdapter = MenuFragmentAdapter(supportFragmentManager)
+        verticalFragmentAdapter = MenuFragmentAdapter(this)
+        verticalFragmentAdapter.addFragment(MenuFragment())
+        verticalFragmentAdapter.addFragment(MenuFragment())
+        verticalFragmentAdapter.addFragment(MenuFragment())
+
         verticalFragmentAdapter.setType(verticalFragmentAdapter.TYPE_VERTICAL_VIEWPAGER)
+
+        binding.storeViewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
         binding.storeViewPager.adapter = verticalFragmentAdapter
 
-        binding.storeTabLayout.setupWithViewPager(binding.storeViewPager)
+        TabLayoutMediator(binding.storeTabLayout, binding.storeViewPager){tab, position ->
+            tab.text = tabLayoutTextArray[position] // 메뉴 이름 생성
+        }.attach()
     }
 }
