@@ -1,6 +1,9 @@
 package com.yunwoon.coupangeatsproject.util.favoriteRecycler
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
+import java.io.IOException
+import java.net.URL
 
 class FavoriteAdapter (private val context: Context) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
     var favoriteData = mutableListOf<FavoriteData>()
@@ -33,7 +38,26 @@ class FavoriteAdapter (private val context: Context) : RecyclerView.Adapter<Favo
         private val favoriteDeliveryTip : TextView = itemView.findViewById(R.id.favorite_text_delivery_tip)
 
         fun bind(item: FavoriteData) {
-            favoriteStoreImage.setImageBitmap(item.favoriteStoreImage)
+            // 이미지 변환
+            val LoadImage = object : AsyncTask<String, Int, Bitmap?>() {
+                var bitmap : Bitmap? = null
+
+                override fun doInBackground(vararg p0: String?): Bitmap? {
+                    try {
+                        val inputStream = URL(p0[0]).openStream()
+                        bitmap = BitmapFactory.decodeStream(inputStream)
+                    } catch (e : IOException) {
+                        e.printStackTrace()
+                    }
+                    return bitmap
+                }
+
+                override fun onPostExecute(result: Bitmap?) {
+                    favoriteStoreImage.setImageBitmap(bitmap)
+                }
+            }
+
+            LoadImage.execute(item.favoriteStoreImage)
 
             favoriteTitle.text = item.favoriteTitle
             favoriteStarRating.text = item.favoriteStarRating

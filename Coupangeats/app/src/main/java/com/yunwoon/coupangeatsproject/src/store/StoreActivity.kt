@@ -124,8 +124,8 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     override fun onGetStoreSuccess(response: StoreResponse) {
         dismissLoadingDialog()
         if(response.isSuccess) {
-            // if(response.result.imgResult != null)
-            //    LoadImage.execute(response.result.imgResult[0].imgUrl)
+            if(response.result.imgResult != null)
+                LoadImage.execute(response.result.imgResult[0].imgUrl)
 
             binding.storeTextTitle.text = response.result.restaurantResult[0].name
             binding.storeTextToolbar.text = response.result.restaurantResult[0].name

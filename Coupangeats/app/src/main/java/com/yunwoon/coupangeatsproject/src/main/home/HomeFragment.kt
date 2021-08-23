@@ -149,7 +149,7 @@ class HomeFragment :
         initChooseRecyclerView()
 
         if(loginJwtToken != null) {
-            initRecommendRecyclerView()
+            // initRecommendRecyclerView()
         } else {
             binding.homeTextRecommendStore.visibility = View.GONE
             binding.homeRecyclerViewRecommend.visibility = View.GONE

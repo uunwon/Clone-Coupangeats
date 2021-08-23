@@ -1,9 +1,7 @@
 package com.yunwoon.coupangeatsproject.util.favoriteRecycler
 
-import android.graphics.Bitmap
-
 data class FavoriteData (
-    val favoriteStoreImage : Bitmap,
+    val favoriteStoreImage : String,
     val favoriteTitle : String,
     val favoriteStarRating : String,
     val favoriteReviewCount : String,

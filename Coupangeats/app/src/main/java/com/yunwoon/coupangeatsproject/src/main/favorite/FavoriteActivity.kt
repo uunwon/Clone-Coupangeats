@@ -1,7 +1,5 @@
 package com.yunwoon.coupangeatsproject.src.main.favorite
 
-import android.content.res.Resources
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +9,7 @@ import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityFavoriteBinding
+import com.yunwoon.coupangeatsproject.src.main.favorite.models.FavoriteDetailResponse
 import com.yunwoon.coupangeatsproject.src.main.favorite.models.FavoriteStoreResponse
 import com.yunwoon.coupangeatsproject.util.favoriteRecycler.FavoriteAdapter
 import com.yunwoon.coupangeatsproject.util.favoriteRecycler.FavoriteData
@@ -22,45 +21,21 @@ class FavoriteActivity : BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteB
 
     private lateinit var favoriteAdapter: FavoriteAdapter
     private val favoriteData = mutableListOf<FavoriteData>()
+    private var favoriteDataCount : Int = 0
+
+    private lateinit var favoriteMenu : Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setToolBar(binding.favoriteToolbar)
 
         setFavoriteView()
+        setFavoriteRecyclerView()
 
         binding.favoriteImageButtonBack.setOnClickListener  { finish() }
         binding.favoriteButtonDefault.setOnClickListener { finish() }
     }
 
-    // 찜 가게 유무에 따라 뷰 설정
-    private fun setFavoriteView() {
-        if(true) {
-            binding.anyFavoriteConstraintLayout.visibility = View.GONE
-            binding.favoriteConstraintLayout.visibility = View.VISIBLE
-
-            if(loginJwtToken != null) {
-                showLoadingDialog(this)
-                FavoriteService(this).tryGetFavorite(loginJwtToken) // get 으로 찜 목록 받아오기
-            }
-
-        } else {
-            binding.anyFavoriteConstraintLayout.visibility = View.VISIBLE
-            binding.favoriteConstraintLayout.visibility = View.GONE
-        }
-    }
-
-    override fun onGetFavoriteSuccess(storeResponse: FavoriteStoreResponse) {
-        dismissLoadingDialog()
-        for(i in storeResponse.resultStore)
-    }
-
-    override fun onGetFavoriteFailure(message: String) {
-        dismissLoadingDialog()
-        showCustomToast("오류 : $message")
-    }
-
-    // 찜 가게 리사이클러뷰 세팅
     private fun setFavoriteRecyclerView() {
         flayoutManager = LinearLayoutManager(this)
         binding.favoriteRecyclerView.layoutManager = flayoutManager
@@ -69,21 +44,75 @@ class FavoriteActivity : BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteB
 
         binding.favoriteRecyclerView.isNestedScrollingEnabled = true
         binding.favoriteRecyclerView.adapter = favoriteAdapter
+    }
 
-        val resources : Resources = this.resources
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.test_favorite_store)
 
-        favoriteData.apply {
-            add(FavoriteData(bitmap, "굽네치킨 상암점", "4.8", "(432)", "4.1km", "10-20분","배달비 2,000원"))
-            add(FavoriteData(bitmap, "굽네치킨 상아점", "4.8", "(432)", "4.1km", "10-20분","무료배달"))
-            add(FavoriteData(bitmap, "굽네치킨 상오점", "4.8", "(432)", "4.1km", "10-20분","배달비 2,000원"))
+    private fun setFavoriteView() {
+        if(loginJwtToken != null) {
+            showLoadingDialog(this)
+            FavoriteService(this).tryGetFavorite(loginJwtToken) // get 으로 찜 목록 받아오기
+        }
+    }
+
+    override fun onGetFavoriteSuccess(favoriteStoreResponse: FavoriteStoreResponse) {
+        val favoriteData : MenuItem = favoriteMenu.findItem(R.id.menu_favorite_modify)
+
+        dismissLoadingDialog()
+        if(!favoriteStoreResponse.isSuccess)
+            showCustomToast("이미 찜한 가게입니다!")
+
+        // 찜 가게 유무에 따라 뷰 설정
+        if(favoriteStoreResponse.result.isNotEmpty()) {
+            binding.anyFavoriteConstraintLayout.visibility = View.GONE
+            binding.favoriteConstraintLayout.visibility = View.VISIBLE
+            favoriteData.isVisible = true
+
+            for(i in favoriteStoreResponse.result)
+                FavoriteService(this).tryGetFavoriteDetail(i.restaurantId)
+        }
+        else {
+            binding.anyFavoriteConstraintLayout.visibility = View.VISIBLE
+            binding.favoriteConstraintLayout.visibility = View.GONE
+            favoriteData.isVisible = false
+        }
+    }
+
+    override fun onGetFavoriteDetailSuccess(favoriteDetailResponse: FavoriteDetailResponse) {
+        val deliveryType: String
+
+        if(favoriteDetailResponse.isSuccess) {
+            val deliveryFee = favoriteDetailResponse.result.restaurantResult[0].delieveryFee.toInt()
+
+            deliveryType = if(deliveryFee == 0)
+                "무료배달"
+            else
+                "배달비 ${deliveryFee}원"
+
+            favoriteDataCount++
+            favoriteData.add(FavoriteData(favoriteDetailResponse.result.imgResult[0].imgUrl, favoriteDetailResponse.result.restaurantResult[0].name,
+                favoriteDetailResponse.result.restaurantResult[0].ratingAvg.toString(), "(${favoriteDetailResponse.result.restaurantResult[0].reviewCount})",
+                "4.1km", "10-20분", deliveryType))
 
             favoriteAdapter.favoriteData = favoriteData
+            favoriteAdapter.notifyDataSetChanged()
+            binding.favoriteTextCount.text = favoriteDataCount.toString()
         }
-   }
+    }
+
+    override fun onGetFavoriteDetailFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
+    }
+
+    override fun onGetFavoriteFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
+    }
 
     // 옵션 메뉴 생성 - 수정
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        if (menu != null) { this.favoriteMenu = menu }
+
         menuInflater.inflate(R.menu.menu_modify, menu)
         return super.onCreateOptionsMenu(menu)
     }
