@@ -24,6 +24,7 @@ import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityStoreBinding
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragment
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragmentAdapter
+import com.yunwoon.coupangeatsproject.src.store.models.StoreCategoryResponse
 import com.yunwoon.coupangeatsproject.src.store.models.StoreResponse
 import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewAdapter
 import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewData
@@ -50,6 +51,8 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
 
     private lateinit var smallReviewAdapter: SmallReviewAdapter
     private val smallReviewData = mutableListOf<SmallReviewData>()
+
+    private var menuCategoryTab = mutableListOf<String>()
 
     val tabLayoutTextArray = arrayOf("추천메뉴","세트메뉴","엽기메뉴")
 
@@ -80,8 +83,8 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
 
         initStoreView()
         setStoreData()
+        setStoreCategoriesData()
         setSmallReviewRecyclerView()
-        setStoreViewPager()
 
         binding.storeTextDetail.setOnClickListener {
             this.startActivity(Intent(this, StoreDetailActivity::class.java))
@@ -210,11 +213,33 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         this.startActivity(Intent(this, MenuActivity::class.java))
     }
 
+    private fun setStoreCategoriesData() {
+        // showLoadingDialog(this)
+        StoreService(this).tryGetStoreCategories(storeIndex)
+    }
+
+    override fun onGetStoreCategoriesSuccess(response: StoreCategoryResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            var index = 0
+            for(i in response.result) {
+                menuCategoryTab.add(index++, i.categoryName)
+            }
+            setStoreViewPager()
+        } else {
+            showCustomToast("가게 카테고리를 받아오지 못했습니다!")
+        }
+    }
+
+    override fun onGetStoreCategoriesFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
+    }
+
     private fun setStoreViewPager() {
         verticalFragmentAdapter = MenuFragmentAdapter(this)
-        verticalFragmentAdapter.addFragment(MenuFragment(tabLayoutTextArray[0]))
-        verticalFragmentAdapter.addFragment(MenuFragment(tabLayoutTextArray[1]))
-        verticalFragmentAdapter.addFragment(MenuFragment(tabLayoutTextArray[2]))
+        for(i in 0 until menuCategoryTab.size)
+            verticalFragmentAdapter.addFragment(MenuFragment(menuCategoryTab[i]))
 
         verticalFragmentAdapter.setType(verticalFragmentAdapter.TYPE_VERTICAL_VIEWPAGER)
 
@@ -223,7 +248,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         binding.storeViewPager.adapter = verticalFragmentAdapter
 
         TabLayoutMediator(binding.storeTabLayout, binding.storeViewPager){tab, position ->
-            tab.text = tabLayoutTextArray[position] // 메뉴 이름 생성
+            tab.text = menuCategoryTab[position]  // 메뉴 이름 생성
         }.attach()
     }
 }

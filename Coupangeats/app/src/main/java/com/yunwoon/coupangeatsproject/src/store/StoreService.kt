@@ -1,6 +1,7 @@
 package com.yunwoon.coupangeatsproject.src.store
 
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
+import com.yunwoon.coupangeatsproject.src.store.models.StoreCategoryResponse
 import com.yunwoon.coupangeatsproject.src.store.models.StoreResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,6 +20,22 @@ class StoreService(val view: StoreActivityView) {
 
             override fun onFailure(call: Call<StoreResponse>, t: Throwable) {
                 view.onGetStoreFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryGetStoreCategories(restaurantId: Int){
+        val storeRetrofitInterface = ApplicationClass.sRetrofit.create(StoreRetrofitInterface::class.java)
+        storeRetrofitInterface.getStoreCategories(restaurantId).enqueue(object : Callback<StoreCategoryResponse> {
+            override fun onResponse(call: Call<StoreCategoryResponse>, response: Response<StoreCategoryResponse>) {
+                if(response.body() != null)
+                    view.onGetStoreCategoriesSuccess(response.body() as StoreCategoryResponse)
+                else
+                    view.onGetStoreCategoriesFailure("가게 카테고리를 받아오는데 실패했습니다")
+            }
+
+            override fun onFailure(call: Call<StoreCategoryResponse>, t: Throwable) {
+                view.onGetStoreCategoriesFailure(t.message ?: "통신 오류")
             }
         })
     }
