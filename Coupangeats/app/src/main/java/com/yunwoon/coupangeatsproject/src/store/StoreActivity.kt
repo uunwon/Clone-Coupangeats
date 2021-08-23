@@ -20,10 +20,13 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yunwoon.coupangeatsproject.R
+import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityStoreBinding
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragment
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragmentAdapter
+import com.yunwoon.coupangeatsproject.src.store.models.FavoriteResponse
+import com.yunwoon.coupangeatsproject.src.store.models.PostFavoriteRequest
 import com.yunwoon.coupangeatsproject.src.store.models.StoreCategoryResponse
 import com.yunwoon.coupangeatsproject.src.store.models.StoreResponse
 import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewAdapter
@@ -35,6 +38,8 @@ import kotlin.math.abs
 
 class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::inflate),
     AppBarLayout.OnOffsetChangedListener, StoreActivityView {
+    private val loginJwtToken = ApplicationClass.sSharedPreferences.getString("loginJwtToken", null)
+
     private lateinit var appBarLayout: AppBarLayout
     private var storeIndex = 0
 
@@ -157,10 +162,27 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
                 showCustomToast("공유되었습니다")
             }
             R.id.menu_store_favorite -> {
-                showCustomToast("찜되었습니다")
+                if(loginJwtToken != null) {
+                    showLoadingDialog(this)
+                    val postFavoriteRequest = PostFavoriteRequest(restaurantId = storeIndex)
+                    StoreService(this).tryPostFavorite(loginJwtToken, postFavoriteRequest)
+                }
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPostFavoriteSuccess(response: FavoriteResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            showCustomToast(response.result)
+        } else
+            showCustomToast("이미 누르셨습니다")
+    }
+
+    override fun onPostFavoriteFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
@@ -248,7 +270,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         binding.storeViewPager.adapter = verticalFragmentAdapter
 
         TabLayoutMediator(binding.storeTabLayout, binding.storeViewPager){tab, position ->
-            tab.text = menuCategoryTab[position]  // 메뉴 이름 생성
+            tab.text = menuCategoryTab[position]  // 탭 이름 생성
         }.attach()
     }
 }

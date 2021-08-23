@@ -14,7 +14,7 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:scaleType="centerCrop"
-            android:src="@drawable/test_home_store1"/>
+            android:src="@drawable/test_white"/>
         <LinearLayout
             android:visibility="gone"
             android:layout_width="0dp"
