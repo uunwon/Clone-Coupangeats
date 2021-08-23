@@ -267,7 +267,6 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:layout_marginTop="30dp"
                 android:paddingEnd="15dp"
                 android:elevation="3dp"
                 app:layout_collapseMode="pin"
@@ -319,5 +318,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <!-- 카트 보기 -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/store_appBar_layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/blue_300">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/cart_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center"
+            app:title="@string/menu_text_cart_watch"
+            app:titleTextColor="@color/white"
+            android:elevation="3dp"
+            app:layout_collapseMode="pin" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

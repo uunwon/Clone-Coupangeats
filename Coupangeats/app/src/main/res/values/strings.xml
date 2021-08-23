@@ -65,6 +65,7 @@
     <string name="menu_text_price">가격</string>
     <string name="menu_text_number">수량</string>
     <string name="menu_text_cart">카트에 담기</string>
+    <string name="menu_text_cart_watch">카트 보기</string>
 
     <!-- Order Fragment-->
     <string name="order_text_default">주문 내역이 없습니다.</string>

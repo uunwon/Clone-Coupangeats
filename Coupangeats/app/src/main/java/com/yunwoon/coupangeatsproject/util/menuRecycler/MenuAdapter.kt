@@ -30,7 +30,8 @@ class MenuAdapter(private val context: Context) : RecyclerView.Adapter<MenuAdapt
 
         holder.itemView.setOnClickListener {
             val activity = context as StoreActivity
-            activity.moveOptionMenuActivity(menuDataArrayList[position].menuId)
+            activity.moveOptionMenuActivity(menuDataArrayList[position].menuId, menuDataArrayList[position].menuImage,
+            menuDataArrayList[position].menuTitle, menuDataArrayList[position].menuDetail, menuDataArrayList[position].menuPrice)
         }
     }
 

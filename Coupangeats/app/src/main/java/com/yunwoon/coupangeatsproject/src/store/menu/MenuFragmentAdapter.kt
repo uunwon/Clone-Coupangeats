@@ -37,4 +37,6 @@ class MenuFragmentAdapter (fragmentActivity: FragmentActivity) : FragmentStateAd
         return fragments[position]
     }
 
+
+
 }

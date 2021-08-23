@@ -8,14 +8,14 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
 import android.os.AsyncTask
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowManager
+import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -42,6 +42,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     private val loginJwtToken = ApplicationClass.sSharedPreferences.getString("loginJwtToken", null)
 
     private lateinit var appBarLayout: AppBarLayout
+    private lateinit var bottomAppBarLayout: AppBarLayout
     private var storeIndex = 0
 
     private lateinit var menuIconDrawable1: Drawable
@@ -101,15 +102,16 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
 
     // store 화면 세팅
     private fun initStoreView() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             window.setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
             )
-        }
+        } */
 
         setSupportActionBar(binding.toolbar)
         appBarLayout = binding.appBarLayout
+        bottomAppBarLayout = binding.storeAppBarLayoutBottom
 
         whiteFilter = PorterDuffColorFilter(resources.getColor(R.color.white), PorterDuff.Mode.SRC_ATOP)
         blackFilter = PorterDuffColorFilter(resources.getColor(R.color.black), PorterDuff.Mode.SRC_ATOP)
@@ -194,6 +196,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
                     binding.storeTextToolbar.setTextColor(resources.getColor(R.color.transparency))
                     menuIconDrawable1.colorFilter = whiteFilter
                     menuIconDrawable2.colorFilter = whiteFilter
+                    window.statusBarColor = resources.getColor(R.color.black)
                     window.decorView.systemUiVisibility = 0
                 }
                 //  State Collapsed
@@ -202,6 +205,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
                     binding.storeTextToolbar.setTextColor(resources.getColor(R.color.black))
                     menuIconDrawable1.colorFilter = blackFilter
                     menuIconDrawable2.colorFilter = redFilter
+                    window.statusBarColor = resources.getColor(R.color.white)
                     window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 }
             }
@@ -232,9 +236,14 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     }
 
     // 메뉴 안으로 들어가기 --> 옵션 선택하는 페이지로!
-    fun moveOptionMenuActivity(menuIndex : Int) {
+    fun moveOptionMenuActivity(menuIndex : Int, menuImage: String, menuTitle: String, menuDetail: String, menuPrice: String) {
         val intent = Intent(this, OptionMenuActivity::class.java)
         intent.putExtra("menuIndex", menuIndex)
+        intent.putExtra("menuImage", menuImage)
+        intent.putExtra("menuTitle", menuTitle)
+        intent.putExtra("menuDetail", menuDetail)
+        intent.putExtra("menuPrice", menuPrice)
+
         this.startActivity(intent)
     }
 
@@ -267,6 +276,21 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
             verticalFragmentAdapter.addFragment(MenuFragment(menuCategoryTab[i], storeIndex, i+1))
 
         verticalFragmentAdapter.setType(verticalFragmentAdapter.TYPE_VERTICAL_VIEWPAGER)
+
+        binding.storeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                val view = (binding.storeViewPager[0] as RecyclerView).layoutManager?.findViewByPosition(position)
+                view?.post {
+                    val wMeasureSpec = View.MeasureSpec.makeMeasureSpec(view.width, View.MeasureSpec.EXACTLY)
+                    val hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                    view.measure(wMeasureSpec, hMeasureSpec)
+                    if (binding.storeViewPager.layoutParams.height != view.measuredHeight) {
+                        binding.storeViewPager.layoutParams = (binding.storeViewPager.layoutParams).also { lp -> lp.height = view.measuredHeight }
+                    }
+                }
+            }
+        })
 
         binding.storeViewPager.isNestedScrollingEnabled = true
         binding.storeViewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
