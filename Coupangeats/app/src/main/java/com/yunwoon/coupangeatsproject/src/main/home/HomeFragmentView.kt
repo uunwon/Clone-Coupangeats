@@ -11,4 +11,8 @@ interface HomeFragmentView {
     fun onGetRestaurantsSuccess(response: HomeResponse)
 
     fun onGetRestaurantsFailure(message: String)
+
+    fun onGetOrderRestaurantsSuccess(response: HomeResponse, order: String)
+
+    fun onGetOrderRestaurantsFailure(message: String)
 }

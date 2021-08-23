@@ -207,12 +207,13 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
 
     private fun setStoreViewPager() {
         verticalFragmentAdapter = MenuFragmentAdapter(this)
-        verticalFragmentAdapter.addFragment(MenuFragment())
-        verticalFragmentAdapter.addFragment(MenuFragment())
-        verticalFragmentAdapter.addFragment(MenuFragment())
+        verticalFragmentAdapter.addFragment(MenuFragment(tabLayoutTextArray[0]))
+        verticalFragmentAdapter.addFragment(MenuFragment(tabLayoutTextArray[1]))
+        verticalFragmentAdapter.addFragment(MenuFragment(tabLayoutTextArray[2]))
 
         verticalFragmentAdapter.setType(verticalFragmentAdapter.TYPE_VERTICAL_VIEWPAGER)
 
+        binding.storeViewPager.isNestedScrollingEnabled = true
         binding.storeViewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
         binding.storeViewPager.adapter = verticalFragmentAdapter
 

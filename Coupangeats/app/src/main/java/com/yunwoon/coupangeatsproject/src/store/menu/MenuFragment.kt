@@ -11,7 +11,7 @@ import com.yunwoon.coupangeatsproject.databinding.FragmentMenuBinding
 import com.yunwoon.coupangeatsproject.util.menuRecycler.MenuAdapter
 import com.yunwoon.coupangeatsproject.util.menuRecycler.MenuData
 
-class MenuFragment  :
+class MenuFragment(private val tabLayoutTextArray : String)  :
     BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::bind, R.layout.fragment_menu) {
     private lateinit var mlayoutManager: LinearLayoutManager
 
@@ -20,7 +20,7 @@ class MenuFragment  :
 
     fun newInstance() : MenuFragment {
         val args = Bundle()
-        val frag = MenuFragment()
+        val frag = MenuFragment(tabLayoutTextArray)
         frag.arguments = args
         return frag
     }
@@ -37,6 +37,8 @@ class MenuFragment  :
 
         binding.storeRecyclerViewMenu.layoutManager = mlayoutManager
         binding.storeRecyclerViewMenu.isNestedScrollingEnabled = true
+
+        binding.storeTextMenuTitle.text = tabLayoutTextArray
 
         menuAdapter = MenuAdapter(requireContext())
         binding.storeRecyclerViewMenu.adapter = menuAdapter

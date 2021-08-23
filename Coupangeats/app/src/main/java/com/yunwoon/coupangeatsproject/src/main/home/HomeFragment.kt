@@ -63,9 +63,12 @@ class HomeFragment :
     private lateinit var bitmap2 : Bitmap
     private lateinit var bitmap3 : Bitmap
     private lateinit var bitmap4 : Bitmap
+    private lateinit var newBitmap : Bitmap
+    private lateinit var hotBitmap : Bitmap
 
     private var filterCount = 0
     private var chipArrangeDialogNumber = 1
+    private lateinit var order : String
     private val dialogChipArrange = ChipArrangeDialog()
     private var params = ChipGroup.LayoutParams(ChipGroup.LayoutParams.WRAP_CONTENT, ChipGroup.LayoutParams.WRAP_CONTENT)
 
@@ -78,6 +81,8 @@ class HomeFragment :
         bitmap2 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store2)
         bitmap3 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store3)
         bitmap4 = BitmapFactory.decodeResource(resources, R.drawable.test_category)
+        newBitmap = BitmapFactory.decodeResource(resources, R.drawable.test_new_store)
+        hotBitmap = BitmapFactory.decodeResource(resources, R.drawable.test_hot_store)
 
         setRecyclerViewLayoutManager()
         setToolBar(binding.homeToolbar)
@@ -208,18 +213,8 @@ class HomeFragment :
         hotStoreAdapter = SmallStoreAdapter(requireContext(), this@HomeFragment)
         binding.homeRecyclerViewHot.adapter = hotStoreAdapter
 
-        val resources : Resources = this.resources
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.test_hot_store)
-
-        hotStoreData.apply {
-            add(SmallStoreData(bitmap, "스쿨푸드 문래점", "3.9", "(1,342)", "1.1km", "무료배달"))
-            add(SmallStoreData(bitmap, "스쿨푸드 문래점", "3.9", "(1,342)", "1.1km", "무료배달"))
-            add(SmallStoreData(bitmap, "스쿨푸드 문래점", "3.9", "(1,342)", "1.1km", "무료배달"))
-            add(SmallStoreData(bitmap, "스쿨푸드 문래점", "3.9", "(1,342)", "1.1km", "무료배달"))
-            add(SmallStoreData(bitmap, "스쿨푸드 문래점", "3.9", "(1,342)", "1.1km", "무료배달"))
-        }
-
-        hotStoreAdapter.smallStoreDataArrayList = hotStoreData
+        order = "best"
+        HomeService(this).tryGetOrderRestaurants(order)
     }
 
     // 새로 들어왔어요! 세팅
@@ -227,19 +222,37 @@ class HomeFragment :
         newStoreAdapter = SmallStoreAdapter(requireContext(), this@HomeFragment)
         binding.homeRecyclerViewNew.adapter = newStoreAdapter
 
-        val resources : Resources = this.resources
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.test_new_store)
+        order = "new"
+        HomeService(this).tryGetOrderRestaurants(order)
+    }
 
-        newStoreData.apply {
-            add(SmallStoreData(bitmap, "쥬씨 선유도점", "5.0", "(13)", "0.8km", "무료배달"))
-            add(SmallStoreData(bitmap, "쥬씨 선유도점", "5.0", "(13)", "0.8km", "무료배달"))
-            add(SmallStoreData(bitmap, "쥬씨 선유도점", "5.0", "(13)", "0.8km", "무료배달"))
-            add(SmallStoreData(bitmap, "쥬씨 선유도점", "5.0", "(13)", "0.8km", "무료배달"))
-            add(SmallStoreData(bitmap, "쥬씨 선유도점", "5.0", "(13)", "0.8km", "무료배달"))
+    override fun onGetOrderRestaurantsSuccess(response: HomeResponse, order: String) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            // 새로 들어왔어요
+            if(order == "new") {
+                for (i in response.result.restaurantResult) {
+                    newStoreData.add(SmallStoreData(newBitmap, i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "0.8km", "배달비 ${i.deliveryFee}원"))
+                }
+
+                newStoreAdapter.smallStoreDataArrayList = newStoreData
+                newStoreAdapter.notifyDataSetChanged()
+            }
+            // 인기 프랜차이즈 // 별점 높은 순
+            else if(order == "best") {
+                for (i in response.result.restaurantResult) {
+                    hotStoreData.add(SmallStoreData(hotBitmap, i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "1.8km", "배달비 ${i.deliveryFee}원"))
+                }
+
+                hotStoreAdapter.smallStoreDataArrayList = hotStoreData
+                hotStoreAdapter.notifyDataSetChanged()
+            }
         }
+    }
 
-        newStoreAdapter.smallStoreDataArrayList = newStoreData
-
+    override fun onGetOrderRestaurantsFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     // 골라먹는 맛집 세팅
