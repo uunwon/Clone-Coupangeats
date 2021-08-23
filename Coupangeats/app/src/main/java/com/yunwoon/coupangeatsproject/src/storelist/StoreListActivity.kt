@@ -43,8 +43,6 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
 
     private lateinit var reSources : Resources
     private lateinit var bitmap1 : Bitmap
-    private lateinit var bitmap2 : Bitmap
-    private lateinit var bitmap3 : Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +51,6 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
 
         reSources = this.resources
         bitmap1 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store1)
-        bitmap2 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store2)
-        bitmap3 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store3)
 
         setStoreListView()
         setCategoryRecyclerView()
@@ -122,18 +118,28 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
         newStoreAdapter = SmallStoreAdapter(this, HomeFragment())
         binding.storeListRecyclerViewNew.adapter = newStoreAdapter
 
-        val resources : Resources = this.resources
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.test_new_store)
+        StoreListService(this).tryGetOrderRestaurants("new")
+    }
 
-        newStoreData.apply {
-            add(SmallStoreData(bitmap, "쥬씨 선유도점", "5.0", "(13)", "0.8km", "무료배달"))
-            add(SmallStoreData(bitmap, "쥬씨 선유도점", "5.0", "(13)", "0.8km", "무료배달"))
-            add(SmallStoreData(bitmap, "쥬씨 선유도점", "5.0", "(13)", "0.8km", "무료배달"))
-            add(SmallStoreData(bitmap, "쥬씨 선유도점", "5.0", "(13)", "0.8km", "무료배달"))
-            add(SmallStoreData(bitmap, "쥬씨 선유도점", "5.0", "(13)", "0.8km", "무료배달"))
+    override fun onGetOrderRestaurantsSuccess(response: HomeResponse, order: String) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            // 새로 들어왔어요
+            for (i in response.result.restaurantResult) {
+                if(i.imgUrl != null)
+                    newStoreData.add(SmallStoreData(i.id, i.imgUrl, i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "0.8km", "${i.deliveryFee}원"))
+                else
+                    newStoreData.add(SmallStoreData(i.id, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
+            }
+
+            newStoreAdapter.smallStoreDataArrayList = newStoreData
+            newStoreAdapter.notifyDataSetChanged()
         }
+    }
 
-        newStoreAdapter.smallStoreDataArrayList = newStoreData
+    override fun onGetOrderRestaurantsFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     // 가게 리스트 세팅
@@ -152,7 +158,10 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
         dismissLoadingDialog()
         if(response.isSuccess) {
             for (i in response.result.restaurantResult) {
-                storeListData.add(StoreData(bitmap1, bitmap2, bitmap3, i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
+                if(i.imgUrl != null)
+                    storeListData.add(StoreData(i.id, i.imgUrl, i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
+                else
+                    storeListData.add(StoreData(i.id, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
             }
 
             storeListAdapter.storeDataArrayList = storeListData
@@ -165,8 +174,10 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
         showCustomToast("오류 : $message")
     }
 
-    fun moveToStoreActivity(position: Int) {
-        this.startActivity(Intent(this, StoreActivity::class.java))
+    fun moveToStoreActivity(storeIndex: Int) {
+        val intent = Intent(this, StoreActivity::class.java)
+        intent.putExtra("storeIndex", storeIndex)
+        startActivity(intent)
     }
 
     // 옵션 메뉴 - 검색 기능 생성

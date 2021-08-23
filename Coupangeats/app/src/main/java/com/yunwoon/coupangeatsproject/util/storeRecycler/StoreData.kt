@@ -3,9 +3,8 @@ package com.yunwoon.coupangeatsproject.util.storeRecycler
 import android.graphics.Bitmap
 
 data class StoreData(
-    val storeImage1: Bitmap,
-    val storeImage2: Bitmap,
-    val storeImage3: Bitmap,
+    val storeIndex : Int,
+    val storeImage: String,
     val storeTitle: String,
     val storeDeliveryTime: String,
     val storeStarRating: String,

@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -59,10 +60,8 @@ class HomeFragment :
     private val chooseStoreData = mutableListOf<StoreData>()
 
     private lateinit var reSources : Resources
-    private lateinit var bitmap1 : Bitmap
-    private lateinit var bitmap2 : Bitmap
-    private lateinit var bitmap3 : Bitmap
-    private lateinit var bitmap4 : Bitmap
+    private lateinit var homeBitmap : Bitmap
+    private lateinit var categoryBitmap : Bitmap
     private lateinit var newBitmap : Bitmap
     private lateinit var hotBitmap : Bitmap
 
@@ -77,10 +76,8 @@ class HomeFragment :
         setHasOptionsMenu(true)
 
         reSources = this.resources
-        bitmap1 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store1)
-        bitmap2 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store2)
-        bitmap3 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store3)
-        bitmap4 = BitmapFactory.decodeResource(resources, R.drawable.test_category)
+        homeBitmap = BitmapFactory.decodeResource(resources, R.drawable.test_home_store1)
+        categoryBitmap = BitmapFactory.decodeResource(resources, R.drawable.test_category)
         newBitmap = BitmapFactory.decodeResource(resources, R.drawable.test_new_store)
         hotBitmap = BitmapFactory.decodeResource(resources, R.drawable.test_hot_store)
 
@@ -192,15 +189,12 @@ class HomeFragment :
         recommendStoreAdapter = SmallStoreAdapter(requireContext(), this@HomeFragment)
         binding.homeRecyclerViewRecommend.adapter = recommendStoreAdapter
 
-        val resources : Resources = this.resources
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.test_recommend_store)
-
         recommendStoreData.apply {
-            add(SmallStoreData(bitmap, "피자헛 당산점", "4.9", "(528)", "0.1km", "3,000원"))
-            add(SmallStoreData(bitmap, "피자헛 당산점", "4.8", "(528)", "0.1km", "3,000원"))
-            add(SmallStoreData(bitmap, "피자헛 당산점", "4.7", "(528)", "0.1km", "3,000원"))
-            add(SmallStoreData(bitmap, "피자헛 당산점", "4.9", "(528)", "0.1km", "3,000원"))
-            add(SmallStoreData(bitmap, "피자헛 당산점", "4.9", "(528)", "0.1km", "3,000원"))
+            add(SmallStoreData(1, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", "피자헛 당산점", "4.9", "(528)", "0.1km", "3,000원"))
+            add(SmallStoreData(2, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", "피자헛 당산점", "4.8", "(528)", "0.1km", "3,000원"))
+            add(SmallStoreData(3, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", "피자헛 당산점", "4.7", "(528)", "0.1km", "3,000원"))
+            add(SmallStoreData(4, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", "피자헛 당산점", "4.9", "(528)", "0.1km", "3,000원"))
+            add(SmallStoreData(5, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", "피자헛 당산점", "4.9", "(528)", "0.1km", "3,000원"))
         }
 
         recommendStoreAdapter.smallStoreDataArrayList = recommendStoreData
@@ -232,7 +226,10 @@ class HomeFragment :
             // 새로 들어왔어요
             if(order == "new") {
                 for (i in response.result.restaurantResult) {
-                    newStoreData.add(SmallStoreData(newBitmap, i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "0.8km", "배달비 ${i.deliveryFee}원"))
+                    if(i.imgUrl != null)
+                        newStoreData.add(SmallStoreData(i.id, i.imgUrl, i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "0.8km", "${i.deliveryFee}원"))
+                    else
+                        newStoreData.add(SmallStoreData(i.id, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
                 }
 
                 newStoreAdapter.smallStoreDataArrayList = newStoreData
@@ -241,7 +238,10 @@ class HomeFragment :
             // 인기 프랜차이즈 // 별점 높은 순
             else if(order == "best") {
                 for (i in response.result.restaurantResult) {
-                    hotStoreData.add(SmallStoreData(hotBitmap, i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "1.8km", "배달비 ${i.deliveryFee}원"))
+                    if(i.imgUrl != null)
+                        hotStoreData.add(SmallStoreData(i.id, i.imgUrl, i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "1.8km", "${i.deliveryFee}원"))
+                    else
+                        hotStoreData.add(SmallStoreData(i.id, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "1.8km", i.deliveryFee+"원"))
                 }
 
                 hotStoreAdapter.smallStoreDataArrayList = hotStoreData
@@ -268,7 +268,10 @@ class HomeFragment :
         dismissLoadingDialog()
         if(response.isSuccess) {
             for (i in response.result.restaurantResult) {
-                chooseStoreData.add(StoreData(bitmap1, bitmap2, bitmap3, i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
+                if(i.imgUrl != null)
+                    chooseStoreData.add(StoreData(i.id, i.imgUrl, i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
+                else
+                    chooseStoreData.add(StoreData(i.id, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
             }
 
             chooseStoreAdapter.storeDataArrayList = chooseStoreData
@@ -366,8 +369,12 @@ class HomeFragment :
         startActivity(intent)
     }
 
-    fun moveToStoreActivity(position: Int) {
-        this.startActivity(Intent(requireContext(), StoreActivity::class.java))
+    // 특정 가게로 화면 이동
+    fun moveToStoreActivity(storeIndex: Int) {
+        val intent = Intent(requireContext(), StoreActivity::class.java)
+        intent.putExtra("storeIndex", storeIndex)
+        Log.d("HomeFragment", "$storeIndex")
+        startActivity(intent)
     }
 
     // 옵션 메뉴 - 검색 기능 생성

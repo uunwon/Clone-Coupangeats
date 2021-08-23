@@ -16,6 +16,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/test_home_store1"/>
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -61,7 +62,7 @@
             android:gravity="end"
             android:text="@string/store_item_delivery_time"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout

@@ -11,5 +11,6 @@ data class ResultHomeRestaurants(
     @SerializedName("latitude") val latitude: String,
     @SerializedName("longitude") val longitude: String,
     @SerializedName("reviewCount") val reviewCount: Int,
-    @SerializedName("ratingAvg") val ratingAvg : Int
+    @SerializedName("ratingAvg") val ratingAvg : Int,
+    @SerializedName("imgUrl") val imgUrl : String,
 )

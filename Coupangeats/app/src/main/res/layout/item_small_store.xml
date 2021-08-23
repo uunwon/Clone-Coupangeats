@@ -11,7 +11,8 @@
         android:id="@+id/small_store_image"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/test_recommend_store" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/test_white" />
 
     <TextView
         android:id="@+id/small_store_text_title"

@@ -35,6 +35,7 @@ import kotlin.math.abs
 class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::inflate),
     AppBarLayout.OnOffsetChangedListener, StoreActivityView {
     private lateinit var appBarLayout: AppBarLayout
+    private var storeIndex = 0
 
     private lateinit var menuIconDrawable1: Drawable
     private lateinit var menuIconDrawable2: Drawable
@@ -74,6 +75,9 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        storeIndex = intent.getIntExtra("storeIndex", 0) // 가게 인덱스 받아옴
+        Log.d("StoreActivity", "$storeIndex")
+
         initStoreView()
         setStoreData()
         setSmallReviewRecyclerView()
@@ -106,13 +110,14 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     // 해당 가게 데이터 가져오기
     private fun setStoreData() {
         showLoadingDialog(this)
-        StoreService(this).tryGetStore(1)
+        StoreService(this).tryGetStore(storeIndex)
     }
 
     override fun onGetStoreSuccess(response: StoreResponse) {
         dismissLoadingDialog()
         if(response.isSuccess) {
-            LoadImage.execute(response.result.imgResult[0].imgUrl)
+            // if(response.result.imgResult != null)
+            //    LoadImage.execute(response.result.imgResult[0].imgUrl)
 
             binding.storeTextTitle.text = response.result.restaurantResult[0].name
             binding.storeTextToolbar.text = response.result.restaurantResult[0].name

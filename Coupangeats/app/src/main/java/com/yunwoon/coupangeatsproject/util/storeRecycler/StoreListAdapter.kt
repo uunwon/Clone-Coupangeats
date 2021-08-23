@@ -1,6 +1,9 @@
 package com.yunwoon.coupangeatsproject.util.storeRecycler
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +12,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.src.storelist.StoreListActivity
+import java.io.IOException
+import java.net.URL
 
 class StoreListAdapter(private val context: Context) : RecyclerView.Adapter<StoreListAdapter.ViewHolder>() {
     var storeDataArrayList = mutableListOf<StoreData>()
@@ -22,16 +27,14 @@ class StoreListAdapter(private val context: Context) : RecyclerView.Adapter<Stor
         holder.bind(storeDataArrayList[position])
 
         holder.itemView.setOnClickListener {
-            (context as StoreListActivity).moveToStoreActivity(position)
+            (context as StoreListActivity).moveToStoreActivity(storeDataArrayList[position].storeIndex)
         }
     }
 
     override fun getItemCount(): Int = storeDataArrayList.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val storeImage1: ImageView = itemView.findViewById(R.id.store_image_view1)
-        private val storeImage2: ImageView = itemView.findViewById(R.id.store_image_view2)
-        private val storeImage3: ImageView = itemView.findViewById(R.id.store_image_view3)
+        private val storeImage: ImageView = itemView.findViewById(R.id.store_image_view1)
         private val storeTitle: TextView = itemView.findViewById(R.id.store_text_title)
         private val storeDeliveryTime: TextView = itemView.findViewById(R.id.store_text_delivery_time)
         private val storeStarRating: TextView = itemView.findViewById(R.id.store_text_star_rating)
@@ -40,9 +43,26 @@ class StoreListAdapter(private val context: Context) : RecyclerView.Adapter<Stor
         private val storeDeliveryTip: TextView = itemView.findViewById(R.id.store_text_delivery_tip)
 
         fun bind(item: StoreData) {
-            storeImage1.setImageBitmap(item.storeImage1)
-            storeImage2.setImageBitmap(item.storeImage2)
-            storeImage3.setImageBitmap(item.storeImage3)
+            // 이미지 변환
+            val LoadImage = object : AsyncTask<String, Int, Bitmap?>() {
+                var bitmap : Bitmap? = null
+
+                override fun doInBackground(vararg p0: String?): Bitmap? {
+                    try {
+                        val inputStream = URL(p0[0]).openStream()
+                        bitmap = BitmapFactory.decodeStream(inputStream)
+                    } catch (e : IOException) {
+                        e.printStackTrace()
+                    }
+                    return bitmap
+                }
+
+                override fun onPostExecute(result: Bitmap?) {
+                    storeImage.setImageBitmap(bitmap)
+                }
+            }
+
+            LoadImage.execute(item.storeImage)
 
             storeTitle.text = item.storeTitle
             storeDeliveryTime.text = item.storeDeliveryTime

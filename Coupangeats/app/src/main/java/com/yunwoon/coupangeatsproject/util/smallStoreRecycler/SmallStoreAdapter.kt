@@ -1,6 +1,9 @@
 package com.yunwoon.coupangeatsproject.util.smallStoreRecycler
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +12,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.src.main.home.HomeFragment
+import java.io.IOException
+import java.net.URL
 
 class SmallStoreAdapter(private val context: Context, private var homeFragment: HomeFragment) : RecyclerView.Adapter<SmallStoreAdapter.ViewHolder>()  {
     var smallStoreDataArrayList = mutableListOf<SmallStoreData>()
@@ -33,7 +38,27 @@ class SmallStoreAdapter(private val context: Context, private var homeFragment: 
         private val storeDeliveryTip: TextView = itemView.findViewById(R.id.small_store_text_delivery_tip)
 
         fun bind(item: SmallStoreData) {
-            storeImage.setImageBitmap(item.storeImage)
+            // 이미지 변환
+            val LoadImage = object : AsyncTask<String, Int, Bitmap?>() {
+                var bitmap : Bitmap? = null
+
+                override fun doInBackground(vararg p0: String?): Bitmap? {
+                    try {
+                        val inputStream = URL(p0[0]).openStream()
+                        bitmap = BitmapFactory.decodeStream(inputStream)
+                    } catch (e : IOException) {
+                        e.printStackTrace()
+                    }
+                    return bitmap
+                }
+
+                override fun onPostExecute(result: Bitmap?) {
+                    storeImage.setImageBitmap(bitmap)
+                }
+            }
+
+            LoadImage.execute(item.storeImage)
+
             storeTitle.text = item.storeTitle
             storeStarRating.text = item.storeStarRating
             storeReviewCount.text = item.storeReviewCount

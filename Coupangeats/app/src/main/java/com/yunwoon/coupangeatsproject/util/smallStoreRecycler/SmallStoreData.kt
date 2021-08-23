@@ -1,9 +1,8 @@
 package com.yunwoon.coupangeatsproject.util.smallStoreRecycler
 
-import android.graphics.Bitmap
-
 data class SmallStoreData (
-    val storeImage: Bitmap,
+    val storeIndex: Int,
+    val storeImage: String,
     val storeTitle: String,
     val storeStarRating: String,
     val storeReviewCount: String,
