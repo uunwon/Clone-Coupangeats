@@ -1,6 +1,9 @@
 package com.yunwoon.coupangeatsproject.util.menuRecycler
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +13,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.src.store.StoreActivity
+import java.io.IOException
+import java.net.URL
 
 class MenuAdapter(private val context: Context) : RecyclerView.Adapter<MenuAdapter.ViewHolder>() {
     var menuDataArrayList = mutableListOf<MenuData>()
@@ -39,10 +44,30 @@ class MenuAdapter(private val context: Context) : RecyclerView.Adapter<MenuAdapt
         private val menuImage: ImageView = itemView.findViewById(R.id.menu_image)
 
         fun bind(item: MenuData) {
+            // 이미지 변환
+            val LoadImage = object : AsyncTask<String, Int, Bitmap?>() {
+                var bitmap : Bitmap? = null
+
+                override fun doInBackground(vararg p0: String?): Bitmap? {
+                    try {
+                        val inputStream = URL(p0[0]).openStream()
+                        bitmap = BitmapFactory.decodeStream(inputStream)
+                    } catch (e : IOException) {
+                        e.printStackTrace()
+                    }
+                    return bitmap
+                }
+
+                override fun onPostExecute(result: Bitmap?) {
+                    menuImage.setImageBitmap(bitmap)
+                }
+            }
+
+            LoadImage.execute(item.menuImage)
+
             menuTitle.text = item.menuTitle
             menuPrice.text = item.menuPrice
             menuDetail.text = item.menuDetail
-            menuImage.setImageBitmap(item.menuImage)
         }
     }
 }

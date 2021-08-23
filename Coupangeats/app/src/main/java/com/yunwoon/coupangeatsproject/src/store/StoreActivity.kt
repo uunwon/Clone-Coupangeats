@@ -235,8 +235,8 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         this.startActivity(Intent(this, MenuActivity::class.java))
     }
 
+    // 한 가게의 카테고리 받아오기
     private fun setStoreCategoriesData() {
-        // showLoadingDialog(this)
         StoreService(this).tryGetStoreCategories(storeIndex)
     }
 
@@ -261,7 +261,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     private fun setStoreViewPager() {
         verticalFragmentAdapter = MenuFragmentAdapter(this)
         for(i in 0 until menuCategoryTab.size)
-            verticalFragmentAdapter.addFragment(MenuFragment(menuCategoryTab[i]))
+            verticalFragmentAdapter.addFragment(MenuFragment(menuCategoryTab[i], storeIndex, i+1))
 
         verticalFragmentAdapter.setType(verticalFragmentAdapter.TYPE_VERTICAL_VIEWPAGER)
 
