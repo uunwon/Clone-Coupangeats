@@ -8,12 +8,15 @@ import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yunwoon.coupangeatsproject.R
+import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityFavoriteBinding
+import com.yunwoon.coupangeatsproject.src.main.favorite.models.FavoriteStoreResponse
 import com.yunwoon.coupangeatsproject.util.favoriteRecycler.FavoriteAdapter
 import com.yunwoon.coupangeatsproject.util.favoriteRecycler.FavoriteData
 
-class FavoriteActivity : BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteBinding::inflate) {
+class FavoriteActivity : BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteBinding::inflate), FavoriteActivityView {
+    private val loginJwtToken = ApplicationClass.sSharedPreferences.getString("loginJwtToken", null)
 
     private lateinit var flayoutManager: LinearLayoutManager
 
@@ -36,11 +39,25 @@ class FavoriteActivity : BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteB
             binding.anyFavoriteConstraintLayout.visibility = View.GONE
             binding.favoriteConstraintLayout.visibility = View.VISIBLE
 
-            setFavoriteRecyclerView()
+            if(loginJwtToken != null) {
+                showLoadingDialog(this)
+                FavoriteService(this).tryGetFavorite(loginJwtToken) // get 으로 찜 목록 받아오기
+            }
+
         } else {
             binding.anyFavoriteConstraintLayout.visibility = View.VISIBLE
             binding.favoriteConstraintLayout.visibility = View.GONE
         }
+    }
+
+    override fun onGetFavoriteSuccess(storeResponse: FavoriteStoreResponse) {
+        dismissLoadingDialog()
+        for(i in storeResponse.resultStore)
+    }
+
+    override fun onGetFavoriteFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     // 찜 가게 리사이클러뷰 세팅
