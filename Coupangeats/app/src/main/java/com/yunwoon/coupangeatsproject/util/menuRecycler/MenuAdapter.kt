@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,9 +30,7 @@ class MenuAdapter(private val context: Context) : RecyclerView.Adapter<MenuAdapt
 
         holder.itemView.setOnClickListener {
             val activity = context as StoreActivity
-            activity.moveActivity(position)
-            Log.d("StoreActivity", "MenuData $position 선택됨")
-
+            activity.moveOptionMenuActivity(menuDataArrayList[position].menuId)
         }
     }
 

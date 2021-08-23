@@ -29,6 +29,7 @@ import com.yunwoon.coupangeatsproject.src.store.models.FavoriteResponse
 import com.yunwoon.coupangeatsproject.src.store.models.PostFavoriteRequest
 import com.yunwoon.coupangeatsproject.src.store.models.StoreCategoryResponse
 import com.yunwoon.coupangeatsproject.src.store.models.StoreResponse
+import com.yunwoon.coupangeatsproject.src.store.optionmenu.OptionMenuActivity
 import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewAdapter
 import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewData
 import java.io.IOException
@@ -139,7 +140,6 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     override fun onGetStoreFailure(message: String) {
         dismissLoadingDialog()
         showCustomToast("오류 : $message")
-        Log.d("오류", "$message")
     }
 
     // 옵션 메뉴 세팅
@@ -231,8 +231,11 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         smallReviewAdapter.smallReviewDataArrayList = smallReviewData
     }
 
-    fun moveActivity(position : Int) {
-        this.startActivity(Intent(this, MenuActivity::class.java))
+    // 메뉴 안으로 들어가기 --> 옵션 선택하는 페이지로!
+    fun moveOptionMenuActivity(menuIndex : Int) {
+        val intent = Intent(this, OptionMenuActivity::class.java)
+        intent.putExtra("menuIndex", menuIndex)
+        this.startActivity(intent)
     }
 
     // 한 가게의 카테고리 받아오기

@@ -53,9 +53,9 @@ class MenuDetailAdapter(private var context: Context) : RecyclerView.Adapter<Men
         private val menuDetailRecyclerViewCheck: RecyclerView = itemView.findViewById(R.id.menu_detail_recycler_view_check)
 
         fun bind(item: MenuDetailData) {
-            if(item.menuDetailStatus) {
+            if(item.menuDetailNecessary == 1) {
                 menuDetailTitle.text = item.menuDetailTitle
-                menuDetailNecessary.text = item.menuDetailNecessary
+                menuDetailNecessary.text = "필수항목"
 
                 menuDetailRecyclerViewRadio.visibility = View.VISIBLE
                 menuDetailRecyclerViewCheck.visibility = View.GONE
@@ -63,10 +63,9 @@ class MenuDetailAdapter(private var context: Context) : RecyclerView.Adapter<Men
                 menuDetailRecyclerViewRadio.layoutManager = LinearLayoutManager(context)
                 menuDetailRecyclerViewRadio.adapter = menuRadioAdapter
             }
-
             else {
                 menuDetailTitle.text = item.menuDetailTitle
-                menuDetailNecessary.text = item.menuDetailNecessary
+                menuDetailNecessary.text = ""
 
                 menuDetailRecyclerViewRadio.visibility = View.GONE
                 menuDetailRecyclerViewCheck.visibility = View.VISIBLE

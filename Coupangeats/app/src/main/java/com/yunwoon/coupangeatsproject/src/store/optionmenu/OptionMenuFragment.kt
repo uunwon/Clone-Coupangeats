@@ -1,4 +1,4 @@
-package com.yunwoon.coupangeatsproject.src.store
+package com.yunwoon.coupangeatsproject.src.store.optionmenu
 
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -9,15 +9,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseFragment
-import com.yunwoon.coupangeatsproject.databinding.FragmentMenuInsideBinding
+import com.yunwoon.coupangeatsproject.databinding.FragmentOptionMenuBinding
+import com.yunwoon.coupangeatsproject.src.store.models.OptionMenuCategoryResponse
+import com.yunwoon.coupangeatsproject.src.store.models.OptionMenuResponse
 import com.yunwoon.coupangeatsproject.util.menuDetailRecycler.MenuCheckData
 import com.yunwoon.coupangeatsproject.util.menuDetailRecycler.MenuDetailAdapter
 import com.yunwoon.coupangeatsproject.util.menuDetailRecycler.MenuDetailData
 import com.yunwoon.coupangeatsproject.util.menuDetailRecycler.MenuRadioData
 import kotlin.math.abs
 
-class MenuInsideFragment :
-    BaseFragment<FragmentMenuInsideBinding>(FragmentMenuInsideBinding::bind, R.layout.fragment_menu_inside), AppBarLayout.OnOffsetChangedListener {
+class OptionMenuFragment(private val menuIndex: Int) :
+    BaseFragment<FragmentOptionMenuBinding>(FragmentOptionMenuBinding::bind, R.layout.fragment_option_menu)
+    , AppBarLayout.OnOffsetChangedListener, OptionMenuView {
     private lateinit var appBarLayout: AppBarLayout
 
     private lateinit var whiteFilter: PorterDuffColorFilter
@@ -34,10 +37,10 @@ class MenuInsideFragment :
         super.onViewCreated(view, savedInstanceState)
 
         initMenuView()
-        setMenuRecyclerView()
+        setOptionMenuCategory()
 
         binding.storeImageButtonBack.setOnClickListener {
-            (context as MenuActivity).backToStore()
+            (context as OptionMenuActivity).backToStore()
         }
     }
 
@@ -70,8 +73,8 @@ class MenuInsideFragment :
         }
     }
 
-    // 메뉴 디테일 리스트 세팅
-    private fun setMenuRecyclerView() {
+    // 옵션 메뉴 카테고리 설정
+    private fun setOptionMenuCategory() {
         mlayoutManager = LinearLayoutManager(requireContext())
 
         binding.menuRecyclerView.layoutManager = mlayoutManager
@@ -80,21 +83,44 @@ class MenuInsideFragment :
         menuDetailAdapter = MenuDetailAdapter(requireContext())
         binding.menuRecyclerView.adapter = menuDetailAdapter
 
-        menuRadioData.apply {
-            add(MenuRadioData(false, "필수 - 달콤씁쓸치즈볼"))
-            add(MenuRadioData(true, "필수 - 달콤상콤치즈볼"))
-        }
+        showLoadingDialog(requireContext())
+        OptionMenuService(this).tryGetOptionMenuCategories(menuIndex)
+    }
 
-        menuCheckData.apply {
-            add(MenuCheckData(false, "선택 - 달콤씁쓸치즈볼"))
-            add(MenuCheckData(false, "선택 - 달콤상콤치즈볼"))
+    override fun onGetOptionMenuCategoriesSuccess(response: OptionMenuCategoryResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess && response.result.isNotEmpty()) {
+            for(i in response.result) {
+                showLoadingDialog(requireContext())
+                OptionMenuService(this).tryGetOptionMenus(menuIndex, i.id)
+                menuDetailData.add(MenuDetailData(i.categoryName, i.isRequired, menuRadioData, menuCheckData))
+            }
         }
-
-        menuDetailData.apply {
-            add(MenuDetailData("기본", "필수항목", menuRadioData, menuCheckData, true))
-            add(MenuDetailData("선택", "", menuRadioData, menuCheckData, false))
-        }
-
         menuDetailAdapter.menuDetailDataArrayList = menuDetailData
+        menuDetailAdapter.notifyDataSetChanged()
+        Log.d("OptionMenuFragment", "menuRadioData = $menuRadioData")
+        Log.d("OptionMenuFragment", "menuCheckData = $menuCheckData")
+    }
+
+    override fun onGetOptionMenusSuccess(response: OptionMenuResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess && response.result.isNotEmpty()) {
+            for(i in response.result) {
+                if(i.isRequired == 1) // 필수
+                    menuRadioData.add(MenuRadioData(false, i.optionName, i.price.toInt()))
+                else
+                    menuCheckData.add(MenuCheckData(false, i.optionName, i.price.toInt()))
+            }
+        }
+    }
+
+    override fun onGetOptionMenuCategoriesFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
+    }
+
+    override fun onGetOptionMenusFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 }

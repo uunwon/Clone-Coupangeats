@@ -7,7 +7,7 @@
     android:layout_marginStart="20dp"
     android:layout_marginEnd="20dp"
     android:paddingBottom="1dp"
-    android:background="@color/gray_200">
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="0dp"

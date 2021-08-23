@@ -29,7 +29,7 @@
             android:name=".src.store.StoreDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".src.store.MenuActivity"
+            android:name=".src.store.optionmenu.OptionMenuActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MenuAppTheme"/>
         <activity

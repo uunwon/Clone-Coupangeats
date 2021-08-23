@@ -23,5 +23,4 @@ class MenuService(val view : MenuFragmentView) {
             }
         })
     }
-
 }

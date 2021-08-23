@@ -49,7 +49,7 @@ class MenuFragment(private val tabLayoutTextArray : String, private val storeInd
         if(response.isSuccess && response.result.isNotEmpty()) {
 
             for(i in response.result) {
-                menuData.add(MenuData(i.menuName, i.price, "(매운맛 조절가능, 토핑 축가능, 떡/오뎅사리 추가옵션 미선택시 기본 양으로만 제공)" +
+                menuData.add(MenuData(i.id, i.menuName, i.price, "(매운맛 조절가능, 토핑 축가능, 떡/오뎅사리 추가옵션 미선택시 기본 양으로만 제공)" +
                         "/ 피크타임 조리시간 60-70분 소요", "https://user-images.githubusercontent.com/48541984/130426115-e805e693-ef47-4f1f-91b2-d5f57ccabb8e.png"))
             }
             menuAdapter.menuDataArrayList = menuData
