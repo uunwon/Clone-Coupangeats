@@ -25,6 +25,16 @@ class MenuRadioAdapter(private var context: Context) : RecyclerView.Adapter<Menu
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(menuRadioData[position])
+
+        holder.itemView.findViewById<RadioButton>(R.id.menu_detail_radio_button).setOnCheckedChangeListener(checkedChangeListener)
+        if(holder.itemView.findViewById<RadioButton>(R.id.menu_detail_radio_button).isChecked)
+            checkedRadioButton = holder.itemView.findViewById<RadioButton>(R.id.menu_detail_radio_button)
+
+    }
+
+    private val checkedChangeListener = CompoundButton.OnCheckedChangeListener { compoundButton, b ->
+        checkedRadioButton?.apply { setChecked(false) }
+        checkedRadioButton = compoundButton.apply { setChecked(isChecked) }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
