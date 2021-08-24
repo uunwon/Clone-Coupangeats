@@ -1,10 +1,11 @@
 package com.yunwoon.coupangeatsproject.src.store.optionmenu
 
+import com.yunwoon.coupangeatsproject.src.store.models.CartResponse
 import com.yunwoon.coupangeatsproject.src.store.models.OptionMenuCategoryResponse
 import com.yunwoon.coupangeatsproject.src.store.models.OptionMenuResponse
+import com.yunwoon.coupangeatsproject.src.store.models.PostCartRequest
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface OptionRetrofitInterface {
 
@@ -19,4 +20,9 @@ interface OptionRetrofitInterface {
         @Query("categoryId") categoryId : Int
     ): Call<OptionMenuResponse>
 
+    @POST("/carts")
+    fun postCart(
+        @Header("x-jwt") jwt : String,
+        @Body params: PostCartRequest
+    ): Call<CartResponse>
 }

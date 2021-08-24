@@ -39,10 +39,6 @@ class OptionMenuFragment(private val menuIndex: Int, private val menuImage: Stri
     private val menuRadioData = mutableListOf<MenuRadioData>()
     private val menuCheckData = mutableListOf<MenuCheckData>()
 
-    private var menuDetailDataCount = 0
-    private val menuDetailDataCategoryName = arrayListOf<String>()
-    private val menuDetailDataRequire = arrayListOf<String>()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -125,7 +121,6 @@ class OptionMenuFragment(private val menuIndex: Int, private val menuImage: Stri
     override fun onGetOptionMenuCategoriesSuccess(response: OptionMenuCategoryResponse) {
         dismissLoadingDialog()
         if(response.isSuccess && response.result.isNotEmpty()) {
-            menuDetailDataCount = response.result.size
 
             for(i in response.result) {
                 OptionMenuService(this).tryGetOptionMenu(menuIndex, i.id).join()

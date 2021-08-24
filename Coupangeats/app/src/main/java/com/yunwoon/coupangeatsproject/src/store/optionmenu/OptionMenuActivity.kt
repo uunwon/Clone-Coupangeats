@@ -1,14 +1,17 @@
 package com.yunwoon.coupangeatsproject.src.store.optionmenu
 
-import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.appbar.AppBarLayout
 import com.yunwoon.coupangeatsproject.R
+import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityOptionMenuBinding
-import com.yunwoon.coupangeatsproject.src.cart.CartActivity
+import com.yunwoon.coupangeatsproject.src.store.models.CartResponse
+import com.yunwoon.coupangeatsproject.src.store.models.PostCartRequest
 
-class OptionMenuActivity : BaseActivity<ActivityOptionMenuBinding>(ActivityOptionMenuBinding::inflate) {
+class OptionMenuActivity : BaseActivity<ActivityOptionMenuBinding>(ActivityOptionMenuBinding::inflate), OptionActivityView {
+    private val loginJwtToken = ApplicationClass.sSharedPreferences.getString("loginJwtToken", null)
+
     private lateinit var bottomAppBarLayout: AppBarLayout
     private var menuIndex = 0
     private lateinit var menuImage : String
@@ -25,12 +28,10 @@ class OptionMenuActivity : BaseActivity<ActivityOptionMenuBinding>(ActivityOptio
         menuDetail = intent.getStringExtra("menuDetail").toString()
         menuPrice = intent.getStringExtra("menuPrice") .toString()
 
-
         bottomAppBarLayout = binding.menuAppBarLayoutBottom
 
-        binding.cartToolbar.setOnClickListener {
-            this.startActivity(Intent(this, CartActivity::class.java))
-        }
+        // 카트에 담기
+        binding.cartToolbar.setOnClickListener { setCart() }
     }
 
     fun backToStore() { finish() }
@@ -41,5 +42,30 @@ class OptionMenuActivity : BaseActivity<ActivityOptionMenuBinding>(ActivityOptio
         supportFragmentManager.beginTransaction().replace(R.id.menu_frame_layout,
             OptionMenuFragment(menuIndex, menuImage, menuTitle, menuDetail, menuPrice))
             .commitAllowingStateLoss()
+    }
+
+    // 카트 담기
+    private fun setCart() {
+        val postCartRequest = PostCartRequest(menuId = menuIndex, menuCounts = 1)
+        if(loginJwtToken != null) {
+            showLoadingDialog(this)
+            OptionMenuActivityService(this).tryPostCart(loginJwtToken, postCartRequest)
+        } else {
+            showCustomToast("로그인이 필요한 작업입니다")
+        }
+    }
+
+    override fun onPostCartSuccess(response: CartResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            showCustomToast("카트에 담았습니다")
+        } else {
+            showCustomToast("카트 담기에 실패했습니다")
+        }
+    }
+
+    override fun onPostCartFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 }

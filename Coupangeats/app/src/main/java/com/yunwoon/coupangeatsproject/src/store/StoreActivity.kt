@@ -21,6 +21,7 @@ import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityStoreBinding
+import com.yunwoon.coupangeatsproject.src.cart.CartActivity
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragment
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragmentAdapter
 import com.yunwoon.coupangeatsproject.src.store.models.FavoriteResponse
@@ -95,6 +96,11 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         }
 
         binding.storeImageButtonBack.setOnClickListener { finish() }
+
+        binding.storeAppBarLayoutBottom.setOnClickListener {
+            // 카트로 이동
+            this.startActivity(Intent(this, CartActivity::class.java))
+        }
     }
 
     // store 화면 세팅
