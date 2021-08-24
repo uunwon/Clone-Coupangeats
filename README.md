@@ -38,8 +38,8 @@
 <img src="https://user-images.githubusercontent.com/48541984/129486402-3a21b120-b4b0-4006-baed-a012ccd31247.png" width="60%"/>
 
 ## 테스트 진행현황
-### 1주차 진행현황 🌈
-![Progress](https://progress-bar.dev/95/?scale=100&width=500&suffix=%)  
+### 진행현황 🌈
+![Progress](https://progress-bar.dev/80/?scale=100&width=500&suffix=%)  
 ### 2021-08-14
 * 기획서 제출 - 100%  
   * 개발 범위 / 개발 우선 순위  
@@ -127,6 +127,15 @@
   * 특정 메뉴 특정 카테고리 옵션 조회 API <- 데이터 늦게 받아오는 !issue
   * 찜 생성 API == 즐겨찾기
   * 찜 확인 API
+
+### 2021-08-24
+* 메뉴의 옵션 메뉴 데이터 들어가지 않는 문제 => 스레드 처리로 해결 (runBlocking, join)
+* 메뉴의 옵션 메뉴 라디오 버튼 하나만 클릭 가능하도록 변경
+* 서버 Retrofit 통신
+  * 카트 생성 API
+  * 카트 조회 API
+  * 주문 생성 API
+  * 주문 내역 조회 API / 완료된 주문 내역 조회 API
 
 ## 테스트 개발환경
 * AWS EC2 / RDS
