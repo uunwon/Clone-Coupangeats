@@ -70,7 +70,7 @@ class NaverMapActivity : BaseActivity<ActivityNaverMapBinding>(ActivityNaverMapB
         uiSettings.isLocationButtonEnabled = true
 
         naverMap.addOnLocationChangeListener { location ->
-            showCustomToast("${location.latitude}, ${location.longitude}")
+            // showCustomToast("${location.latitude}, ${location.longitude}")
 
             if(flag++ == 0) {
                 val cameraUpdate = CameraUpdate.scrollTo(LatLng(location.latitude, location.longitude))
@@ -81,5 +81,9 @@ class NaverMapActivity : BaseActivity<ActivityNaverMapBinding>(ActivityNaverMapB
                 naverMap.moveCamera(cameraUpdate)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }

@@ -128,35 +128,43 @@ class OptionMenuFragment(private val menuIndex: Int, private val menuImage: Stri
             menuDetailDataCount = response.result.size
 
             for(i in response.result) {
-                OptionMenuService(this).tryGetOptionMenus(menuIndex, i.id)
-                menuDetailData.add(MenuDetailData(i.categoryName, i.isRequired, menuRadioData, menuCheckData))
+                OptionMenuService(this).tryGetOptionMenu(menuIndex, i.id).join()
+
+                var radioData = mutableListOf<MenuRadioData>()
+                var checkData = mutableListOf<MenuCheckData>()
+
+                if(i.isRequired == 1) {
+                    var radioData2 = menuRadioData.toMutableList()
+                    menuDetailData.add(MenuDetailData(i.categoryName, i.isRequired, radioData2, checkData))
+                }
+                else {
+                    var checkData2 = menuCheckData.toMutableList()
+                    menuDetailData.add(MenuDetailData(i.categoryName, i.isRequired, radioData, checkData2))
+                }
+
+                menuRadioData.clear()
+                menuCheckData.clear()
             }
+
+            menuDetailAdapter.menuDetailDataArrayList = menuDetailData
+            menuDetailAdapter.notifyDataSetChanged()
+            Log.d("OptionMenuFragment", "menudetaildata 확인 $menuDetailData")
         }
     }
 
     override fun onGetOptionMenusSuccess(response: OptionMenuResponse) {
         dismissLoadingDialog()
         if(response.isSuccess && response.result.isNotEmpty()) {
-            val categoryName = response.result[0].categoryName
-            val isRequired = response.result[0].isRequired
             for(i in response.result) {
                 // 필수
                 if(i.isRequired == 1) {
-                    menuRadioData.add(MenuRadioData(false, i.optionName, i.price.toInt()))
+                    menuRadioData.add(MenuRadioData(i.id, false, i.optionName, i.price.toInt()))
                 }
                 else {
-                    menuCheckData.add(MenuCheckData(false, i.optionName, i.price.toInt()))
+                    menuCheckData.add(MenuCheckData(i.id, false, i.optionName, i.price.toInt()))
                 }
             }
-            Log.d("OptionMenuFragment", "onGetOptionMenusSuccess menuCheckData $menuCheckData ")
-            Log.d("OptionMenuFragment", "onGetOptionMenusSuccess menuCheckData $menuCheckData ")
         }
-
-        menuDetailAdapter.menuDetailDataArrayList = menuDetailData
-        menuDetailAdapter.notifyDataSetChanged()
-
-        menuRadioData.clear()
-        menuCheckData.clear()
     }
 
     override fun onGetOptionMenuCategoriesFailure(message: String) {
@@ -166,6 +174,6 @@ class OptionMenuFragment(private val menuIndex: Int, private val menuImage: Stri
 
     override fun onGetOptionMenusFailure(message: String) {
         dismissLoadingDialog()
-        showCustomToast("오류 : $message")
+        // showCustomToast("오류 : $message")
     }
 }

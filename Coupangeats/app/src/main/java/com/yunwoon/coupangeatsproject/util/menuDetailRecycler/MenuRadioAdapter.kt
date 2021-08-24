@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,7 @@ import com.yunwoon.coupangeatsproject.R
 
 class MenuRadioAdapter(private var context: Context) : RecyclerView.Adapter<MenuRadioAdapter.ViewHolder>() {
     var menuRadioData = mutableListOf<MenuRadioData>()
+    private var checkedRadioButton: CompoundButton? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_menu_detail_radio, parent, false)

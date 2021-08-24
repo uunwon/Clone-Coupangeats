@@ -13,9 +13,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -35,7 +33,6 @@ import com.yunwoon.coupangeatsproject.util.smallReviewRecycler.SmallReviewData
 import java.io.IOException
 import java.net.URL
 import kotlin.math.abs
-
 
 class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::inflate),
     AppBarLayout.OnOffsetChangedListener, StoreActivityView {
@@ -277,7 +274,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
 
         verticalFragmentAdapter.setType(verticalFragmentAdapter.TYPE_VERTICAL_VIEWPAGER)
 
-        binding.storeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        /* binding.storeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 val view = (binding.storeViewPager[0] as RecyclerView).layoutManager?.findViewByPosition(position)
@@ -290,7 +287,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
                     }
                 }
             }
-        })
+        }) */
 
         binding.storeViewPager.isNestedScrollingEnabled = true
         binding.storeViewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
