@@ -30,7 +30,6 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
         super.onCreate(savedInstanceState)
 
         setSupportActionBar(binding.storeDetailToolbar)
-        setAddress()
         // setCartRecyclerView()
         getCartData()
 
@@ -49,6 +48,8 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
 
     // 주문하기
     override fun onPostOrderSuccess(response: UserOrderResponse) {
+        dismissLoadingDialog()
+
         if(response.isSuccess) {
             finish()
             showCustomToast("주문 완료했습니다")
@@ -108,6 +109,7 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
         dismissLoadingDialog()
         if(response.isSuccess) {
             if(response.result.carts.isNotEmpty()) {  // 메인 카트
+                setAddress() // 주소 설정
                 binding.cartConstraintLayout.visibility = View.VISIBLE
                 binding.anyCartConstraintLayout.visibility = View.GONE
                 binding.cartTextStoreTitle.text = response.result.carts[0].restaurantName

@@ -55,18 +55,18 @@ class MyPageFragment :
     }
 
     private fun addMyPageData() {
-        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "배달 주소 관리"))
-        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "즐겨찾기"))
-        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "할인쿠폰"))
-        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "진행중인 이벤트"))
-        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "결제관리"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_address, "배달 주소 관리"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "즐겨찾기"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_coupon, "할인쿠폰"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_event, "진행중인 이벤트"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_pay, "결제관리"))
 
-        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "배달파트너 모집"))
-        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "자주 묻는 질문"))
-        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "고객 지원"))
-        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "설정"))
-        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test2, "공지사항"))
-        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_test, "약관ㆍ개인정보 처리방침"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_delivery, "배달파트너 모집"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_ask, "자주 묻는 질문"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_customer, "고객 지원"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_settings, "설정"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_notice, "공지사항"))
+        myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_terms, "약관ㆍ개인정보 처리방침"))
     }
 
     class MyPageAdapter(private val myPageDataArrayList:ArrayList<MyPageData>, context: Context) : BaseAdapter() {
