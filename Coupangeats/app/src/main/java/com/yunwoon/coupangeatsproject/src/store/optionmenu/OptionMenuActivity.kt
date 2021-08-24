@@ -59,6 +59,7 @@ class OptionMenuActivity : BaseActivity<ActivityOptionMenuBinding>(ActivityOptio
         dismissLoadingDialog()
         if(response.isSuccess) {
             showCustomToast("카트에 담았습니다")
+            finish()
         } else {
             showCustomToast("카트 담기에 실패했습니다")
         }

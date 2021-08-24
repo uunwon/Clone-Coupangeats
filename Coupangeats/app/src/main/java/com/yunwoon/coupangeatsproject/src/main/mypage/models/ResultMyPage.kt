@@ -8,5 +8,5 @@ data class ResultMyPage(
     @SerializedName("name") val name: String,
     @SerializedName("phoneNumber") val phoneNumber: String,
     @SerializedName("createAt") val createAt: String,
-    @SerializedName("updateAt") val updateAt: String,
+    @SerializedName("updateAt") val updateAt: String
 )

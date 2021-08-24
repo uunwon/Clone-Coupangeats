@@ -8,9 +8,13 @@ interface HomeFragmentView {
 
     fun onGetCategoriesFailure(message: String)
 
-    fun onGetRestaurantsSuccess(response: HomeResponse)
+    fun onGetMainRestaurantsSuccess(response: HomeResponse)
 
-    fun onGetRestaurantsFailure(message: String)
+    fun onGetMainRestaurantsFailure(message: String)
+
+    fun onGetOrderMainRestaurantsSuccess(response: HomeResponse)
+
+    fun onGetOrderMainRestaurantsFailure(message: String)
 
     fun onGetOrderRestaurantsSuccess(response: HomeResponse, order: String)
 

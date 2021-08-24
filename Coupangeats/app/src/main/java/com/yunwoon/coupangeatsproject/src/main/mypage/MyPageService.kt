@@ -24,4 +24,5 @@ class MyPageService(val view: MyPageFragmentView) {
             }
         })
     }
+
 }

@@ -97,9 +97,12 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
 
         binding.storeImageButtonBack.setOnClickListener { finish() }
 
-        binding.storeAppBarLayoutBottom.setOnClickListener {
+        binding.cartToolbar.setOnClickListener {
             // 카트로 이동
-            this.startActivity(Intent(this, CartActivity::class.java))
+            if(loginJwtToken != null)
+                this.startActivity(Intent(this, CartActivity::class.java))
+            else
+                showCustomToast("로그인이 필요한 서비스입니다")
         }
     }
 

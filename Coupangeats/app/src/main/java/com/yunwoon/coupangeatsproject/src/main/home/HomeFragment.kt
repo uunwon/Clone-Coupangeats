@@ -261,10 +261,10 @@ class HomeFragment :
         binding.homeRecyclerViewChoose.adapter = chooseStoreAdapter
 
         showLoadingDialog(requireContext())
-        HomeService(this).tryGetRestaurants()
+        HomeService(this).tryGetMainRestaurants()
     }
 
-    override fun onGetRestaurantsSuccess(response: HomeResponse) {
+    override fun onGetMainRestaurantsSuccess(response: HomeResponse) {
         dismissLoadingDialog()
         if(response.isSuccess) {
             for (i in response.result.restaurantResult) {
@@ -279,7 +279,7 @@ class HomeFragment :
         }
     }
 
-    override fun onGetRestaurantsFailure(message: String) {
+    override fun onGetMainRestaurantsFailure(message: String) {
         dismissLoadingDialog()
         showCustomToast("오류 : $message")
     }
@@ -301,7 +301,9 @@ class HomeFragment :
 
                         filterCount = 0
                         chipArrangeDialogNumber = 1
+
                         // 아래 가게 정렬 받아오는 걸로 바뀌기
+                        initChooseRecyclerView()
                     }
                     2 -> { // 주문많은순
                         params.setMargins(0,0,0,0)
@@ -338,6 +340,7 @@ class HomeFragment :
                         binding.homeChipReset.setText("초기화 " + filterCount)
 
                         chipArrangeDialogNumber = 4
+                        initArrangeChip()
                     }
                     5 -> { // 신규매장순
                         params.setMargins(0,0,0,0)
@@ -360,6 +363,40 @@ class HomeFragment :
                 }
             }
         })
+    }
+
+    private fun initArrangeChip() {
+        showLoadingDialog(requireContext())
+        HomeService(this).tryGetOrderMainRestaurants("new")
+    }
+
+    override fun onGetOrderMainRestaurantsSuccess(response: HomeResponse) {
+        binding.homeRecyclerViewChoose.layoutManager = clayoutManager
+        chooseStoreAdapter = StoreAdapter(requireContext(), this@HomeFragment)
+        chooseStoreData.clear()
+
+        dismissLoadingDialog()
+
+        if(response.isSuccess) {
+            // 인기 프랜차이즈 // 별점 높은 순
+            if(order == "new") {
+                for (i in response.result.restaurantResult) {
+                    if(i.imgUrl != null)
+                        chooseStoreData.add(StoreData(i.id, i.imgUrl, i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
+                    else
+                        chooseStoreData.add(StoreData(i.id, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
+                }
+
+                chooseStoreAdapter.storeDataArrayList = chooseStoreData
+                binding.homeRecyclerViewChoose.adapter = chooseStoreAdapter
+                chooseStoreAdapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    override fun onGetOrderMainRestaurantsFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     // 카테고리 아이템 클릭 시 화면 이동
