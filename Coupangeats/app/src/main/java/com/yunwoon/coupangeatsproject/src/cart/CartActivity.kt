@@ -3,6 +3,7 @@ package com.yunwoon.coupangeatsproject.src.cart
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
@@ -131,8 +132,9 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
 
         binding.cartRecyclerView.layoutManager = clayoutManager
         binding.cartRecyclerView.isNestedScrollingEnabled = true
+        // binding.cartRecyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager(this).orientation))
 
-        cartAdapter = CartAdapter(this)
+        cartAdapter = CartAdapter(this, supportFragmentManager)
         binding.cartRecyclerView.adapter = cartAdapter
 
         dismissLoadingDialog()
