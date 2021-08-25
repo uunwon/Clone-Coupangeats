@@ -8,6 +8,7 @@ import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityCartBinding
 import com.yunwoon.coupangeatsproject.src.address.AddressActivity
+import com.yunwoon.coupangeatsproject.src.address.models.AddressResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.PostOrderRequest
 import com.yunwoon.coupangeatsproject.src.cart.models.UserCartResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.UserOrderResponse
@@ -30,7 +31,8 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
         super.onCreate(savedInstanceState)
 
         setSupportActionBar(binding.storeDetailToolbar)
-        // setCartRecyclerView()
+
+        getAddress()
         getCartData()
 
         binding.storeCartImageButtonClose.setOnClickListener { finish() }
@@ -46,19 +48,29 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
         }
     }
 
-    // 주문하기
-    override fun onPostOrderSuccess(response: UserOrderResponse) {
-        dismissLoadingDialog()
-
-        if(response.isSuccess) {
-            finish()
-            showCustomToast("주문 완료했습니다")
-        } else {
-            showCustomToast("주문에 실패했습니다")
+    private fun getAddress() {
+        if(loginJwtToken != null) {
+            CartService(this).tryGetAddress(loginJwtToken)
         }
     }
 
-    override fun onPostOrderFailure(message: String) {
+    override fun onGetAddressSuccess(response: AddressResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            if(response.result.isNotEmpty()) {
+                for(i in response.result) {
+                    binding.cartTextAddress.text = "${i.location} (으)로 배달"
+                    binding.cartTextAddressDetail.text = i.locationDetail
+                }
+            }
+            else
+                setAddress()
+        } else {
+            showCustomToast("사용자 정보를 받아오지 못했습니다")
+        }
+    }
+
+    override fun onGetAddressFailure(message: String) {
         dismissLoadingDialog()
         showCustomToast("오류 : $message")
     }
@@ -82,8 +94,24 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
         })
     }
 
-    private fun moveToAddressActivity() {
-        this.startActivity(Intent(this, AddressActivity::class.java))
+    // 주소 설정 페이지로 이동
+    private fun moveToAddressActivity() { this.startActivity(Intent(this, AddressActivity::class.java)) }
+
+    // 주문하기
+    override fun onPostOrderSuccess(response: UserOrderResponse) {
+        dismissLoadingDialog()
+
+        if(response.isSuccess) {
+            finish()
+            showCustomToast("주문 완료했습니다")
+        } else {
+            showCustomToast("주문에 실패했습니다")
+        }
+    }
+
+    override fun onPostOrderFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     // 카트 데이터 받아오기
@@ -109,7 +137,6 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
         dismissLoadingDialog()
         if(response.isSuccess) {
             if(response.result.carts.isNotEmpty()) {  // 메인 카트
-                setAddress() // 주소 설정
                 binding.cartConstraintLayout.visibility = View.VISIBLE
                 binding.anyCartConstraintLayout.visibility = View.GONE
                 binding.cartTextStoreTitle.text = response.result.carts[0].restaurantName
@@ -141,7 +168,7 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
         showCustomToast("오류 : $message")
     }
 
-    // 카트 리사이클러뷰 세팅
+    /* 카트 리사이클러뷰 세팅
     private fun setCartRecyclerView() {
         clayoutManager = LinearLayoutManager(this)
 
@@ -156,5 +183,5 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
         }
 
         cartAdapter.cartData = cartData
-    }
+    } */
 }

@@ -10,6 +10,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
+import com.yunwoon.coupangeatsproject.config.ApplicationClass
 
 class MenuRadioAdapter(private var context: Context) : RecyclerView.Adapter<MenuRadioAdapter.ViewHolder>() {
     var menuRadioData = mutableListOf<MenuRadioData>()
@@ -46,7 +47,14 @@ class MenuRadioAdapter(private var context: Context) : RecyclerView.Adapter<Menu
             menuDetailRadioButton.isChecked = item.menuDetailRadioStatus
             menuDetailRadioText.text = item.menuDetailRadioText
 
+            menuDetailRadioButton.setOnClickListener(object : View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    val position = adapterPosition
 
+                    Log.d("MenuRadioAdapter", "라디오 버튼 ${menuRadioData[position].menuDetailRadioId} 클릭함")
+                    ApplicationClass.sEditor.putInt("requiredOptionId", menuRadioData[position].menuDetailRadioId).apply()
+                }
+            })
         }
     }
 }

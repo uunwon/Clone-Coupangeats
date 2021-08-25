@@ -1,9 +1,6 @@
 package com.yunwoon.coupangeatsproject.src.store.optionmenu
 
-import com.yunwoon.coupangeatsproject.src.store.models.CartResponse
-import com.yunwoon.coupangeatsproject.src.store.models.OptionMenuCategoryResponse
-import com.yunwoon.coupangeatsproject.src.store.models.OptionMenuResponse
-import com.yunwoon.coupangeatsproject.src.store.models.PostCartRequest
+import com.yunwoon.coupangeatsproject.src.store.models.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -25,5 +22,17 @@ interface OptionRetrofitInterface {
         @Header("x-jwt") jwt : String,
         @Body params: PostCartRequest
     ): Call<CartResponse>
+
+    @POST("/carts")
+    fun postCartwithOption(
+        @Header("x-jwt") jwt : String,
+        @Body params: PostCartwithOptionRequest
+    ): Call<CartwithOptionResponse>
+
+    @POST("/carts/options")
+    fun postOptionCart(
+        @Header("x-jwt") jwt : String,
+        @Body params: PostOptionCartRequest
+    ): Call<OptionCartResponse>
 
 }
