@@ -379,18 +379,16 @@ class HomeFragment :
 
         if(response.isSuccess) {
             // 인기 프랜차이즈 // 별점 높은 순
-            if(order == "new") {
                 for (i in response.result.restaurantResult) {
                     if(i.imgUrl != null)
                         chooseStoreData.add(StoreData(i.id, i.imgUrl, i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
                     else
                         chooseStoreData.add(StoreData(i.id, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
                 }
-
+                Log.d("HomeFragment", "$chooseStoreData")
                 chooseStoreAdapter.storeDataArrayList = chooseStoreData
                 binding.homeRecyclerViewChoose.adapter = chooseStoreAdapter
                 chooseStoreAdapter.notifyDataSetChanged()
-            }
         }
     }
 
