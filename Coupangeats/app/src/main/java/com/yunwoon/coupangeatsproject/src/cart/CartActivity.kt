@@ -11,7 +11,9 @@ import com.yunwoon.coupangeatsproject.src.address.AddressActivity
 import com.yunwoon.coupangeatsproject.src.address.models.AddressResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.PostOrderRequest
 import com.yunwoon.coupangeatsproject.src.cart.models.UserCartResponse
+import com.yunwoon.coupangeatsproject.src.cart.models.UserOptionCartResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.UserOrderResponse
+import com.yunwoon.coupangeatsproject.src.store.models.SampleOptionCart
 import com.yunwoon.coupangeatsproject.util.SetAddressDialog
 import com.yunwoon.coupangeatsproject.util.cartRecycler.CartAdapter
 import com.yunwoon.coupangeatsproject.util.cartRecycler.CartData
@@ -22,6 +24,7 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
 
     private lateinit var cartAdapter: CartAdapter
     private val cartData = mutableListOf<CartData>()
+    val optionCart = mutableListOf<SampleOptionCart>()
 
     private var cartPrice = 0
     private var cartDeliveryTip = 0
@@ -140,32 +143,32 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
                 binding.anyCartConstraintLayout.visibility = View.GONE
                 binding.cartTextStoreTitle.text = response.result.carts[0].restaurantName
 
-                if(response.result.optionCarts.isNotEmpty()) {
-                    val optionCart = mutableListOf<String>()
-                    val optionCart2 = mutableListOf<String>()
-                    var cartId = 0
+                for(i in response.result.carts) {
+                    if (response.result.optionCarts.isNotEmpty() && loginJwtToken != null) {
+                        CartService(this).tryGetOptionCart(loginJwtToken, i.cartId).join()
+                        var optionCart2: MutableList<SampleOptionCart> = optionCart.toMutableList()
+                        var optionCart3 = mutableListOf<String>()
 
-                    for (i in response.result.optionCarts) {
-                        cartId = i.cartId
-                        if(i.price.toInt() != 0) {
-                            optionCart.add("${i.optionName} (+${i.price}원)")
-                            cartPrice += i.price.toInt() // 옵션메뉴의 가격 추가
-                        }
-                        else
-                            optionCart.add(i.optionName)
-                    }
-
-                    for(i in response.result.carts) {
-                        if(cartId == i.cartId) {
-                            cartData.add(CartData(i.menuId, i.menuName, optionCart, i.price, i.menuCounts))
+                        if (optionCart2.isNotEmpty()) { // 해당 메뉴의 옵션이 있을 때
+                            var optionPrice = 0
+                            for (i in optionCart2) {
+                                if (i.price.toInt() != 0) {
+                                    optionCart3.add("${i.optionName} (+${i.price}원)")
+                                    optionPrice += i.price.toInt()
+                                    cartPrice += i.price.toInt()
+                                }
+                                else
+                                    optionCart3.add(i.optionName)
+                            }
+                            cartData.add(CartData(i.menuId, i.menuName, optionCart3, (i.price.toInt()+optionPrice).toString(), i.menuCounts))
                             cartPrice += i.price.toInt()
-                        }
-                        else {
-                            cartData.add(CartData(i.menuId, i.menuName, optionCart2, i.price, i.menuCounts))
+                        } else { // 해당 메뉴의 옵션이 없을 때
+                            cartData.add(CartData(i.menuId, i.menuName, optionCart3, i.price, i.menuCounts))
                             cartPrice += i.price.toInt()
                         }
                     }
                 }
+
                 cartDeliveryTip += response.result.carts[0].delieveryFee.toInt()
                 cartAdapter.cartData = cartData
                 cartId = response.result.carts[0].cartId
@@ -180,6 +183,26 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
         binding.cartTextDeliveryPrice.text = "+$cartDeliveryTip 원"
         binding.cartTextTotalPrice.text = "${cartDeliveryTip+cartPrice} 원"
         binding.cartTextOrder.text = "${cartDeliveryTip+cartPrice} 원 결제하기"
+    }
+
+    override fun onGetUserOptionCartSuccess(response: UserOptionCartResponse, cartId: Int) {
+        dismissLoadingDialog()
+        optionCart.clear()
+
+        if(response.isSuccess && response.result.isNotEmpty()) {
+            for (i in response.result) {
+                if (cartId == i.cartId) {
+                    optionCart.add(SampleOptionCart(i.optionName, i.price))
+                }
+            }
+        } else {
+            showCustomToast("옵션 카트를 받아오지 못했습니다")
+        }
+    }
+
+    override fun onGetUserOptionCartFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     override fun onGetUserCartFailure(message: String) {

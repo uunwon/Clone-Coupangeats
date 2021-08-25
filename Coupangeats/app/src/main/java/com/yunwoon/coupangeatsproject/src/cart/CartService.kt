@@ -5,10 +5,13 @@ import com.yunwoon.coupangeatsproject.src.address.AddressRetrofitInterface
 import com.yunwoon.coupangeatsproject.src.address.models.AddressResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.PostOrderRequest
 import com.yunwoon.coupangeatsproject.src.cart.models.UserCartResponse
+import com.yunwoon.coupangeatsproject.src.cart.models.UserOptionCartResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.UserOrderResponse
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.concurrent.thread
 
 class CartService(val view : CartActivityView) {
 
@@ -42,6 +45,23 @@ class CartService(val view : CartActivityView) {
                 view.onGetUserCartFailure(t.message ?: "통신 오류")
             }
         })
+    }
+
+    fun tryGetOptionCart(loginJwtToken: String, cartId: Int) = runBlocking {
+        thread(start=true) {
+            val cartRetrofitInterface = ApplicationClass.sRetrofit.create(CartRetrofitInterface::class.java)
+
+            try {
+                val response : Response<UserOptionCartResponse> = cartRetrofitInterface.getOptionCart(loginJwtToken).execute()
+                if(response.body() != null)
+                    view.onGetUserOptionCartSuccess(response.body() as UserOptionCartResponse, cartId)
+                else
+                    view.onGetUserOptionCartFailure("옵션의 카테고리를 받아오는데 실패했습니다")
+            } catch (e : Exception) {
+                e.printStackTrace()
+                view.onGetUserOptionCartFailure("통신 오류")
+            }
+        }
     }
 
     fun tryPostOrder(loginJwtToken: String, postOrderRequest: PostOrderRequest){

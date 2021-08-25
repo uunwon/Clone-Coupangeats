@@ -62,13 +62,4 @@ class OptionMenuService(val view : OptionMenuView) {
         }
     }
 
-
-    /* var handler = Handler(Looper.getMainLooper())
-        handler.post(object : Runnable {
-            override fun run() {
-
-            }
-
-        }) */
-
 }

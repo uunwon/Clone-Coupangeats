@@ -2,6 +2,7 @@ package com.yunwoon.coupangeatsproject.src.cart
 
 import com.yunwoon.coupangeatsproject.src.cart.models.PostOrderRequest
 import com.yunwoon.coupangeatsproject.src.cart.models.UserCartResponse
+import com.yunwoon.coupangeatsproject.src.cart.models.UserOptionCartResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.UserOrderResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -15,6 +16,11 @@ interface CartRetrofitInterface {
     fun getCart(
         @Header("x-jwt") jwt : String
     ): Call<UserCartResponse>
+
+    @GET("/carts/options")
+    fun getOptionCart(
+        @Header("x-jwt") jwt : String
+    ): Call<UserOptionCartResponse>
 
     @POST("/orders")
     fun postOrder(

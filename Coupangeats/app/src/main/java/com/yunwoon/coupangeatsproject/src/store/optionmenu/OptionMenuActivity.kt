@@ -88,6 +88,8 @@ class OptionMenuActivity : BaseActivity<ActivityOptionMenuBinding>(ActivityOptio
                 val postOptionCartRequest = PostOptionCartRequest(optionId = ApplicationClass.sSharedPreferences.getInt("checkOptionId", 0)
                     , cartId = response.result.cartResult)
                 OptionMenuActivityService(this).tryPostOptionCart(loginJwtToken, postOptionCartRequest)
+            } else {
+                finish()
             }
             /* val postOptionCartRequest = PostOptionCartRequest(optionId = ApplicationClass.sSharedPreferences.getInt("requiredOptionId", 0)
                 , cartId = response.result.cartResult)
