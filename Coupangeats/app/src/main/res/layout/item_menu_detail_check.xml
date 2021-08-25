@@ -10,7 +10,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:button="@color/transparency"
-        android:background="@drawable/check_box_join_term"/>
+        android:background="@drawable/check_box_option_menu"/>
 
     <TextView
         android:id="@+id/menu_detail_check_text"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="@string/store_test_menu_detail3"
-        android:textSize="17sp"
+        android:textSize="15sp"
         android:textColor="@color/black"/>
 
 </LinearLayout>

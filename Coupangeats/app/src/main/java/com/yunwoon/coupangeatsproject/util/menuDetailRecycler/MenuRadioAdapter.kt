@@ -45,6 +45,8 @@ class MenuRadioAdapter(private var context: Context) : RecyclerView.Adapter<Menu
             Log.d("MenuRadioAdapter", "ViewHolder 동작")
             menuDetailRadioButton.isChecked = item.menuDetailRadioStatus
             menuDetailRadioText.text = item.menuDetailRadioText
+
+
         }
     }
 }
