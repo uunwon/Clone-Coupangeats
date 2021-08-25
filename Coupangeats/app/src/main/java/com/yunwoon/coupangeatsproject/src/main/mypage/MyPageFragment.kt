@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.telephony.PhoneNumberUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,12 +36,6 @@ class MyPageFragment :
 
         initMyPageListView()
         initUserProfile()
-
-        binding.myPageImageViewLogout.setOnClickListener {
-            val dialogLogout = LogoutDialog()
-            dialogLogout.setTargetFragment(this@MyPageFragment, LOGOUT_CODE)
-            fragmentManager?.let { it1 -> dialogLogout.show(it1, "LogoutDialog") }
-        }
     }
 
     // 마이페이지 목록 세팅
@@ -69,7 +64,7 @@ class MyPageFragment :
         myPageDataArrayList.add(MyPageData(R.drawable.ic_my_page_terms, "약관ㆍ개인정보 처리방침"))
     }
 
-    class MyPageAdapter(private val myPageDataArrayList:ArrayList<MyPageData>, context: Context) : BaseAdapter() {
+    inner class MyPageAdapter(private val myPageDataArrayList:ArrayList<MyPageData>, context: Context) : BaseAdapter() {
         private val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         private lateinit var binding: ItemMyPageBinding
 
@@ -79,14 +74,27 @@ class MyPageFragment :
 
         override fun getItemId(p0: Int): Long = p0.toLong()
 
-        override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
+        override fun getView(position: Int, p1: View?, p2: ViewGroup?): View {
             binding = ItemMyPageBinding.inflate(inflater, p2, false)
 
-            binding.myPageImageView.setImageResource(myPageDataArrayList[p0].myPageImageView)
-            binding.myPageText.text = myPageDataArrayList[p0].myPageText
+            binding.myPageImageView.setImageResource(myPageDataArrayList[position].myPageImageView)
+            binding.myPageText.text = myPageDataArrayList[position].myPageText
 
+            binding.myPageText.setOnClickListener(object : View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    Log.d("MyPageFragment","${p0?.tag}")
+                    if(myPageDataArrayList[position].myPageText == "설정")
+                        logout()
+                }
+            })
             return binding.root
         }
+    }
+
+    fun logout() {
+        val dialogLogout = LogoutDialog()
+        dialogLogout.setTargetFragment(this@MyPageFragment, LOGOUT_CODE)
+        fragmentManager?.let { it1 -> dialogLogout.show(it1, "LogoutDialog") }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
