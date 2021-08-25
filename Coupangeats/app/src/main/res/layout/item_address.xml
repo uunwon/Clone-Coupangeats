@@ -1,8 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingEnd="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/address_image_view"
+            android:layout_width="18dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_home_view_unselected"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/address_view"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/address_text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="15dp"
+            android:paddingEnd="70dp"
+            android:text="@string/address_button_home"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/address_image_view"/>
+
+        <TextView
+            android:id="@+id/address_text_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:paddingEnd="70dp"
+            android:text="@string/address_text_road_detail"
+            android:textColor="@color/gray_700"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/address_text_title"
+            app:layout_constraintStart_toEndOf="@id/address_image_view"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/address_image_view_check"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/ic_join_check"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/blue_300" />
+
+        <View
+            android:id="@+id/address_view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="17dp"
+            android:background="@color/gray_200"
+            app:layout_constraintTop_toBottomOf="@id/address_text_detail" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
