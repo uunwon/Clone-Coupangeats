@@ -25,6 +25,10 @@ class AddressAdapter(private var context: Context) : RecyclerView.Adapter<Addres
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(addressData[position])
+
+        holder.itemView.setOnClickListener {
+            holder.itemView.findViewById<ImageView>(R.id.address_image_view_check)
+        }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -40,17 +44,17 @@ class AddressAdapter(private var context: Context) : RecyclerView.Adapter<Addres
                 "집" -> {
                     addressCategoryImage.setImageResource(R.drawable.ic_home_view_unselected)
                     addressTitle.text = item.addressCategory
-                    addressDetail.text = item.addressDetail
+                    addressDetail.text = item.addressTitle
                 }
                 "회사" -> {
                     addressCategoryImage.setImageResource(R.drawable.ic_company_address)
                     addressTitle.text = item.addressCategory
-                    addressDetail.text = item.addressDetail
+                    addressDetail.text = item.addressTitle
                 }
                 "기타" -> {
                     addressCategoryImage.setImageResource(R.drawable.ic_location)
-                    addressTitle.text = item.addressTitle
-                    addressDetail.text = item.addressDetail
+                    addressTitle.text = item.addressDetail
+                    addressDetail.text = item.addressTitle
                 }
             }
         }

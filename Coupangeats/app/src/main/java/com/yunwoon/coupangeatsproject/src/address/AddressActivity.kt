@@ -106,7 +106,7 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
         }
 
         // 기타버튼 클릭
-        binding.addressButtonSet.setOnClickListener {
+        binding.addressButtonEtc.setOnClickListener {
             binding.addressButtonHome.setBackgroundResource(R.drawable.button_default_gray)
             binding.addressButtonCompany.setBackgroundResource(R.drawable.button_default_gray)
             binding.addressButtonEtc.setBackgroundResource(R.drawable.button_coupang)
@@ -259,8 +259,8 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
     // 배달지 상세 정보 페이지에서 배달지 주소 설정
     private fun setAddressDetail() {
         if(loginJwtToken != null) {
-            val postAddressRequest = PostAddressRequest(location = binding.addressTextAddress.text.toString(),
-                locationDetail = (binding.addressTextAddressDetail.text.toString()+" ${binding.addressEditTextDetail.text}"),
+            val postAddressRequest = PostAddressRequest(location = binding.addressTextAddressDetail.text.toString(),
+                locationDetail = (binding.addressTextAddress.text.toString()+" ${binding.addressEditTextDetail.text}"),
                 category = addressCategory)
             AddressService(this).tryPostAddress(loginJwtToken, postAddressRequest)
         }
