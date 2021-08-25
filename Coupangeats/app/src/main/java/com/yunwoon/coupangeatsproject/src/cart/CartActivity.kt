@@ -31,8 +31,6 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
         super.onCreate(savedInstanceState)
 
         setSupportActionBar(binding.storeDetailToolbar)
-
-        getAddress()
         getCartData()
 
         binding.storeCartImageButtonClose.setOnClickListener { finish() }
@@ -137,6 +135,7 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
         dismissLoadingDialog()
         if(response.isSuccess) {
             if(response.result.carts.isNotEmpty()) {  // 메인 카트
+                getAddress()
                 binding.cartConstraintLayout.visibility = View.VISIBLE
                 binding.anyCartConstraintLayout.visibility = View.GONE
                 binding.cartTextStoreTitle.text = response.result.carts[0].restaurantName

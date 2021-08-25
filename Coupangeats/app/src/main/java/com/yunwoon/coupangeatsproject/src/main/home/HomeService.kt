@@ -62,13 +62,13 @@ class HomeService(val view: HomeFragmentView) {
         homeRetrofitInterface.getOrderRestaurants(order).enqueue(object : Callback<HomeResponse> {
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 if(response.body() != null)
-                    view.onGetOrderRestaurantsSuccess(response.body() as HomeResponse, order)
+                    view.onGetOrderMainRestaurantsSuccess(response.body() as HomeResponse, order)
                 else
-                    view.onGetOrderRestaurantsFailure("정렬된 전체 식당 리스트를 받아오는데 실패했습니다")
+                    view.onGetOrderMainRestaurantsFailure("정렬된 전체 식당 리스트를 받아오는데 실패했습니다")
             }
 
             override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                view.onGetOrderRestaurantsFailure(t.message ?: "통신 오류")
+                view.onGetOrderMainRestaurantsFailure(t.message ?: "통신 오류")
             }
         })
     }

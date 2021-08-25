@@ -260,6 +260,8 @@ class HomeFragment :
         chooseStoreAdapter = StoreAdapter(requireContext(), this@HomeFragment)
         binding.homeRecyclerViewChoose.adapter = chooseStoreAdapter
 
+        chooseStoreData.clear()
+
         showLoadingDialog(requireContext())
         HomeService(this).tryGetMainRestaurants()
     }
@@ -370,25 +372,28 @@ class HomeFragment :
         HomeService(this).tryGetOrderMainRestaurants("new")
     }
 
-    override fun onGetOrderMainRestaurantsSuccess(response: HomeResponse) {
-        binding.homeRecyclerViewChoose.layoutManager = clayoutManager
+    override fun onGetOrderMainRestaurantsSuccess(response: HomeResponse, order: String) {
+        Log.d("initArrangeChip", "onGetOrderMainRestaurantsSuccess 들어옴")
         chooseStoreAdapter = StoreAdapter(requireContext(), this@HomeFragment)
         chooseStoreData.clear()
 
         dismissLoadingDialog()
 
         if(response.isSuccess) {
-            // 인기 프랜차이즈 // 별점 높은 순
+            Log.d("initArrangeChip", "isSuccess 들어옴")
+            // 인기 프랜차이즈 // 별점 높은 순 - 사실은 새로 나온 순임
+            if(order == "new") {
                 for (i in response.result.restaurantResult) {
                     if(i.imgUrl != null)
                         chooseStoreData.add(StoreData(i.id, i.imgUrl, i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
                     else
                         chooseStoreData.add(StoreData(i.id, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
                 }
-                Log.d("HomeFragment", "$chooseStoreData")
+                Log.d("initArrangeChip", "chooseStoreData 데이터는? $chooseStoreData")
                 chooseStoreAdapter.storeDataArrayList = chooseStoreData
                 binding.homeRecyclerViewChoose.adapter = chooseStoreAdapter
                 chooseStoreAdapter.notifyDataSetChanged()
+            }
         }
     }
 
