@@ -7,12 +7,15 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.chip.ChipGroup
 import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityStoreListBinding
 import com.yunwoon.coupangeatsproject.src.main.home.HomeFragment
+import com.yunwoon.coupangeatsproject.src.main.home.dialogs.ChipArrangeDialog
 import com.yunwoon.coupangeatsproject.src.main.home.models.CategoryResponse
 import com.yunwoon.coupangeatsproject.src.main.home.models.HomeResponse
 import com.yunwoon.coupangeatsproject.src.store.StoreActivity
@@ -44,10 +47,15 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
     private lateinit var reSources : Resources
     private lateinit var bitmap1 : Bitmap
 
+    private var filterCount = 0
+    private val dialogChipArrange = ChipArrangeDialog()
+    private var chipArrangeDialogNumber = 1
+    private var params = ChipGroup.LayoutParams(ChipGroup.LayoutParams.WRAP_CONTENT, ChipGroup.LayoutParams.WRAP_CONTENT)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        categoryPosition = intent.getIntExtra("position", 0) // 카테고리 받아옴
+        categoryPosition = intent.getIntExtra("position", 0) // 카테고리 인덱스 받아옴
 
         reSources = this.resources
         bitmap1 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store1)
@@ -57,6 +65,7 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
         setNewRecyclerView()
         setStoreListRecyclerView()
 
+        binding.storeListChipStoreFilter.setOnClickListener { setChipArrangeDialog() }
         binding.storeListImageButtonBack.setOnClickListener { finish() }
     }
 
@@ -108,6 +117,83 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
 
     fun changeCategory(position : Int) {
         showCustomToast("$position 번째 카테고리 선택")
+    }
+
+    // 매장 정렬 chip 필터
+    private fun setChipArrangeDialog() {
+        dialogChipArrange.setChipDialog(chipArrangeDialogNumber)
+        dialogChipArrange.show(supportFragmentManager, "ChipArrangeDialog")
+
+        dialogChipArrange.setChipDialogResult(object : ChipArrangeDialog.SetChipResult{
+            override fun setFilter(dialogResult: Int) {
+                filterCount = 1
+
+                when(dialogResult){
+                    1 -> { // 추천순
+                        binding.storeListChipStoreFilter.setChipBackgroundColorResource(R.color.white)
+                        binding.storeListChipStoreFilter.setTextColor(reSources.getColor(R.color.black))
+                        binding.storeListChipStoreFilter.setText(R.string.home_chip_recommend)
+
+                        filterCount = 0
+                        chipArrangeDialogNumber = 1
+                    }
+                    2 -> { // 주문많은순
+                        params.setMargins(0,0,0,0)
+                        binding.storeListChipStoreFilter.layoutParams = params
+                        binding.storeListChipStoreFilter.setChipBackgroundColorResource(R.color.blue_300)
+                        binding.storeListChipStoreFilter.setTextColor(reSources.getColor(R.color.white))
+                        binding.storeListChipStoreFilter.setText(R.string.home_chip_order)
+
+                        binding.storeListChipReset.visibility = View.VISIBLE
+                        binding.storeListChipReset.setText("초기화 " + filterCount)
+
+                        chipArrangeDialogNumber = 2
+                    }
+                    3 -> { // 가까운순
+                        params.setMargins(0,0,0,0)
+                        binding.storeListChipStoreFilter.layoutParams = params
+                        binding.storeListChipStoreFilter.setChipBackgroundColorResource(R.color.blue_300)
+                        binding.storeListChipStoreFilter.setTextColor(reSources.getColor(R.color.white))
+                        binding.storeListChipStoreFilter.setText(R.string.home_chip_location)
+
+                        binding.storeListChipReset.visibility = View.VISIBLE
+                        binding.storeListChipReset.setText("초기화 " + filterCount)
+
+                        chipArrangeDialogNumber = 3
+                    }
+                    4 -> { // 별점높은순
+                        params.setMargins(0,0,0,0)
+                        binding.storeListChipStoreFilter.layoutParams = params
+                        binding.storeListChipStoreFilter.setChipBackgroundColorResource(R.color.blue_300)
+                        binding.storeListChipStoreFilter.setTextColor(reSources.getColor(R.color.white))
+                        binding.storeListChipStoreFilter.setText(R.string.home_chip_star_rating)
+
+                        binding.storeListChipReset.visibility = View.VISIBLE
+                        binding.storeListChipReset.setText("초기화 " + filterCount)
+
+                        chipArrangeDialogNumber = 4
+                    }
+                    5 -> { // 신규매장순
+                        params.setMargins(0,0,0,0)
+                        binding.storeListChipStoreFilter.layoutParams = params
+                        binding.storeListChipStoreFilter.setChipBackgroundColorResource(R.color.blue_300)
+                        binding.storeListChipStoreFilter.setTextColor(reSources.getColor(R.color.white))
+                        binding.storeListChipStoreFilter.setText(R.string.home_chip_new)
+
+                        binding.storeListChipReset.visibility = View.VISIBLE
+                        binding.storeListChipReset.setText("초기화 " + filterCount)
+
+                        chipArrangeDialogNumber = 5
+                    }
+                }
+
+                if(filterCount == 0) {
+                    binding.storeListChipReset.visibility = View.GONE
+                    params.setMargins(38,0,0,0)
+                    binding.storeListChipStoreFilter.layoutParams = params
+                }
+            }
+        })
     }
 
     // 새로 들어왔어요 리스트 세팅
