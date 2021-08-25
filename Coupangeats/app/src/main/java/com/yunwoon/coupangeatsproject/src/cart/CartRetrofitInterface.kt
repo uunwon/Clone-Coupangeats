@@ -10,6 +10,7 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface CartRetrofitInterface {
+
     @GET("/carts")
     fun getCart(
         @Header("x-jwt") jwt : String
@@ -20,4 +21,5 @@ interface CartRetrofitInterface {
         @Header("x-jwt") jwt : String,
         @Body postOrderRequest: PostOrderRequest
     ): Call<UserOrderResponse>
+
 }

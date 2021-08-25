@@ -342,7 +342,6 @@ class HomeFragment :
                         binding.homeChipReset.setText("초기화 " + filterCount)
 
                         chipArrangeDialogNumber = 4
-                        initArrangeChip()
                     }
                     5 -> { // 신규매장순
                         params.setMargins(0,0,0,0)
@@ -355,6 +354,7 @@ class HomeFragment :
                         binding.homeChipReset.setText("초기화 " + filterCount)
 
                         chipArrangeDialogNumber = 5
+                        initArrangeChip()
                     }
                 }
 
@@ -381,7 +381,7 @@ class HomeFragment :
 
         if(response.isSuccess) {
             Log.d("initArrangeChip", "isSuccess 들어옴")
-            // 인기 프랜차이즈 // 별점 높은 순 - 사실은 새로 나온 순임
+            // 신규 매장 순
             if(order == "new") {
                 for (i in response.result.restaurantResult) {
                     if(i.imgUrl != null)

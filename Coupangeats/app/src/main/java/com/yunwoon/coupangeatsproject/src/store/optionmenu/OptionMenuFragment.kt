@@ -41,6 +41,7 @@ class OptionMenuFragment(private val menuIndex: Int, private val menuImage: Stri
     private val menuCheckData = mutableListOf<MenuCheckData>()
 
     private var optionIdSet = mutableSetOf<String>()
+    private var menuCount = 1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,6 +51,20 @@ class OptionMenuFragment(private val menuIndex: Int, private val menuImage: Stri
 
         binding.storeImageButtonBack.setOnClickListener {
             (context as OptionMenuActivity).backToStore()
+        }
+
+        // 음식 수량 선택
+        binding.menuImageButtonPlus.setOnClickListener {
+            menuCount++
+            binding.menuTextNumberDetail.text = menuCount.toString()
+            ApplicationClass.sEditor.putInt("menuCount", menuCount).apply()
+        }
+
+        binding.menuImageButtonMinus.setOnClickListener {
+            if(menuCount-- > 1) {
+                binding.menuTextNumberDetail.text = menuCount.toString()
+                ApplicationClass.sEditor.putInt("menuCount", menuCount).apply()
+            }
         }
     }
 

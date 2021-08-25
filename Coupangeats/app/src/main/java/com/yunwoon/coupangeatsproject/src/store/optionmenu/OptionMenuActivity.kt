@@ -47,8 +47,9 @@ class OptionMenuActivity : BaseActivity<ActivityOptionMenuBinding>(ActivityOptio
     // 카트 담기
     private fun setCart() {
         val postCartRequest = PostCartRequest(menuId = menuIndex, menuCounts = 1)
-        val postCartwithOptionRequest = PostCartwithOptionRequest(menuId = menuIndex, menuCounts = 1,
-        optionId = ApplicationClass.sSharedPreferences.getInt("requiredOptionCategoryId", 0))
+        val postCartwithOptionRequest = PostCartwithOptionRequest(menuId = menuIndex,
+            menuCounts = ApplicationClass.sSharedPreferences.getInt("menuCount", 1),
+            optionId = ApplicationClass.sSharedPreferences.getInt("requiredOptionCategoryId", 0))
 
         if(loginJwtToken != null) {
             if(menuIndex == 1 && ApplicationClass.sSharedPreferences.getInt("requiredOptionId", 0) == 0)

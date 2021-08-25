@@ -211,7 +211,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageButton
-                android:id="@+id/menu_image_button_plus"
+                android:id="@+id/menu_image_button_minus"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="20dp"
@@ -234,10 +234,10 @@
                 android:textStyle="bold"
                 android:textSize="17sp"
                 app:layout_constraintTop_toBottomOf="@id/menu_text_price_unit"
-                app:layout_constraintEnd_toStartOf="@id/menu_image_button_minus" />
+                app:layout_constraintEnd_toStartOf="@id/menu_image_button_plus" />
 
             <ImageButton
-                android:id="@+id/menu_image_button_minus"
+                android:id="@+id/menu_image_button_plus"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="20dp"
