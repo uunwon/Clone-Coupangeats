@@ -9,6 +9,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
+import com.yunwoon.coupangeatsproject.config.ApplicationClass
 
 class MenuCheckAdapter(private var context: Context) : RecyclerView.Adapter<MenuCheckAdapter.ViewHolder>()  {
     var menuCheckData = mutableListOf<MenuCheckData>()
@@ -32,6 +33,15 @@ class MenuCheckAdapter(private var context: Context) : RecyclerView.Adapter<Menu
         fun bind(item: MenuCheckData) {
             menuDetailCheckBox.isChecked = item.menuDetailCheckBox
             menuDetailCheckText.text = item.menuDetailCheckText
+
+            menuDetailCheckBox.setOnClickListener(object : View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    val position = adapterPosition
+
+                    Log.d("MenuRadioAdapter", "라디오 버튼 ${menuCheckData[position].menuDetailCheckId} 클릭함")
+                    ApplicationClass.sEditor.putInt("checkOptionId", menuCheckData[position].menuDetailCheckId).apply()
+                }
+            })
         }
     }
 }

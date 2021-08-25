@@ -147,7 +147,6 @@ class OptionMenuFragment(private val menuIndex: Int, private val menuImage: Stri
                 var checkData = mutableListOf<MenuCheckData>()
 
                 if(i.isRequired == 1) {
-                    ApplicationClass.sEditor.putInt("requiredOptionCategoryId", i.id).apply() // 카테고리 아이디
                     var radioData2 = menuRadioData.toMutableList()
                     menuDetailData.add(MenuDetailData(i.categoryName, i.isRequired, radioData2, checkData))
                 }

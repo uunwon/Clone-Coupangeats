@@ -140,6 +140,13 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
                 binding.anyCartConstraintLayout.visibility = View.GONE
                 binding.cartTextStoreTitle.text = response.result.carts[0].restaurantName
 
+                for(i in response.result.carts) {
+
+                }
+                if(response.result.optionCarts.isNotEmpty()) {
+
+                }
+
                 for (i in response.result.carts) {
                     cartData.add(CartData(i.menuId, i.menuName, "", i.price, i.menuCounts))
                     cartPrice += i.price.toInt()
@@ -149,6 +156,9 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
                 cartId = response.result.carts[0].cartId
             }
             else if(response.result.optionCarts.isNotEmpty()) {  // 옵션 카트
+                for(i in response.result.optionCarts) {
+
+                }
             }
             else {
                 binding.cartConstraintLayout.visibility = View.GONE

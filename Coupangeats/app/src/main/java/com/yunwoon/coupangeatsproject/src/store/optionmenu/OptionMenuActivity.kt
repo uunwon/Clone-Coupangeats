@@ -21,6 +21,7 @@ class OptionMenuActivity : BaseActivity<ActivityOptionMenuBinding>(ActivityOptio
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ApplicationClass.sEditor.putInt("requiredOptionId", 0).apply()
+        ApplicationClass.sEditor.putInt("checkOptionId", 0).apply()
 
         menuIndex = intent.getIntExtra("menuIndex", 0) // 메뉴 데이터 받아옴
         menuImage = intent.getStringExtra("menuImage").toString()
@@ -49,7 +50,7 @@ class OptionMenuActivity : BaseActivity<ActivityOptionMenuBinding>(ActivityOptio
         val postCartRequest = PostCartRequest(menuId = menuIndex, menuCounts = 1)
         val postCartwithOptionRequest = PostCartwithOptionRequest(menuId = menuIndex,
             menuCounts = ApplicationClass.sSharedPreferences.getInt("menuCount", 1),
-            optionId = ApplicationClass.sSharedPreferences.getInt("requiredOptionCategoryId", 0))
+            optionId = ApplicationClass.sSharedPreferences.getInt("requiredOptionId", 0))
 
         if(loginJwtToken != null) {
             if(menuIndex == 1 && ApplicationClass.sSharedPreferences.getInt("requiredOptionId", 0) == 0)
@@ -83,16 +84,22 @@ class OptionMenuActivity : BaseActivity<ActivityOptionMenuBinding>(ActivityOptio
         dismissLoadingDialog()
         if(response.isSuccess) {
             showCustomToast("메인 카트가 생성되었습니다")
-            val postOptionCartRequest = PostOptionCartRequest(optionId = ApplicationClass.sSharedPreferences.getInt("requiredOptionId", 0)
+            if(ApplicationClass.sSharedPreferences.getInt("checkOptionId", 0) != 0 && loginJwtToken != null) {
+                val postOptionCartRequest = PostOptionCartRequest(optionId = ApplicationClass.sSharedPreferences.getInt("checkOptionId", 0)
+                    , cartId = response.result.cartResult)
+                OptionMenuActivityService(this).tryPostOptionCart(loginJwtToken, postOptionCartRequest)
+            }
+            /* val postOptionCartRequest = PostOptionCartRequest(optionId = ApplicationClass.sSharedPreferences.getInt("requiredOptionId", 0)
                 , cartId = response.result.cartResult)
 
             if(loginJwtToken != null)
-                OptionMenuActivityService(this).tryPostOptionCart(loginJwtToken, postOptionCartRequest)
+                OptionMenuActivityService(this).tryPostOptionCart(loginJwtToken, postOptionCartRequest) */
         } else {
             showCustomToast("카트 담기에 실패했습니다")
         }
     }
 
+    // 체크 박스 같은 옵션 카트 생성
     override fun onPostOptionCartSuccess(response: OptionCartResponse) {dismissLoadingDialog()
         if(response.isSuccess) {
             showCustomToast("옵션 카트가 생성되었습니다")
