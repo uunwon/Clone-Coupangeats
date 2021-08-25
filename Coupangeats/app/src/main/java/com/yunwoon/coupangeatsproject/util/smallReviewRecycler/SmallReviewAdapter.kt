@@ -1,6 +1,9 @@
 package com.yunwoon.coupangeatsproject.util.smallReviewRecycler
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
+import java.io.IOException
+import java.net.URL
 
 class SmallReviewAdapter(private val context: Context) : RecyclerView.Adapter<SmallReviewAdapter.ViewHolder>()  {
     var smallReviewDataArrayList = mutableListOf<SmallReviewData>()
@@ -29,7 +34,26 @@ class SmallReviewAdapter(private val context: Context) : RecyclerView.Adapter<Sm
         private val reviewStarRating: TextView = itemView.findViewById(R.id.small_review_text_star_rating)
 
         fun bind(item: SmallReviewData) {
-            reviewImage.setImageBitmap(item.reviewImage)
+            // 이미지 변환
+            val LoadImage = object : AsyncTask<String, Int, Bitmap?>() {
+                var bitmap : Bitmap? = null
+
+                override fun doInBackground(vararg p0: String?): Bitmap? {
+                    try {
+                        val inputStream = URL(p0[0]).openStream()
+                        bitmap = BitmapFactory.decodeStream(inputStream)
+                    } catch (e : IOException) {
+                        e.printStackTrace()
+                    }
+                    return bitmap
+                }
+
+                override fun onPostExecute(result: Bitmap?) {
+                    reviewImage.setImageBitmap(bitmap)
+                }
+            }
+
+            LoadImage.execute(item.reviewImage)
             reviewText.text = item.reviewText
             reviewStarRating.text = item.reviewStarRating
         }

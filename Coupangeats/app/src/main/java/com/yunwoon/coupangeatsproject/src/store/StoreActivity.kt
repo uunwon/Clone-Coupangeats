@@ -1,7 +1,6 @@
 package com.yunwoon.coupangeatsproject.src.store
 
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PorterDuff
@@ -229,13 +228,10 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         smallReviewAdapter = SmallReviewAdapter(this)
         binding.storeRecyclerViewReview.adapter = smallReviewAdapter
 
-        val resources: Resources = this.resources
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.test_small_review)
-
         smallReviewData.apply {
-            add(SmallReviewData(bitmap, "이번엔 도우가 좀 질겼어요. 그래도 피자는 여기로 정착!", "★★★★★"))
-            add(SmallReviewData(bitmap, "너무 맛나요~ 피자는 이 집이 최고에요!!", "★★★"))
-            add(SmallReviewData(bitmap, "맛있어서 순삭. 배달 빨라서 피자 뜨끈뜨끈해서 좋아요", "★★★★"))
+            add(SmallReviewData("https://user-images.githubusercontent.com/48541984/130749327-a7a39747-11c4-4135-9b24-baaa7fe9e7db.png", "배달 너무너무 깔끔하게 잘 왔습니다:) 맛있게 잘 먹을게요!", "★★★★★"))
+            add(SmallReviewData("https://user-images.githubusercontent.com/48541984/130749369-1dd957ba-cec8-4cf2-8386-b3642286c27a.png", "너무 맛나요~ 떡볶이는 이 집이 최고에요!!", "★★★"))
+            add(SmallReviewData("https://user-images.githubusercontent.com/48541984/130749290-40d62e6d-4724-4fd0-8cb9-c4be61c60c95.png", "엽떡은 로제가 최고입니당 번창하세요", "★★★★"))
         }
 
         smallReviewAdapter.smallReviewDataArrayList = smallReviewData

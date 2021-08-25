@@ -187,6 +187,6 @@ class OptionMenuFragment(private val menuIndex: Int, private val menuImage: Stri
 
     override fun onGetOptionMenusFailure(message: String) {
         dismissLoadingDialog()
-        // showCustomToast("오류 : $message")
+        showCustomToast("오류 : $message")
     }
 }
