@@ -137,6 +137,15 @@
   * 주문 생성 API
   * 주문 내역 조회 API / 완료된 주문 내역 조회 API
 
+### 2021-08-25
+* 배달지 상세 설정, 조회 RecyclerView 제작
+* OptionMenuActivity 선택한 체크박스, 라디오박스 값 받아오기
+* HomeFragment 가게 필터 (추천순, 신규매장순) 적용
+* CartActivity 음식 수량 버튼 제작
+* 서버 Retrofit 통신
+  * 옵션 카트 생성 API
+  * 옵션 카트 전체 조회 API
+
 ## 테스트 개발환경
 * AWS EC2 / RDS
 * Node.js

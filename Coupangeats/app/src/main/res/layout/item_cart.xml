@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="30dp">
         <TextView
             android:id="@+id/cart_text_main"
             android:layout_width="310dp"
@@ -67,11 +67,10 @@
             android:id="@+id/cart_constraint_layout_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="5dp"
             android:clickable="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cart_image_button_delete">
+            app:layout_constraintTop_toTopOf="@id/cart_text_price_detail">
 
             <TextView
                 android:id="@+id/cart_text_count"
@@ -89,7 +88,7 @@
             <Button
                 android:id="@+id/cart_button_count"
                 android:layout_width="90dp"
-                android:layout_height="30dp"
+                android:layout_height="33dp"
                 android:background="@drawable/spinner_gray"
                 app:backgroundTint="@null"
                 app:layout_constraintEnd_toEndOf="parent"
