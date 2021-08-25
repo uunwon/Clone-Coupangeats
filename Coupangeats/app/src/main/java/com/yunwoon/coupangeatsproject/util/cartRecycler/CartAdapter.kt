@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
@@ -33,12 +32,13 @@ class CartAdapter(private var context: Context) : RecyclerView.Adapter<CartAdapt
         private val cartMain: TextView = itemView.findViewById(R.id.cart_text_main)
         private val cartOption: TextView = itemView.findViewById(R.id.cart_text_option)
         private val cartPrice: TextView = itemView.findViewById(R.id.cart_text_price)
-        private val cartCounts: Button = itemView.findViewById(R.id.cart_button_delete)
+        // private val cartCounts: Button = itemView.findViewById(R.id.cart_button_delete)
+        private val cartSpinner: TextView = itemView.findViewById(R.id.cart_text_count)
 
         fun bind(item: CartData) {
             cartMain.text = item.cartMain
             cartPrice.text = item.cartPrice
-            cartCounts.text = item.cartCount.toString()
+            cartSpinner.text = item.cartCount.toString()
 
             if(item.cartOption.isNotEmpty()) {
                 cartOption.visibility = View.VISIBLE
