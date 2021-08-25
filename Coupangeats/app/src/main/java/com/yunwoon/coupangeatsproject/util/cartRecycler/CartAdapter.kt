@@ -11,6 +11,8 @@ import com.yunwoon.coupangeatsproject.R
 
 class CartAdapter(private var context: Context) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     var cartData = mutableListOf<CartData>()
+    var cartOptionData = mutableListOf<String>()
+    var cartCount = 0
 
     fun CartAdapter(context: Context) {
         this.context = context
@@ -38,9 +40,14 @@ class CartAdapter(private var context: Context) : RecyclerView.Adapter<CartAdapt
             cartPrice.text = item.cartPrice
             cartCounts.text = item.cartCount.toString()
 
-            if(item.cartOption != "") {
+            if(item.cartOption.isNotEmpty()) {
                 cartOption.visibility = View.VISIBLE
-                cartOption.text = item.cartOption
+                for(i in item.cartOption) {
+                    if(cartCount++ == 0)
+                        cartOption.text = "$i"
+                    else
+                        cartOption.text = "${cartOption.text} \n$i"
+                }
             } else {
                 cartOption.visibility = View.GONE
             }

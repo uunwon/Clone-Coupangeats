@@ -15,6 +15,7 @@ import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseFragment
 import com.yunwoon.coupangeatsproject.databinding.FragmentHomeBinding
 import com.yunwoon.coupangeatsproject.src.address.AddressActivity
+import com.yunwoon.coupangeatsproject.src.address.models.AddressResponse
 import com.yunwoon.coupangeatsproject.src.main.home.dialogs.ChipArrangeDialog
 import com.yunwoon.coupangeatsproject.src.main.home.models.CategoryResponse
 import com.yunwoon.coupangeatsproject.src.main.home.models.HomeResponse
@@ -100,12 +101,26 @@ class HomeFragment :
     // 주소 받아오기
     private fun setAddress() {
         if(loginJwtToken != null) {
-            binding.homeTextAddress.text = "집"
             // 사용자 주소 받아오기
+            HomeService(this).tryGetAddress(loginJwtToken)
         } else {
             binding.homeTextAddress.text = "배달 주소를 입력하세요."
-            // 최초 init gps 권한 체크
         }
+    }
+
+    override fun onGetAddressSuccess(response: AddressResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            for(i in response.result)
+                binding.homeTextAddress.text = i.location
+        } else {
+            showCustomToast("사용자의 위치를 받아오는데 실패했습니다")
+        }
+    }
+
+    override fun onGetAddressFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     // RecyclerView LayoutManager 세팅

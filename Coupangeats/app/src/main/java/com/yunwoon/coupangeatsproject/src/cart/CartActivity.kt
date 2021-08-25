@@ -140,25 +140,35 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
                 binding.anyCartConstraintLayout.visibility = View.GONE
                 binding.cartTextStoreTitle.text = response.result.carts[0].restaurantName
 
-                for(i in response.result.carts) {
-
-                }
                 if(response.result.optionCarts.isNotEmpty()) {
+                    val optionCart = mutableListOf<String>()
+                    val optionCart2 = mutableListOf<String>()
+                    var cartId = 0
 
-                }
+                    for (i in response.result.optionCarts) {
+                        cartId = i.cartId
+                        if(i.price.toInt() != 0) {
+                            optionCart.add("${i.optionName} (+${i.price}원)")
+                            cartPrice += i.price.toInt() // 옵션메뉴의 가격 추가
+                        }
+                        else
+                            optionCart.add(i.optionName)
+                    }
 
-                for (i in response.result.carts) {
-                    cartData.add(CartData(i.menuId, i.menuName, "", i.price, i.menuCounts))
-                    cartPrice += i.price.toInt()
+                    for(i in response.result.carts) {
+                        if(cartId == i.cartId) {
+                            cartData.add(CartData(i.menuId, i.menuName, optionCart, i.price, i.menuCounts))
+                            cartPrice += i.price.toInt()
+                        }
+                        else {
+                            cartData.add(CartData(i.menuId, i.menuName, optionCart2, i.price, i.menuCounts))
+                            cartPrice += i.price.toInt()
+                        }
+                    }
                 }
                 cartDeliveryTip += response.result.carts[0].delieveryFee.toInt()
                 cartAdapter.cartData = cartData
                 cartId = response.result.carts[0].cartId
-            }
-            else if(response.result.optionCarts.isNotEmpty()) {  // 옵션 카트
-                for(i in response.result.optionCarts) {
-
-                }
             }
             else {
                 binding.cartConstraintLayout.visibility = View.GONE

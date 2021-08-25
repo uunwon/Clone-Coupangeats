@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:text="@string/login_text_need"
-            android:textSize="28sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/login_text_default"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textColor="@color/gray_700"
             app:layout_constraintTop_toBottomOf="@id/login_text_need"
             app:layout_constraintStart_toStartOf="parent" />

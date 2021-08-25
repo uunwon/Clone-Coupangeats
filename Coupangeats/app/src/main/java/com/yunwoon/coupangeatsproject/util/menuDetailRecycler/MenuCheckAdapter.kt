@@ -38,7 +38,7 @@ class MenuCheckAdapter(private var context: Context) : RecyclerView.Adapter<Menu
                 override fun onClick(p0: View?) {
                     val position = adapterPosition
 
-                    Log.d("MenuRadioAdapter", "라디오 버튼 ${menuCheckData[position].menuDetailCheckId} 클릭함")
+                    Log.d("MenuRadioAdapter", "체크박스 ${menuCheckData[position].menuDetailCheckId} 클릭함")
                     ApplicationClass.sEditor.putInt("checkOptionId", menuCheckData[position].menuDetailCheckId).apply()
                 }
             })
