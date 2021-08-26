@@ -184,6 +184,16 @@
     <string name="join_check_box_term_4">[필수] 개인정보 수집 및 이용 동의</string>
     <string name="join_check_box_term_5">[필수] 개인정보 제공 동의</string>
     <string name="join_button">동의하고 가입하기</string>
+
+    <!-- Review Activity -->
+    <string name="review_text_title">만족도 평가 및 리뷰</string>
+    <string name="review_text_food">음식 평가</string>
+    <string name="review_text_delivery">배달 평가</string>
+    <string name="review_text_store">동대문 엽기 떡볶이</string>
+    <string name="review_text_menu">엽기오뎅</string>
+    <string name="review_content_hint">다른 고객들이 참고할 수 있도록 음식 맛, 가격, 양 등 음식에 대한 경험을 적어주세요.</string>
+    <string name="review_delivery_man">배달 파트너</string>
+    <string name="review_set">등록하기</string>
     
     <!-- Address Activity -->
     <string name="address_text_title">배달지 주소 설정</string>

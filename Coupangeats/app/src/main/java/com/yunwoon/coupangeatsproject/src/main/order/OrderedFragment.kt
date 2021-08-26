@@ -1,5 +1,6 @@
 package com.yunwoon.coupangeatsproject.src.main.order
 
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -12,6 +13,7 @@ import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseFragment
 import com.yunwoon.coupangeatsproject.databinding.FragmentOrderedBinding
 import com.yunwoon.coupangeatsproject.src.main.order.models.OrderedResponse
+import com.yunwoon.coupangeatsproject.src.review.ReviewActivity
 import com.yunwoon.coupangeatsproject.util.orderRecycler.OrderAdapter
 import com.yunwoon.coupangeatsproject.util.orderRecycler.OrderData
 import com.yunwoon.coupangeatsproject.util.orderRecycler.OrderMenuData
@@ -56,6 +58,13 @@ class OrderedFragment :
             showCustomToast("로그인이 필요한 서비스입니다")
     }
 
+    fun moveToReviewActivity(storeId : Int) {
+        val intent = Intent(requireContext(), ReviewActivity::class.java)
+        Log.d("restaurantId", "목록에서 보낼 때는 $storeId")
+        intent.putExtra("restaurantId", storeId)
+        startActivity(intent)
+    }
+
     override fun onGetOrderedSuccess(response: OrderedResponse) {
         dismissLoadingDialog()
         if(response.isSuccess) {
@@ -63,7 +72,7 @@ class OrderedFragment :
             olayoutManager = LinearLayoutManager(requireContext())
             binding.orderedRecyclerView.layoutManager = olayoutManager
 
-            orderAdapter = OrderAdapter(requireContext())
+            orderAdapter = OrderAdapter(requireContext(), this@OrderedFragment)
             binding.orderedRecyclerView.isNestedScrollingEnabled = true
             binding.orderedRecyclerView.adapter = orderAdapter
 
@@ -81,7 +90,8 @@ class OrderedFragment :
                     if (loginJwtToken != null)
                         OrderedService(this).tryGetOrderedOption(loginJwtToken, i.cartId, orderMenuData2).join()
 
-                    orderData.add(OrderData("동대문 엽기 떡볶이", bitmap, i.createAt, 5, orderMenuData2, "$price 원", false))
+                    Log.d("restaurantId", "데이터 넣을 때는 ${i.restaurantId}")
+                    orderData.add(OrderData(i.restaurantId, "동대문 엽기 떡볶이", bitmap, i.createAt, 5, orderMenuData2, "$price 원", false))
                 }
                 orderAdapter.orderData = orderData
             }
@@ -108,33 +118,6 @@ class OrderedFragment :
         } else {
             showCustomToast("옵션 메뉴들을 받아오지 못했습니다")
         }
-    }
-
-    private fun setOrderRecyclerView() {
-        Log.d("OrderedFragment", "setOrderRecyclerView 호출")
-
-        olayoutManager = LinearLayoutManager(requireContext())
-        binding.orderedRecyclerView.layoutManager = olayoutManager
-
-        orderAdapter = OrderAdapter(requireContext())
-        binding.orderedRecyclerView.isNestedScrollingEnabled = true
-        binding.orderedRecyclerView.adapter = orderAdapter
-
-        val resources : Resources = this.resources
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.test_favorite_store)
-
-        orderMenuData.apply {
-            add(OrderMenuData(1, "고추 바사삭 한마리"))
-            add(OrderMenuData(2, "달콤 치즈볼"))
-        }
-
-        orderData.apply {
-            add(OrderData("굽네치킨 문래점", bitmap, "2021-08-20 오후 08:45", 5, orderMenuData, "14,000원", false))
-            add(OrderData("네네치킨 문래점", bitmap, "2021-08-17 오후 08:45", 2, orderMenuData, "24,000원", false))
-            add(OrderData("교촌치킨 문래점", bitmap, "2021-08-15 오후 08:45", 4, orderMenuData, "10,000원", true))
-        }
-
-        orderAdapter.orderData = orderData
     }
 
     override fun onGetOrderedFailure(message: String) {

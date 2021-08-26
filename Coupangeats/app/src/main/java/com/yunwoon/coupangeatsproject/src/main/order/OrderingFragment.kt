@@ -95,7 +95,7 @@ class OrderingFragment :
                     if (loginJwtToken != null)
                         OrderingService(this).tryGetOrderingOption(loginJwtToken, i.cartId, orderMenuData2).join()
 
-                    orderData.add(OrderData("동대문 엽기 떡볶이", bitmap, i.createAt, 5, orderMenuData2, "$price 원", false))
+                    orderData.add(OrderData(i.restaurantId, "동대문 엽기 떡볶이", bitmap, i.createAt, 5, orderMenuData2, "$price 원", false))
                 }
                 orderingAdapter.orderData = orderData
             }
@@ -133,7 +133,7 @@ class OrderingFragment :
         showCustomToast("오류 : $message")
     }
 
-    private fun setOrderRecyclerView() {
+    /* private fun setOrderRecyclerView() {
         Log.d("OrderedFragment", "setOrderRecyclerView 호출")
 
         orderMenuData.apply {
@@ -146,6 +146,5 @@ class OrderingFragment :
         }
 
         orderingAdapter.orderData = orderData
-    }
-
+    } */
 }

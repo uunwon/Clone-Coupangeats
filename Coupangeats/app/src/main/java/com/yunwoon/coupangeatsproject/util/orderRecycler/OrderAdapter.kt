@@ -13,15 +13,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
+import com.yunwoon.coupangeatsproject.src.main.order.OrderedFragment
 
-class OrderAdapter (private var context: Context) : RecyclerView.Adapter<OrderAdapter.ViewHolder>()  {
+class OrderAdapter (private var context: Context, private var orderedFragment: OrderedFragment) : RecyclerView.Adapter<OrderAdapter.ViewHolder>()  {
     var orderData = mutableListOf<OrderData>()
 
     private lateinit var orderMenuAdapter: OrderMenuAdapter
     private lateinit var orderMenuData : MutableList<OrderMenuData>
 
-    fun OrderAdapter(context: Context) {
+    fun OrderAdapter(context: Context, orderedFragment: OrderedFragment) {
         this.context = context
+        this.orderedFragment = orderedFragment
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -81,6 +83,14 @@ class OrderAdapter (private var context: Context) : RecyclerView.Adapter<OrderAd
                 orderNewReview.visibility = View.VISIBLE
                 orderReview.visibility = View.GONE
             }
+
+            orderNewReview.setOnClickListener(object: View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    // 리뷰 페이지로 이동
+                    Log.d("restaurantId", "오더 어댑터에서는 ${item.orderStoreId}")
+                    orderedFragment.moveToReviewActivity(item.orderStoreId)
+                }
+            })
 
             // 영수증 보기
             orderReceipt.setOnClickListener { Log.d("OrderAdapter", "영수증 보기 버튼 클릭") }

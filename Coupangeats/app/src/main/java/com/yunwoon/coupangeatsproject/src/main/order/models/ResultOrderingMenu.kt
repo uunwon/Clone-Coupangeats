@@ -12,4 +12,5 @@ data class ResultOrderingMenu(
     @SerializedName("menuPrice") val menuPrice: String,
     @SerializedName("menuName") val menuName: String,
     @SerializedName("cartId") val cartId: Int,
+    @SerializedName("restaurantId") val restaurantId: Int,
 )
