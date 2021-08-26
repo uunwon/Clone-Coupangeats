@@ -27,7 +27,8 @@ class StoreAdapter(private val context: Context, private var homeFragment: HomeF
         holder.bind(storeDataArrayList[position])
 
         holder.itemView.setOnClickListener {
-            homeFragment.moveToStoreActivity(storeDataArrayList[position].storeIndex)
+            homeFragment.moveToStoreActivity(storeDataArrayList[position].storeIndex,
+            storeDataArrayList[position].storeStarRating.toFloat(), storeDataArrayList[position].storeReviewCount.toInt())
         }
     }
 

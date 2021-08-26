@@ -227,7 +227,7 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
             // 새로 들어왔어요
             for (i in response.result) {
                 if(i.imgUrl != null)
-                    newStoreData.add(SmallStoreData(i.id, i.imgUrl, i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "0.8km", "${i.deliveryFee}원"))
+                    newStoreData.add(SmallStoreData(i.id, i.imgUrl, i.name, i.ratingAvg.toString(), i.reviewCount.toString(), "0.8km", "${i.deliveryFee}원"))
                 else
                     newStoreData.add(SmallStoreData(i.id, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
             }
@@ -258,7 +258,7 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
         if(response.isSuccess && response.result.restaurantResult.isNotEmpty()) {
             for (i in response.result.restaurantResult) {
                 if(i.imgUrl != null)
-                    storeListData.add(StoreData(i.id, i.imgUrl, i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
+                    storeListData.add(StoreData(i.id, i.imgUrl, i.name, "10-20분", i.ratingAvg.toString(), i.reviewCount.toString(), "1.1km", i.deliveryFee+"원"))
                 else
                     storeListData.add(StoreData(i.id, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
             }
@@ -275,9 +275,11 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
         showCustomToast("오류 : $message")
     }
 
-    fun moveToStoreActivity(storeIndex: Int) {
+    fun moveToStoreActivity(storeIndex: Int, storeStarRating: Float, storeReviewCount: Int) {
         val intent = Intent(this, StoreActivity::class.java)
         intent.putExtra("storeIndex", storeIndex)
+        intent.putExtra("storeStarRating", storeStarRating)
+        intent.putExtra("storeReviewCount", storeReviewCount)
         startActivity(intent)
     }
 

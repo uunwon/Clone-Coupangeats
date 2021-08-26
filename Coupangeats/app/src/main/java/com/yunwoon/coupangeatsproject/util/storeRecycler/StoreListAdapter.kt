@@ -27,7 +27,8 @@ class StoreListAdapter(private val context: Context) : RecyclerView.Adapter<Stor
         holder.bind(storeDataArrayList[position])
 
         holder.itemView.setOnClickListener {
-            (context as StoreListActivity).moveToStoreActivity(storeDataArrayList[position].storeIndex)
+            (context as StoreListActivity).moveToStoreActivity(storeDataArrayList[position].storeIndex,
+            storeDataArrayList[position].storeStarRating.toFloat(), storeDataArrayList[position].storeReviewCount.toInt())
         }
     }
 

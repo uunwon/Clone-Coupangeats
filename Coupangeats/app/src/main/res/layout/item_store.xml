@@ -82,12 +82,28 @@
             android:textSize="14sp"
             android:textColor="@color/black" />
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="2dp"
+            android:text="("
+            android:textSize="14sp"
+            android:textColor="@color/black" />
+        <TextView
             android:id="@+id/store_text_review_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="2dp"
-            android:text="@string/store_test_review_count"
+            android:text="528"
+            android:textSize="14sp"
+            android:textColor="@color/black" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="2dp"
+            android:text=")"
             android:textSize="14sp"
             android:textColor="@color/black" />
         <TextView

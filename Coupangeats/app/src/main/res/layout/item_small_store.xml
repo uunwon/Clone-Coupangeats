@@ -47,7 +47,15 @@
             android:text="@string/store_test_star_rating"
             android:textSize="11sp"
             android:textColor="@color/black"/>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:minHeight="0dp"
+            android:ellipsize="end"
+            android:text="("
+            android:textSize="11sp"
+            android:textColor="@color/black" />
         <TextView
             android:id="@+id/small_store_text_review_count"
             android:layout_width="wrap_content"
@@ -55,7 +63,16 @@
             android:layout_marginStart="1dp"
             android:minHeight="0dp"
             android:ellipsize="end"
-            android:text="@string/store_test_review_count"
+            android:text="32"
+            android:textSize="11sp"
+            android:textColor="@color/black" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:minHeight="0dp"
+            android:ellipsize="end"
+            android:text=")"
             android:textSize="11sp"
             android:textColor="@color/black" />
         <TextView

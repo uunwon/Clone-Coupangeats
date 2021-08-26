@@ -8,7 +8,6 @@ import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -40,7 +39,6 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
 
     private lateinit var appBarLayout: AppBarLayout
     private lateinit var bottomAppBarLayout: AppBarLayout
-    private var storeIndex = 0
 
     private lateinit var menuIconDrawable1: Drawable
     private lateinit var menuIconDrawable2: Drawable
@@ -58,7 +56,9 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
 
     private var menuCategoryTab = mutableListOf<String>()
 
-    val tabLayoutTextArray = arrayOf("추천메뉴","세트메뉴","엽기메뉴")
+    private var storeIndex = 0
+    private var storeStarRating = 0f
+    private var storeReviewCount = 0
 
     // 이미지 변환
     val LoadImage = object : AsyncTask<String, Int, Bitmap?>() {
@@ -83,7 +83,8 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         super.onCreate(savedInstanceState)
 
         storeIndex = intent.getIntExtra("storeIndex", 0) // 가게 인덱스 받아옴
-        Log.d("StoreActivity", "$storeIndex")
+        storeStarRating = intent.getFloatExtra("storeStarRating", 0f) // 가게 별점
+        storeReviewCount = intent.getIntExtra("storeReviewCount", 0) // 가게 리뷰수
 
         initStoreView()
         setStoreData()
@@ -139,6 +140,8 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
             binding.storeTextToolbar.text = response.result.restaurantResult[0].name
             binding.storeTextDeliveryTip.text = "${response.result.restaurantResult[0].delieveryFee}원"
             binding.storeTextLestDeliveryTip.text = "${response.result.restaurantResult[0].minOrderPrice}원"
+            binding.storeTextStarRating.text = storeStarRating.toString()
+            binding.storeTextReviewCount.text = storeReviewCount.toString()
         } else {
             showCustomToast("가게를 받아오지 못했습니다!")
         }
