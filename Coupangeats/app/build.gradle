@@ -25,6 +25,8 @@ android {
         buildConfigField("String", "ROAD_API_KEY", properties['ROAD_API_KEY'])
         buildConfigField("String", "NAVER_CLIENT_ID", properties['NAVER_CLIENT_ID'])
         buildConfigField("String", "NAVER_CLIENT_SECRET_KEY", properties['NAVER_CLIENT_SECRET_KEY'])
+        buildConfigField("String", "BOOT_PAY_ID", properties['BOOT_PAY_ID'])
+        buildConfigField("String", "BOOT_PAY_KEY", properties['BOOT_PAY_KEY'])
     }
 
     buildTypes {
@@ -88,7 +90,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:16.0.0' // 현재 위치
 
     // 부트 페이
-    // implementation 'com.github.bootpay:client_android_java:3.3.91'
+    implementation 'com.github.bootpay:client_android_java:3.3.91'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

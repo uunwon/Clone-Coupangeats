@@ -25,7 +25,7 @@ class ApplicationClass : Application() {
     private val NAVER_API_URL = "https://naveropenapi.apigw.ntruss.com/"
 
     // 부트페이 서버 주소
-    private val BOOT_PAY_API_URL = "https://dev-api.bootpay.co.kr/"
+    private val BOOT_PAY_API_URL = "https://api.bootpay.co.kr/"
 
     companion object {
         lateinit var instance : ApplicationClass

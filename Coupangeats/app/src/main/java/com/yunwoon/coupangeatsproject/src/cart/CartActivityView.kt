@@ -4,12 +4,17 @@ import com.yunwoon.coupangeatsproject.src.address.models.AddressResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.UserCartResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.UserOptionCartResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.UserOrderResponse
+import com.yunwoon.coupangeatsproject.src.main.mypage.models.MyPageResponse
 
 interface CartActivityView {
 
     fun onGetAddressSuccess(response: AddressResponse)
 
     fun onGetAddressFailure(message: String)
+
+    fun onGetMyPageSuccess(response: MyPageResponse)
+
+    fun onGetMyPageFailure(message: String)
 
     fun onGetUserCartSuccess(response: UserCartResponse)
 

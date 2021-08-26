@@ -2,8 +2,10 @@ package com.yunwoon.coupangeatsproject.src.cart
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.yunwoon.coupangeatsproject.BuildConfig
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityCartBinding
@@ -13,10 +15,18 @@ import com.yunwoon.coupangeatsproject.src.cart.models.PostOrderRequest
 import com.yunwoon.coupangeatsproject.src.cart.models.UserCartResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.UserOptionCartResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.UserOrderResponse
+import com.yunwoon.coupangeatsproject.src.main.mypage.models.MyPageResponse
 import com.yunwoon.coupangeatsproject.src.store.models.SampleOptionCart
 import com.yunwoon.coupangeatsproject.util.SetAddressDialog
 import com.yunwoon.coupangeatsproject.util.cartRecycler.CartAdapter
 import com.yunwoon.coupangeatsproject.util.cartRecycler.CartData
+import kr.co.bootpay.Bootpay
+import kr.co.bootpay.BootpayAnalytics
+import kr.co.bootpay.enums.Method
+import kr.co.bootpay.enums.PG
+import kr.co.bootpay.enums.UX
+import kr.co.bootpay.model.BootExtra
+import kr.co.bootpay.model.BootUser
 
 class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::inflate), CartActivityView {
     private val loginJwtToken = ApplicationClass.sSharedPreferences.getString("loginJwtToken", null)
@@ -30,23 +40,92 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
     private var cartDeliveryTip = 0
     private var cartId = 0
 
+    private var menuName = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setSupportActionBar(binding.storeDetailToolbar)
         getCartData()
 
+        BootpayAnalytics.init(this, BuildConfig.BOOT_PAY_ID) // 부트페이 초기설정
+
         binding.storeCartImageButtonClose.setOnClickListener { finish() }
         binding.cartToolbarPay.setOnClickListener {
-            // 결제하기 버튼 클릭
-            if(loginJwtToken != null) {
-                val postOrderRequest = PostOrderRequest(cartId = cartId)
-                showLoadingDialog(this)
-                CartService(this).tryPostOrder(loginJwtToken, postOrderRequest)
-            } else {
-                showCustomToast("로그인이 필요한 서비스입니다")
-            }
+            // 결제하기 버튼 클릭 // 부트페이 가자
+            postBootPay()
         }
+    }
+
+    private fun postBootPay() {
+        val bootUser = BootUser()
+            .setID(ApplicationClass.sSharedPreferences.getString("userId", "1"))
+            .setPhone(ApplicationClass.sSharedPreferences.getString("userPhone", "010-1234-5678"))
+        val bootExtra = BootExtra().setPopup(1)
+
+        val stuck = 1 //재고 있음
+
+        Bootpay.init(this)
+            .setApplicationId(BuildConfig.BOOT_PAY_ID) // 해당 프로젝트(안드로이드)의 application id 값
+            .setContext(this)
+            .setBootUser(bootUser)
+            .setBootExtra(bootExtra)
+            .setUX(UX.PG_DIALOG)
+            .setPG(PG.PAYAPP)
+            .setMethod(Method.CARD)
+            .setIsShowAgree(true)
+//                .setUserPhone("010-1234-5678") // 구매자 전화번호
+            .setName(menuName) // 결제할 상품명
+            .setOrderId(cartId.toString()) // 결제 고유번호 expire_month
+            .setPrice(cartPrice+cartDeliveryTip) // 결제할 금액
+            .onConfirm { message ->
+                if (0 < stuck) Bootpay.confirm(message) // 재고가 있을 경우.
+                else Bootpay.removePaymentWindow() // 재고가 없어 중간에 결제창을 닫고 싶을 경우
+                Log.d("confirm", message)
+            }
+            .onDone {
+                message -> Log.d("done", message)
+                if(loginJwtToken != null) {
+                    val postOrderRequest = PostOrderRequest(cartId = cartId)
+                    showLoadingDialog(this)
+                    CartService(this).tryPostOrder(loginJwtToken, postOrderRequest)
+                } else {
+                    showCustomToast("로그인이 필요한 서비스입니다")
+                }
+            }
+            .onReady { message -> Log.d("ready", message)
+            }
+            .onCancel { message -> Log.d("cancel", message)
+            }
+            .onError{ message -> Log.d("error", message)
+            }
+            .onClose { message -> Log.d("close", "close")
+            }
+            .request()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // 사용자 정보 받아오기
+        if(loginJwtToken != null) {
+            CartService(this).tryGetMyPage(loginJwtToken)
+        }
+    }
+
+    override fun onGetMyPageSuccess(response: MyPageResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess && response.result.isNotEmpty()) {
+            ApplicationClass.sEditor.putString("userId", response.result[0].id.toString()).apply()
+            ApplicationClass.sEditor.putString("userEmail", response.result[0].email).apply()
+            ApplicationClass.sEditor.putString("userName", response.result[0].name).apply()
+            ApplicationClass.sEditor.putString("userPhone", response.result[0].phoneNumber).apply()
+        }
+    }
+
+    override fun onGetMyPageFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     private fun getAddress() {
@@ -161,10 +240,12 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
                                 else
                                     optionCart3.add(i.optionName)
                             }
+                            menuName = i.menuName
                             cartData.add(CartData(i.menuId, i.menuName, optionCart3, (i.price.toInt()+optionPrice).toString(), i.menuCounts))
                             cartPrice += i.price.toInt()
                         }
                     } else { // 해당 메뉴의 옵션이 없을 때
+                        menuName = i.menuName
                         cartData.add(CartData(i.menuId, i.menuName, optionCart3, i.price, i.menuCounts))
                         cartPrice += i.price.toInt()
                     }

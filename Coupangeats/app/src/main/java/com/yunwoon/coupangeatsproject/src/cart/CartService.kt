@@ -7,6 +7,8 @@ import com.yunwoon.coupangeatsproject.src.cart.models.PostOrderRequest
 import com.yunwoon.coupangeatsproject.src.cart.models.UserCartResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.UserOptionCartResponse
 import com.yunwoon.coupangeatsproject.src.cart.models.UserOrderResponse
+import com.yunwoon.coupangeatsproject.src.main.mypage.MyPageRetrofitInterface
+import com.yunwoon.coupangeatsproject.src.main.mypage.models.MyPageResponse
 import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,6 +29,24 @@ class CartService(val view : CartActivityView) {
             }
             override fun onFailure(call: Call<AddressResponse>, t: Throwable) {
                 view.onGetAddressFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    // 사용자 정보 받아오기
+    fun tryGetMyPage(loginJwtToken: String){
+        val myPageRetrofitInterface = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
+        myPageRetrofitInterface.getMyPage(loginJwtToken).enqueue(object :
+            Callback<MyPageResponse> {
+            override fun onResponse(call: Call<MyPageResponse>, response: Response<MyPageResponse>) {
+                if(response.body() != null)
+                    view.onGetMyPageSuccess(response.body() as MyPageResponse)
+                else
+                    view.onGetMyPageFailure("정보를 받아오는데 실패했습니다")
+            }
+
+            override fun onFailure(call: Call<MyPageResponse>, t: Throwable) {
+                view.onGetMyPageFailure(t.message ?: "통신 오류")
             }
         })
     }
