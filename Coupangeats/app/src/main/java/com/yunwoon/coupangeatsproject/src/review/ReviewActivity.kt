@@ -1,7 +1,6 @@
 package com.yunwoon.coupangeatsproject.src.review
 
 import android.os.Bundle
-import android.util.Log
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityReviewBinding
@@ -16,10 +15,8 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding>(ActivityReviewBinding
         super.onCreate(savedInstanceState)
 
         restaurantId = intent.getIntExtra("restaurantId", 0) // 식당 인덱스 받아옴
-        Log.d("restaurantId", "리뷰 액티비티 들어왔을 떄는 $restaurantId")
 
         binding.reviewButton.setOnClickListener {
-            Log.d("restaurantId", "리뷰 버튼 누를 때는 $restaurantId")
             if(binding.reviewRatingBar.numStars == 0) {
                 showCustomToast("별점을 선택해주세요")
             } else {

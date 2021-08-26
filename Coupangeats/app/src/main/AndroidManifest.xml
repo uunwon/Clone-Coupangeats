@@ -16,6 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+        <activity android:name=".src.reviewlist.ReviewListActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".src.review.ReviewActivity"
             android:screenOrientation="portrait" />
         <activity

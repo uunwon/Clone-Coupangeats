@@ -20,6 +20,7 @@ import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityStoreBinding
 import com.yunwoon.coupangeatsproject.src.cart.CartActivity
+import com.yunwoon.coupangeatsproject.src.reviewlist.ReviewListActivity
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragment
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragmentAdapter
 import com.yunwoon.coupangeatsproject.src.store.models.FavoriteResponse
@@ -103,6 +104,13 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
                 this.startActivity(Intent(this, CartActivity::class.java))
             else
                 showCustomToast("로그인이 필요한 서비스입니다")
+        }
+
+        binding.storeTextReviewGo.setOnClickListener {
+            // 리뷰 페이지로 이동
+            var intent = Intent(this, ReviewListActivity::class.java)
+            intent.putExtra("restaurantId", storeIndex)
+            startActivity(intent)
         }
     }
 
