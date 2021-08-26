@@ -1,6 +1,7 @@
 package com.yunwoon.coupangeatsproject.src.address
 
 import android.os.Bundle
+import android.util.Log
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -9,8 +10,10 @@ import com.naver.maps.map.util.FusedLocationSource
 import com.yunwoon.coupangeatsproject.BuildConfig
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityNaverMapBinding
+import com.yunwoon.coupangeatsproject.src.address.naverModels.naverResponse
 
-class NaverMapActivity : BaseActivity<ActivityNaverMapBinding>(ActivityNaverMapBinding::inflate), OnMapReadyCallback {
+class NaverMapActivity : BaseActivity<ActivityNaverMapBinding>(ActivityNaverMapBinding::inflate),
+    OnMapReadyCallback, NaverMapActivityView {
     private val key = BuildConfig.NAVER_CLIENT_ID
 
     private lateinit var locationSource: FusedLocationSource
@@ -19,6 +22,7 @@ class NaverMapActivity : BaseActivity<ActivityNaverMapBinding>(ActivityNaverMapB
 
     private var flag = 0
     private val marker = Marker()
+
     private var latitude : Double? = null
     private var longitude : Double? = null
 
@@ -74,16 +78,44 @@ class NaverMapActivity : BaseActivity<ActivityNaverMapBinding>(ActivityNaverMapB
 
             if(flag++ == 0) {
                 val cameraUpdate = CameraUpdate.scrollTo(LatLng(location.latitude, location.longitude))
+
                 marker.position = LatLng(location.latitude, location.longitude)
                 marker.icon = OverlayImage.fromResource(R.drawable.navermap_default_marker_icon_black)
 
                 marker.map = naverMap
                 naverMap.moveCamera(cameraUpdate)
+
+                val coords = "${location.longitude},${location.latitude}"
+                Log.d("NaverMapActivity", "coords ? $coords")
+
+                showLoadingDialog(this)
+                NaverMapService(this).tryGetGeocoding(coords)
             }
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onGetGeocodingSuccess(response: naverResponse) {
+        dismissLoadingDialog()
+        if(response.status.name == "ok") {
+            var address = ""
+            var addressDetail = ""
+            for(i in response.results) {
+                if(i.land.addition0.value.isNotEmpty())
+                    address = i.land.addition0.value
+                else
+                    address = i.region.area3.name
+
+                addressDetail = "${i.region.area1.name} ${i.region.area2.name} ${i.land.name} ${i.land.number1}"
+            }
+            binding.naverTextAddress.text = address
+            binding.naverTextAddressDetail.text = addressDetail
+        } else {
+            showCustomToast("지도 불러오기 실패")
+        }
+    }
+
+    override fun onGetGeocodingFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 }

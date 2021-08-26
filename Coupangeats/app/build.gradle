@@ -24,6 +24,7 @@ android {
 
         buildConfigField("String", "ROAD_API_KEY", properties['ROAD_API_KEY'])
         buildConfigField("String", "NAVER_CLIENT_ID", properties['NAVER_CLIENT_ID'])
+        buildConfigField("String", "NAVER_CLIENT_SECRET_KEY", properties['NAVER_CLIENT_SECRET_KEY'])
     }
 
     buildTypes {
