@@ -7,7 +7,7 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 29
 
     viewBinding {
         enabled = true
@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId "com.yunwoon.coupangeatsproject"
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 

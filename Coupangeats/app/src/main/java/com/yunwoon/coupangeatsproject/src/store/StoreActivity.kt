@@ -21,6 +21,7 @@ import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityStoreBinding
 import com.yunwoon.coupangeatsproject.src.cart.CartActivity
 import com.yunwoon.coupangeatsproject.src.reviewlist.ReviewListActivity
+import com.yunwoon.coupangeatsproject.src.reviewlist.models.ReviewListResponse
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragment
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragmentAdapter
 import com.yunwoon.coupangeatsproject.src.store.models.FavoriteResponse
@@ -60,6 +61,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     private var storeIndex = 0
     private var storeStarRating = 0f
     private var storeReviewCount = 0
+    private var storeName = ""
 
     // 이미지 변환
     val LoadImage = object : AsyncTask<String, Int, Bitmap?>() {
@@ -110,6 +112,9 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
             // 리뷰 페이지로 이동
             var intent = Intent(this, ReviewListActivity::class.java)
             intent.putExtra("restaurantId", storeIndex)
+            intent.putExtra("storeName", storeName)
+            intent.putExtra("storeStarRating", storeStarRating)
+            intent.putExtra("storeReviewCount", storeReviewCount)
             startActivity(intent)
         }
     }
@@ -144,6 +149,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
             if(response.result.imgResult != null)
                 LoadImage.execute(response.result.imgResult[0].imgUrl)
 
+            storeName = response.result.restaurantResult[0].name
             binding.storeTextTitle.text = response.result.restaurantResult[0].name
             binding.storeTextToolbar.text = response.result.restaurantResult[0].name
             binding.storeTextDeliveryTip.text = "${response.result.restaurantResult[0].delieveryFee}원"
@@ -239,13 +245,24 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         smallReviewAdapter = SmallReviewAdapter(this)
         binding.storeRecyclerViewReview.adapter = smallReviewAdapter
 
-        smallReviewData.apply {
-            add(SmallReviewData("https://user-images.githubusercontent.com/48541984/130749327-a7a39747-11c4-4135-9b24-baaa7fe9e7db.png", "배달 너무너무 깔끔하게 잘 왔습니다:) 맛있게 잘 먹을게요!", "★★★★★"))
-            add(SmallReviewData("https://user-images.githubusercontent.com/48541984/130749369-1dd957ba-cec8-4cf2-8386-b3642286c27a.png", "너무 맛나요~ 떡볶이는 이 집이 최고에요!!", "★★★"))
-            add(SmallReviewData("https://user-images.githubusercontent.com/48541984/130749290-40d62e6d-4724-4fd0-8cb9-c4be61c60c95.png", "엽떡은 로제가 최고입니당 번창하세요", "★★★★"))
-        }
+        StoreService(this).tryGetReviews(storeIndex, "")
+    }
 
-        smallReviewAdapter.smallReviewDataArrayList = smallReviewData
+
+    override fun onGetReviewsSuccess(response: ReviewListResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            for(i in response.result) {
+                smallReviewData.add(SmallReviewData("https://user-images.githubusercontent.com/48541984/130749327-a7a39747-11c4-4135-9b24-baaa7fe9e7db.png", i.review, i.rating.toFloat()))
+            }
+            smallReviewAdapter.smallReviewDataArrayList = smallReviewData
+            smallReviewAdapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun onGetReviewsFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     // 메뉴 안으로 들어가기 --> 옵션 선택하는 페이지로!

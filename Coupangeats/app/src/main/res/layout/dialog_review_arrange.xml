@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/review_text_arrange"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="20dp"
+        android:gravity="center"
+        android:text="@string/review_text_arrange"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:drawableEnd="@drawable/ic_toolbar_close"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <View
+        android:id="@+id/review_view_arrange"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_100"
+        app:layout_constraintTop_toBottomOf="@id/review_text_arrange" />
+
+    <!-- 추천순 -->
+    <LinearLayout
+        android:id="@+id/review_linear_new"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/review_view_arrange">
+        <ImageView
+            android:id="@+id/review_image_new"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
+        <TextView
+            android:id="@+id/review_text_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/review_text_new"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/review_view_new"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_100"
+        app:layout_constraintTop_toBottomOf="@id/review_linear_new" />
+
+
+    <!-- 리뷰 도움 순 -->
+    <LinearLayout
+        android:id="@+id/review_linear_help"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/review_view_new">
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/review_image_help"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
+        <TextView
+            android:id="@+id/review_text_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/review_text_help"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/review_view_help"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_100"
+        app:layout_constraintTop_toBottomOf="@id/review_linear_help" />
+
+
+    <!-- 별점 높은 순 -->
+    <LinearLayout
+        android:id="@+id/review_linear_high"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/review_view_help">
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/review_image_high"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
+        <TextView
+            android:id="@+id/review_text_high"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/review_text_high"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/review_view_high"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_100"
+        app:layout_constraintTop_toBottomOf="@id/review_linear_high" />
+
+
+    <!-- 별점 낮은 순 -->
+    <LinearLayout
+        android:id="@+id/review_linear_low"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/review_view_high">
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/review_image_low"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
+        <TextView
+            android:id="@+id/review_text_low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/review_text_low"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/review_view_low"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_100"
+        app:layout_constraintTop_toBottomOf="@id/review_linear_low" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

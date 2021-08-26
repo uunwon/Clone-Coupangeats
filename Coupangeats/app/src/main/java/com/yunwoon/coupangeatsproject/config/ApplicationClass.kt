@@ -24,6 +24,9 @@ class ApplicationClass : Application() {
     // 지오코딩 서버 주소
     private val NAVER_API_URL = "https://naveropenapi.apigw.ntruss.com/"
 
+    // 부트페이 서버 주소
+    private val BOOT_PAY_API_URL = "https://dev-api.bootpay.co.kr/"
+
     companion object {
         lateinit var instance : ApplicationClass
 
@@ -38,6 +41,7 @@ class ApplicationClass : Application() {
         lateinit var sRetrofit: Retrofit
         lateinit var roadRetrofit: Retrofit
         lateinit var geoRetrofit: Retrofit
+        lateinit var bootRetrofit: Retrofit
     }
 
     // 앱이 처음 생성되는 순간, SP를 새로 만들어주고, 레트로핏 인스턴스를 생성합니다.
@@ -82,6 +86,12 @@ class ApplicationClass : Application() {
 
         geoRetrofit = Retrofit.Builder()
             .baseUrl(NAVER_API_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        bootRetrofit = Retrofit.Builder()
+            .baseUrl(BOOT_PAY_API_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

@@ -85,7 +85,7 @@
     <string name="store_text_lest_delivery_tip">15,000원</string>
     <string name="store_menu_share">공유</string>
     <string name="store_menu_favorite">즐겨찾기</string>
-    <string name="store_small_review_text">치킨은 이제 거의 후참잘에서만 시켜요 좋아요 맛있어요 맛있어요</string>
+    <string name="store_small_review_text">치킨은 이제 거의 후참잘에서만 시켜요 좋아요 맛있어요 맛있어요 좋아요 맛있어요 맛있어요 좋아요 맛있어요 맛있어요 좋아요 맛있어요 맛있어요 좋아요 맛있어요 맛있어요</string>
     <string name="store_small_review_star_rating">★★★★★</string>
     <string name="store_text_menu_title">신메뉴</string>
 
@@ -194,7 +194,21 @@
     <string name="review_content_hint">다른 고객들이 참고할 수 있도록 음식 맛, 가격, 양 등 음식에 대한 경험을 적어주세요.</string>
     <string name="review_delivery_man">배달 파트너</string>
     <string name="review_set">등록하기</string>
-    
+    <string name="review_photo">포토리뷰</string>
+    <string name="review_arrange">최신순</string>
+    <string name="review_date">오늘</string>
+    <string name="review_call">신고</string>
+    <string name="review_help">리뷰가 도움이 되었나요?</string>
+    <string name="review_order">주문메뉴</string>
+    <string name="review_help_ok">도움이 돼요</string>
+    <string name="review_help_no">도움이 안돼요</string>
+
+    <string name="review_text_arrange">리뷰 정렬</string>
+    <string name="review_text_new">최신순</string>
+    <string name="review_text_help">리뷰 도움순</string>
+    <string name="review_text_high">별점 높은 순</string>
+    <string name="review_text_low">별점 낮은 순</string>
+
     <!-- Address Activity -->
     <string name="address_text_title">배달지 주소 설정</string>
     <string name="address_edit_text_search_hint">도로명, 건물명 또는 지번으로 검색</string>

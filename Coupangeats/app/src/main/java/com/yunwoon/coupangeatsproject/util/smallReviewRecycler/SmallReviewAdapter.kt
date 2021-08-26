@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yunwoon.coupangeatsproject.R
@@ -31,7 +32,7 @@ class SmallReviewAdapter(private val context: Context) : RecyclerView.Adapter<Sm
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val reviewImage: ImageView = itemView.findViewById(R.id.small_review_image_view)
         private val reviewText: TextView = itemView.findViewById(R.id.small_review_text)
-        private val reviewStarRating: TextView = itemView.findViewById(R.id.small_review_text_star_rating)
+        private val reviewStarRating: RatingBar = itemView.findViewById(R.id.small_review_text_star_rating)
 
         fun bind(item: SmallReviewData) {
             // 이미지 변환
@@ -55,7 +56,7 @@ class SmallReviewAdapter(private val context: Context) : RecyclerView.Adapter<Sm
 
             LoadImage.execute(item.reviewImage)
             reviewText.text = item.reviewText
-            reviewStarRating.text = item.reviewStarRating
+            reviewStarRating.rating = item.reviewStarRating
         }
     }
 }

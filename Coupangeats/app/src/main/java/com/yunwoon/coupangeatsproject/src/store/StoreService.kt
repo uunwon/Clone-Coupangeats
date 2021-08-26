@@ -1,6 +1,8 @@
 package com.yunwoon.coupangeatsproject.src.store
 
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
+import com.yunwoon.coupangeatsproject.src.reviewlist.ReviewListRetrofitInterface
+import com.yunwoon.coupangeatsproject.src.reviewlist.models.ReviewListResponse
 import com.yunwoon.coupangeatsproject.src.store.models.FavoriteResponse
 import com.yunwoon.coupangeatsproject.src.store.models.PostFavoriteRequest
 import com.yunwoon.coupangeatsproject.src.store.models.StoreCategoryResponse
@@ -23,6 +25,22 @@ class StoreService(val view: StoreActivityView) {
 
             override fun onFailure(call: Call<StoreResponse>, t: Throwable) {
                 view.onGetStoreFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryGetReviews(restaurantId: Int, order: String){
+        val reviewListRetrofitInterface = ApplicationClass.sRetrofit.create(ReviewListRetrofitInterface::class.java)
+        reviewListRetrofitInterface.postReview(restaurantId, order).enqueue(object : Callback<ReviewListResponse> {
+            override fun onResponse(call: Call<ReviewListResponse>, response: Response<ReviewListResponse>) {
+                if(response.body() != null)
+                    view.onGetReviewsSuccess(response.body() as ReviewListResponse)
+                else
+                    view.onGetReviewsFailure("리뷰 조회에 실패했습니다")
+            }
+
+            override fun onFailure(call: Call<ReviewListResponse>, t: Throwable) {
+                view.onGetReviewsFailure(t.message ?: "통신 오류")
             }
         })
     }
