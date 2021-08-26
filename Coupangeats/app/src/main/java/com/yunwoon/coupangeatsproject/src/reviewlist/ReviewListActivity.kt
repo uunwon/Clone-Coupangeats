@@ -55,13 +55,19 @@ class ReviewListActivity : BaseActivity<ActivityReviewListBinding>(ActivityRevie
         reviewAdapter = ReviewAdapter(this)
         binding.reviewListRecyclerView.adapter = reviewAdapter
 
+        setReviewRecyclerView("")
+    }
+
+    private fun setReviewRecyclerView(order: String) {
         showLoadingDialog(this)
-        ReviewListService(this).tryGetReviews(storeIndex, reviewOrder)
+        ReviewListService(this).tryGetReviews(storeIndex, order)
     }
 
     // 리뷰 받아오기
     override fun onGetReviewsSuccess(response: ReviewListResponse) {
         dismissLoadingDialog()
+        reviewData.clear()
+
         if(response.isSuccess) { // 받아오기 성공
             for(i in response.result)
                 reviewData.add(ReviewData(i.name, i.rating, i.createAt.substring(0,10), i.review))
@@ -81,6 +87,7 @@ class ReviewListActivity : BaseActivity<ActivityReviewListBinding>(ActivityRevie
                     1 -> { // 최신순
                         binding.reviewListTextArrange.setText(R.string.review_text_new)
                         reviewArrangeDialogNumber = 1
+                        setReviewRecyclerView("recent")
                         // initChooseRecyclerView()
                     }
                     2 -> { // 리뷰도움순
@@ -90,6 +97,7 @@ class ReviewListActivity : BaseActivity<ActivityReviewListBinding>(ActivityRevie
                     3 -> { // 별점높은순
                         binding.reviewListTextArrange.setText(R.string.review_text_high)
                         reviewArrangeDialogNumber = 3
+                        setReviewRecyclerView("rating")
                     }
                     4 -> { // 별점낮은순
                         binding.reviewListTextArrange.setText(R.string.review_text_low)

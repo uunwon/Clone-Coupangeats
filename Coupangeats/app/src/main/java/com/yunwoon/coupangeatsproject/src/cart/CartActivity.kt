@@ -3,7 +3,6 @@ package com.yunwoon.coupangeatsproject.src.cart
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
@@ -146,10 +145,10 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
                 binding.cartTextStoreTitle.text = response.result.carts[0].restaurantName
 
                 for(i in response.result.carts) {
+                    var optionCart3 = mutableListOf<String>()
                     if (response.result.optionCarts.isNotEmpty() && loginJwtToken != null) {
                         CartService(this).tryGetOptionCart(loginJwtToken, i.cartId).join()
                         var optionCart2: MutableList<SampleOptionCart> = optionCart.toMutableList()
-                        var optionCart3 = mutableListOf<String>()
 
                         if (optionCart2.isNotEmpty()) { // 해당 메뉴의 옵션이 있을 때
                             var optionPrice = 0
@@ -164,10 +163,10 @@ class CartActivity : BaseActivity<ActivityCartBinding>(ActivityCartBinding::infl
                             }
                             cartData.add(CartData(i.menuId, i.menuName, optionCart3, (i.price.toInt()+optionPrice).toString(), i.menuCounts))
                             cartPrice += i.price.toInt()
-                        } else { // 해당 메뉴의 옵션이 없을 때
-                            cartData.add(CartData(i.menuId, i.menuName, optionCart3, i.price, i.menuCounts))
-                            cartPrice += i.price.toInt()
                         }
+                    } else { // 해당 메뉴의 옵션이 없을 때
+                        cartData.add(CartData(i.menuId, i.menuName, optionCart3, i.price, i.menuCounts))
+                        cartPrice += i.price.toInt()
                     }
                 }
 

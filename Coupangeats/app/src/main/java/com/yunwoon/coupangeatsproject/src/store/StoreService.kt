@@ -1,6 +1,8 @@
 package com.yunwoon.coupangeatsproject.src.store
 
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
+import com.yunwoon.coupangeatsproject.src.cart.CartRetrofitInterface
+import com.yunwoon.coupangeatsproject.src.cart.models.UserCartResponse
 import com.yunwoon.coupangeatsproject.src.reviewlist.ReviewListRetrofitInterface
 import com.yunwoon.coupangeatsproject.src.reviewlist.models.ReviewListResponse
 import com.yunwoon.coupangeatsproject.src.store.models.FavoriteResponse
@@ -73,6 +75,22 @@ class StoreService(val view: StoreActivityView) {
 
             override fun onFailure(call: Call<FavoriteResponse>, t: Throwable) {
                 view.onPostFavoriteFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryGetCart(loginJwtToken: String){
+        val cartRetrofitInterface = ApplicationClass.sRetrofit.create(CartRetrofitInterface::class.java)
+        cartRetrofitInterface.getCart(loginJwtToken).enqueue(object : Callback<UserCartResponse> {
+            override fun onResponse(call: Call<UserCartResponse>, response: Response<UserCartResponse>) {
+                if(response.body() != null)
+                    view.onGetUserCartSuccess(response.body() as UserCartResponse)
+                else
+                    view.onGetUserCartFailure("사용자의 카트를 받아오는데 실패했습니다")
+            }
+
+            override fun onFailure(call: Call<UserCartResponse>, t: Throwable) {
+                view.onGetUserCartFailure(t.message ?: "통신 오류")
             }
         })
     }

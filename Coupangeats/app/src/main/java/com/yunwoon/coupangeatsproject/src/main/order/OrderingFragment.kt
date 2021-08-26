@@ -95,7 +95,7 @@ class OrderingFragment :
                     if (loginJwtToken != null)
                         OrderingService(this).tryGetOrderingOption(loginJwtToken, i.cartId, orderMenuData2).join()
 
-                    orderData.add(OrderData(i.restaurantId, "동대문 엽기 떡볶이", bitmap, i.createAt, 5, orderMenuData2, "$price 원", false))
+                    orderData.add(OrderData(i.restaurantId, "동대문 엽기 떡볶이", bitmap, i.createAt.substring(0,10), 5, orderMenuData2, "$price 원", false))
                 }
                 orderingAdapter.orderData = orderData
             }

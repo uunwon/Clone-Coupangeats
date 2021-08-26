@@ -38,6 +38,8 @@ class ReviewAdapter(private var context: Context) : RecyclerView.Adapter<ReviewA
             reviewStarRating.rating = item.reviewStarRating.toFloat()
             reviewDate.text = item.reviewDate
             reviewContent.text = item.reviewContent
+
+
         }
     }
 }

@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginStart="3dp"
+                        android:layout_marginStart="1dp"
                         android:layout_marginEnd="140dp"
                         android:text="@string/store_test_review_go"
                         android:textSize="15sp"
@@ -324,6 +324,7 @@
 
     <!-- 카트 보기 -->
     <com.google.android.material.appbar.AppBarLayout
+        android:visibility="gone"
         android:id="@+id/store_appBar_layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

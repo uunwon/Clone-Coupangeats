@@ -20,6 +20,7 @@ import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityStoreBinding
 import com.yunwoon.coupangeatsproject.src.cart.CartActivity
+import com.yunwoon.coupangeatsproject.src.cart.models.UserCartResponse
 import com.yunwoon.coupangeatsproject.src.reviewlist.ReviewListActivity
 import com.yunwoon.coupangeatsproject.src.reviewlist.models.ReviewListResponse
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragment
@@ -57,6 +58,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     private val smallReviewData = mutableListOf<SmallReviewData>()
 
     private var menuCategoryTab = mutableListOf<String>()
+    private var menuCategoryId = ArrayList<Int>()
 
     private var storeIndex = 0
     private var storeStarRating = 0f
@@ -119,15 +121,30 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if(loginJwtToken != null)
+            StoreService(this).tryGetCart(loginJwtToken)
+    }
+
+    override fun onGetUserCartSuccess(response: UserCartResponse) {
+        dismissLoadingDialog()
+        if(response.isSuccess) {
+            if(response.result.carts.isNotEmpty())
+                binding.storeAppBarLayoutBottom.visibility = View.VISIBLE
+            else
+                binding.storeAppBarLayoutBottom.visibility = View.GONE
+        }
+    }
+
+    override fun onGetUserCartFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
+    }
+
     // store 화면 세팅
     private fun initStoreView() {
-        /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-            )
-        } */
-
         setSupportActionBar(binding.toolbar)
         appBarLayout = binding.appBarLayout
         bottomAppBarLayout = binding.storeAppBarLayoutBottom
@@ -288,6 +305,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
             var index = 0
             for(i in response.result) {
                 menuCategoryTab.add(index++, i.categoryName)
+                menuCategoryId.add(i.id)
             }
             setStoreViewPager()
         } else {
@@ -303,7 +321,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     private fun setStoreViewPager() {
         verticalFragmentAdapter = MenuFragmentAdapter(this)
         for(i in 0 until menuCategoryTab.size)
-            verticalFragmentAdapter.addFragment(MenuFragment(menuCategoryTab[i], storeIndex, i+1))
+            verticalFragmentAdapter.addFragment(MenuFragment(menuCategoryTab[i], storeIndex, menuCategoryId[i]))
 
         verticalFragmentAdapter.setType(verticalFragmentAdapter.TYPE_VERTICAL_VIEWPAGER)
 

@@ -1,5 +1,6 @@
 package com.yunwoon.coupangeatsproject.src.store
 
+import com.yunwoon.coupangeatsproject.src.cart.models.UserCartResponse
 import com.yunwoon.coupangeatsproject.src.reviewlist.models.ReviewListResponse
 import com.yunwoon.coupangeatsproject.src.store.models.FavoriteResponse
 import com.yunwoon.coupangeatsproject.src.store.models.StoreCategoryResponse
@@ -21,4 +22,8 @@ interface StoreActivityView {
     fun onPostFavoriteSuccess(response: FavoriteResponse)
 
     fun onPostFavoriteFailure(message: String)
+
+    fun onGetUserCartSuccess(response: UserCartResponse)
+
+    fun onGetUserCartFailure(message: String)
 }
