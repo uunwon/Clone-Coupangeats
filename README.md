@@ -39,7 +39,7 @@
 
 ## 테스트 진행현황
 ### 진행현황 🌈
-![Progress](https://progress-bar.dev/80/?scale=100&width=500&suffix=%)  
+![Progress](https://progress-bar.dev/100/?scale=100&width=500&suffix=%)  
 ### 2021-08-14
 * 기획서 제출 - 100%  
   * 개발 범위 / 개발 우선 순위  
@@ -145,6 +145,15 @@
 * 서버 Retrofit 통신
   * 옵션 카트 생성 API
   * 옵션 카트 전체 조회 API
+
+### 2021-08-26
+* CartActivity 스피너 다이얼로그 제작
+* 카테고리 선택 색상 변경, 정렬 적용
+* MyPageActivity 로그아웃 위치 변경
+* 위도, 경도 이용해 주소 얻는 Naver Reverse Geocoding API 사용
+* 서버 Retrofit 통신
+  * 리뷰 생성 API
+  * 리뷰 조회 API
 
 ## 테스트 개발환경
 * AWS EC2 / RDS
