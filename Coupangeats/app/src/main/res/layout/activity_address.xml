@@ -302,8 +302,8 @@
             android:layout_height="0.5dp"
             android:paddingStart="25dp"
             android:paddingEnd="25dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
             android:layout_marginTop="15dp"
             android:background="@color/gray_400"
             app:layout_constraintTop_toBottomOf="@id/address_edit_text_detail"/>
@@ -353,7 +353,7 @@
                 android:drawableTop="@drawable/ic_address_home"
                 android:drawableTint="@color/gray_700"
                 android:drawablePadding="0dp"
-                android:background="@drawable/button_default_gray"
+                android:background="@drawable/button_address_white"
                 app:backgroundTint="@null"
                 android:stateListAnimator="@null"/>
             <Button
@@ -367,7 +367,7 @@
                 android:textColor="@color/black"
                 android:drawableTop="@drawable/ic_company_address"
                 android:drawablePadding="0dp"
-                android:background="@drawable/button_default_gray"
+                android:background="@drawable/button_address_white"
                 app:backgroundTint="@null"
                 android:stateListAnimator="@null"/>
             <Button
@@ -381,7 +381,7 @@
                 android:drawableTop="@drawable/ic_location"
                 android:drawableTint="@color/black"
                 android:drawablePadding="0dp"
-                android:background="@drawable/button_default_gray"
+                android:background="@drawable/button_address_white"
                 app:backgroundTint="@null"
                 android:stateListAnimator="@null"/>
         </LinearLayout>
@@ -415,9 +415,10 @@
         <Button
             android:id="@+id/address_button_set"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="65dp"
             android:text="@string/address_button_set"
             android:textColor="@color/white"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:background="@drawable/button_coupang_blue"
             app:backgroundTint="@null"

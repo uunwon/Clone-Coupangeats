@@ -89,9 +89,14 @@ class FavoriteActivity : BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteB
                 "배달비 ${deliveryFee}원"
 
             favoriteDataCount++
-            favoriteData.add(FavoriteData(favoriteDetailResponse.result.imgResult[0].imgUrl, favoriteDetailResponse.result.restaurantResult[0].name,
-                favoriteDetailResponse.result.restaurantResult[0].ratingAvg.toString(), "(${favoriteDetailResponse.result.restaurantResult[0].reviewCount})",
+            if(favoriteDetailResponse.result.restaurantResult[0].ratingAvg.length > 2)
+                favoriteData.add(FavoriteData(favoriteDetailResponse.result.imgResult[0].imgUrl, favoriteDetailResponse.result.restaurantResult[0].name,
+                favoriteDetailResponse.result.restaurantResult[0].ratingAvg.substring(0,3), "(${favoriteDetailResponse.result.restaurantResult[0].reviewCount})",
                 "4.1km", "10-20분", deliveryType))
+            else
+                favoriteData.add(FavoriteData(favoriteDetailResponse.result.imgResult[0].imgUrl, favoriteDetailResponse.result.restaurantResult[0].name,
+                    favoriteDetailResponse.result.restaurantResult[0].ratingAvg, "(${favoriteDetailResponse.result.restaurantResult[0].reviewCount})",
+                    "4.1km", "10-20분", deliveryType))
 
             favoriteAdapter.favoriteData = favoriteData
             favoriteAdapter.notifyDataSetChanged()

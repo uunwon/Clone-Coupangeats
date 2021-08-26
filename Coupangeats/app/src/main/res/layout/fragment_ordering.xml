@@ -7,11 +7,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".src.main.order.OrderedFragment">
 
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/ordering_image_view"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_any_order"
+        app:layout_constraintBottom_toTopOf="@id/order_button_view_ordered"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <Button
         android:visibility="gone"
         android:id="@+id/order_button_view_ordered"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:minHeight="0dp"
         android:text="@string/order_text_view_ordered"
         android:textColor="@color/black"
         android:background="@drawable/button_default"

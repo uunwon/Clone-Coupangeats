@@ -33,7 +33,7 @@ class CategoryAdapter(private val context: Context, private var homeFragment: Ho
         holder.bind(categoryData[position])
 
         holder.itemView.setOnClickListener {
-            homeFragment.moveToCategoryDetailActivity(position)
+            homeFragment.moveToCategoryDetailActivity(position, categoryData[position].categoryTextTitle)
         }
     }
 

@@ -95,25 +95,25 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
 
         // 홈버튼 클릭
         binding.addressButtonHome.setOnClickListener {
-            binding.addressButtonHome.setBackgroundResource(R.drawable.button_coupang)
-            binding.addressButtonCompany.setBackgroundResource(R.drawable.button_default_gray)
-            binding.addressButtonEtc.setBackgroundResource(R.drawable.button_default_gray)
+            binding.addressButtonHome.setBackgroundResource(R.drawable.button_address_blue)
+            binding.addressButtonCompany.setBackgroundResource(R.drawable.button_address_white)
+            binding.addressButtonEtc.setBackgroundResource(R.drawable.button_address_white)
             addressCategory = "집"
         }
 
         // 회사버튼 클릭
         binding.addressButtonCompany.setOnClickListener {
-            binding.addressButtonHome.setBackgroundResource(R.drawable.button_default_gray)
-            binding.addressButtonCompany.setBackgroundResource(R.drawable.button_coupang)
-            binding.addressButtonEtc.setBackgroundResource(R.drawable.button_default_gray)
+            binding.addressButtonHome.setBackgroundResource(R.drawable.button_address_white)
+            binding.addressButtonCompany.setBackgroundResource(R.drawable.button_address_blue)
+            binding.addressButtonEtc.setBackgroundResource(R.drawable.button_address_white)
             addressCategory = "회사"
         }
 
         // 기타버튼 클릭
         binding.addressButtonEtc.setOnClickListener {
-            binding.addressButtonHome.setBackgroundResource(R.drawable.button_default_gray)
-            binding.addressButtonCompany.setBackgroundResource(R.drawable.button_default_gray)
-            binding.addressButtonEtc.setBackgroundResource(R.drawable.button_coupang)
+            binding.addressButtonHome.setBackgroundResource(R.drawable.button_address_white)
+            binding.addressButtonCompany.setBackgroundResource(R.drawable.button_address_white)
+            binding.addressButtonEtc.setBackgroundResource(R.drawable.button_address_blue)
             addressCategory = "기타"
         }
 
@@ -221,7 +221,6 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
         dismissLoadingDialog()
         Log.d("AddressActivity", searchResponse.searchResults.common.errorMessage)
         if(searchResponse.searchResults.common.errorCode == "0") {
-            showCustomToast("도로명 받아오기 GET 성공")
             // 리사이클러뷰에 정보 뿌리기
             initRecyclerView(searchResponse)
         } else {

@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:text="@string/store_test_title"
+                    android:text="@string/review_text_store"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="18sp" />

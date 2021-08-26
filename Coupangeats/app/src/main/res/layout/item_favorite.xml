@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="20dp">
+    android:layout_marginBottom="15dp"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:text="@string/favorite_store_text"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@id/favorite_store_image"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -42,7 +43,7 @@
             app:layout_constraintStart_toEndOf="@id/favorite_store_image"
             app:layout_constraintTop_toBottomOf="@id/favorite_text_title">
             <ImageView
-                android:layout_width="20dp"
+                android:layout_width="18dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_star_rating" />
             <TextView
@@ -52,7 +53,7 @@
                 android:layout_marginStart="2dp"
                 android:layout_gravity="center"
                 android:text="@string/store_test_star_rating"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:textColor="@color/black" />
             <TextView
                 android:id="@+id/favorite_text_review_count"
@@ -61,7 +62,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="4dp"
                 android:text="@string/store_test_review_count"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:textColor="@color/black" />
         </LinearLayout>
 
@@ -70,6 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
+            android:layout_marginTop="1dp"
             app:layout_constraintStart_toEndOf="@id/favorite_store_image"
             app:layout_constraintTop_toBottomOf="@id/favorite_linear_layout_star">
             <TextView
@@ -79,7 +81,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="2dp"
                 android:text="@string/store_test_location"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="@color/black" />
             <TextView
                 android:layout_width="wrap_content"
@@ -87,7 +89,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="2dp"
                 android:text="ㆍ"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="@color/black" />
             <TextView
                 android:id="@+id/favorite_text_delivery_time"
@@ -96,7 +98,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="2dp"
                 android:text="@string/store_item_delivery_time"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="@color/black" />
             <TextView
                 android:layout_width="wrap_content"
@@ -104,7 +106,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="2dp"
                 android:text="ㆍ"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="@color/black" />
             <TextView
                 android:id="@+id/favorite_text_delivery_tip"
@@ -113,10 +115,16 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="2dp"
                 android:text="@string/favorite_delivery_tip"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="@color/black" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/gray_100" />
 
 </LinearLayout>

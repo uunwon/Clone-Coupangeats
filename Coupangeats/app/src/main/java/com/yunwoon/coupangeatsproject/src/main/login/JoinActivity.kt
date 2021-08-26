@@ -101,7 +101,7 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
                     binding.joinTextWrongPassword11.visibility = View.GONE // 성공문1
                     binding.joinTextWrongPassword31.visibility = View.GONE // 성공문3
 
-                    binding.joinImageViewPassword.setImageResource(R.drawable.ic_password_invisible)
+                    binding.joinImageViewPassword.setImageResource(R.drawable.ic_password_eye)
                 }
                 else {
                     if(!matcher.matches()) { // 패턴에 걸리면
@@ -115,7 +115,7 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
                         binding.joinTextWrongPassword1.visibility = View.VISIBLE // 경고문1
                         binding.joinTextCorrectPassword.visibility = View.GONE // 성공문
                         binding.joinTextWrongPassword11.visibility = View.GONE // 성공문1
-                        binding.joinImageViewPassword.setImageResource(R.drawable.ic_password_invisible)
+                        binding.joinImageViewPassword.setImageResource(R.drawable.ic_password_eye)
                     } else {
                         passwordCheck1 = true
 
@@ -138,7 +138,7 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
                         binding.joinTextWrongPassword3.visibility = View.VISIBLE //경고문3
                         binding.joinTextCorrectPassword.visibility = View.GONE // 성공문
                         binding.joinTextWrongPassword31.visibility = View.GONE // 성공문3
-                        binding.joinImageViewPassword.setImageResource(R.drawable.ic_password_invisible)
+                        binding.joinImageViewPassword.setImageResource(R.drawable.ic_password_eye)
                     } else {
                         passwordCheck3 = true
 

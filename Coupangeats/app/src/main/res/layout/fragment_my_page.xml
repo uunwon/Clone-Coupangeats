@@ -107,7 +107,7 @@
                 android:id="@+id/my_page_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="780dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="13dp"
                 android:scrollbars="none"
                 android:divider="@color/white"
                 tools:listitem="@layout/item_my_page"

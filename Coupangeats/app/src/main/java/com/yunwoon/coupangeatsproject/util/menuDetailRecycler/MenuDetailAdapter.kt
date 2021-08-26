@@ -55,7 +55,7 @@ class MenuDetailAdapter(private var context: Context) : RecyclerView.Adapter<Men
         fun bind(item: MenuDetailData) {
             if(item.menuDetailNecessary == 1) {
                 menuDetailTitle.text = item.menuDetailTitle
-                menuDetailNecessary.text = "필수항목"
+                menuDetailNecessary.text = "필수 선택"
 
                 menuDetailRecyclerViewRadio.visibility = View.VISIBLE
                 menuDetailRecyclerViewCheck.visibility = View.GONE

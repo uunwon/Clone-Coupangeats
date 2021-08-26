@@ -57,6 +57,7 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
         super.onCreate(savedInstanceState)
 
         categoryPosition = intent.getIntExtra("position", 0) // 카테고리 인덱스 받아옴
+        binding.storeListTitle.text = intent.getStringExtra("categoryTextTitle")
 
         reSources = this.resources
         bitmap1 = BitmapFactory.decodeResource(resources, R.drawable.test_home_store1)
@@ -124,8 +125,9 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
         showCustomToast("오류 : $message")
     }
 
-    fun changeCategory(position : Int) {
+    fun changeCategory(position : Int, categoryTextTitle: String) {
         categoryPosition = position
+        binding.storeListTitle.text = categoryTextTitle
 
         categoryData.clear()
         newStoreData.clear()
@@ -226,8 +228,13 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
         if(response.isSuccess && response.result.isNotEmpty()) {
             // 새로 들어왔어요
             for (i in response.result) {
-                if(i.imgUrl != null)
-                    newStoreData.add(SmallStoreData(i.id, i.imgUrl, i.name, i.ratingAvg.toString(), i.reviewCount.toString(), "0.8km", "${i.deliveryFee}원"))
+                if(i.imgUrl != null) {
+                    if(i.ratingAvg.length > 2)
+                        newStoreData.add(SmallStoreData(i.id, i.imgUrl, i.name, i.ratingAvg.substring(0,3), i.reviewCount.toString(), "0.8km", "${i.deliveryFee}원"))
+                    else
+                        newStoreData.add(SmallStoreData(i.id, i.imgUrl, i.name, i.ratingAvg, i.reviewCount.toString(), "0.8km", "${i.deliveryFee}원"))
+
+                }
                 else
                     newStoreData.add(SmallStoreData(i.id, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", i.name, i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
             }
@@ -257,8 +264,13 @@ class StoreListActivity : BaseActivity<ActivityStoreListBinding>(ActivityStoreLi
         dismissLoadingDialog()
         if(response.isSuccess && response.result.restaurantResult.isNotEmpty()) {
             for (i in response.result.restaurantResult) {
-                if(i.imgUrl != null)
-                    storeListData.add(StoreData(i.id, i.imgUrl, i.name, "10-20분", i.ratingAvg.toString(), i.reviewCount.toString(), "1.1km", i.deliveryFee+"원"))
+                if(i.imgUrl != null) {
+                    if(i.ratingAvg.length > 2)
+                        storeListData.add(StoreData(i.id, i.imgUrl, i.name, "10-20분", i.ratingAvg.substring(0,3), i.reviewCount.toString(), "1.1km", i.deliveryFee+"원"))
+                    else
+                        storeListData.add(StoreData(i.id, i.imgUrl, i.name, "10-20분", i.ratingAvg, i.reviewCount.toString(), "1.1km", i.deliveryFee+"원"))
+
+                }
                 else
                     storeListData.add(StoreData(i.id, "https://user-images.githubusercontent.com/48541984/130389421-9118e255-0e59-4060-9746-c62098c0c913.jpg", i.name, "10-20분", i.ratingAvg.toString(), "(${i.reviewCount})", "1.1km", i.deliveryFee+"원"))
             }

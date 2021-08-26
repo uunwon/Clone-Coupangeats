@@ -21,7 +21,7 @@
             android:ellipsize="end"
             android:text="@string/favorite_store_text"
             android:textColor="@color/black"
-            android:textSize="23sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:progressTint="@color/yellow_a700"
+            android:secondaryProgressTint="@color/transparency"
             android:isIndicator="true"
             android:numStars="5"
             android:rating="4"
@@ -85,7 +86,7 @@
             android:layout_marginTop="15dp"
             android:text="@string/order_text_sum"
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/ordered_recycler_view_menu"
             app:layout_constraintStart_toStartOf="parent" />
@@ -98,7 +99,7 @@
             android:layout_marginStart="5dp"
             android:text="@string/store_text_lest_delivery_tip"
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/ordered_text_sum_detail"
             app:layout_constraintTop_toBottomOf="@id/ordered_recycler_view_menu" />
@@ -165,7 +166,7 @@
         android:gravity="center"
         android:elevation="0dp"
         android:text="@string/order_text_receipt"
-        android:textSize="14sp"
+        android:textSize="13sp"
         android:textColor="@color/black"
         android:background="@drawable/button_menu_receipt"
         app:layout_constraintTop_toBottomOf="@id/ordered_button_review" />

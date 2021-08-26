@@ -40,7 +40,7 @@ class CategoryListAdapter (private var context: Context, private var categoryPos
         holder.itemView.findViewById<CircleImageView>(R.id.category_circle_image)
 
         holder.itemView.setOnClickListener {
-            (context as StoreListActivity).changeCategory(position)
+            (context as StoreListActivity).changeCategory(position, categoryData[position].categoryTextTitle)
         }
     }
 

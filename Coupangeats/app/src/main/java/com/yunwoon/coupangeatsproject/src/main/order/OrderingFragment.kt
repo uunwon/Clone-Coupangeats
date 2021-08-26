@@ -84,6 +84,7 @@ class OrderingFragment :
             if(response.result.selectMenuOrderResult.isNotEmpty()) {
                 binding.nestedScrollView.visibility = View.VISIBLE
                 binding.orderButtonViewOrdered.visibility = View.GONE
+                binding.orderingImageView.visibility = View.GONE
 
                 for (i in response.result.selectMenuOrderResult) {
                     var orderMenuData2 = mutableListOf<OrderMenuData>()
@@ -102,6 +103,7 @@ class OrderingFragment :
             else {
                 binding.nestedScrollView.visibility = View.GONE
                 binding.orderButtonViewOrdered.visibility = View.VISIBLE
+                binding.orderingImageView.visibility = View.VISIBLE
             }
         }
     }
