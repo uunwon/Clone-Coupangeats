@@ -21,6 +21,7 @@ import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityStoreBinding
 import com.yunwoon.coupangeatsproject.src.cart.CartActivity
 import com.yunwoon.coupangeatsproject.src.cart.models.UserCartResponse
+import com.yunwoon.coupangeatsproject.src.main.favorite.models.FavoriteStoreResponse
 import com.yunwoon.coupangeatsproject.src.reviewlist.ReviewListActivity
 import com.yunwoon.coupangeatsproject.src.reviewlist.models.ReviewListResponse
 import com.yunwoon.coupangeatsproject.src.store.menu.MenuFragment
@@ -43,6 +44,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     private lateinit var appBarLayout: AppBarLayout
     private lateinit var bottomAppBarLayout: AppBarLayout
 
+    private lateinit var menu : Menu
     private lateinit var menuIconDrawable1: Drawable
     private lateinit var menuIconDrawable2: Drawable
 
@@ -143,6 +145,27 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         showCustomToast("오류 : $message")
     }
 
+    // 찜 여부 확인
+    private fun setStoreFavorite() {
+        if(loginJwtToken != null)
+            StoreService(this).tryGetFavorite(loginJwtToken)
+    }
+
+    override fun onGetFavoriteSuccess(storeResponse: FavoriteStoreResponse) {
+        dismissLoadingDialog()
+        if(storeResponse.isSuccess && storeResponse.result.isNotEmpty()) {
+            for (i in storeResponse.result) {
+                if(storeIndex == i.restaurantId)
+                    menu.getItem(1).setIcon(R.drawable.ic_my_page_test2)
+            }
+        }
+    }
+
+    override fun onGetFavoriteFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
+    }
+
     // store 화면 세팅
     private fun initStoreView() {
         setSupportActionBar(binding.toolbar)
@@ -187,11 +210,14 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_store, menu)
         if(menu != null) {
+            this.menu = menu
             menuIconDrawable1 = menu.getItem(0).icon
             menuIconDrawable2 = menu.getItem(1).icon
         }
         menuIconDrawable1.mutate()
         menuIconDrawable2.mutate()
+
+        setStoreFavorite()
 
         appBarLayout.addOnOffsetChangedListener(this)
         return true
@@ -217,6 +243,7 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
         dismissLoadingDialog()
         if(response.isSuccess) {
             showCustomToast(response.result)
+            menu.getItem(1).setIcon(R.drawable.ic_my_page_test2)
         } else
             showCustomToast("이미 누르셨습니다")
     }
@@ -228,6 +255,9 @@ class StoreActivity : BaseActivity<ActivityStoreBinding>(ActivityStoreBinding::i
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
         if (appBarLayout != null) {
+            menuIconDrawable2 = menu.getItem(1).icon
+            menuIconDrawable2.mutate()
+
             when {
                 //  State Expanded
                 verticalOffset == 0 -> {
