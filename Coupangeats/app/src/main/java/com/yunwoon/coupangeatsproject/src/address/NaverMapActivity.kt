@@ -8,6 +8,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.yunwoon.coupangeatsproject.BuildConfig
+import com.yunwoon.coupangeatsproject.R
 import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityNaverMapBinding
@@ -87,7 +88,7 @@ class NaverMapActivity : BaseActivity<ActivityNaverMapBinding>(ActivityNaverMapB
                 val cameraUpdate = CameraUpdate.scrollTo(LatLng(location.latitude, location.longitude))
 
                 marker.position = LatLng(location.latitude, location.longitude)
-                marker.icon = OverlayImage.fromResource(R.drawable.navermap_default_marker_icon_black)
+                marker.icon = OverlayImage.fromResource(R.drawable.ic_user_location2)
 
                 marker.map = naverMap
                 naverMap.moveCamera(cameraUpdate)

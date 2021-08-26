@@ -87,6 +87,9 @@ dependencies {
     implementation 'com.naver.maps:map-sdk:3.12.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0' // 현재 위치
 
+    // 부트 페이
+    // implementation 'com.github.bootpay:client_android_java:3.3.91'
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
