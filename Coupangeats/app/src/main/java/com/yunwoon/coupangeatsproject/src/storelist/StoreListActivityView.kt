@@ -2,17 +2,18 @@ package com.yunwoon.coupangeatsproject.src.storelist
 
 import com.yunwoon.coupangeatsproject.src.main.home.models.CategoryResponse
 import com.yunwoon.coupangeatsproject.src.main.home.models.HomeResponse
+import com.yunwoon.coupangeatsproject.src.storelist.models.NewStoreResponse
 
 interface StoreListActivityView {
     fun onGetCategoriesSuccess(response: CategoryResponse)
 
     fun onGetCategoriesFailure(message: String)
 
-    fun onGetRestaurantsSuccess(response: HomeResponse)
+    fun onGetRestaurantswithCategorySuccess(response: HomeResponse, categoryId: Int)
 
-    fun onGetRestaurantsFailure(message: String)
+    fun onGetRestaurantswithCategoryFailure(message: String)
 
-    fun onGetOrderRestaurantsSuccess(response: HomeResponse, order: String)
+    fun onGetNewRestaurantsSuccess(response: NewStoreResponse, categoryId: Int, order: String)
 
-    fun onGetOrderRestaurantsFailure(message: String)
+    fun onGetNewRestaurantsFailure(message: String)
 }

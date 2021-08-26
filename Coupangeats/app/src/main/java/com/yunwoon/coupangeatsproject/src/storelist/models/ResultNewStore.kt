@@ -1,8 +1,8 @@
-package com.yunwoon.coupangeatsproject.src.main.home.models
+package com.yunwoon.coupangeatsproject.src.storelist.models
 
 import com.google.gson.annotations.SerializedName
 
-data class ResultHomeRestaurants(
+data class ResultNewStore(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
     @SerializedName("minOrderPrice") val minOrderPrice: String,
