@@ -1,5 +1,6 @@
 package com.yunwoon.coupangeatsproject.src.address
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -40,6 +41,8 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
     private val roadItemArrayList = ArrayList<RoadData>()
     private lateinit var roadAdapter : RoadAdapter
     private lateinit var rlayoutManager : LinearLayoutManager
+
+    private val REQUEST_CODE = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +89,8 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
         binding.addressEditTextSearch.setOnKeyListener(this)
 
         binding.addressButtonSearch.setOnClickListener {
-            this.startActivity(Intent(this, NaverMapActivity::class.java))
+            val intent = Intent(this, NaverMapActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE)
         }
 
         // 홈버튼 클릭
@@ -254,6 +258,24 @@ class AddressActivity : BaseActivity<ActivityAddressBinding>(ActivityAddressBind
 
         binding.addressTextAddress.text = ApplicationClass.sSharedPreferences.getString("temporaryAddress", "temporaryAddress")
         binding.addressTextAddressDetail.text = ApplicationClass.sSharedPreferences.getString("temporaryAddressDetail", "temporaryAddressDetail")
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == REQUEST_CODE) {
+            if(resultCode == Activity.RESULT_OK) {
+                addressDetailSetStatus = false
+                addressSearchStatus = true
+                addressPage = 2
+
+                binding.addressConstraintLayoutDetail.visibility = View.VISIBLE
+                binding.titleAddress.text = "배달지 상세 정보"
+
+                binding.addressTextAddress.text = ApplicationClass.sSharedPreferences.getString("temporaryAddress", "temporaryAddress")
+                binding.addressTextAddressDetail.text = ApplicationClass.sSharedPreferences.getString("temporaryAddressDetail", "temporaryAddressDetail")
+            }
+        }
     }
 
     // 배달지 상세 정보 페이지에서 배달지 주소 설정

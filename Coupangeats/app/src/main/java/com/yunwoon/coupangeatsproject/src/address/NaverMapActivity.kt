@@ -8,6 +8,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.yunwoon.coupangeatsproject.BuildConfig
+import com.yunwoon.coupangeatsproject.config.ApplicationClass
 import com.yunwoon.coupangeatsproject.config.BaseActivity
 import com.yunwoon.coupangeatsproject.databinding.ActivityNaverMapBinding
 import com.yunwoon.coupangeatsproject.src.address.naverModels.naverResponse
@@ -43,7 +44,14 @@ class NaverMapActivity : BaseActivity<ActivityNaverMapBinding>(ActivityNaverMapB
         binding.mapFragment.getMapAsync(this)
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
 
-        binding.naverMapImageButtonBack.setOnClickListener { finish() }
+        binding.naverMapImageButtonBack.setOnClickListener {
+            setResult(RESULT_CANCELED)
+            finish()
+        }
+        binding.naverMapButtonSetting.setOnClickListener {
+            setResult(RESULT_OK)
+            finish()
+        }
     }
 
     // 권한 허용
@@ -74,7 +82,6 @@ class NaverMapActivity : BaseActivity<ActivityNaverMapBinding>(ActivityNaverMapB
         uiSettings.isLocationButtonEnabled = true
 
         naverMap.addOnLocationChangeListener { location ->
-            // showCustomToast("${location.latitude}, ${location.longitude}")
 
             if(flag++ == 0) {
                 val cameraUpdate = CameraUpdate.scrollTo(LatLng(location.latitude, location.longitude))
@@ -107,8 +114,13 @@ class NaverMapActivity : BaseActivity<ActivityNaverMapBinding>(ActivityNaverMapB
 
                 addressDetail = "${i.region.area1.name} ${i.region.area2.name} ${i.land.name} ${i.land.number1}"
             }
+
             binding.naverTextAddress.text = address
             binding.naverTextAddressDetail.text = addressDetail
+
+            ApplicationClass.sEditor.putString("temporaryAddress", address).apply()
+            ApplicationClass.sEditor.putString("temporaryAddressDetail", addressDetail).apply()
+
         } else {
             showCustomToast("지도 불러오기 실패")
         }
