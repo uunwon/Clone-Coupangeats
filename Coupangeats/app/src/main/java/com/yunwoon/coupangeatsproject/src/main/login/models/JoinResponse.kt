@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 import com.yunwoon.coupangeatsproject.config.BaseResponse
 
 data class JoinResponse(
-    @SerializedName("result") val result: Int
+    @SerializedName("result") val result: String
 ) : BaseResponse()

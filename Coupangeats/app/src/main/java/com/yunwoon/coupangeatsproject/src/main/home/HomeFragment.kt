@@ -75,6 +75,7 @@ class HomeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        Log.d("jwt 값좀 줘", "$loginJwtToken")
 
         reSources = this.resources
         homeBitmap = BitmapFactory.decodeResource(resources, R.drawable.test_home_store1)

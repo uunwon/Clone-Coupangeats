@@ -196,7 +196,7 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
                     binding.joinTextWrongPassword11.visibility = View.GONE // 성공문1
                     binding.joinTextWrongPassword31.visibility = View.GONE // 성공문3
 
-                    binding.joinImageViewPassword.setImageResource(R.drawable.ic_password_invisible)
+                    binding.joinImageViewPassword.setImageResource(R.drawable.ic_password_eye)
                 }
             }
         }
@@ -340,7 +340,6 @@ class JoinActivity : BaseActivity<ActivityJoinBinding>(ActivityJoinBinding::infl
     override fun onPostJoinSuccess(response: JoinResponse) {
         dismissLoadingDialog()
         if(response.isSuccess) {
-            showCustomToast(response.result.toString())
             finish()
             showCustomToast("회원가입에 성공했습니다")
         } else {
