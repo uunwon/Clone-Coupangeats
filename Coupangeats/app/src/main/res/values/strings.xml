@@ -1,0 +1,276 @@
+<resources>
+    <string name="app_name">쿠팡이츠</string>
+
+    <!-- Naming Rules -->
+    <!-- 도메인명_컴포넌트함축어_용도(=목적) -->
+    <string name="back_button_default">뒤로 가기</string>
+
+    <!-- Main -->
+    <string name="main_btm_nav_home_title">홈</string>
+    <string name="main_btm_nav_search_title">검색</string>
+    <string name="main_btm_nav_favorite_title">즐겨찾기</string>
+    <string name="main_btm_nav_order_title">주문내역</string>
+    <string name="main_btm_nav_my_page_title">My 이츠</string>
+
+    <!-- Home Fragment -->
+    <string name="home_text_category_new">신규 맛집</string>
+    <string name="home_text_recommend_store">본 고객을 위한 추천 맛집</string>
+    <string name="home_text_hot_store">인기 프랜차이즈</string>
+    <string name="home_text_new_store">새로 들어왔어요!</string>
+    <string name="home_text_choose_store">골라먹는 맛집</string>
+
+    <string name="home_chip_reset">초기화</string>
+    <string name="home_chip_arrange">매장 정렬</string>
+    <string name="home_chip_recommend">추천순</string>
+    <string name="home_chip_order">주문많은순</string>
+    <string name="home_chip_location">가까운순</string>
+    <string name="home_chip_star_rating">별점높은순</string>
+    <string name="home_chip_new">신규매장순</string>
+    <string name="home_chip_fast">치타배달</string>
+    <string name="home_chip_delivery_tip">배달비</string>
+    <string name="home_chip_least">최소주문</string>
+    <string name="home_chip_coupon">할인쿠폰</string>
+
+    <!-- Category -->
+    <string name="category_text_toolbar">한식</string>
+    
+    <!-- Test Data -->
+    <string name="blank">&#160;</string>
+    <string name="store_test_title">피자헛 당산점</string>
+    <string name="store_test_date">2021-08-20 오후 08:45</string>
+    <string name="store_test_status">배달 완료</string>
+    <string name="store_test_star_rating">4.9</string>
+    <string name="store_test_location">0.1km</string>
+    <string name="store_test_review_count">(528)</string>
+    <string name="store_test_delivery">배달비</string>
+    <string name="store_test_delivery_tip">3,000원</string>
+    <string name="store_item_title">진심을 담아내다. 고기장인</string>
+    <string name="store_item_delivery_time">10-20분</string>
+    <string name="store_test_review">리뷰</string>
+    <string name="store_test_review_count2">22</string>
+    <string name="store_test_review_go">개</string>
+    <string name="store_test_menu_title">고르곤졸라 피자</string>
+    <string name="store_test_menu_title_detail">L (+3,000원), 선택없음, 참여안함</string>
+    <string name="store_test_menu_price">23,000</string>
+    <string name="store_test_menu_price_unit">원</string>
+    <string name="store_test_menu_detail">이탈리아의 대표적인 블루치즈를 사용하여 치즈의 깊고 진한 맛을 느낄 수 있는 이태리 정통피자이태리</string>
+    <string name="store_test_menu_detail2">디저트</string>
+    <string name="store_test_menu_detail3">달콤바삭치즈볼</string>
+    <string name="store_test_menu_detail4">M인치(11인치)</string>
+    <string name="store_test_menu_detail5">기본</string>
+    <string name="store_test_menu_detail6">고추 바사삭 한마리</string>
+    <string name="store_menu_info">알레르기/영양성분 정보 보기</string>
+
+    <!-- Menu Activity -->
+    <string name="menu_text_price">가격</string>
+    <string name="menu_text_number">수량</string>
+    <string name="menu_text_cart">카트에 담기</string>
+    <string name="menu_text_cart_watch">카트 보기</string>
+
+    <!-- Order Fragment-->
+    <string name="order_text_default">주문 내역이 없습니다.</string>
+    <string name="order_text_view_ordered">과거 주문 내역 보기</string>
+    <string name="order_text_search">주문한 메뉴/매장을 찾아보세요</string>
+    <string name="order_text_sum">합계: </string>
+    <string name="order_button_delivery">배달 현황 보기</string>
+    <string name="order_button_reorder">재주문하기</string>
+    <string name="order_button_new_review">리뷰쓰기</string>
+    <string name="order_button_review">작성한 리뷰 보기</string>
+    <string name="order_text_receipt">영수증 보기</string>
+
+    <!-- Store Activity -->
+    <string name="store_text_detail">매장 / 원산지 정보</string>
+    <string name="store_text_delivery_tip_detail">자세히</string>
+    <string name="store_text_least_delivery">최소주문</string>
+    <string name="store_text_lest_delivery_tip">15,000원</string>
+    <string name="store_menu_share">공유</string>
+    <string name="store_menu_favorite">즐겨찾기</string>
+    <string name="store_small_review_text">치킨은 이제 거의 후참잘에서만 시켜요 좋아요 맛있어요 맛있어요 좋아요 맛있어요 맛있어요 좋아요 맛있어요 맛있어요 좋아요 맛있어요 맛있어요 좋아요 맛있어요 맛있어요</string>
+    <string name="store_small_review_star_rating">★★★★★</string>
+    <string name="store_text_menu_title">신메뉴</string>
+
+    <!-- Store Detail Activity -->
+    <string name="store_detail_title">매장정보</string>
+    <string name="store_detail_phone">전화번호:</string>
+    <string name="store_detail_phone_detail">02-2059-1823</string>
+    <string name="store_detail_call">전화하기</string>
+    <string name="store_detail_address">주소:</string>
+    <string name="store_detail_address_detail">서울 영등포구 국회대로 574 2층</string>
+    <string name="store_detail_owner_name">대표자명:</string>
+    <string name="store_detail_owner_name_detail">채윤원</string>
+    <string name="store_detail_number">사업자등록번호:</string>
+    <string name="store_detail_number_detail">110-47-713340</string>
+    <string name="store_detail_store_name">상호명:</string>
+    <string name="store_detail_store_name_detail">한국피자헛 당산점</string>
+    <string name="store_detail_time">영업시간</string>
+    <string name="store_detail_time_detail">월요일 ~ 일요일: 11:00 ~ 22:30</string>
+    <string name="store_detail_store_info">매장소개</string>
+    <string name="store_detail_store_info_detail">안녕하세요. 피자헛입니다.</string>
+    <string name="store_detail_origin">원산지 정보</string>
+    <string name="store_detail_origin_detail">원산지 상세정보는 아래 링크를 참조해주세요.</string>
+    <string name="store_detail_nutrient">영양성분 정보</string>
+    <string name="store_detail_nutrient_detail">하단 링크를 눌러 자세한 내용을 확인하시기 바랍니다.</string>
+    <string name="store_detail_allergy">알레르기 유발성분 정보</string>
+    <string name="store_detail_allergy_detail">하단 링크를 눌러 자세한 내용을 확인하시기 바랍니다.</string>
+    <string name="store_coupang">쿠팡은 통신판매중개자로서 통신판매의 당사자가 아니며, 판매자가 등록한 상품 정보, 상품의 품질
+    및 거래에 대해서 일체의 책임을 지지 않습니다.</string>
+
+    <!-- My Page Fragment-->
+    <string name="my_page_text_name">샐리</string>
+    <string name="my_page_text_phone">010-****-4321</string>
+    <string name="my_page_test_list_name">배달 주소 관리</string>
+
+    <!-- Favorite Activity -->
+    <string name="favorite_text_default">즐겨찾는 맛집이 없습니다.\n좋아하는 맛집에 ♥ 를 눌러주세요.</string>
+    <string name="favorite_button_view_main">쿠팡이츠 맛집 구경가기</string>
+    <string name="favorite_all">총</string>
+    <string name="favorite_count">개</string>
+    <string name="favorite_filter">자주 주문한 순</string>
+    <string name="favorite_delivery_tip">배달비 2,000원</string>
+    <string name="favorite_store_text">굽네치킨 문래점</string>
+
+    <!-- Login Activity -->
+    <string name="login_text_email">이메일</string>
+    <string name="login_text_email_hint">쿠팡 아이디(이메일) 입력</string>
+    <string name="login_text_password">비밀번호</string>
+    <string name="login_text_password_hint">비밀번호 입력</string>
+    <string name="login">로그인</string>
+    <string name="login_text_find_email">아이디 찾기</string>
+    <string name="login_text_find_password">비밀번호 찾기</string>
+
+    <!-- Login Dialog -->
+    <string name="login_text_need">로그인이 필요합니다.</string>
+    <string name="login_text_default">로그인 후 맛있는 음식을 빠르게 즐겨보세요.</string>
+    <string name="login_button_coupang_app">쿠팡 앱으로 로그인</string>
+    <string name="login_button_coupang_id">쿠팡 아이디로 로그인</string>
+    <string name="login_text_need_join">아직 회원이 아니신가요?</string>
+    <string name="login_text_join">회원가입</string>
+    <string name="login_text_terms">로그인하여 <u>쿠팡이츠 서비스 이용약관</u>, <u>위치기반서비스 이용약관</u>,\n<u>쿠팡페이 서비스 이용약관</u>,
+        <u>쿠팡페이 전자금융거래약관</u>, <u>쿠팡페이\n개인정보수집이용</u>, <u>쿠팡페이 개인정보제공</u>에 동의합니다.</string>
+    <string name="login_text_error">아이디를 입력해주세요</string>
+    <string name="login_text_error1">비밀번호를 입력해주세요</string>
+    <string name="login_text_error2">아이디는 이메일주소 형식으로 입력해주세요</string>
+    <string name="login_error">입력하신 아이디 또는 비밀번호가\n일치하지 않습니다.</string>
+    <string name="login_error_confirm">확인</string>
+
+    <!-- Logout Dialog -->
+    <string name="logout_text">정말로 로그아웃 하시겠습니까?</string>
+    <string name="logout_text_cancel">취소</string>
+    <string name="logout_text_confirm">로그아웃</string>
+
+    <!-- Join Activity -->
+    <string name="join_text_need">회원정보를 입력해주세요</string>
+    <string name="join_edit_text_email_hint">아이디(이메일)</string>
+    <string name="join_text_wrong_email">이메일을 올바르게 입력해주세요.</string>
+    <string name="join_edit_text_password_hint">비밀번호</string>
+    <string name="join_text_correct_password">사용 가능한 비밀번호입니다.</string>
+    <string name="join_text_wrong_password_1">X&#160;&#160;영문/숫자/특수문자 2가지 이상 조합 (8~20자)</string>
+    <string name="join_text_wrong_password_1_1">O&#160;&#160;영문/숫자/특수문자 2가지 이상 조합 (8~20자)</string>
+    <string name="join_text_wrong_password_2">X&#160;&#160;3개 이상 연속되거나 동일한 문자/숫자 제외</string>
+    <string name="join_text_wrong_password_2_1">O&#160;&#160;3개 이상 연속되거나 동일한 문자/숫자 제외</string>
+    <string name="join_text_wrong_password_3">X&#160;&#160;아이디(이메일) 제외</string>
+    <string name="join_text_wrong_password_3_1">O&#160;&#160;아이디(이메일) 제외</string>
+    <string name="join_edit_text_name_hint">이름</string>
+    <string name="join_text_wrong_name">이름을 정확하게 입력하세요.</string>
+    <string name="join_edit_text_phone_hint">휴대폰 번호</string>
+    <string name="join_text_wrong_phone">휴대폰 번호를 정확하게 입력하세요.</string>
+    <string name="join_text_same_phone">ch**@naver.com 아이디(이메일)로 가입된 휴대폰 번호입니다.</string>
+    <string name="join_button_phone">휴대폰 인증</string>
+    <string name="join_text_term">쿠팡 서비스약관에 동의해주세요</string>
+    <string name="join_check_box_term_all">모두 동의합니다.</string>
+    <string name="join_check_box_term_1">[필수] 만 14세 이상입니다.</string>
+    <string name="join_check_box_term_2">[필수] 쿠팡 이용약관 동의</string>
+    <string name="join_check_box_term_3">[필수] 전자금융거래 이용약관 동의</string>
+    <string name="join_check_box_term_4">[필수] 개인정보 수집 및 이용 동의</string>
+    <string name="join_check_box_term_5">[필수] 개인정보 제공 동의</string>
+    <string name="join_button">동의하고 가입하기</string>
+
+    <!-- Review Activity -->
+    <string name="review_text_title">만족도 평가 및 리뷰</string>
+    <string name="review_text_food">음식 평가</string>
+    <string name="review_text_delivery">배달 평가</string>
+    <string name="review_text_store">동대문 엽기 떡볶이</string>
+    <string name="review_text_menu">엽기오뎅</string>
+    <string name="review_content_hint">다른 고객들이 참고할 수 있도록 음식 맛, 가격, 양 등 음식에 대한 경험을 적어주세요.</string>
+    <string name="review_delivery_man">배달 파트너</string>
+    <string name="review_set">등록하기</string>
+    <string name="review_photo">포토리뷰</string>
+    <string name="review_arrange">최신순</string>
+    <string name="review_date">오늘</string>
+    <string name="review_call">신고</string>
+    <string name="review_help">리뷰가 도움이 되었나요?</string>
+    <string name="review_order">주문메뉴</string>
+    <string name="review_help_ok">도움이 돼요</string>
+    <string name="review_help_no">도움이 안돼요</string>
+
+    <string name="review_text_arrange">리뷰 정렬</string>
+    <string name="review_text_new">최신순</string>
+    <string name="review_text_help">리뷰 도움순</string>
+    <string name="review_text_high">별점 높은 순</string>
+    <string name="review_text_low">별점 낮은 순</string>
+
+    <!-- Address Activity -->
+    <string name="address_text_title">배달지 주소 설정</string>
+    <string name="address_edit_text_search_hint">도로명, 건물명 또는 지번으로 검색</string>
+    <string name="address_button_current_position">현재 위치로 주소 찾기</string>
+    <string name="address_text_home">집 추가</string>
+    <string name="address_text_company">회사 추가</string>
+    <string name="address_text_search_tip">검색 Tip</string>
+    <string name="address_text_search_guide1">* 도로명 + 건물번호</string>
+    <string name="address_text_search_guide1_1">(예: 송파대로 570)</string>
+    <string name="address_text_search_guide2">* 동/읍/면/리 + 번지</string>
+    <string name="address_text_search_guide2_1">(예: 신천동 7_30)</string>
+    <string name="address_text_search_guide3">* 건물명, 아파트명</string>
+    <string name="address_text_search_guide3_1">(예: 반포자이아파트)</string>
+    <string name="address_text_road_title">지번명</string>
+    <string name="address_text_road">영등포구 선유서로34길</string>
+    <string name="address_text_road_detail">서울 영등포구 선유서로34길 13</string>
+    <string name="address_text_hint_detail">상세주소 (아파트/동/호)</string>
+    <string name="address_text_hint_direction">길 안내 (예 : 1층에 올리브영이 있는 오피스텔)</string>
+    <string name="address_button_home">집</string>
+    <string name="address_button_company">회사</string>
+    <string name="address_button_etc">기타</string>
+    <string name="address_button_map">지도에서 위치 확인하기</string>
+    <string name="address_button_naver">이 위치로 배달받기</string>
+    <string name="address_button_set">완료</string>
+
+    <!-- Address Dialog -->
+    <string name="address_dialog_text">배달받을 주소를 설정해 주세요.</string>
+    <string name="address_dialog_confirm">배달 주소 설정</string>
+    <string name="address_dialog_cancel">취소</string>
+
+    <!-- Cart Activity -->
+    <string name="cart_text_title">카트</string>
+    <string name="cart_text_any">장바구니가 비어있습니다.</string>
+    <string name="cart_text_modify">수정</string>
+    <string name="cart_text_delivery">서울특별시 양천구 목동서로 30길 (으)로 배달</string>
+    <string name="cart_text_delivery_info">서울특별시 양천구 목동서로 30길</string>
+    <string name="cart_text_delivery_detail">(으)로 배달</string>
+    <string name="cart_text_menu_add">+ 메뉴추가</string>
+    <string name="cart_text_coupon">할인쿠폰</string>
+    <string name="cart_text_coupon_available">사용가능 쿠폰</string>
+    <string name="cart_text_coupon_available_detail">0장</string>
+    <string name="cart_text_coupon_choose">쿠폰을 선택해주세요</string>
+    <string name="cart_text_coupon_choose_detail">선택</string>
+    <string name="cart_text_order_fee">주문금액</string>
+    <string name="cart_text_order_fee_detail">71,700원</string>
+    <string name="cart_text_delivery_fee">배달비</string>
+    <string name="cart_text_delivery_fee_detail">+0원</string>
+    <string name="cart_text_total_fee">총 결제금액</string>
+    <string name="cart_text_comment">요청사항</string>
+    <string name="cart_text_comment_ex">예) 견과류는 빼주세요.</string>
+    <string name="cart_text_owner">가게 사장님에게</string>
+    <string name="cart_text_man">배달 기사님에게</string>
+    <string name="cart_text_man_detail">초인종 누르고 문 앞</string>
+    <string name="cart_text_comment_plastic">일회용 수저, 포크 받기</string>
+    <string name="cart_text_comment_plastic_detail">일회용품 사용을 줄이기 위해, 선택 시에만 제공됩니다.</string>
+    <string name="cart_text_pay">결제수단</string>
+    <string name="cart_text_pay_detail">쿠페이 중 계좌이체/신용카드로만 결제가능</string>
+    <string name="cart_text_term">구매조건 확인 및 결제대행 서비스 동의</string>
+    <string name="cart_text_term_agree">보기</string>
+    <string name="cart_text_bottom">71,700원 결제하기</string>
+    <string name="cart_text_coupang">쿠팡은 통신판매중개자로서 통신판매의 당사자가 아니며, 판매자가 등록한 상품 정보, 상품의 품질
+    및 거래에 대해서 일체의 책임을 지지 않습니다. 회원은 주문 내용을 확인하였고, 결제에 동의합니다.</string>
+
+    <string name="copy_right">ⓒ&#160;Coupang Corp. All rights reserved.</string>
+</resources>

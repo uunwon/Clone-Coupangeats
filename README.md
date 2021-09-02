@@ -1,1 +1,161 @@
-# merge
+<p align="center" >
+<img src="https://user-images.githubusercontent.com/48541984/129441829-aa5bef86-94d7-4728-84fd-c8fa069649e0.png" width="200" height="200" align="center"/>
+</p>
+<h1 align="center">
+  Clone-Coupangeats </br> 
+    <img alt="kotlin" src="https://img.shields.io/badge/kotlin-1.5-blueviolet.svg">
+    <img alt="Android-Studio" src="https://img.shields.io/badge/AndroidStudio-6.0-brightgreen.svg">
+</h1>
+
+## 테스트 기간
+2021.08.14 ~ 08.27
+
+## 테스트 [규칙](https://softsquared.notion.site/6c2c0054572945f69423af661eea9158)
+* 일일단위 작업 기록해주세요. (1일 1커밋 & 1 개발일지)  
+* 일지는 **작업 진행상황**에 대해 작성해주세요. ([예시 보러가기](https://softsquared.notion.site/2d0cef8721e34c10acf70646e776038c))
+  * 기획서의 변동사항
+  * 기획서 상 계획이 몇퍼센트 완료되었는지
+  * 현재 어떤 화면 혹은 기능을 구현중에 있는지
+  * 클라이언트 개발자 or 서버 개발자와의 회의에 따른 회의록
+  * 개발팀장님의 피드백(1차, 2차)
+  * 개발 도중에 발생하는 이슈
+* 개발 도중에 생기는 **이슈**에 대해서 모두 작성해주세요.
+  * 어떤 점이 어려웠는지,
+  * 어떤 점에서 이슈가 발생했는지,
+  * 어떻게 해결을 시도하였는지,
+  * 해결이 되었는지
+
+## 테스트 역할분담
+| 서버 | 클라이언트 |
+| :---: | :-----------: |
+| Coogie / 정재민 | &#160;&#160;&#160;Sally / 채윤원&#160;&#160;&#160; |
+
+## 테스트 기획서
+#### 구글 DOCS [`보러가기` 👆](https://docs.google.com/document/d/1f3Ua5d-3wBIh7YIModxf8_8H15YEf-Swgd18dXQDDhE/edit?usp=sharing)
+
+## 테스트 개발이슈
+#### Notion 쿠팡이츠 개발이슈와 구현일정 [`보러가기` 🤘](https://www.notion.so/uunwon/bc814b591c6a4bd594941c0e26cb53ff)
+<img src="https://user-images.githubusercontent.com/48541984/129486402-3a21b120-b4b0-4006-baed-a012ccd31247.png" width="60%"/>
+
+## 테스트 진행현황
+### 진행현황 🌈
+![Progress](https://progress-bar.dev/100/?scale=100&width=500&suffix=%)  
+### 2021-08-14
+* 기획서 제출 - 100%  
+  * 개발 범위 / 개발 우선 순위  
+  * 개발할 기능 및 화면 캡쳐 / 1주차까지 작업해올 범위  
+  * 안드로이드 버전 화면 캡쳐  
+* 제공받은 안드로이드 템플릿 숙지
+* mvp 패턴 적용하여 프로젝트 세팅
+* SplashActivity 생성
+* MainActivity 내 Bottom Navigation Bar 생성
+
+### 2021-08-15
+* 앱 로고 이미지 변경
+* FavoriteActivity , OrderFragment 생성
+* OrderFragment 내 TabLayout 구현
+* FavoriteActivity 생성
+* HomeFragment 내 광고 이미지 ViewFlipper 구현
+* 로그인/회원가입 창 BottomSheetDialogFragment 구현
+* LoginActivity 구현
+* JoinActivity 구현
+  * (.!!추가할 부분) 비밀번호 화면 표시 이모지 처리
+
+### 2021-08-16
+* LoginActivity 내 BottomLoginErrorDialog 활용해 예외 처리 
+* JoinActivity 내 각 컬럼 예외처리, 정규식 추가
+* 서버 Retrofit 통신
+  * 로그인 API : 실패 시 LoginErrorDialog 출력
+  * 회원가입 API : 성공 시 생성한 유저 index 값 출력
+* HomeFragment 내 가로형 카테고리 RecyclerView 생성
+  * 카테고리 클릭 시 해당 position 값 다음 액티비티에 전달
+
+### 2021-08-17
+* AddressActivity 배달지 주소 설정 , 검색창 화면
+* AddressActivity 내 도로명 주소 검색 API 적용
+* HomeFragment 내 가로형 가게 RecyclerView 생성
+* JoinActivity 내 TextWatcher 이벤트 추가
+* **1차 피드백 적용** --> 로그인 여부에 따른 MainActivity 화면 상이하게 처리
+* MyPageFragment 생성
+
+### 2021-08-18
+* **1차 피드백 적용** --> HomeFragment 내 가로형 RecyclerView 로그인 유무에 따라 상이하게 처리
+* HomeFragment RecyclerView 전부 구현 / 이중 스크롤 이슈 해결
+* OrderFragment 내 Tablayout 과 ViewPager 연결
+* HomeFragment 유저 프로필 정보 API 연결, 연락처 데이터 가공
+* StoreActivity 내 가게 이름 부분 CollapsingToolbarLayout 구현
+* StoreActivity 내 작은 리뷰 RecyclerView 추가
+
+### 2021-08-19
+* StoreActivity 내 CollapsingToolbarLayout + Tablayout
+* StoreActivity 내 메뉴 RecyclerView 추가
+* MenuActivity 생성
+* MenuActivity 내 RecyclerView 안에 RecyclerView 넣기
+
+### 2021-08-20
+* MenuActivity NestedScrollView 스크롤 문제 => FrameLayout으로 해결
+* CartActivity 생성
+  * 주소 없는 사용자의 경우 주소 설정 페이지로 넘어감
+* FavoriteActivity 내 RecyclerView 생성
+* 서버 Retrofit 통신
+  * 식당 전체 조회 API : HomeFragment 내 "골라먹는 맛집"
+  * 음식 카테고리 전체 조회 API : HomeFragment 내 카테고리 목록
+
+### 2021-08-21
+* API 명세서 화면 캡쳐본 업데이트
+* OrderFragment 내 ViewPager 안 RecyclerView 생성
+* 서버 Retrofit 통신
+  * 전체 유저 조회 API : JoinActivity 내 같은 이메일 오류 처리
+
+### 2021-08-22
+* HomeFragment 내 가게 filter chip 제작
+* ViewPager Refresh 이슈 해결!
+* 배달지 주소 설정 페이지 제작
+* 네이버 maps API 적용
+* 서버 Retrofit 통신
+  * 음식 카테고리 전체 조회 API : 이미지 받아오기
+  * 특정 식당 조회 API : StoreActivity 내 정보 받아오기
+
+### 2021-08-23
+* 서버 담당 `쿠기` 님과 구글 미트 👩‍💻👨‍💻
+* 서버 Retrofit 통신
+  * 식당 전체 조회 API : 필터링 (new, best)
+  * 식당 전체 메뉴 카테고리 조회 API
+  * 식당 메뉴 카테고리 조회 API
+  * 식당 메뉴 카테고리의 메뉴 조회 API
+  * 특정 메뉴 옵션 카테고리 전체 조회 API
+  * 특정 메뉴 특정 카테고리 옵션 조회 API <- 데이터 늦게 받아오는 !issue
+  * 찜 생성 API == 즐겨찾기
+  * 찜 확인 API
+
+### 2021-08-24
+* 메뉴의 옵션 메뉴 데이터 들어가지 않는 문제 => 스레드 처리로 해결 (runBlocking, join)
+* 메뉴의 옵션 메뉴 라디오 버튼 하나만 클릭 가능하도록 변경
+* 서버 Retrofit 통신
+  * 카트 생성 API
+  * 카트 조회 API
+  * 주문 생성 API
+  * 주문 내역 조회 API / 완료된 주문 내역 조회 API
+
+### 2021-08-25
+* 배달지 상세 설정, 조회 RecyclerView 제작
+* OptionMenuActivity 선택한 체크박스, 라디오박스 값 받아오기
+* HomeFragment 가게 필터 (추천순, 신규매장순) 적용
+* CartActivity 음식 수량 버튼 제작
+* 서버 Retrofit 통신
+  * 옵션 카트 생성 API
+  * 옵션 카트 전체 조회 API
+
+### 2021-08-26
+* CartActivity 스피너 다이얼로그 제작
+* 카테고리 선택 색상 변경, 정렬 적용
+* MyPageActivity 로그아웃 위치 변경
+* 위도, 경도 이용해 주소 얻는 Naver Reverse Geocoding API 사용
+* 서버 Retrofit 통신
+  * 리뷰 생성 API
+  * 리뷰 조회 API
+
+## 테스트 개발환경
+* AWS EC2 / RDS
+* Node.js
+* Android Studio

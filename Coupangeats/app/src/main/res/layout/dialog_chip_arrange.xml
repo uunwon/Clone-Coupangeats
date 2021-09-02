@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/chip_text_arrange"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="20dp"
+        android:gravity="center"
+        android:text="@string/home_chip_arrange"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:drawableEnd="@drawable/ic_toolbar_close"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <View
+        android:id="@+id/chip_view_arrange"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_100"
+        app:layout_constraintTop_toBottomOf="@id/chip_text_arrange" />
+
+    <!-- 추천순 -->
+    <LinearLayout
+        android:id="@+id/chip_linear_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/chip_view_arrange">
+        <ImageView
+            android:id="@+id/chip_image_recommend"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
+        <TextView
+            android:id="@+id/chip_text_recommend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/home_chip_recommend"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/chip_view_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_100"
+        app:layout_constraintTop_toBottomOf="@id/chip_linear_recommend" />
+
+
+    <!-- 주문많은순 -->
+    <LinearLayout
+        android:id="@+id/chip_linear_order"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/chip_view_recommend">
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/chip_image_order"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
+        <TextView
+            android:id="@+id/chip_text_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/home_chip_order"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/chip_view_order"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_100"
+        app:layout_constraintTop_toBottomOf="@id/chip_linear_order" />
+
+
+    <!-- 가까운순 -->
+    <LinearLayout
+        android:id="@+id/chip_linear_location"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/chip_view_order">
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/chip_image_location"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
+        <TextView
+            android:id="@+id/chip_text_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/home_chip_location"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/chip_view_location"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_100"
+        app:layout_constraintTop_toBottomOf="@id/chip_linear_location" />
+
+
+    <!-- 별점높은순 -->
+    <LinearLayout
+        android:id="@+id/chip_linear_star_rating"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/chip_view_location">
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/chip_image_star_rating"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
+        <TextView
+            android:id="@+id/chip_text_star_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/home_chip_star_rating"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/chip_view_star_rating"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_100"
+        app:layout_constraintTop_toBottomOf="@id/chip_linear_star_rating" />
+
+
+    <!-- 신규매장순 -->
+    <LinearLayout
+        android:id="@+id/chip_linear_new"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/chip_view_star_rating">
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/chip_image_new"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/ic_join_check"
+            app:tint="@color/blue_300" />
+        <TextView
+            android:id="@+id/chip_text_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/home_chip_new"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/chip_view_new"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_100"
+        app:layout_constraintTop_toBottomOf="@id/chip_linear_new" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
