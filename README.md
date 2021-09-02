@@ -1,161 +1,130 @@
-<p align="center" >
-<img src="https://user-images.githubusercontent.com/48541984/129441829-aa5bef86-94d7-4728-84fd-c8fa069649e0.png" width="200" height="200" align="center"/>
+</br>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/48541984/131235545-fe074a5f-d222-4d6f-a4e2-781c5a6039b4.jpg" height="130" align="center"/>
 </p>
 <h1 align="center">
   Clone-Coupangeats </br> 
-    <img alt="kotlin" src="https://img.shields.io/badge/kotlin-1.5-blueviolet.svg">
-    <img alt="Android-Studio" src="https://img.shields.io/badge/AndroidStudio-6.0-brightgreen.svg">
+    <img alt="Ubuntu" src="https://img.shields.io/badge/Ubuntu-18.04-important.svg">
+    <img alt="Nodejs" src="https://img.shields.io/badge/Nodejs-14.15.3-success.svg">
+    <img alt="MySQL" src="https://img.shields.io/badge/MySQL-8.0.x-informational.svg">
+    <img alt="AndroidStudio" src="https://img.shields.io/badge/AndroidStudio-4.2-brightgreen.svg">
 </h1>
 
-## 테스트 기간
+## 개발 기간
 2021.08.14 ~ 08.27
 
-## 테스트 [규칙](https://softsquared.notion.site/6c2c0054572945f69423af661eea9158)
-* 일일단위 작업 기록해주세요. (1일 1커밋 & 1 개발일지)  
-* 일지는 **작업 진행상황**에 대해 작성해주세요. ([예시 보러가기](https://softsquared.notion.site/2d0cef8721e34c10acf70646e776038c))
-  * 기획서의 변동사항
-  * 기획서 상 계획이 몇퍼센트 완료되었는지
-  * 현재 어떤 화면 혹은 기능을 구현중에 있는지
-  * 클라이언트 개발자 or 서버 개발자와의 회의에 따른 회의록
-  * 개발팀장님의 피드백(1차, 2차)
-  * 개발 도중에 발생하는 이슈
-* 개발 도중에 생기는 **이슈**에 대해서 모두 작성해주세요.
-  * 어떤 점이 어려웠는지,
-  * 어떤 점에서 이슈가 발생했는지,
-  * 어떻게 해결을 시도하였는지,
-  * 해결이 되었는지
+## 개발 역할분담 <img src="https://img.shields.io/badge/Slack-4A154B?style=plastic&logo=Slack&logoColor=#4A154B">
+**서버** : 정재민  
 
-## 테스트 역할분담
-| 서버 | 클라이언트 |
-| :---: | :-----------: |
-| Coogie / 정재민 | &#160;&#160;&#160;Sally / 채윤원&#160;&#160;&#160; |
+**클라이언트** : 채윤원
 
-## 테스트 기획서
-#### 구글 DOCS [`보러가기` 👆](https://docs.google.com/document/d/1f3Ua5d-3wBIh7YIModxf8_8H15YEf-Swgd18dXQDDhE/edit?usp=sharing)
+## 서비스 소개
+### 배달 앱 '[쿠팡이츠](https://play.google.com/store/apps/details?id=com.coupang.mobile.eats&hl=ko&gl=US)' 클론코딩 실전 프로젝트
+#### (1) 회원가입과 로그인
+* 신규 사용자는 아래 탭 중 하나을 클릭해 **회원가입**을 진행합니다.
+* 가입 이력이 있는 휴대폰 번호는 가입할 수 없습니다.
+* 사용자의 텍스트를 실시간 감지하여 조건 충족 여부를 확인합니다.  
+* 기존 회원은 **로그인**을 진행해주세요.  
 
-## 테스트 개발이슈
-#### Notion 쿠팡이츠 개발이슈와 구현일정 [`보러가기` 🤘](https://www.notion.so/uunwon/bc814b591c6a4bd594941c0e26cb53ff)
-<img src="https://user-images.githubusercontent.com/48541984/129486402-3a21b120-b4b0-4006-baed-a012ccd31247.png" width="60%"/>
+#### (2) 메인 화면
+* 메인 화면 내 카테고리를 선택하여 원하는 가게 리스트를 확인합니다.  
+* 가게 **필터링**으로 추천순, 신규매장순으로 정렬 가능합니다.  
 
-## 테스트 진행현황
-### 진행현황 🌈
-![Progress](https://progress-bar.dev/100/?scale=100&width=500&suffix=%)  
-### 2021-08-14
-* 기획서 제출 - 100%  
-  * 개발 범위 / 개발 우선 순위  
-  * 개발할 기능 및 화면 캡쳐 / 1주차까지 작업해올 범위  
-  * 안드로이드 버전 화면 캡쳐  
-* 제공받은 안드로이드 템플릿 숙지
-* mvp 패턴 적용하여 프로젝트 세팅
-* SplashActivity 생성
-* MainActivity 내 Bottom Navigation Bar 생성
+#### (3) 배달지 주소 등록
+* 주문을 진행하기 전 메인 화면 상단 주소를 클릭해 **주소를 등록**해주세요.
+* 현재 위치 기반으로 주소를 작성할 수 있습니다.
+* 가장 최근에 작성된 주소를 기반으로 배달됩니다.
 
-### 2021-08-15
-* 앱 로고 이미지 변경
-* FavoriteActivity , OrderFragment 생성
-* OrderFragment 내 TabLayout 구현
-* FavoriteActivity 생성
-* HomeFragment 내 광고 이미지 ViewFlipper 구현
-* 로그인/회원가입 창 BottomSheetDialogFragment 구현
-* LoginActivity 구현
-* JoinActivity 구현
-  * (.!!추가할 부분) 비밀번호 화면 표시 이모지 처리
+#### (4) 가게 즐겨찾기
+* 각 가게 상세 페이지 내 하트 클릭 시 **즐겨찾는 가게**로 등록됩니다. `🤍 -> 🖤`
+* 즐겨찾기 탭을 통해 즐겨찾는 가게 목록을 확인해보세요!
 
-### 2021-08-16
-* LoginActivity 내 BottomLoginErrorDialog 활용해 예외 처리 
-* JoinActivity 내 각 컬럼 예외처리, 정규식 추가
-* 서버 Retrofit 통신
-  * 로그인 API : 실패 시 LoginErrorDialog 출력
-  * 회원가입 API : 성공 시 생성한 유저 index 값 출력
-* HomeFragment 내 가로형 카테고리 RecyclerView 생성
-  * 카테고리 클릭 시 해당 position 값 다음 액티비티에 전달
+#### (5) 음식 주문하기
+* 원하는 메뉴를 선택해 **카트**에 담아주세요!
+* 카트에 음식이 담긴 경우 가게 상세 페이지 하단에 `카트 보기` 탭이 생성됩니다.
+* 카트 내 `결제하기` 하단 탭을 클릭해 결제를 진행해주세요.
+* 테스트 결제 시 유의해주세요, **실제 PAYAPP 을 통해 카드 결제**됩니다!
+* 주문 내역 탭을 통해 과거 주문 내역과 현 준비중 주문 내역을 확인해보세요.
 
-### 2021-08-17
-* AddressActivity 배달지 주소 설정 , 검색창 화면
-* AddressActivity 내 도로명 주소 검색 API 적용
-* HomeFragment 내 가로형 가게 RecyclerView 생성
-* JoinActivity 내 TextWatcher 이벤트 추가
-* **1차 피드백 적용** --> 로그인 여부에 따른 MainActivity 화면 상이하게 처리
-* MyPageFragment 생성
+#### (6) 리뷰 작성하기
+* 주문한 건에 한하여 리뷰를 작성할 수 있습니다.
+* 각 가게 상세 페이지 내 리뷰 `>` 클릭 시 리뷰 목록과 평점을 확인할 수 있습니다.
 
-### 2021-08-18
-* **1차 피드백 적용** --> HomeFragment 내 가로형 RecyclerView 로그인 유무에 따라 상이하게 처리
-* HomeFragment RecyclerView 전부 구현 / 이중 스크롤 이슈 해결
-* OrderFragment 내 Tablayout 과 ViewPager 연결
-* HomeFragment 유저 프로필 정보 API 연결, 연락처 데이터 가공
-* StoreActivity 내 가게 이름 부분 CollapsingToolbarLayout 구현
-* StoreActivity 내 작은 리뷰 RecyclerView 추가
+#### (7) 로그이아웃
+* My이츠 탭 내 `설정` 버튼 클릭 시 로그아웃 됩니다.
 
-### 2021-08-19
-* StoreActivity 내 CollapsingToolbarLayout + Tablayout
-* StoreActivity 내 메뉴 RecyclerView 추가
-* MenuActivity 생성
-* MenuActivity 내 RecyclerView 안에 RecyclerView 넣기
+### 활용 기술
+* `mvp` design pattern
+* Retrofit 2.9.0
+* Coroutines
+* ViewFlipper for banner images
+* RecyclerView with adpater pattern
+* TextWatcher, addTextChangedListener in Join Service
+* CollapsingToolbarLayout + TabLayout + ViewPager
+* JWT authorization, SharedPreference
 
-### 2021-08-20
-* MenuActivity NestedScrollView 스크롤 문제 => FrameLayout으로 해결
-* CartActivity 생성
-  * 주소 없는 사용자의 경우 주소 설정 페이지로 넘어감
-* FavoriteActivity 내 RecyclerView 생성
-* 서버 Retrofit 통신
-  * 식당 전체 조회 API : HomeFragment 내 "골라먹는 맛집"
-  * 음식 카테고리 전체 조회 API : HomeFragment 내 카테고리 목록
+### 라이브러리 & 오픈 API
+* Circle ImageView [(Github)](https://github.com/hdodenhof/CircleImageView)
+* Spin kit [(Github)](https://github.com/ybq/Android-SpinKit)
+* 개발자센터 도로명 주소 검색 API
+* 네이버 Mobile Dynamic Map API (Android SDK 3.0)
+* 네이버 Reverse Geocoding API
+* 부트페이 결제 연동 API / PAYAPP 카드결제
 
-### 2021-08-21
-* API 명세서 화면 캡쳐본 업데이트
-* OrderFragment 내 ViewPager 안 RecyclerView 생성
-* 서버 Retrofit 통신
-  * 전체 유저 조회 API : JoinActivity 내 같은 이메일 오류 처리
+### 서비스 화면
+🌈 추후 화면 캡쳐본 추가 예정
 
-### 2021-08-22
-* HomeFragment 내 가게 filter chip 제작
-* ViewPager Refresh 이슈 해결!
-* 배달지 주소 설정 페이지 제작
-* 네이버 maps API 적용
-* 서버 Retrofit 통신
-  * 음식 카테고리 전체 조회 API : 이미지 받아오기
-  * 특정 식당 조회 API : StoreActivity 내 정보 받아오기
+## 서비스 설계
+### REST API 명세서
+`Google sheets`, `postman` 사용해 명세서 작성  
 
-### 2021-08-23
-* 서버 담당 `쿠기` 님과 구글 미트 👩‍💻👨‍💻
-* 서버 Retrofit 통신
-  * 식당 전체 조회 API : 필터링 (new, best)
-  * 식당 전체 메뉴 카테고리 조회 API
-  * 식당 메뉴 카테고리 조회 API
-  * 식당 메뉴 카테고리의 메뉴 조회 API
-  * 특정 메뉴 옵션 카테고리 전체 조회 API
-  * 특정 메뉴 특정 카테고리 옵션 조회 API <- 데이터 늦게 받아오는 !issue
-  * 찜 생성 API == 즐겨찾기
-  * 찜 확인 API
+### 소스 구조
+> MVP (Model-View-Presenter) pattern 을 따르기 위해 config, src, util 로 나누어 개발 진행
+* `config` : 프로젝트의 근간이 되는 베이스 코드를 모아놓은 폴더
+* `src` : 베이스 코드를 이용해 구현된 코드를 모아놓은 폴더, 도메인별로 구분됨
+* `util` : 프로젝트 내 도구처럼 사용되는 코드를 모아놓은 폴더
+```text
+com.yunwoon.coupangeatsproject
+  > * config
+    | ApplicationClass.kt // 앱 실행될 때 맨 처음 1번 실행되는 코드, 싱글톤 객체 보관
+    | BaseActivity.kt // 액티비티 설계 시 공통적으로 사용되는 구조를 위한 모델 클래스
+    | BaseFragment.kt // 프래그먼트 설계 시 〃〃
+    | BaseResponse.kt // 서버로부터 받는 통신 응답 공통적으로 사용되는 구조를 위한 모델 클래스
+    | XAccessTokenInterceptor.kt // 서버가 클라이언트를 식별하기 위한 jwt 토큰 관련 코드
+  > * src
+    > main // BottomNavigationView 들어가는 도메인별 분리
+      > home
+        > models // 서버와 어떤 형태로 데이터를 주고받을지 작성하는 모델 클래스
+          | CategoryResponse.kt 
+          | HomeResponse.kt
+          | ResultCategory.kt
+          | ResultHome.kt
+          | ResultHomeRestaurants.kt
+      | HomeFragment.kt // 메인 UI를 조작하는 곳
+      | HomeFragmentView.kt // 네트워크와 화면(액티비티,프래그먼트)를 연결해주는 곳
+      | HomeRetrofitInterface.kt // Retrofit API Interface 명세서
+      | HomeService.kt // 실제로 서버에 요청을 보내는 코드를 작성하는 곳
+      > favorite 
+      > login
+      > mypage
+      > order
+      | MainActivity.kt
+      ㆍ
+      ㆍ
+  > * util
+    > storeRecycler
+      | StoreAdapter.kt // 리사이클러뷰에 표시될 아이템 뷰를 생성하는 곳
+      | StoreData.kt // 리사이클러뷰에 들어갈 아이템의 데이터 클래스
+    | LoadingDialog.kt // 로딩 화면 다이얼로그
+    ㆍ
+    ㆍ
+build.gradle // gradle 빌드시에 필요한 dependency 설정하는 곳
+.gitignore // git 에 포함되지 않아야 하는 폴더, 파일들을 작성 해놓는 곳
 
-### 2021-08-24
-* 메뉴의 옵션 메뉴 데이터 들어가지 않는 문제 => 스레드 처리로 해결 (runBlocking, join)
-* 메뉴의 옵션 메뉴 라디오 버튼 하나만 클릭 가능하도록 변경
-* 서버 Retrofit 통신
-  * 카트 생성 API
-  * 카트 조회 API
-  * 주문 생성 API
-  * 주문 내역 조회 API / 완료된 주문 내역 조회 API
+```
 
-### 2021-08-25
-* 배달지 상세 설정, 조회 RecyclerView 제작
-* OptionMenuActivity 선택한 체크박스, 라디오박스 값 받아오기
-* HomeFragment 가게 필터 (추천순, 신규매장순) 적용
-* CartActivity 음식 수량 버튼 제작
-* 서버 Retrofit 통신
-  * 옵션 카트 생성 API
-  * 옵션 카트 전체 조회 API
-
-### 2021-08-26
-* CartActivity 스피너 다이얼로그 제작
-* 카테고리 선택 색상 변경, 정렬 적용
-* MyPageActivity 로그아웃 위치 변경
-* 위도, 경도 이용해 주소 얻는 Naver Reverse Geocoding API 사용
-* 서버 Retrofit 통신
-  * 리뷰 생성 API
-  * 리뷰 조회 API
-
-## 테스트 개발환경
+### 개발환경
 * AWS EC2 / RDS
 * Node.js
+* MySQL
 * Android Studio
