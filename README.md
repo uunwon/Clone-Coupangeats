@@ -72,7 +72,17 @@
 * 부트페이 결제 연동 API / PAYAPP 카드결제
 
 ### 서비스 화면
-🌈 추후 화면 캡쳐본 추가 예정
+| **Main Activity** | **Join Activity** |
+|:--------------:|:--------------:|
+| <img src="https://user-images.githubusercontent.com/48541984/132095825-28146a7d-9bd8-47e7-84e2-92c76051399e.gif" width = "300" /> | <img src="https://user-images.githubusercontent.com/48541984/132095834-821ee04f-8177-4ff4-b74a-1aaa9345ebca.gif" width = "300" /> |
+
+| **Address Activity** | **Store Activity** |
+|:--------------:|:--------------:|
+| <img src="https://user-images.githubusercontent.com/48541984/132095853-9b4950a2-db6e-4c3b-ae2b-62c2dd367a70.gif" width = "300" /> | <img src="https://user-images.githubusercontent.com/48541984/132095870-81cbfa2f-9ba4-41c8-93e0-61649a35edeb.gif" width = "300" /> |
+
+| **Menu Activity** | **Cart Activity** |
+|:--------------:|:--------------:|
+| <img src="https://user-images.githubusercontent.com/48541984/132095898-a8472048-bdb0-440b-8b10-871b17a997b5.gif" width = "300" /> | <img src="https://user-images.githubusercontent.com/48541984/132095953-29c05b1c-363d-49f6-bade-428cb710401f.gif" width = "300" /> |
 
 ## 서비스 설계
 ### REST API 명세서
